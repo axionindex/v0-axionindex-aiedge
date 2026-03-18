@@ -8,313 +8,178 @@ const dimensions = [
     title: "Exposure",
     description: "How much of your work is AI-compressible?",
     detail:
-      "Measures the proportion of your working hours spent on tasks that AI can perform at comparable or superior quality. Higher exposure signals structural compression pressure.",
+      "Measures the proportion of your working hours spent on tasks that AI can perform at comparable or superior quality.",
     metric: "0-100%",
-    insight: "Most professionals underestimate their exposure by 20-30 points",
   },
   {
     letter: "D",
     title: "Decision Density",
     description: "How much consequence-bearing judgment do you own?",
     detail:
-      "Captures the frequency and significance of decisions where you make the call and absorb the outcome. High decision density is the strongest AI-proof signal.",
+      "Captures the frequency and significance of decisions where you make the call and absorb the outcome.",
     metric: "Calls/Week",
-    insight: "The strongest predictor of structural position",
   },
   {
     letter: "G",
     title: "Growth of Boundary",
     description: "Is your decision authority expanding over time?",
     detail:
-      "Tracks whether your scope of judgment and consequence ownership is growing, stable, or contracting. Direction matters as much as current position.",
+      "Tracks whether your scope of judgment and consequence ownership is growing, stable, or contracting.",
     metric: "24mo Trend",
-    insight: "Directional velocity often matters more than current state",
   },
   {
     letter: "E",
     title: "Economic Anchoring",
     description: "Is your compensation tied to scarce contribution?",
     detail:
-      "Assesses whether your economic value is anchored to AI-proof work or compressible output. Salary defensibility follows structural position.",
+      "Assesses whether your economic value is anchored to AI-proof work or compressible output.",
     metric: "Defensibility",
-    insight: "Compensation follows structure with a 12-18 month lag",
   },
 ];
 
 const workTypes = [
-  {
-    type: "Framing",
-    classification: "AI-PROOF",
-    compression: 5,
-    signal: "Strong edge",
-    description: "Defining the problem, setting constraints, establishing success criteria",
-  },
-  {
-    type: "Deciding",
-    classification: "AI-PROOF",
-    compression: 8,
-    signal: "Strong edge",
-    description: "Making consequential calls with incomplete information",
-  },
-  {
-    type: "Insighting",
-    classification: "AI-ASSISTED",
-    compression: 12,
-    signal: "Moderate edge",
-    description: "Synthesizing patterns into novel understanding",
-  },
-  {
-    type: "Analysing",
-    classification: "AI-ASSISTED",
-    compression: 58,
-    signal: "Moderate exposure",
-    description: "Processing data, identifying trends, generating reports",
-  },
-  {
-    type: "Executing",
-    classification: "AI-DOMINANT",
-    compression: 85,
-    signal: "High exposure",
-    description: "Implementing defined processes and procedures",
-  },
-  {
-    type: "Researching",
-    classification: "AI-DOMINANT",
-    compression: 88,
-    signal: "High exposure",
-    description: "Gathering information, summarizing sources, fact-finding",
-  },
+  { type: "Framing", classification: "AI-PROOF", compression: 5 },
+  { type: "Deciding", classification: "AI-PROOF", compression: 8 },
+  { type: "Insighting", classification: "AI-ASSISTED", compression: 12 },
+  { type: "Analysing", classification: "AI-ASSISTED", compression: 58 },
+  { type: "Executing", classification: "AI-DOMINANT", compression: 85 },
+  { type: "Researching", classification: "AI-DOMINANT", compression: 88 },
 ];
 
-function AnimatedCounter({
-  target,
-  suffix = "",
-  isVisible,
-}: {
-  target: number;
-  suffix?: string;
-  isVisible: boolean;
-}) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    let startTime: number;
-    let animationFrame: number;
-
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / 1500, 1);
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(easeOut * target));
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate);
-      }
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, [isVisible, target]);
-
-  return (
-    <span>
-      {count}
-      {suffix}
-    </span>
-  );
-}
-
 export function FrameworkSection() {
-  const [visibleBars, setVisibleBars] = useState(false);
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
-  const [activeDimension, setActiveDimension] = useState<number | null>(null);
-  const barRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [barsVisible, setBarsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const barsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const barObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisibleBars(true);
-            barObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    const cardObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = cardRefs.current.indexOf(entry.target as HTMLDivElement);
-            if (index !== -1) {
-              setTimeout(() => {
-                setVisibleCards((prev) => new Set([...prev, index]));
-              }, index * 100);
-            }
+            setIsVisible(true);
           }
         });
       },
       { threshold: 0.1 }
     );
 
-    if (barRef.current) {
-      barObserver.observe(barRef.current);
-    }
+    const barsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setBarsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-    cardRefs.current.forEach((ref) => {
-      if (ref) cardObserver.observe(ref);
-    });
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (barsRef.current) barsObserver.observe(barsRef.current);
 
     return () => {
-      barObserver.disconnect();
-      cardObserver.disconnect();
+      observer.disconnect();
+      barsObserver.disconnect();
     };
   }, []);
 
   return (
-    <section id="framework" className="py-16 lg:py-24 border-t border-rule">
+    <section ref={sectionRef} id="framework" className="py-24 lg:py-32 border-t border-rule/50">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        {/* Section header */}
-        <div className="border-b border-rule pb-4 mb-12">
-          <p className="font-label text-[9px] text-gold uppercase tracking-[0.3em]">
+        {/* Section Header - Centered like OpenAI */}
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <span className="font-label text-[11px] text-gold uppercase tracking-[0.3em]">
             Framework
-          </p>
-          <h2 className="mt-2 font-display text-4xl lg:text-5xl font-black">
+          </span>
+          <h2 className="mt-4 font-display text-4xl lg:text-5xl xl:text-6xl font-black">
             The E.D.G.E. Framework
           </h2>
-          <p className="mt-4 text-cream2 text-lg max-w-2xl">
-            Four dimensions measuring structural position in the AI economy.
-            Your Edge Score is derived from where you sit across each dimension.
+          <p className="mt-6 text-cream2 text-lg leading-relaxed">
+            Four dimensions measuring your structural position in the AI economy. 
+            Your Edge Score derives from where you sit across each dimension.
           </p>
         </div>
 
-        {/* Interactive Dimension Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+        {/* Dimension Cards - Clean Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
           {dimensions.map((dim, index) => (
             <div
               key={index}
-              ref={(el) => {
-                cardRefs.current[index] = el;
-              }}
-              onMouseEnter={() => setActiveDimension(index)}
-              onMouseLeave={() => setActiveDimension(null)}
-              className={`group relative border-l-2 border-gold bg-ink2 p-6 cursor-default transition-all duration-500 ${
-                visibleCards.has(index)
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
-              } ${
-                activeDimension === index
-                  ? "bg-goldp border-gold shadow-lg shadow-gold/10 -translate-y-1"
-                  : "hover:bg-ink3"
+              className={`group bg-ink2 border border-rule p-8 transition-all duration-700 hover:border-gold/50 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
+              style={{ transitionDelay: `${index * 100 + 200}ms` }}
             >
-              {/* Dimension Letter + Title */}
-              <div className="flex items-baseline gap-3 mb-3">
-                <span className={`font-display text-5xl font-black transition-colors duration-300 ${
-                  activeDimension === index ? "text-cream" : "text-gold"
-                }`}>
+              <div className="flex items-center justify-between mb-6">
+                <span className="font-display text-5xl font-black text-gold group-hover:text-cream transition-colors">
                   {dim.letter}
                 </span>
-                <span className="font-label text-[10px] text-stone uppercase tracking-[0.15em]">
-                  {dim.title}
-                </span>
+                <svg className="w-5 h-5 text-stone opacity-0 group-hover:opacity-100 group-hover:text-gold transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                </svg>
               </div>
               
-              {/* Question */}
+              <h3 className="font-label text-[11px] text-gold uppercase tracking-[0.2em] mb-3">
+                {dim.title}
+              </h3>
+              
               <p className="text-cream text-base font-medium mb-3">
                 {dim.description}
               </p>
               
-              {/* Detail Text */}
-              <p className={`text-cream3 text-sm leading-relaxed mb-4 transition-all duration-300 ${
-                activeDimension === index ? "text-cream2" : ""
-              }`}>
+              <p className="text-cream3 text-sm leading-relaxed mb-6">
                 {dim.detail}
               </p>
 
-              {/* Metric Badge */}
-              <div className="flex items-center justify-between">
-                <span className="font-label text-[9px] text-gold uppercase tracking-[0.1em] px-2 py-1 bg-goldp">
-                  {dim.metric}
+              <div className="pt-4 border-t border-rule">
+                <span className="font-label text-[9px] text-stone uppercase tracking-[0.1em]">
+                  Metric: {dim.metric}
                 </span>
-              </div>
-
-              {/* Hover Insight */}
-              <div className={`mt-4 pt-4 border-t border-rule transition-all duration-300 overflow-hidden ${
-                activeDimension === index ? "opacity-100 max-h-20" : "opacity-0 max-h-0"
-              }`}>
-                <p className="font-label text-[9px] text-gold uppercase tracking-[0.1em]">
-                  Insight
-                </p>
-                <p className="text-cream2 text-xs mt-1 italic">
-                  {dim.insight}
-                </p>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Work Types + Compression - Enhanced */}
-        <div className="border-t border-rule pt-12">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-8">
-            <div>
-              <h3 className="font-display text-2xl font-bold">
-                Six Work Types & Compression Coefficients
-              </h3>
-              <p className="mt-2 text-cream3 text-sm max-w-lg">
-                Not all work compresses equally. Understanding where your hours land determines your structural position.
-              </p>
-            </div>
-            <div className="flex gap-4">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-goldp border border-gold"></div>
-                <span className="font-label text-[9px] text-stone uppercase tracking-[0.1em]">AI-Proof</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-ink3 border border-stone3"></div>
-                <span className="font-label text-[9px] text-stone uppercase tracking-[0.1em]">AI-Assisted</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-stone3"></div>
-                <span className="font-label text-[9px] text-stone uppercase tracking-[0.1em]">AI-Dominant</span>
-              </div>
-            </div>
+        {/* Work Types Section */}
+        <div className={`transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <div className="text-center mb-12">
+            <h3 className="font-display text-2xl lg:text-3xl font-bold">
+              Six Work Types & Compression
+            </h3>
+            <p className="mt-3 text-cream3 text-sm">
+              Not all work compresses equally. Understanding where your hours land determines your structural position.
+            </p>
           </div>
 
-          <div ref={barRef} className="space-y-4">
+          <div ref={barsRef} className="max-w-4xl mx-auto">
             {workTypes.map((work, index) => (
               <div
                 key={index}
-                className="group grid grid-cols-12 gap-4 items-center py-4 border-b border-rule2 hover:bg-ink2/50 transition-colors px-2 -mx-2"
+                className="group grid grid-cols-12 gap-4 items-center py-5 border-b border-rule/30 hover:bg-ink2/30 transition-colors"
               >
-                <div className="col-span-12 sm:col-span-3 lg:col-span-2">
+                <div className="col-span-3 lg:col-span-2">
                   <p className="font-display text-lg font-bold text-cream group-hover:text-gold transition-colors">
                     {work.type}
                   </p>
-                  <p className="text-cream3 text-xs mt-0.5 hidden sm:block">
-                    {work.description}
-                  </p>
                 </div>
-                <div className="col-span-4 sm:col-span-3 lg:col-span-2">
+                
+                <div className="col-span-3 lg:col-span-2">
                   <span
-                    className={`font-label text-[9px] uppercase tracking-[0.1em] px-2 py-1 inline-block ${
+                    className={`font-label text-[9px] uppercase tracking-[0.1em] px-3 py-1.5 inline-block ${
                       work.classification === "AI-PROOF"
-                        ? "bg-goldp text-gold border border-goldb"
+                        ? "bg-goldp text-gold border border-gold/30"
                         : work.classification === "AI-ASSISTED"
                         ? "bg-ink3 text-cream3 border border-stone3"
-                        : "bg-stone3 text-stone border border-stone2"
+                        : "bg-stone3/50 text-stone border border-stone2/50"
                     }`}
                   >
                     {work.classification}
                   </span>
                 </div>
-                <div className="col-span-6 sm:col-span-4 lg:col-span-6">
-                  <div className="h-3 bg-stone3/50 relative overflow-hidden">
+                
+                <div className="col-span-5 lg:col-span-7">
+                  <div className="h-2 bg-ink3 overflow-hidden">
                     <div
                       className={`h-full transition-all duration-1000 ease-out ${
                         work.classification === "AI-PROOF"
@@ -324,34 +189,16 @@ export function FrameworkSection() {
                           : "bg-stone"
                       }`}
                       style={{
-                        width: visibleBars ? `${work.compression}%` : "0%",
-                        transitionDelay: `${index * 100}ms`,
-                      }}
-                    />
-                    {/* Percentage marker */}
-                    <div 
-                      className="absolute top-0 h-full w-px bg-cream/30 transition-all duration-1000"
-                      style={{
-                        left: visibleBars ? `${work.compression}%` : "0%",
+                        width: barsVisible ? `${work.compression}%` : "0%",
                         transitionDelay: `${index * 100}ms`,
                       }}
                     />
                   </div>
-                  <p className="mt-1 font-label text-[10px] text-stone">
-                    ~<AnimatedCounter target={work.compression} suffix="%" isVisible={visibleBars} /> automatable
-                  </p>
                 </div>
-                <div className="col-span-2 text-right hidden sm:block">
-                  <span
-                    className={`font-label text-[10px] uppercase tracking-[0.1em] ${
-                      work.signal.includes("Strong")
-                        ? "text-gold"
-                        : work.signal.includes("High")
-                        ? "text-stone"
-                        : "text-cream3"
-                    }`}
-                  >
-                    {work.signal}
+                
+                <div className="col-span-1 text-right">
+                  <span className="font-label text-[11px] text-stone">
+                    {work.compression}%
                   </span>
                 </div>
               </div>
@@ -359,69 +206,39 @@ export function FrameworkSection() {
           </div>
         </div>
 
-        {/* Score Bands - Enhanced Bento Style */}
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-5">
-          <div className="bg-goldp border border-goldb p-6 lg:p-8 group hover:shadow-lg hover:shadow-gold/5 transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <p className="font-label text-[10px] text-gold uppercase tracking-[0.2em]">
-                75–100
-              </p>
-              <div className="w-12 h-1 bg-gold"></div>
+        {/* Score Bands */}
+        <div className="mt-24 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className={`bg-goldp border border-gold/30 p-8 transition-all duration-700 delay-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="font-label text-[11px] text-gold uppercase tracking-[0.2em]">75-100</span>
+              <div className="flex-1 h-px bg-gold/30" />
             </div>
-            <h4 className="font-display text-2xl font-bold text-gold mb-3">
-              Edge Accelerating
-            </h4>
-            <p className="text-cream2 text-sm leading-relaxed mb-4">
-              Scope anchored to consequence-bearing judgment; AI compression
-              present but leverage sits above it.
+            <h4 className="font-display text-2xl font-bold text-gold mb-3">Edge Accelerating</h4>
+            <p className="text-cream2 text-sm leading-relaxed">
+              Scope anchored to consequence-bearing judgment; AI compression present but leverage sits above it.
             </p>
-            <div className="pt-4 border-t border-gold/30">
-              <p className="font-label text-[9px] text-gold/70 uppercase tracking-[0.1em]">
-                Structural Position: Above the compression line
-              </p>
-            </div>
           </div>
 
-          <div className="bg-ink2 border border-rule p-6 lg:p-8 group hover:border-cream3 transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <p className="font-label text-[10px] text-cream3 uppercase tracking-[0.2em]">
-                50–74
-              </p>
-              <div className="w-12 h-1 bg-cream3"></div>
+          <div className={`bg-ink2 border border-rule p-8 transition-all duration-700 delay-800 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="font-label text-[11px] text-cream3 uppercase tracking-[0.2em]">50-74</span>
+              <div className="flex-1 h-px bg-rule" />
             </div>
-            <h4 className="font-display text-2xl font-bold text-cream mb-3">
-              Edge Holding
-            </h4>
-            <p className="text-cream2 text-sm leading-relaxed mb-4">
-              Meaningful judgment combined with compressible output; edge intact
-              but sensitive to time allocation.
+            <h4 className="font-display text-2xl font-bold text-cream mb-3">Edge Holding</h4>
+            <p className="text-cream3 text-sm leading-relaxed">
+              Meaningful judgment combined with compressible output; edge intact but sensitive to time allocation.
             </p>
-            <div className="pt-4 border-t border-rule">
-              <p className="font-label text-[9px] text-stone uppercase tracking-[0.1em]">
-                Structural Position: At the compression line
-              </p>
-            </div>
           </div>
 
-          <div className="bg-ink3 border border-stone3 p-6 lg:p-8 group hover:border-stone transition-all">
-            <div className="flex items-center justify-between mb-4">
-              <p className="font-label text-[10px] text-stone uppercase tracking-[0.2em]">
-                0–49
-              </p>
-              <div className="w-12 h-1 bg-stone"></div>
+          <div className={`bg-ink3 border border-stone3 p-8 transition-all duration-700 delay-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="font-label text-[11px] text-stone uppercase tracking-[0.2em]">0-49</span>
+              <div className="flex-1 h-px bg-stone3" />
             </div>
-            <h4 className="font-display text-2xl font-bold text-cream3 mb-3">
-              Edge Thinning
-            </h4>
-            <p className="text-stone text-sm leading-relaxed mb-4">
-              Significant scope overlap with AI-compressible work; quiet
-              structural pressure on compensation.
+            <h4 className="font-display text-2xl font-bold text-cream3 mb-3">Edge Thinning</h4>
+            <p className="text-stone text-sm leading-relaxed">
+              Significant scope overlap with AI-compressible work; quiet structural pressure on compensation.
             </p>
-            <div className="pt-4 border-t border-stone3">
-              <p className="font-label text-[9px] text-stone2 uppercase tracking-[0.1em]">
-                Structural Position: Below the compression line
-              </p>
-            </div>
           </div>
         </div>
       </div>
