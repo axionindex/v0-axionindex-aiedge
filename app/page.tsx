@@ -16,7 +16,7 @@ import { Footer } from "@/components/footer";
 
 export default function HomePage() {
   return (
-    <main style={{ minHeight: "100vh", background: "var(--black)" }}>
+    <main style={{ minHeight: "100vh", background: "#080808", color: "#F5F2EC" }}>
       <Navigation />
       <HeroSection />
       <BandSection />
