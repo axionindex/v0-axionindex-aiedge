@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* AI Edge Lab Brand Colors */
+  --ink: #0A0806;
+  --ink2: #131008;
+  --ink3: #1C180E;
+  --cream: #EDE4CF;
+  --cream2: #D8CEBC;
+  --cream3: #B8AE9C;
+  --stone: #7A7468;
+  --stone2: #524E44;
+  --stone3: #343028;
+  --gold: #C8A44A;
+  --gold2: #A8843A;
+  
+  /* Derived colors */
+  --goldp: rgba(200,164,74,0.13);
+  --goldb: rgba(200,164,74,0.28);
+  --rule: rgba(200,164,74,0.18);
+  --rule2: rgba(200,164,74,0.09);
+
+  /* Shadcn mappings */
+  --background: var(--ink);
+  --foreground: var(--cream);
+  --card: var(--ink2);
+  --card-foreground: var(--cream);
+  --popover: var(--ink2);
+  --popover-foreground: var(--cream);
+  --primary: var(--gold);
+  --primary-foreground: var(--ink);
+  --secondary: var(--ink3);
+  --secondary-foreground: var(--cream);
+  --muted: var(--stone3);
+  --muted-foreground: var(--stone);
+  --accent: var(--ink3);
+  --accent-foreground: var(--cream);
+  --destructive: #dc2626;
+  --destructive-foreground: var(--cream);
+  --border: var(--stone3);
+  --input: var(--stone3);
+  --ring: var(--gold);
+  --radius: 0rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-baskerville), Georgia, serif;
+  --font-serif: var(--font-baskerville), Georgia, serif;
+  --font-mono: var(--font-ibm-plex), 'IBM Plex Mono', monospace;
+  --font-display: var(--font-playfair), 'Playfair Display', serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  
+  /* Brand colors */
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink2);
+  --color-ink3: var(--ink3);
+  --color-cream: var(--cream);
+  --color-cream2: var(--cream2);
+  --color-cream3: var(--cream3);
+  --color-stone: var(--stone);
+  --color-stone2: var(--stone2);
+  --color-stone3: var(--stone3);
+  --color-gold: var(--gold);
+  --color-gold2: var(--gold2);
+  --color-goldp: var(--goldp);
+  --color-goldb: var(--goldb);
+  --color-rule: var(--rule);
+  --color-rule2: var(--rule2);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-baskerville), Georgia, serif;
+  }
+  
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.032;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-playfair), 'Playfair Display', serif;
+  }
+  
+  .font-label {
+    font-family: var(--font-ibm-plex), 'IBM Plex Mono', monospace;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Progress bar animation */
+.progress-fill {
+  transition: width 0.8s ease-out;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--goldp);
+  color: var(--cream);
+}
