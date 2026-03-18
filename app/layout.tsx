@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Libre_Baskerville, IBM_Plex_Mono } from "next/font/google";
+import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -11,44 +11,45 @@ const playfair = Playfair_Display({
   style: ["normal", "italic"],
 });
 
-const baskerville = Libre_Baskerville({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-baskerville",
+  variable: "--font-dm-sans",
   display: "swap",
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+  weight: ["300", "400", "500"],
 });
 
-const ibmPlex = IBM_Plex_Mono({
+const dmMono = DM_Mono({
   subsets: ["latin"],
-  variable: "--font-ibm-plex",
+  variable: "--font-dm-mono",
   display: "swap",
   weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "The AI Edge Lab | The Doctrine of the Future Workplace",
+  title: "The AI Edge Lab — The Structural Economics of Work in the AI Era",
   description:
-    "A structural framework for understanding how AI is reshaping work — and where individual professionals sit relative to the compression line. By Nitin Nahata.",
+    "A management doctrine for the AI era. When intelligence becomes abundant, judgment becomes the scarce resource. The AI Edge Lab studies that shift — and builds frameworks to redesign roles, decisions, and organisations for an AI-native economy.",
   keywords: [
     "AI",
     "future of work",
     "career",
     "assessment",
     "diagnostic",
-    "edge score",
+    "AI replaceability",
+    "judgment",
+    "EDGE framework",
   ],
-  authors: [{ name: "Nitin Nahata", url: "https://axionindex.org" }],
+  authors: [{ name: "Nitin Nahata" }],
   openGraph: {
     title: "The AI Edge Lab",
     description:
-      "The Doctrine of the Future Workplace — AI Edge Diagnostic by Nitin Nahata",
+      "The Structural Economics of Work in the AI Era — AI Edge Diagnostic by Nitin Nahata",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A0806",
+  themeColor: "#080808",
   width: "device-width",
   initialScale: 1,
 };
@@ -61,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${baskerville.variable} ${ibmPlex.variable}`}
+      className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body className="min-h-screen antialiased">
         {children}

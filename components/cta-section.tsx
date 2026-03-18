@@ -1,23 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 export function CTASection() {
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -28,109 +25,123 @@ export function CTASection() {
   }, []);
 
   return (
-    <section 
+    <div
+      id="cta"
       ref={sectionRef}
-      className="py-24 lg:py-32 border-t border-rule bg-ink2 overflow-hidden"
+      style={{
+        background: "var(--near-black)",
+        borderBottom: "1px solid #181818",
+        position: "relative",
+        overflow: "hidden",
+      }}
     >
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Content */}
-          <div 
-            className={`lg:col-span-7 transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-            }`}
-          >
-            <p className="font-label text-[10px] text-gold uppercase tracking-[0.3em] mb-6">
-              AI Edge Diagnostic™
-            </p>
+      {/* Background glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-200px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "600px",
+          height: "500px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
-            <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-black text-balance leading-tight">
-              Where does your work sit relative to the{" "}
-              <span className="text-gold">compression line</span>?
-            </h2>
-
-            <p className="mt-6 text-cream2 text-lg leading-relaxed max-w-xl">
-              Take the diagnostic. Understand your structural position. Receive a
-              personalised action plan — not generic career advice.
-            </p>
-
-            <div className="mt-10 flex flex-col sm:flex-row items-start gap-4">
-              <Link
-                href="/diagnostic"
-                className="group px-8 py-4 bg-gold text-ink font-label text-[11px] uppercase tracking-[0.15em] hover:bg-gold2 transition-all flex items-center gap-2"
-              >
-                Take the Diagnostic
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-              <Link
-                href="/#framework"
-                className="px-8 py-4 border border-rule text-cream2 font-label text-[11px] uppercase tracking-[0.15em] hover:border-gold hover:text-gold transition-colors"
-              >
-                Explore Framework
-              </Link>
-            </div>
-
-            {/* Privacy note */}
-            <p className="mt-8 font-label text-[9px] text-stone uppercase tracking-[0.15em]">
-              Results are private — never shared with employers or organisations
-            </p>
+      <div
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          padding: "100px 52px",
+          textAlign: "center",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div className={`reveal ${isVisible ? "vis" : ""}`}>
+          <div className="sec-lbl" style={{ textAlign: "center" }}>
+            Stay Connected
           </div>
 
-          {/* Right - Feature Cards */}
-          <div 
-            className={`lg:col-span-5 transition-all duration-700 delay-200 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-            }`}
+          <h2
+            className="sec-title"
+            style={{
+              textAlign: "center",
+              fontSize: "clamp(2rem, 5vw, 3rem)",
+            }}
           >
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { value: "9", label: "Structured Inputs", sublabel: "Guided questions" },
-                { value: "12", label: "Minutes", sublabel: "Quick assessment" },
-                { value: "0-100", label: "Edge Score", sublabel: "Personalised rating" },
-                { value: "90", label: "Day Action Plan", sublabel: "Structural roadmap" },
-              ].map((item, idx) => (
-                <div 
-                  key={idx}
-                  className={`bg-ink3 border border-rule p-5 transition-all duration-500 hover:border-gold hover:bg-goldp group ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                  }`}
-                  style={{ transitionDelay: `${300 + idx * 100}ms` }}
-                >
-                  <p className="font-display text-3xl font-black text-gold group-hover:text-cream transition-colors">
-                    {item.value}
-                  </p>
-                  <p className="font-label text-[10px] text-cream2 uppercase tracking-[0.1em] mt-2">
-                    {item.label}
-                  </p>
-                  <p className="font-label text-[9px] text-stone uppercase tracking-[0.1em] mt-1">
-                    {item.sublabel}
-                  </p>
-                </div>
-              ))}
-            </div>
+            Join the AI Edge community.
+          </h2>
 
-            {/* Benefit List */}
-            <div className="mt-6 bg-goldp border border-goldb p-5">
-              <p className="font-label text-[9px] text-gold uppercase tracking-[0.2em] mb-4">
-                What You Get
-              </p>
-              <ul className="space-y-2">
-                {[
-                  "AI exposure profile mapped to six work types",
-                  "Structural position band with percentile ranking",
-                  "90-day priority roadmap for edge protection",
-                  "Downloadable report for personal reference",
-                ].map((benefit, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-cream2 text-sm">
-                    <span className="text-gold mt-0.5 shrink-0">·</span>
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <p
+            className="sec-body"
+            style={{
+              textAlign: "center",
+              maxWidth: "540px",
+              margin: "0 auto 40px",
+            }}
+          >
+            Get updates on new frameworks, diagnostic tools, and structural insights. Be first to access HROS — our
+            forthcoming Intelligent Payroll platform.
+          </p>
+
+          {/* Form */}
+          <form
+            style={{
+              display: "flex",
+              gap: "12px",
+              maxWidth: "480px",
+              margin: "0 auto",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              placeholder="Enter your email"
+              style={{
+                flex: "1 1 250px",
+                minWidth: "250px",
+                padding: "16px 20px",
+                background: "#0a0a0a",
+                border: "1px solid var(--border)",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.9rem",
+                color: "var(--white)",
+                outline: "none",
+                transition: "border-color 0.2s",
+              }}
+            />
+            <button
+              type="submit"
+              className="btn-p"
+              style={{
+                whiteSpace: "nowrap",
+                padding: "16px 32px",
+              }}
+            >
+              Join Waitlist
+            </button>
+          </form>
+
+          {/* Trust line */}
+          <p
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.58rem",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "var(--white-faint)",
+              marginTop: "24px",
+            }}
+          >
+            No spam. Unsubscribe anytime. Framework updates only.
+          </p>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
