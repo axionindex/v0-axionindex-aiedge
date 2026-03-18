@@ -1,33 +1,75 @@
 "use client";
 
-import { useState } from "react";
-import { Lock, CheckCircle, Shield } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Lock, CheckCircle, Shield, Globe } from "lucide-react";
 
 interface PaymentGateProps {
   onComplete: (email: string) => void;
 }
 
+// Stripe Payment Link URLs - Replace these with your actual Stripe payment links
+const STRIPE_LINKS = {
+  india: "https://buy.stripe.com/YOUR_INDIA_LINK", // ₹400
+  international: "https://buy.stripe.com/YOUR_INTERNATIONAL_LINK", // $9.99
+};
+
 export function PaymentGate({ onComplete }: PaymentGateProps) {
   const [email, setEmail] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isIndia, setIsIndia] = useState<boolean | null>(null);
+  const [isDetecting, setIsDetecting] = useState(true);
 
-  const handlePayment = async () => {
+  // Auto-detect user's country
+  useEffect(() => {
+    const detectCountry = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        setIsIndia(data.country_code === "IN");
+      } catch {
+        // Default to international if detection fails
+        setIsIndia(false);
+      } finally {
+        setIsDetecting(false);
+      }
+    };
+    detectCountry();
+  }, []);
+
+  const handlePayment = () => {
     if (!email || !email.includes("@")) {
       setError("Please enter a valid email address for PDF delivery.");
       return;
     }
 
-    setError(null);
-    setIsProcessing(true);
+    // Store email in localStorage for retrieval after payment
+    localStorage.setItem("diagnostic_email", email);
 
-    // Simulate payment processing
-    // In production, this would integrate with Stripe/Razorpay
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Redirect to appropriate Stripe payment link
+    const paymentLink = isIndia ? STRIPE_LINKS.india : STRIPE_LINKS.international;
+    
+    // Add success_url parameter to redirect back after payment
+    const successUrl = encodeURIComponent(
+      `${window.location.origin}/diagnostic/full-diagnostic?payment=success`
+    );
+    
+    // Stripe payment links support adding client_reference_id and prefilled_email
+    const fullUrl = `${paymentLink}?prefilled_email=${encodeURIComponent(email)}&client_reference_id=${encodeURIComponent(email)}`;
+    
+    window.location.href = fullUrl;
+  };
 
-    setIsProcessing(false);
+  // For demo purposes - simulate payment completion
+  const handleDemoComplete = () => {
+    if (!email || !email.includes("@")) {
+      setError("Please enter a valid email address for PDF delivery.");
+      return;
+    }
     onComplete(email);
   };
+
+  const price = isIndia ? "₹400" : "$9.99";
+  const priceLabel = isIndia ? "INR" : "USD";
 
   return (
     <div className="max-w-xl mx-auto px-4 lg:px-8 py-16 lg:py-24">
@@ -84,6 +126,26 @@ export function PaymentGate({ onComplete }: PaymentGateProps) {
         </ul>
       </div>
 
+      {/* Location detection */}
+      <div className="mb-6 flex items-center justify-center gap-2">
+        <Globe className="w-4 h-4 text-stone" />
+        {isDetecting ? (
+          <span className="font-label text-[10px] text-stone uppercase tracking-[0.1em]">
+            Detecting your location...
+          </span>
+        ) : (
+          <span className="font-label text-[10px] text-stone uppercase tracking-[0.1em]">
+            {isIndia ? "India" : "International"} pricing ({priceLabel})
+            <button
+              onClick={() => setIsIndia(!isIndia)}
+              className="ml-2 text-gold underline underline-offset-2 hover:text-gold2"
+            >
+              Switch
+            </button>
+          </span>
+        )}
+      </div>
+
       {/* Email input */}
       <div className="mb-6">
         <label className="block font-label text-[10px] text-stone uppercase tracking-[0.15em] mb-2">
@@ -99,22 +161,20 @@ export function PaymentGate({ onComplete }: PaymentGateProps) {
           placeholder="your@email.com"
           className="w-full bg-ink border border-rule px-4 py-3 text-cream placeholder-stone focus:border-gold focus:outline-none"
         />
-        {error && (
-          <p className="mt-2 text-sm text-destructive">{error}</p>
-        )}
+        {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
       </div>
 
       {/* Payment button */}
       <button
         onClick={handlePayment}
-        disabled={isProcessing}
+        disabled={isDetecting}
         className={`w-full px-6 py-4 font-label text-[12px] uppercase tracking-[0.15em] transition-colors ${
-          isProcessing
+          isDetecting
             ? "bg-stone3 text-stone cursor-not-allowed"
             : "bg-gold text-ink hover:bg-gold2"
         }`}
       >
-        {isProcessing ? "Processing..." : "Pay ₹400 · Unlock Results"}
+        {isDetecting ? "Loading..." : `Pay ${price} · Unlock Results`}
       </button>
 
       {/* Trust signals */}
@@ -122,7 +182,7 @@ export function PaymentGate({ onComplete }: PaymentGateProps) {
         <div className="flex items-center gap-2 text-stone">
           <Shield className="w-4 h-4" />
           <span className="font-label text-[9px] uppercase tracking-[0.1em]">
-            Secure Payment via Razorpay / Stripe
+            Secure Payment via Stripe
           </span>
         </div>
         <p className="font-label text-[9px] text-stone2 uppercase tracking-[0.1em] text-center">
@@ -130,15 +190,21 @@ export function PaymentGate({ onComplete }: PaymentGateProps) {
         </p>
       </div>
 
-      {/* Demo note */}
-      <div className="mt-10 p-4 bg-goldp border border-goldb text-center">
-        <p className="font-label text-[10px] text-gold uppercase tracking-[0.15em] mb-1">
+      {/* Demo mode - Remove this section in production */}
+      <div className="mt-10 p-4 bg-goldp border border-goldb">
+        <p className="font-label text-[10px] text-gold uppercase tracking-[0.15em] mb-2 text-center">
           Demo Mode
         </p>
-        <p className="text-cream3 text-sm">
-          This is a demonstration. In production, payment will be processed
-          through Stripe or Razorpay before showing results.
+        <p className="text-cream3 text-sm text-center mb-4">
+          Replace the payment links in the code with your Stripe payment links.
+          For now, use the button below to test:
         </p>
+        <button
+          onClick={handleDemoComplete}
+          className="w-full px-4 py-2 bg-ink border border-gold text-gold font-label text-[10px] uppercase tracking-[0.15em] hover:bg-gold hover:text-ink transition-colors"
+        >
+          Skip Payment (Demo Only)
+        </button>
       </div>
     </div>
   );
