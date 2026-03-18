@@ -7,10 +7,10 @@ interface PaymentGateProps {
   onComplete: (email: string) => void;
 }
 
-// Stripe Payment Link URLs - Replace these with your actual Stripe payment links
-const STRIPE_LINKS = {
-  india: "https://buy.stripe.com/YOUR_INDIA_LINK", // ₹400
-  international: "https://buy.stripe.com/YOUR_INTERNATIONAL_LINK", // $9.99
+// Razorpay Payment Link URLs - Replace these with your actual Razorpay payment links
+const RAZORPAY_LINKS = {
+  india: "https://rzp.io/l/YOUR_INDIA_LINK", // ₹400
+  international: "https://rzp.io/l/YOUR_INTERNATIONAL_LINK", // $9.99
 };
 
 export function PaymentGate({ onComplete }: PaymentGateProps) {
@@ -45,16 +45,12 @@ export function PaymentGate({ onComplete }: PaymentGateProps) {
     // Store email in localStorage for retrieval after payment
     localStorage.setItem("diagnostic_email", email);
 
-    // Redirect to appropriate Stripe payment link
-    const paymentLink = isIndia ? STRIPE_LINKS.india : STRIPE_LINKS.international;
+    // Redirect to appropriate Razorpay payment link
+    const paymentLink = isIndia ? RAZORPAY_LINKS.india : RAZORPAY_LINKS.international;
     
-    // Add success_url parameter to redirect back after payment
-    const successUrl = encodeURIComponent(
-      `${window.location.origin}/diagnostic/full-diagnostic?payment=success`
-    );
-    
-    // Stripe payment links support adding client_reference_id and prefilled_email
-    const fullUrl = `${paymentLink}?prefilled_email=${encodeURIComponent(email)}&client_reference_id=${encodeURIComponent(email)}`;
+    // Razorpay payment links support prefilled fields
+    // Format: https://rzp.io/l/YOUR_LINK?email=user@email.com
+    const fullUrl = `${paymentLink}?email=${encodeURIComponent(email)}`;
     
     window.location.href = fullUrl;
   };
@@ -182,7 +178,7 @@ export function PaymentGate({ onComplete }: PaymentGateProps) {
         <div className="flex items-center gap-2 text-stone">
           <Shield className="w-4 h-4" />
           <span className="font-label text-[9px] uppercase tracking-[0.1em]">
-            Secure Payment via Stripe
+            Secure Payment via Razorpay
           </span>
         </div>
         <p className="font-label text-[9px] text-stone2 uppercase tracking-[0.1em] text-center">
@@ -196,7 +192,7 @@ export function PaymentGate({ onComplete }: PaymentGateProps) {
           Demo Mode
         </p>
         <p className="text-cream3 text-sm text-center mb-4">
-          Replace the payment links in the code with your Stripe payment links.
+          Replace the payment links in the code with your Razorpay payment links.
           For now, use the button below to test:
         </p>
         <button
