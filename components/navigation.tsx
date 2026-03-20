@@ -60,7 +60,7 @@ const navItems = [
         items: [
           { num: "◇", title: "Quick Mirror — Free", sub: "5 min · Instant results on page", href: "/quick-mirror", isPage: true },
           { num: "◆", title: "Full Diagnostic — Paid", sub: "30 min · PDF report via email", href: "#fulldiagnostic" },
-          { num: "↗", title: "View Sample Report", sub: "See exactly what a Full Diagnostic delivers", href: "#", isModal: true, highlight: true, gold: true },
+          { num: "↗", title: "View Sample Report", sub: "See exactly what a Full Diagnostic delivers", href: "/AI-Edge-Full-Diagnostic-Report.pdf", isDownload: true, highlight: true, gold: true },
         ],
       },
     ],
@@ -74,7 +74,7 @@ const navItems = [
         label: "Publications",
         items: [
           { num: "↓", title: "The Doctrine — PDF", sub: "Full manifesto · Laws · Principles · 2026 Edition", href: "#", isPdf: true, highlight: true, gold: true },
-          { num: "↓", title: "Sample Diagnostic Report — PDF", sub: "See what the Full Diagnostic produces", href: "#", isPdf: true, highlight: true, gold: true },
+          { num: "↓", title: "Sample Diagnostic Report — PDF", sub: "See what the Full Diagnostic produces", href: "/AI-Edge-Full-Diagnostic-Report.pdf", isDownload: true, highlight: true, gold: true },
         ],
       },
     ],
@@ -110,11 +110,17 @@ export function Navigation() {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    item: { href: string; tabIndex?: number; isPdf?: boolean; isModal?: boolean; isPage?: boolean }
+    item: { href: string; tabIndex?: number; isPdf?: boolean; isModal?: boolean; isPage?: boolean; isDownload?: boolean }
   ) => {
     // Handle page navigation (don't prevent default)
     if (item.isPage) {
       return; // Let the browser handle the navigation normally
+    }
+
+    // Handle PDF downloads - open in new tab
+    if (item.isDownload) {
+      window.open(item.href, "_blank");
+      return;
     }
 
     e.preventDefault();
