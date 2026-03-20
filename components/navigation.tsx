@@ -8,12 +8,6 @@ const navItems = [
     label: "Doctrine",
     groups: [
       {
-        label: "Philosophy",
-        items: [
-          { num: "00", title: "Full Philosophy", sub: "The structural economics of work in the AI era", href: "#hero" },
-        ],
-      },
-      {
         label: "The Three Structural Shifts",
         items: [
           { num: "01", title: "Intelligence is Becoming Abundant", sub: "The supply shock — cognitive tasks now done by machines", href: "#shifts" },
@@ -22,17 +16,11 @@ const navItems = [
         ],
       },
       {
-        label: "Structural Truths",
-        items: [
-          { num: "→", title: "Eight Structural Truths", sub: "Realities already visible — not predictions", href: "#truths" },
-        ],
-      },
-      {
         label: "What Must Change",
         items: [
-          { num: "05", title: "For the Individual", sub: "Career strategy rewrite", href: "#changes" },
-          { num: "06", title: "For the Leader", sub: "Structural question, not a tech question", href: "#changes" },
-          { num: "07", title: "For the Organisation", sub: "Workforce strategy means redesigning work itself", href: "#changes" },
+          { num: "→", title: "For the Individual", sub: "Career strategy rewrite", href: "#changes" },
+          { num: "→", title: "For the Leader", sub: "Structural question, not a tech question", href: "#changes" },
+          { num: "→", title: "For the Organisation", sub: "Workforce strategy means redesigning work itself", href: "#changes" },
         ],
       },
     ],
@@ -51,17 +39,10 @@ const navItems = [
         ],
       },
       {
-        label: "Ownership Ladders",
+        label: "Instruments",
         items: [
-          { num: "→", title: "Judgment Ownership Ladder", sub: "I own → I lead → I contribute → I execute", href: "#ownership" },
-          { num: "→", title: "Thinking Ownership Ladder", sub: "Original → Adaptive → Synthesis → Application", href: "#ownership" },
-        ],
-      },
-      {
-        label: "Diagrams",
-        items: [
+          { num: "→", title: "Ownership Ladders — Judgment & Thinking", sub: "I own → I lead → I contribute → I execute", href: "#ownership" },
           { num: "∿", title: "The Brainpower Density Curve™", sub: "Where your value sits — and where it's migrating", href: "#bpdcurve" },
-          { num: "05", title: "The Intellectual Stack", sub: "Five instruments — one framework", href: "#stack" },
         ],
       },
     ],
@@ -71,45 +52,20 @@ const navItems = [
     label: "Assessment",
     groups: [
       {
-        label: "The AI Edge Framework",
-        items: [
-          { num: "◈", title: "Types of Work — How Your Role Is Structured", sub: "The three-zone map every professional needs", href: "#workstructure" },
-          { num: "◆", title: "AI Dominant", sub: "Value compressing rapidly", href: "#workstructure", color: "red" },
-          { num: "◆", title: "AI Assisted", sub: "Human-AI collaboration — active transition zone", href: "#workstructure", color: "amber" },
-          { num: "◆", title: "AI Proof", sub: "Irreducibly human — consequence-bearing work", href: "#workstructure", color: "green" },
-          { num: "∿", title: "Brainpower Density Curve™", sub: "Where your economic value is migrating", href: "#bpdcurve" },
-          { num: "→", title: "Salary Defensibility Score", sub: "Is your compensation justified?", href: "#salary" },
-        ],
-      },
-      {
         label: "Choose Your Instrument",
         items: [
           { num: "◇", title: "Quick Mirror — Free", sub: "5 min · Instant results on page", href: "#quickmirror" },
           { num: "◆", title: "Full Diagnostic — Paid", sub: "30 min · PDF report via email", href: "#fulldiagnostic" },
-        ],
-      },
-      {
-        label: "",
-        items: [
           { num: "↗", title: "View Sample Report", sub: "See exactly what a Full Diagnostic delivers", href: "#", highlight: true, gold: true },
         ],
       },
     ],
-    width: "390px",
+    width: "350px",
     alignRight: 60,
   },
   {
-    label: "Insights",
+    label: "Resources",
     groups: [
-      {
-        label: "Articles & Essays — Coming Soon",
-        items: [
-          { num: "01", title: "When Intelligence Gets Cheap", sub: "The structural argument for why AI changes work permanently", href: "#", disabled: true },
-          { num: "02", title: "Is Your Salary Still Defensible?", sub: "How to assess whether your compensation survives", href: "#", disabled: true },
-          { num: "03", title: "From Intelligence Worker to Judgment Worker", sub: "The career rebalancing imperative", href: "#", disabled: true },
-          { num: "04", title: "The Leadership Question No One Is Asking", sub: "Why most AI strategies miss the operating problem", href: "#", disabled: true },
-        ],
-      },
       {
         label: "Publications",
         items: [
@@ -118,28 +74,8 @@ const navItems = [
         ],
       },
     ],
-    width: "370px",
+    width: "340px",
     alignRight: 60,
-  },
-  {
-    label: "Connect",
-    groups: [
-      {
-        label: "Nitin Nahata",
-        items: [
-          { num: "↗", title: "LinkedIn", sub: "Weekly AI Edge insights & commentary", href: "https://linkedin.com/in/nitin-nahata", external: true },
-          { num: "↗", title: "Personal Page", sub: "HROS · Intelligent Payroll · About Nitin", href: "#" },
-        ],
-      },
-      {
-        label: "Stay Connected",
-        items: [
-          { num: "→", title: "Newsletter & Waitlist", sub: "AI Edge updates · HROS early access", href: "#cta" },
-        ],
-      },
-    ],
-    width: "300px",
-    alignRight: 0,
   },
 ];
 
@@ -249,7 +185,6 @@ export function Navigation() {
                     <Link
                       key={mi}
                       href={menuItem.href}
-                      target={menuItem.external ? "_blank" : undefined}
                       className="dd-item"
                       style={{
                         display: "grid",
@@ -260,8 +195,6 @@ export function Navigation() {
                         borderLeft: menuItem.highlight ? "2px solid var(--gold)" : "2px solid transparent",
                         transition: "background 0.15s, border-color 0.15s",
                         textDecoration: "none",
-                        opacity: menuItem.disabled ? 0.5 : 1,
-                        pointerEvents: menuItem.disabled ? "none" : "auto",
                         background: menuItem.highlight ? "rgba(201,168,76,0.04)" : "transparent",
                       }}
                     >
@@ -271,7 +204,7 @@ export function Navigation() {
                           fontSize: "0.58rem",
                           paddingTop: "2px",
                           letterSpacing: "0.04em",
-                          color: menuItem.gold ? "var(--gold)" : menuItem.color === "red" ? "var(--red)" : menuItem.color === "amber" ? "var(--amber)" : menuItem.color === "green" ? "var(--green)" : "var(--white-faint)",
+                          color: menuItem.gold ? "var(--gold)" : "var(--white-faint)",
                         }}
                       >
                         {menuItem.num}
@@ -291,6 +224,32 @@ export function Navigation() {
             </div>
           </div>
         ))}
+
+        {/* LinkedIn - Direct Link */}
+        <a
+          href="https://linkedin.com/in/nitin-nahata"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "5px",
+            padding: "0 14px",
+            height: "100%",
+            fontFamily: "'DM Mono', monospace",
+            fontSize: "0.6rem",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: "rgba(245,242,236,0.45)",
+            cursor: "pointer",
+            transition: "color 0.2s",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+          }}
+          className="linkedin-link"
+        >
+          LinkedIn <span style={{ fontSize: "0.7rem" }}>↗</span>
+        </a>
       </div>
 
       <style jsx>{`
@@ -318,6 +277,9 @@ export function Navigation() {
         .dd-item:hover {
           background: rgba(201,168,76,0.05) !important;
           border-left-color: var(--gold) !important;
+        }
+        .linkedin-link:hover {
+          color: var(--gold) !important;
         }
       `}</style>
     </nav>
