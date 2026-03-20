@@ -58,7 +58,7 @@ const navItems = [
       {
         label: "Choose Your Instrument",
         items: [
-          { num: "◇", title: "Quick Mirror — Free", sub: "5 min · Instant results on page", href: "#quickmirror" },
+          { num: "◇", title: "Quick Mirror — Free", sub: "5 min · Instant results on page", href: "/quick-mirror", isPage: true },
           { num: "◆", title: "Full Diagnostic — Paid", sub: "30 min · PDF report via email", href: "#fulldiagnostic" },
           { num: "↗", title: "View Sample Report", sub: "See exactly what a Full Diagnostic delivers", href: "#", isModal: true, highlight: true, gold: true },
         ],
@@ -110,8 +110,13 @@ export function Navigation() {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    item: { href: string; tabIndex?: number; isPdf?: boolean; isModal?: boolean }
+    item: { href: string; tabIndex?: number; isPdf?: boolean; isModal?: boolean; isPage?: boolean }
   ) => {
+    // Handle page navigation (don't prevent default)
+    if (item.isPage) {
+      return; // Let the browser handle the navigation normally
+    }
+
     e.preventDefault();
 
     // Handle PDF placeholder links

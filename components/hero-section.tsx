@@ -138,7 +138,7 @@ export function HeroSection() {
             animation: "fadeUp 0.9s ease 0.82s forwards",
           }}
         >
-          <Link href="#assessment" className="btn-p">
+          <Link href="/quick-mirror" className="btn-p">
             Take the Replaceability Index
           </Link>
           <Link href="#shifts" className="btn-g">

@@ -22,7 +22,7 @@ const navSections = [
   {
     title: "Assessment",
     links: [
-      { label: "Quick Mirror", href: "#quickmirror" },
+      { label: "Quick Mirror — Free", href: "/quick-mirror" },
       { label: "Full Diagnostic", href: "#fulldiagnostic" },
       { label: "Salary Defensibility", href: "#salary" },
     ],

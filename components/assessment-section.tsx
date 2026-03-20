@@ -63,7 +63,7 @@ export function AssessmentSection() {
             background: "var(--border)",
           }}
         >
-          {/* Quick Mirror */}
+          {/* Quick Mirror - Entry Card */}
           <div
             id="quickmirror"
             className="instr-card"
@@ -75,104 +75,70 @@ export function AssessmentSection() {
               transition: "background 0.3s",
             }}
           >
-            {/* Free tag */}
+            {/* Pulsing badge */}
             <div
               style={{
-                position: "absolute",
-                top: "20px",
-                right: "20px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
                 fontFamily: "'DM Mono', monospace",
                 fontSize: "0.54rem",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "var(--green)",
-                background: "rgba(100,200,130,0.1)",
-                padding: "4px 10px",
+                color: "var(--gold)",
+                background: "rgba(201,168,76,0.08)",
+                padding: "6px 12px",
+                marginBottom: "24px",
+                position: "relative",
               }}
             >
-              Free
-            </div>
-
-            <div
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.6rem",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "var(--gold-dim)",
-                marginBottom: "12px",
-              }}
-            >
-              Quick Mirror
+              <span
+                style={{
+                  width: "6px",
+                  height: "6px",
+                  borderRadius: "50%",
+                  background: "var(--gold)",
+                  animation: "pulse 2s ease-in-out infinite",
+                }}
+              />
+              Free · 5 Minutes · Instant Result
             </div>
 
             <h3
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "1.45rem",
+                fontSize: "1.8rem",
                 fontWeight: 700,
                 color: "var(--white)",
-                marginBottom: "12px",
+                marginBottom: "16px",
               }}
             >
-              5-minute directional scan
+              Quick Mirror
             </h3>
 
             <p
               style={{
-                fontSize: "0.9rem",
+                fontSize: "0.95rem",
                 color: "var(--white-dim)",
-                lineHeight: 1.75,
-                marginBottom: "28px",
+                lineHeight: 1.8,
+                marginBottom: "32px",
+                maxWidth: "400px",
               }}
             >
-              A fast, directional assessment to reveal which zone you're operating in today. Instant results on page — no
-              email required. Designed to give you a quick read before deciding whether to go deeper.
+              Your AI exposure in 7 questions. Score, band, direction, work split, and three structural moves. No account required.
             </p>
 
-            {/* Stats */}
-            <div
+            <Link
+              href="/quick-mirror"
+              className="btn-p"
               style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: "1px",
-                background: "var(--border)",
-                marginBottom: "28px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
               }}
             >
-              {[
-                { num: "9", label: "Questions" },
-                { num: "5", label: "Minutes" },
-                { num: "Instant", label: "Results" },
-              ].map((stat, idx) => (
-                <div key={idx} style={{ background: "#0a0a0a", padding: "16px 14px", textAlign: "center" }}>
-                  <div
-                    style={{
-                      fontFamily: "'Playfair Display', serif",
-                      fontSize: "1.7rem",
-                      fontWeight: 700,
-                      color: "var(--gold)",
-                    }}
-                  >
-                    {stat.num}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: "0.52rem",
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "var(--white-faint)",
-                    }}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <Link href="#quickmirror-start" className="btn-p" style={{ display: "inline-block" }}>
               Start Quick Mirror
+              <span style={{ fontSize: "1.1em" }}>→</span>
             </Link>
           </div>
 
@@ -296,6 +262,10 @@ export function AssessmentSection() {
       <style jsx>{`
         .instr-card:hover {
           background: #0f0f0f !important;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.2); }
         }
         @media (max-width: 900px) {
           .reveal > div:last-child {

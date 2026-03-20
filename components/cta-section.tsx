@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 export function CTASection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -140,6 +141,32 @@ export function CTASection() {
           >
             No spam. Unsubscribe anytime. Framework updates only.
           </p>
+
+          {/* Quick Mirror CTA */}
+          <div style={{ marginTop: "40px", paddingTop: "32px", borderTop: "1px solid var(--border)" }}>
+            <p
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.9rem",
+                color: "var(--white-dim)",
+                marginBottom: "16px",
+              }}
+            >
+              Or take the free assessment now
+            </p>
+            <Link
+              href="/quick-mirror"
+              className="btn-g"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              Start with Quick Mirror
+              <span style={{ fontSize: "1.1em" }}>→</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
