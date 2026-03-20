@@ -340,7 +340,7 @@ export function Navigation() {
               }}
             >
               <a
-                href="https://linkedin.com/in/nitin-nahata"
+                href="https://www.linkedin.com/in/nahatanitin/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="dd-item"
