@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { CHANGE_TAB_EVENT } from "./navigation";
 
 const changesData = [
   {
@@ -37,6 +38,7 @@ const changesData = [
 
 export function ChangesSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,6 +57,18 @@ export function ChangesSection() {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+  // Listen for tab change events from navigation
+  useEffect(() => {
+    const handleTabChange = (e: CustomEvent<{ tabIndex: number }>) => {
+      setActiveTab(e.detail.tabIndex);
+    };
+
+    window.addEventListener(CHANGE_TAB_EVENT as string, handleTabChange as EventListener);
+    return () => {
+      window.removeEventListener(CHANGE_TAB_EVENT as string, handleTabChange as EventListener);
+    };
   }, []);
 
   const getTypeIcon = (type: string) => {
@@ -89,7 +103,7 @@ export function ChangesSection() {
         }}
       >
         {/* Header */}
-        <div className={`reveal ${isVisible ? "vis" : ""}`} style={{ marginBottom: "64px" }}>
+        <div className={`reveal ${isVisible ? "vis" : ""}`} style={{ marginBottom: "48px" }}>
           <div className="sec-lbl">What Must Change</div>
           <h2 className="sec-title">
             Three audiences.<br />One structural shift.
@@ -100,65 +114,85 @@ export function ChangesSection() {
           </p>
         </div>
 
-        {/* Three columns */}
+        {/* Tab buttons */}
         <div
           className={`reveal ${isVisible ? "vis" : ""}`}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            display: "flex",
             gap: "2px",
+            marginBottom: "2px",
             background: "var(--border)",
           }}
         >
           {changesData.map((section, idx) => (
-            <div
+            <button
               key={idx}
-              className="change-card"
+              onClick={() => setActiveTab(idx)}
+              className="change-tab"
               style={{
-                background: "var(--near-black)",
-                padding: "36px 28px",
-                position: "relative",
+                flex: 1,
+                padding: "18px 24px",
+                background: activeTab === idx ? "var(--near-black)" : "var(--surface)",
+                border: "none",
+                cursor: "pointer",
                 transition: "background 0.3s",
+                position: "relative",
+                textAlign: "left",
               }}
             >
-              {/* Top accent */}
+              {/* Active indicator */}
               <div
-                className="change-border"
                 style={{
                   position: "absolute",
                   top: 0,
                   left: 0,
                   right: 0,
                   height: "2px",
-                  background: "var(--gold)",
-                  transform: "scaleX(0)",
-                  transition: "transform 0.4s",
-                  transformOrigin: "left",
+                  background: activeTab === idx ? "var(--gold)" : "transparent",
+                  transition: "background 0.3s",
                 }}
               />
-
-              {/* Tag */}
-              <div
+              <span
                 style={{
                   fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.58rem",
-                  letterSpacing: "0.22em",
+                  fontSize: "0.6rem",
+                  letterSpacing: "0.2em",
                   textTransform: "uppercase",
-                  color: "var(--gold)",
-                  marginBottom: "10px",
+                  color: activeTab === idx ? "var(--gold)" : "var(--white-faint)",
+                  transition: "color 0.3s",
                 }}
               >
                 {section.tag}
-              </div>
+              </span>
+            </button>
+          ))}
+        </div>
 
+        {/* Tab content */}
+        <div
+          className={`reveal ${isVisible ? "vis" : ""}`}
+          style={{
+            background: "var(--near-black)",
+            padding: "40px 36px",
+            minHeight: "320px",
+          }}
+        >
+          {changesData.map((section, idx) => (
+            <div
+              key={idx}
+              style={{
+                display: activeTab === idx ? "block" : "none",
+                animation: activeTab === idx ? "fadeIn 0.4s ease" : "none",
+              }}
+            >
               {/* Title */}
               <h3
                 style={{
                   fontFamily: "'Playfair Display', serif",
-                  fontSize: "1.25rem",
+                  fontSize: "1.5rem",
                   fontWeight: 700,
                   color: "var(--white)",
-                  marginBottom: "20px",
+                  marginBottom: "28px",
                 }}
               >
                 {section.title}
@@ -173,21 +207,21 @@ export function ChangesSection() {
                       key={itemIdx}
                       style={{
                         display: "flex",
-                        gap: "12px",
-                        padding: "12px 0",
-                        borderTop: "1px solid var(--border)",
+                        gap: "16px",
+                        padding: "16px 0",
+                        borderTop: itemIdx === 0 ? "none" : "1px solid var(--border)",
                         alignItems: "flex-start",
                       }}
                     >
                       <span
                         style={{
                           fontFamily: "'DM Mono', monospace",
-                          fontSize: "0.7rem",
+                          fontSize: "0.8rem",
                           color: typeInfo.color,
-                          width: "16px",
+                          width: "20px",
                           flexShrink: 0,
                           textAlign: "center",
-                          marginTop: "2px",
+                          marginTop: "3px",
                         }}
                       >
                         {typeInfo.symbol}
@@ -195,9 +229,9 @@ export function ChangesSection() {
                       <span
                         style={{
                           fontFamily: "'DM Sans', sans-serif",
-                          fontSize: "0.85rem",
+                          fontSize: "0.95rem",
                           color: "var(--white-dim)",
-                          lineHeight: 1.6,
+                          lineHeight: 1.7,
                         }}
                       >
                         {item.text}
@@ -209,18 +243,53 @@ export function ChangesSection() {
             </div>
           ))}
         </div>
+
+        {/* Quick nav dots */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "12px",
+            marginTop: "24px",
+          }}
+        >
+          {changesData.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setActiveTab(idx)}
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+                background: activeTab === idx ? "var(--gold)" : "var(--border)",
+                border: "none",
+                cursor: "pointer",
+                transition: "background 0.3s, transform 0.2s",
+                transform: activeTab === idx ? "scale(1.2)" : "scale(1)",
+              }}
+              aria-label={`Go to ${changesData[idx].tag}`}
+            />
+          ))}
+        </div>
       </div>
 
       <style jsx>{`
-        .change-card:hover {
-          background: var(--surface) !important;
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
-        .change-card:hover .change-border {
-          transform: scaleX(1) !important;
+        .change-tab:hover {
+          background: var(--near-black) !important;
         }
-        @media (max-width: 900px) {
-          .reveal > div:last-child {
-            grid-template-columns: 1fr !important;
+        @media (max-width: 768px) {
+          .reveal > div:nth-child(2) {
+            flex-direction: column !important;
           }
         }
       `}</style>
