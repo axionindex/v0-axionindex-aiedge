@@ -287,31 +287,115 @@ export function Navigation() {
             </div>
           ))}
 
-          {/* LinkedIn - Direct Link */}
-          <a
-            href="https://linkedin.com/in/nitin-nahata"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              padding: "0 14px",
-              height: "100%",
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.6rem",
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "rgba(245,242,236,0.45)",
-              cursor: "pointer",
-              transition: "color 0.2s",
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-            }}
-            className="linkedin-link"
-          >
-            LinkedIn <span style={{ fontSize: "0.7rem" }}>↗</span>
-          </a>
+          {/* Connect Dropdown */}
+          <div className="nav-item" style={{ position: "relative", height: "100%", display: "flex", alignItems: "center" }}>
+            <button
+              className="nav-trigger"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                padding: "0 14px",
+                height: "100%",
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.6rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "rgba(245,242,236,0.45)",
+                cursor: "pointer",
+                transition: "color 0.2s",
+                border: "none",
+                background: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Connect
+              <svg width="7" height="7" viewBox="0 0 10 6" fill="none" style={{ transition: "transform 0.22s", opacity: 0.35 }}>
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+
+            {/* Dropdown */}
+            <div
+              className="nav-dd"
+              style={{
+                position: "absolute",
+                top: "100%",
+                right: "0",
+                minWidth: "280px",
+                background: "rgba(6,6,6,0.99)",
+                border: "1px solid rgba(201,168,76,0.18)",
+                borderTop: "2px solid var(--gold)",
+                padding: "6px 0",
+                opacity: 0,
+                visibility: "hidden",
+                transform: "translateY(6px)",
+                transition: "all 0.2s ease",
+                backdropFilter: "blur(20px)",
+              }}
+            >
+              <a
+                href="https://linkedin.com/in/nitin-nahata"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dd-item"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "24px 1fr",
+                  alignItems: "baseline",
+                  gap: "10px",
+                  padding: "8px 18px",
+                  borderLeft: "2px solid transparent",
+                  transition: "background 0.15s, border-color 0.15s",
+                  textDecoration: "none",
+                  background: "transparent",
+                  cursor: "pointer",
+                }}
+              >
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.58rem", paddingTop: "2px", letterSpacing: "0.04em", color: "var(--white-faint)" }}>
+                  ↗
+                </span>
+                <span>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.78rem", fontWeight: 500, color: "var(--white)", display: "block" }}>
+                    LinkedIn
+                  </span>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.56rem", color: "var(--white-dim)", letterSpacing: "0.06em", display: "block", marginTop: "1px" }}>
+                    Connect with Nitin Nahata
+                  </span>
+                </span>
+              </a>
+              <a
+                href="https://www.perplexity.ai/computer/a/the-making-of-the-operating-ar-mXeHIIQeSJWFEvWxSQaKtw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="dd-item"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "24px 1fr",
+                  alignItems: "baseline",
+                  gap: "10px",
+                  padding: "8px 18px",
+                  borderLeft: "2px solid transparent",
+                  transition: "background 0.15s, border-color 0.15s",
+                  textDecoration: "none",
+                  background: "transparent",
+                  cursor: "pointer",
+                }}
+              >
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.58rem", paddingTop: "2px", letterSpacing: "0.04em", color: "var(--white-faint)" }}>
+                  ↗
+                </span>
+                <span>
+                  <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "0.78rem", fontWeight: 500, color: "var(--white)", display: "block" }}>
+                    About Nitin Nahata
+                  </span>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.56rem", color: "var(--white-dim)", letterSpacing: "0.06em", display: "block", marginTop: "1px" }}>
+                    The making of the operating architecture
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
 
         <style jsx>{`
@@ -339,9 +423,6 @@ export function Navigation() {
           .dd-item:hover {
             background: rgba(201,168,76,0.05) !important;
             border-left-color: var(--gold) !important;
-          }
-          .linkedin-link:hover {
-            color: var(--gold) !important;
           }
         `}</style>
       </nav>
