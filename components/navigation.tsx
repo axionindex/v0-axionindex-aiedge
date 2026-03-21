@@ -73,7 +73,7 @@ const navItems = [
       {
         label: "Publications",
         items: [
-          { num: "↓", title: "The Doctrine — PDF", sub: "Full manifesto · Laws · Principles · 2026 Edition", href: "#", isPdf: true, highlight: true, gold: true },
+          { num: "↓", title: "The Doctrine — PDF", sub: "Full manifesto · Laws · Principles · 2026 Edition", href: "/AI-Edge-Doctrine-2026.pdf", isDownload: true, highlight: true, gold: true },
           { num: "↓", title: "Sample Diagnostic Report — PDF", sub: "See what the Full Diagnostic produces", href: "/AI-Edge-Full-Diagnostic-Report.pdf", isDownload: true, highlight: true, gold: true },
         ],
       },
