@@ -60,7 +60,6 @@ const navItems = [
         items: [
           { num: "◇", title: "Quick Mirror — Free", sub: "5 min · Instant results on page", href: "/quick-mirror", isPage: true },
           { num: "◆", title: "Full Diagnostic — Paid", sub: "30 min · PDF report via email", href: "/full-diagnostic", isPage: true },
-          { num: "↗", title: "View Sample Report", sub: "See exactly what a Full Diagnostic delivers", href: "/sample-report", isPage: true, highlight: true, gold: true },
         ],
       },
     ],
