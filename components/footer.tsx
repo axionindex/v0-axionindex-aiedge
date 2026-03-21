@@ -1,68 +1,212 @@
+"use client";
+
 import Link from "next/link";
+
+const navSections = [
+  {
+    title: "Doctrine",
+    links: [
+      { label: "The Three Shifts", href: "#shifts" },
+      { label: "Eight Truths", href: "#truths" },
+      { label: "What Must Change", href: "#changes" },
+    ],
+  },
+  {
+    title: "Framework",
+    links: [
+      { label: "E.D.G.E. Dimensions", href: "#edge" },
+      { label: "Brainpower Density", href: "#bpdcurve" },
+      { label: "Ownership Ladders", href: "#ownership" },
+    ],
+  },
+  {
+    title: "Assessment",
+    links: [
+      { label: "Quick Mirror — Free", href: "/quick-mirror" },
+      { label: "Full Diagnostic", href: "#fulldiagnostic" },
+      { label: "Salary Defensibility", href: "#salary" },
+    ],
+  },
+  {
+    title: "Connect",
+    links: [
+      { label: "LinkedIn", href: "https://linkedin.com/in/nitin-nahata", external: true },
+      { label: "Waitlist", href: "#cta" },
+    ],
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="border-t border-rule py-12">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          {/* Logo and credits */}
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <span className="font-display text-lg font-black tracking-tight">
-              AI <span className="text-gold">EDGE</span> LAB
-            </span>
-            <span className="font-label text-[9px] text-stone uppercase tracking-[0.15em]">
-              · Nitin Nahata · Axionindex · 2026
-            </span>
+    <footer
+      style={{
+        background: "var(--black)",
+        borderTop: "1px solid var(--border)",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "72px 52px 40px",
+        }}
+      >
+        {/* Top section */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "280px 1fr",
+            gap: "80px",
+            marginBottom: "56px",
+          }}
+        >
+          {/* Left - Brand */}
+          <div>
+            <Link
+              href="#hero"
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "1rem",
+                fontWeight: 900,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "var(--white)",
+                textDecoration: "none",
+              }}
+            >
+              AI <span style={{ color: "var(--gold)" }}>EDGE</span> LAB
+            </Link>
+
+            <p
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.85rem",
+                color: "var(--white-dim)",
+                lineHeight: 1.7,
+                marginTop: "20px",
+                marginBottom: "24px",
+              }}
+            >
+              The structural economics of work in the AI era. A framework for understanding how roles, careers, and
+              organisations must evolve.
+            </p>
+
+            <div
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.58rem",
+                letterSpacing: "0.18em",
+                color: "var(--white-faint)",
+              }}
+            >
+              <span style={{ color: "var(--gold)" }}>Nitin Nahata</span> · CHRO, Gameskraft
+            </div>
           </div>
 
-          {/* Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            <Link
-              href="/#concepts"
-              className="font-label text-[10px] text-stone uppercase tracking-[0.1em] hover:text-gold transition-colors"
-            >
-              Concepts
-            </Link>
-            <Link
-              href="/#framework"
-              className="font-label text-[10px] text-stone uppercase tracking-[0.1em] hover:text-gold transition-colors"
-            >
-              Framework
-            </Link>
-            <Link
-              href="/#workplace"
-              className="font-label text-[10px] text-stone uppercase tracking-[0.1em] hover:text-gold transition-colors"
-            >
-              Workplace
-            </Link>
-            <Link
-              href="/#individual"
-              className="font-label text-[10px] text-stone uppercase tracking-[0.1em] hover:text-gold transition-colors"
-            >
-              Individual
-            </Link>
-            <Link
-              href="/#lexicon"
-              className="font-label text-[10px] text-stone uppercase tracking-[0.1em] hover:text-gold transition-colors"
-            >
-              Lexicon
-            </Link>
-            <Link
-              href="/diagnostic"
-              className="font-label text-[10px] text-gold uppercase tracking-[0.1em] hover:text-gold2 transition-colors"
-            >
-              Take Diagnostic
-            </Link>
-          </nav>
+          {/* Right - Nav sections */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "40px",
+            }}
+          >
+            {navSections.map((section, idx) => (
+              <div key={idx}>
+                <div
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "0.58rem",
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
+                    marginBottom: "20px",
+                  }}
+                >
+                  {section.title}
+                </div>
+                <ul style={{ listStyle: "none" }}>
+                  {section.links.map((link, linkIdx) => (
+                    <li key={linkIdx} style={{ marginBottom: "12px" }}>
+                      <Link
+                        href={link.href}
+                        target={link.external ? "_blank" : undefined}
+                        className="ftr-link"
+                        style={{
+                          fontFamily: "'DM Sans', sans-serif",
+                          fontSize: "0.82rem",
+                          color: "var(--white-dim)",
+                          textDecoration: "none",
+                          transition: "color 0.2s",
+                        }}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom line */}
-        <div className="mt-8 pt-6 border-t border-rule2 text-center">
-          <p className="font-label text-[9px] text-stone2 uppercase tracking-[0.15em]">
-            AI Edge Diagnostic™ · Framework Version: 2026-Q1
-          </p>
+        {/* Divider */}
+        <div
+          style={{
+            height: "1px",
+            background: "var(--border)",
+            marginBottom: "28px",
+          }}
+        />
+
+        {/* Bottom section */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "16px",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.56rem",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "var(--white-faint)",
+            }}
+          >
+            AI Edge Lab · Doctrine 2026 · Axionindex
+          </div>
+
+          <div
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.56rem",
+              letterSpacing: "0.1em",
+              color: "var(--white-faint)",
+            }}
+          >
+            Framework v1.0 · Updated March 2026
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .ftr-link:hover {
+          color: var(--gold) !important;
+        }
+        @media (max-width: 900px) {
+          div > div:first-child {
+            grid-template-columns: 1fr !important;
+          }
+          div > div:first-child > div:last-child {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

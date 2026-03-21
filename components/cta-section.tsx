@@ -1,42 +1,174 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 export function CTASection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-24 lg:py-32 border-t border-rule bg-ink2">
-      <div className="max-w-3xl mx-auto px-4 lg:px-8 text-center">
-        <p className="font-label text-[10px] text-gold uppercase tracking-[0.3em] mb-6">
-          AI Edge Diagnostic™
-        </p>
+    <div
+      id="cta"
+      ref={sectionRef}
+      style={{
+        background: "var(--near-black)",
+        borderBottom: "1px solid #181818",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-200px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "600px",
+          height: "500px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
-        <h2 className="font-display text-4xl lg:text-5xl font-black text-balance leading-tight">
-          Where does your work sit relative to the compression line?
-        </h2>
+      <div
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          padding: "100px 52px",
+          textAlign: "center",
+          position: "relative",
+          zIndex: 2,
+        }}
+      >
+        <div className={`reveal ${isVisible ? "vis" : ""}`}>
+          <div className="sec-lbl" style={{ textAlign: "center" }}>
+            Stay Connected
+          </div>
 
-        <p className="mt-6 text-cream2 text-lg leading-relaxed max-w-xl mx-auto">
-          Take the diagnostic. Understand your structural position. Receive a
-          personalised action plan.
-        </p>
-
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            href="/diagnostic"
-            className="px-8 py-4 bg-gold text-ink font-label text-[11px] uppercase tracking-[0.15em] hover:bg-gold2 transition-colors"
+          <h2
+            className="sec-title"
+            style={{
+              textAlign: "center",
+              fontSize: "clamp(2rem, 5vw, 3rem)",
+            }}
           >
-            Take the Diagnostic →
-          </Link>
-          <Link
-            href="/#framework"
-            className="px-8 py-4 border border-rule text-cream2 font-label text-[11px] uppercase tracking-[0.15em] hover:border-gold hover:text-gold transition-colors"
+            Join the AI Edge community.
+          </h2>
+
+          <p
+            className="sec-body"
+            style={{
+              textAlign: "center",
+              maxWidth: "540px",
+              margin: "0 auto 40px",
+            }}
           >
-            Learn More
-          </Link>
+            Get updates on new frameworks, diagnostic tools, and structural insights. Be first to access HROS — our
+            forthcoming Intelligent Payroll platform.
+          </p>
+
+          {/* Form */}
+          <form
+            style={{
+              display: "flex",
+              gap: "12px",
+              maxWidth: "480px",
+              margin: "0 auto",
+              flexWrap: "wrap",
+              justifyContent: "center",
+            }}
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              placeholder="Enter your email"
+              style={{
+                flex: "1 1 250px",
+                minWidth: "250px",
+                padding: "16px 20px",
+                background: "#0a0a0a",
+                border: "1px solid var(--border)",
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.9rem",
+                color: "var(--white)",
+                outline: "none",
+                transition: "border-color 0.2s",
+              }}
+            />
+            <button
+              type="submit"
+              className="btn-p"
+              style={{
+                whiteSpace: "nowrap",
+                padding: "16px 32px",
+              }}
+            >
+              Join Waitlist
+            </button>
+          </form>
+
+          {/* Trust line */}
+          <p
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.58rem",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "var(--white-faint)",
+              marginTop: "24px",
+            }}
+          >
+            No spam. Unsubscribe anytime. Framework updates only.
+          </p>
+
+          {/* Quick Mirror CTA */}
+          <div style={{ marginTop: "40px", paddingTop: "32px", borderTop: "1px solid var(--border)" }}>
+            <p
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "0.9rem",
+                color: "var(--white-dim)",
+                marginBottom: "16px",
+              }}
+            >
+              Or take the free assessment now
+            </p>
+            <Link
+              href="/quick-mirror"
+              className="btn-g"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+            >
+              Start with Quick Mirror
+              <span style={{ fontSize: "1.1em" }}>→</span>
+            </Link>
+          </div>
         </div>
-
-        {/* Privacy note */}
-        <p className="mt-8 font-label text-[9px] text-stone uppercase tracking-[0.15em]">
-          Results are private — never shared with employers or organisations
-        </p>
       </div>
-    </section>
+    </div>
   );
 }
