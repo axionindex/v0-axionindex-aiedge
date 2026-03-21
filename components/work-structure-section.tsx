@@ -16,7 +16,7 @@ const zones = [
       "Pattern recognition",
       "Process execution",
     ],
-    width: "85%",
+    compression: "85%",
   },
   {
     color: "var(--amber)",
@@ -31,7 +31,7 @@ const zones = [
       "Creative direction",
       "Quality control",
     ],
-    width: "55%",
+    compression: "55%",
   },
   {
     color: "var(--green)",
@@ -46,7 +46,7 @@ const zones = [
       "Crisis judgment",
       "Accountability ownership",
     ],
-    width: "25%",
+    compression: "25%",
   },
 ];
 
@@ -129,6 +129,9 @@ export function WorkStructureSection() {
                 position: "relative",
                 overflow: "hidden",
                 transition: "background 0.3s",
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "480px",
               }}
             >
               {/* Top accent bar */}
@@ -150,6 +153,7 @@ export function WorkStructureSection() {
                   padding: "4px 10px",
                   background: zone.colorLight,
                   marginBottom: "16px",
+                  alignSelf: "flex-start",
                 }}
               >
                 <span
@@ -186,13 +190,14 @@ export function WorkStructureSection() {
                   color: "var(--white-dim)",
                   lineHeight: 1.7,
                   marginBottom: "20px",
+                  minHeight: "60px",
                 }}
               >
                 {zone.desc}
               </p>
 
-              {/* Items */}
-              <ul style={{ listStyle: "none" }}>
+              {/* Items - flex grow to push compression bar to bottom */}
+              <ul style={{ listStyle: "none", flex: "1" }}>
                 {zone.items.map((item, itemIdx) => (
                   <li
                     key={itemIdx}
@@ -213,12 +218,12 @@ export function WorkStructureSection() {
                 ))}
               </ul>
 
-              {/* AI Compression bar */}
+              {/* AI Compression bar - always at bottom */}
               <div
                 style={{
-                  marginTop: "24px",
+                  marginTop: "auto",
                   background: "#0a0a0a",
-                  padding: "10px 12px",
+                  padding: "12px 14px",
                   borderTop: `1px solid ${zone.color}22`,
                 }}
               >
@@ -226,13 +231,14 @@ export function WorkStructureSection() {
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    marginBottom: "6px",
+                    alignItems: "center",
+                    marginBottom: "8px",
                   }}
                 >
                   <span
                     style={{
                       fontFamily: "'DM Mono', monospace",
-                      fontSize: "0.52rem",
+                      fontSize: "0.56rem",
                       letterSpacing: "0.2em",
                       textTransform: "uppercase",
                       color: "var(--white-faint)",
@@ -243,16 +249,17 @@ export function WorkStructureSection() {
                   <span
                     style={{
                       fontFamily: "'DM Mono', monospace",
-                      fontSize: "0.56rem",
+                      fontSize: "0.62rem",
+                      fontWeight: 600,
                       color: zone.color,
                     }}
                   >
-                    {zone.width}
+                    {zone.compression}
                   </span>
                 </div>
                 <div
                   style={{
-                    height: "4px",
+                    height: "5px",
                     background: "#222",
                     position: "relative",
                     overflow: "hidden",
@@ -261,7 +268,7 @@ export function WorkStructureSection() {
                   <div
                     style={{
                       height: "100%",
-                      width: isVisible ? zone.width : "0%",
+                      width: isVisible ? zone.compression : "0%",
                       background: zone.color,
                       transition: "width 1.2s ease-out 0.3s",
                     }}

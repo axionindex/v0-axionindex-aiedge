@@ -73,60 +73,107 @@ export function AssessmentSection() {
               position: "relative",
               overflow: "hidden",
               transition: "background 0.3s",
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "420px",
             }}
           >
-            {/* Pulsing badge */}
+            {/* Free tag */}
             <div
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
+                position: "absolute",
+                top: "20px",
+                right: "20px",
                 fontFamily: "'DM Mono', monospace",
                 fontSize: "0.54rem",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
-                color: "var(--gold)",
-                background: "rgba(201,168,76,0.08)",
-                padding: "6px 12px",
-                marginBottom: "24px",
-                position: "relative",
+                color: "var(--green)",
+                background: "rgba(100,200,130,0.12)",
+                padding: "4px 10px",
               }}
             >
-              <span
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  borderRadius: "50%",
-                  background: "var(--gold)",
-                  animation: "pulse 2s ease-in-out infinite",
-                }}
-              />
-              Free · 5 Minutes · Instant Result
+              Free
+            </div>
+
+            <div
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.6rem",
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "var(--gold)",
+                marginBottom: "12px",
+              }}
+            >
+              Quick Mirror
             </div>
 
             <h3
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "1.8rem",
+                fontSize: "1.45rem",
                 fontWeight: 700,
                 color: "var(--white)",
-                marginBottom: "16px",
+                marginBottom: "12px",
               }}
             >
-              Quick Mirror
+              5-minute directional check
             </h3>
 
             <p
               style={{
-                fontSize: "0.95rem",
+                fontSize: "0.9rem",
                 color: "var(--white-dim)",
-                lineHeight: 1.8,
-                marginBottom: "32px",
-                maxWidth: "400px",
+                lineHeight: 1.75,
+                marginBottom: "28px",
+                flex: "1",
               }}
             >
-              Your AI exposure in 7 questions. Score, band, direction, work split, and three structural moves. No account required.
+              Your AI exposure in 7 questions. Get your score, band, direction, work split, and three structural moves.
+              Instant results on page. No account required.
             </p>
+
+            {/* Stats */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: "1px",
+                background: "var(--border)",
+                marginBottom: "28px",
+              }}
+            >
+              {[
+                { num: "7", label: "Questions" },
+                { num: "5", label: "Minutes" },
+                { num: "Instant", label: "Results" },
+              ].map((stat, idx) => (
+                <div key={idx} style={{ background: "#0a0a0a", padding: "16px 14px", textAlign: "center" }}>
+                  <div
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: "1.7rem",
+                      fontWeight: 700,
+                      color: "var(--gold)",
+                    }}
+                  >
+                    {stat.num}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "0.52rem",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: "var(--white-faint)",
+                    }}
+                  >
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
 
             <Link
               href="/quick-mirror"
@@ -134,7 +181,9 @@ export function AssessmentSection() {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: "8px",
+                width: "100%",
               }}
             >
               Start Quick Mirror
@@ -153,6 +202,9 @@ export function AssessmentSection() {
               overflow: "hidden",
               borderLeft: "2px solid var(--gold)",
               transition: "background 0.3s",
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "420px",
             }}
           >
             {/* Paid tag */}
@@ -204,11 +256,11 @@ export function AssessmentSection() {
                 color: "var(--white-dim)",
                 lineHeight: 1.75,
                 marginBottom: "28px",
+                flex: "1",
               }}
             >
               A comprehensive structural diagnostic that produces your personal Edge Score (0–100), Salary Defensibility
-              Score, and a PDF report delivered via email. Includes Brainpower Density mapping, zone breakdown, and
-              personalised repositioning recommendations.
+              Score, and a PDF report delivered via email. Includes Brainpower Density mapping and repositioning recommendations.
             </p>
 
             {/* Stats */}
@@ -252,7 +304,17 @@ export function AssessmentSection() {
               ))}
             </div>
 
-            <Link href="#fulldiagnostic-start" className="btn-p" style={{ display: "inline-block" }}>
+            <Link
+              href="/full-diagnostic"
+              className="btn-p"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                width: "100%",
+              }}
+            >
               Start Full Diagnostic
             </Link>
           </div>
