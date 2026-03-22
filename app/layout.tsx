@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, DM_Sans, DM_Mono } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-cormorant",
   display: "swap",
-  weight: ["400", "700", "900"],
+  weight: ["300", "400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
@@ -27,30 +27,30 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The AI Edge Lab — The Structural Economics of Work in the AI Era",
+  title: "Axion Index — Instruments for the Structural Economy",
   description:
-    "A management doctrine for the AI era. When intelligence becomes abundant, judgment becomes the scarce resource. The AI Edge Lab studies that shift — and builds frameworks to redesign roles, decisions, and organisations for an AI-native economy.",
+    "Research-grade diagnostic instruments and strategic frameworks for individuals and institutions navigating structural economic shifts. Built by Nitin Nahata.",
   keywords: [
+    "structural economics",
     "AI",
     "future of work",
     "career",
     "assessment",
     "diagnostic",
-    "AI replaceability",
-    "judgment",
-    "EDGE framework",
+    "governance",
+    "capital alignment",
   ],
   authors: [{ name: "Nitin Nahata" }],
   openGraph: {
-    title: "The AI Edge Lab",
+    title: "Axion Index",
     description:
-      "The Structural Economics of Work in the AI Era — AI Edge Diagnostic by Nitin Nahata",
+      "Instruments for the Structural Economy — Research-grade diagnostics by Nitin Nahata",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#080808",
+  themeColor: "#0D0D0D",
   width: "device-width",
   initialScale: 1,
 };
@@ -63,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
+      className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body className="min-h-screen antialiased">
         {children}

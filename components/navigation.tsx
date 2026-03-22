@@ -174,22 +174,46 @@ export function Navigation() {
         }}
       >
         {/* Logo + tag */}
-        <Link
-          href="#hero"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("#hero", 0);
-          }}
-          style={{ display: "flex", alignItems: "center", gap: 0, textDecoration: "none" }}
-        >
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", fontWeight: 900, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--white)" }}>
-            AI <span style={{ color: "var(--gold)" }}>EDGE</span> LAB
-          </span>
-          <span style={{ width: "1px", height: "28px", background: "rgba(255,255,255,0.1)", margin: "0 20px" }} />
-          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--white-faint)" }}>
-            Doctrine · 2026
-          </span>
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+          {/* Axion Index link */}
+          <Link
+            href="/"
+            style={{
+              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              fontSize: "0.75rem",
+              fontWeight: 500,
+              color: "rgba(245,242,236,0.4)",
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "baseline",
+              gap: "4px",
+              transition: "color 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,242,236,0.4)")}
+          >
+            <span>Axion</span>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase" }}>Index</span>
+            <span style={{ marginLeft: "4px", fontSize: "0.7em" }}>›</span>
+          </Link>
+          <span style={{ width: "1px", height: "20px", background: "rgba(255,255,255,0.08)", margin: "0 16px" }} />
+          <Link
+            href="#hero"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("#hero", 0);
+            }}
+            style={{ display: "flex", alignItems: "center", gap: 0, textDecoration: "none" }}
+          >
+            <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "0.95rem", fontWeight: 900, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--white)" }}>
+              AI <span style={{ color: "var(--gold)" }}>EDGE</span> LAB
+            </span>
+            <span style={{ width: "1px", height: "28px", background: "rgba(255,255,255,0.1)", margin: "0 20px" }} />
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.28em", textTransform: "uppercase", color: "var(--white-faint)" }}>
+              Doctrine · 2026
+            </span>
+          </Link>
+        </div>
 
         {/* Nav right */}
         <div className="nav-right" style={{ display: "flex", alignItems: "center", height: "100%", gap: 0 }}>
