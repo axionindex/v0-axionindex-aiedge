@@ -4,16 +4,23 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* AI Edge Lab Brand Colors - Exact from HTML */
+  /* Axion Index Brand Colors */
+  --ink: #0D0D0D;
+  --parchment: #F5F2EC;
+  --gold: #C9A84C;
+  --gold-light: #ddb85c;
+  --gold-dim: #8a6e30;
+  --gold-glow: rgba(201,168,76,0.12);
+  --rust: #8B4513;
+  --slate: #2F4F4F;
+  --steel: #4A5568;
+  
+  /* Legacy AI Edge Lab colors (for subpages) */
   --black: #080808;
   --near-black: #0e0e0e;
   --surface: #141414;
   --surface2: #1c1c1c;
   --border: rgba(255,255,255,0.07);
-  --gold: #C9A84C;
-  --gold-light: #ddb85c;
-  --gold-dim: #8a6e30;
-  --gold-glow: rgba(201,168,76,0.12);
   --white: #F5F2EC;
   --white-dim: rgba(245,242,236,0.52);
   --white-faint: rgba(245,242,236,0.18);
@@ -22,22 +29,22 @@
   --green: #4A7C5F;
 
   /* Shadcn mappings */
-  --background: var(--black);
-  --foreground: var(--white);
-  --card: var(--surface);
-  --card-foreground: var(--white);
-  --popover: var(--surface);
-  --popover-foreground: var(--white);
+  --background: var(--ink);
+  --foreground: var(--parchment);
+  --card: #141414;
+  --card-foreground: var(--parchment);
+  --popover: #141414;
+  --popover-foreground: var(--parchment);
   --primary: var(--gold);
-  --primary-foreground: var(--black);
-  --secondary: var(--surface2);
-  --secondary-foreground: var(--white);
-  --muted: var(--surface2);
-  --muted-foreground: var(--white-dim);
-  --accent: var(--surface2);
-  --accent-foreground: var(--white);
-  --destructive: var(--red);
-  --destructive-foreground: var(--white);
+  --primary-foreground: var(--ink);
+  --secondary: #1c1c1c;
+  --secondary-foreground: var(--parchment);
+  --muted: #1c1c1c;
+  --muted-foreground: rgba(245,242,236,0.52);
+  --accent: #1c1c1c;
+  --accent-foreground: var(--parchment);
+  --destructive: var(--rust);
+  --destructive-foreground: var(--parchment);
   --input: var(--border);
   --ring: var(--gold);
   --radius: 0rem;
@@ -45,7 +52,7 @@
 
 @theme inline {
   --font-sans: 'DM Sans', sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'DM Mono', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -72,14 +79,19 @@
   --radius-xl: 0;
   
   /* Brand colors for Tailwind */
-  --color-black: var(--black);
-  --color-near-black: var(--near-black);
-  --color-surface: var(--surface);
-  --color-surface2: var(--surface2);
+  --color-ink: var(--ink);
+  --color-parchment: var(--parchment);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-gold-dim: var(--gold-dim);
   --color-gold-glow: var(--gold-glow);
+  --color-rust: var(--rust);
+  --color-slate: var(--slate);
+  --color-steel: var(--steel);
+  --color-black: var(--black);
+  --color-near-black: var(--near-black);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
   --color-white-dim: var(--white-dim);
   --color-white-faint: var(--white-faint);
   --color-red: var(--red);
@@ -100,8 +112,8 @@
   }
   
   body {
-    background: var(--black);
-    color: var(--white);
+    background: var(--ink);
+    color: var(--parchment);
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     line-height: 1.7;
@@ -113,7 +125,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    opacity: 0.022;
+    opacity: 0.018;
     pointer-events: none;
     z-index: 999;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -165,7 +177,7 @@
 /* Selection */
 ::selection {
   background-color: rgba(201,168,76,0.2);
-  color: var(--white);
+  color: var(--parchment);
 }
 
 /* Divider */
@@ -187,9 +199,9 @@
 }
 
 .sec-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(1.9rem, 3.5vw, 3.1rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.08;
   margin-bottom: 20px;
 }
@@ -210,7 +222,7 @@
 .btn-p {
   display: inline-block;
   background: var(--gold);
-  color: var(--black);
+  color: var(--ink);
   font-family: 'DM Mono', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.16em;
