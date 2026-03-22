@@ -69,7 +69,7 @@ export default function AxionIndexSite() {
   const framework = [
     {
       title: 'Belief',
-      text: 'Founder-led. Implicit. Fragile. Powerful — but unscalable if it lives in one person's head.',
+      text: "Founder-led. Implicit. Fragile. Powerful — but unscalable if it lives in one person's head.",
     },
     {
       title: 'Conviction',
