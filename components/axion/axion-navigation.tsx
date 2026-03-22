@@ -96,8 +96,32 @@ export function AxionNavigation() {
               scrollTo={scrollToSection}
             />
 
-            {/* AI Edge Lab - Distinct styling */}
-            <AIEdgeLabDropdown scrollTo={scrollToSection} />
+            {/* AI Edge Lab - Direct link */}
+            <Link
+              href="/ai-edge-lab"
+              className="steel-trigger"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "0 14px",
+                height: "34px",
+                margin: "0 0.3rem",
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                fontSize: "0.62rem",
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "var(--steel-lt)",
+                cursor: "pointer",
+                transition: "all 0.2s",
+                border: "1px solid rgba(74,107,138,0.32)",
+                background: "none",
+                textDecoration: "none",
+              }}
+            >
+              <span style={{ width: "6px", height: "6px", background: "var(--green)", borderRadius: "50%" }} />
+              The AI Edge Lab
+            </Link>
 
             {/* How We Work */}
             <NavLink label="How We Work" href="#how-we-work" scrollTo={scrollToSection} />
@@ -152,7 +176,26 @@ export function AxionNavigation() {
             <MobileNavLink label="What We Do" href="#what-we-do" scrollTo={scrollToSection} />
             <MobileNavLink label="Framework" href="#framework" scrollTo={scrollToSection} />
             <MobileNavLink label="Domains" href="#domains" scrollTo={scrollToSection} />
-            <MobileNavLink label="AI Edge Lab" href="#aiedge" scrollTo={scrollToSection} isSteel />
+            <Link
+              href="/ai-edge-lab"
+              style={{
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                fontSize: "0.75rem",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--steel-lt)",
+                textDecoration: "none",
+                padding: "0.5rem 0",
+                borderBottom: "1px solid var(--rule2)",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+              }}
+              onClick={() => setMobileOpen(false)}
+            >
+              <span style={{ width: "6px", height: "6px", background: "var(--green)", borderRadius: "50%" }} />
+              AI Edge Lab
+            </Link>
             <MobileNavLink label="How We Work" href="#how-we-work" scrollTo={scrollToSection} />
             <MobileNavLink label="Architecture" href="#architecture" scrollTo={scrollToSection} />
             <MobileNavLink label="Founder" href="#founder" scrollTo={scrollToSection} />
@@ -292,136 +335,6 @@ function NavDropdown({ label, items, scrollTo, borderColor }: { label: string; i
         })}
       </div>
     </div>
-  );
-}
-
-function AIEdgeLabDropdown({ scrollTo }: { scrollTo: (id: string) => void }) {
-  return (
-    <div className="nav-item" style={{ position: "relative", height: "72px", display: "flex", alignItems: "center" }}>
-      <a
-        href="https://www.axionindex.org/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="steel-trigger"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          padding: "0 14px",
-          height: "34px",
-          margin: "0 0.3rem",
-          fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-          fontSize: "0.62rem",
-          letterSpacing: "0.16em",
-          textTransform: "uppercase",
-          color: "var(--steel-lt)",
-          cursor: "pointer",
-          transition: "all 0.2s",
-          border: "1px solid rgba(74,107,138,0.32)",
-          background: "none",
-          textDecoration: "none",
-        }}
-      >
-        <span className="live-dot" style={{ width: "6px", height: "6px", background: "var(--green)", borderRadius: "50%" }} />
-        The AI Edge Lab
-      </a>
-
-      <div
-        className="nav-dd"
-        style={{
-          position: "absolute",
-          top: "100%",
-          left: 0,
-          minWidth: "360px",
-          background: "rgba(12,11,9,0.99)",
-          border: "1px solid var(--srule)",
-          borderTop: "2px solid var(--steel)",
-          padding: "8px 0",
-          opacity: 0,
-          visibility: "hidden",
-          transform: "translateY(8px)",
-          transition: "all 0.2s ease",
-          backdropFilter: "blur(20px)",
-        }}
-      >
-        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,107,138,0.5)" }}>
-          Live Assessments
-        </div>
-        <DropdownItem label="Quick Mirror — Free" badge="LIVE" href="https://www.axionindex.org/quick-mirror" external green />
-        <DropdownItem label="Full Diagnostic" badge="LIVE" href="https://www.axionindex.org/full-diagnostic" external green />
-        <DropdownItem label="3i Labour Code Readiness Index™" badge="LIVE" href="#aiedge" scrollTo={scrollTo} green />
-
-        <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
-        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,107,138,0.5)" }}>
-          Doctrine & Framework
-        </div>
-        <DropdownItem label="The Three Structural Shifts" href="https://www.axionindex.org/#shifts" external />
-        <DropdownItem label="E.D.G.E. Framework" href="https://www.axionindex.org/#edge" external />
-        <DropdownItem label="Brainpower Density Curve™" href="https://www.axionindex.org/#bpdcurve" external />
-        <DropdownItem label="Ownership Ladders" href="https://www.axionindex.org/#ownership" external />
-        <DropdownItem label="Salary Defensibility Score" href="https://www.axionindex.org/#salary" external />
-
-        <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
-        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,107,138,0.5)" }}>
-          Building
-        </div>
-        <DropdownItem label="Workforce Architecture Diagnostics™" badge="BUILDING" href="#aiedge" scrollTo={scrollTo} />
-        <DropdownItem label="AI Exposure & Work Compression" badge="BUILDING" href="#aiedge" scrollTo={scrollTo} />
-        <DropdownItem label="Decision Ownership Models™" badge="SOON" href="#aiedge" scrollTo={scrollTo} />
-        <DropdownItem label="Payroll Operating Control" badge="SOON" href="#aiedge" scrollTo={scrollTo} />
-
-        <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
-        <DropdownItem label="The Doctrine — PDF ↓" href="https://www.axionindex.org/AI-Edge-Doctrine-2026.pdf" external />
-        <DropdownItem label="Sample Diagnostic Report ↗" href="https://www.axionindex.org/sample-report" external />
-      </div>
-    </div>
-  );
-}
-
-function DropdownItem({ label, badge, href, external, scrollTo, green }: { label: string; badge?: string; href: string; external?: boolean; scrollTo?: (id: string) => void; green?: boolean }) {
-  const handleClick = (e: React.MouseEvent) => {
-    if (!external && scrollTo) {
-      e.preventDefault();
-      scrollTo(href);
-    }
-  };
-
-  return (
-    <a
-      href={href}
-      onClick={handleClick}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noopener noreferrer" : undefined}
-      className="steel-dd-item"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "10px 20px",
-        fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
-        fontSize: "0.85rem",
-        color: "var(--parchment)",
-        textDecoration: "none",
-        borderLeft: "2px solid transparent",
-        transition: "all 0.15s",
-      }}
-    >
-      <span>{label}</span>
-      {badge && (
-        <span
-          style={{
-            fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-            fontSize: "0.5rem",
-            letterSpacing: "0.1em",
-            padding: "3px 8px",
-            background: green ? "var(--green-dim)" : badge === "BUILDING" ? "var(--gold-dim)" : "rgba(107,99,88,0.2)",
-            color: green ? "var(--green)" : badge === "BUILDING" ? "var(--gold)" : "var(--dim)",
-          }}
-        >
-          {badge}
-        </span>
-      )}
-    </a>
   );
 }
 
