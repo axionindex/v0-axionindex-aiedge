@@ -27,7 +27,7 @@ export function AxionWhy() {
 
   return (
     <section
-      id="why"
+      id="tension"
       ref={sectionRef}
       style={{
         background: "var(--ink2)",
@@ -49,131 +49,76 @@ export function AxionWhy() {
           </h2>
         </div>
 
-        {/* 2-column layout */}
+        {/* Tension items */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginBottom: "2.5rem", maxWidth: "800px" }}>
+          {tensions.map((t, i) => (
+            <div
+              key={i}
+              className={`rv ${visible ? "in" : ""}`}
+              style={{
+                display: "flex",
+                gap: "1rem",
+                paddingLeft: "1rem",
+                borderLeft: "2px solid var(--gold)",
+                transition: "border-color 0.2s, background 0.2s",
+                transitionDelay: `${i * 0.08}s`,
+                padding: "0.75rem 1rem",
+                cursor: "default",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderLeftColor = "var(--gold-pale)";
+                e.currentTarget.style.background = "rgba(196,154,60,0.04)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderLeftColor = "var(--gold)";
+                e.currentTarget.style.background = "transparent";
+              }}
+            >
+              <span style={{ color: "var(--gold)", fontSize: "1rem", flexShrink: 0 }}>—</span>
+              <p style={{ fontSize: "0.95rem", color: "var(--mist)", lineHeight: 1.7 }}>
+                {t}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Verdict card */}
         <div
+          className={`rv ${visible ? "in" : ""}`}
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "4rem",
+            borderLeft: "3px solid var(--gold)",
+            background: "rgba(196,154,60,0.06)",
+            padding: "1.5rem",
+            maxWidth: "720px",
+            transitionDelay: "0.5s",
           }}
         >
-          {/* Left - Tension list + verdict */}
-          <div>
-            {/* Tension items */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "2rem" }}>
-              {tensions.map((t, i) => (
-                <div
-                  key={i}
-                  className={`rv ${visible ? "in" : ""}`}
-                  style={{
-                    display: "flex",
-                    gap: "1rem",
-                    paddingLeft: "1rem",
-                    borderLeft: "2px solid var(--gold)",
-                    transition: "border-color 0.2s, background 0.2s",
-                    transitionDelay: `${i * 0.08}s`,
-                    padding: "0.75rem 1rem",
-                    cursor: "default",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderLeftColor = "var(--gold-pale)";
-                    e.currentTarget.style.background = "rgba(196,154,60,0.04)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderLeftColor = "var(--gold)";
-                    e.currentTarget.style.background = "transparent";
-                  }}
-                >
-                  <span style={{ color: "var(--dim)", fontSize: "1rem" }}>—</span>
-                  <p style={{ fontSize: "0.95rem", color: "var(--mist)", lineHeight: 1.7 }}>
-                    {t}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Verdict card */}
-            <div
-              className={`rv ${visible ? "in" : ""}`}
-              style={{
-                borderLeft: "3px solid var(--gold)",
-                background: "var(--gold-dim)",
-                padding: "1.5rem",
-                transitionDelay: "0.5s",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                  fontSize: "0.56rem",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--gold)",
-                  display: "block",
-                  marginBottom: "0.75rem",
-                }}
-              >
-                The result
-              </span>
-              <p
-                style={{
-                  fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-                  fontSize: "1.15rem",
-                  fontStyle: "italic",
-                  lineHeight: 1.6,
-                  color: "var(--parchment)",
-                }}
-              >
-                The result is not inefficiency. It is <strong style={{ fontWeight: 600, color: "var(--gold)" }}>invisible fragility</strong> — organisations that look healthy until the moment they don&apos;t.
-              </p>
-            </div>
-          </div>
-
-          {/* Right - Prose + position box */}
-          <div>
-            <div className={`rv ${visible ? "in" : ""}`} style={{ transitionDelay: "0.2s" }}>
-              <p style={{ fontSize: "1rem", color: "var(--mist)", lineHeight: 1.85, marginBottom: "1.5rem" }}>
-                Strategy fails less often than people systems do. Growth stalls not because the market changed, but because the operating system underneath could not hold. Most organisations learn this too late — when the regulator arrives, when the founder tries to step back, when AI compresses an entire layer of work overnight.
-              </p>
-              <p style={{ fontSize: "1rem", color: "var(--mist)", lineHeight: 1.85, marginBottom: "2rem" }}>
-                The cost of reactive redesign is exponentially higher than the cost of proactive architecture. The first demands crisis management. The second demands only discipline — and the willingness to see clearly.
-              </p>
-            </div>
-
-            {/* Position box */}
-            <div
-              className={`rv ${visible ? "in" : ""}`}
-              style={{
-                border: "1px solid var(--rule)",
-                padding: "1.75rem",
-                transitionDelay: "0.4s",
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-                  fontSize: "1.25rem",
-                  fontStyle: "italic",
-                  lineHeight: 1.5,
-                  color: "var(--parchment)",
-                }}
-              >
-                &quot;Every hour spent designing the system before the crisis is worth ten hours managing it during.&quot;
-              </p>
-            </div>
-          </div>
+          <span
+            style={{
+              fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+              fontSize: "0.56rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--gold)",
+              display: "block",
+              marginBottom: "0.75rem",
+            }}
+          >
+            The result
+          </span>
+          <p
+            style={{
+              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontSize: "1.15rem",
+              fontStyle: "italic",
+              lineHeight: 1.6,
+              color: "var(--parchment)",
+            }}
+          >
+            What looks like inefficiency is not inefficiency. It is <strong style={{ fontWeight: 600, color: "var(--gold)" }}>structural fragility</strong> — organisations that look healthy until the moment they don&apos;t.
+          </p>
         </div>
       </div>
-
-      {/* Responsive */}
-      <style jsx>{`
-        @media (max-width: 900px) {
-          section > div > div:last-child {
-            grid-template-columns: 1fr !important;
-            gap: 2rem !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

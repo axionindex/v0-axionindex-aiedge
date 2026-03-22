@@ -295,9 +295,33 @@ body::after {
 .btn-dim:hover {
   border-color: var(--rule);
   color: var(--mist);
-}
-
-/* Legacy button styles for AI Edge Lab pages */
+  }
+  
+  /* Button - Green (live actions) */
+  .btn-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  border: 1px solid var(--green);
+  padding: 10px 20px;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  }
+  
+  .btn-green:hover {
+  background: #7fc99b;
+  border-color: #7fc99b;
+  transform: translateY(-1px);
+  }
+  
+  /* Legacy button styles for AI Edge Lab pages */
 .btn-p {
   display: inline-block;
   background: var(--gold);

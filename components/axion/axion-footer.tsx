@@ -8,14 +8,14 @@ export function AxionFooter() {
   return (
     <footer
       style={{
-        padding: "64px 32px 48px",
-        borderTop: "1px solid var(--border)",
-        background: "rgba(10,10,10,0.6)",
+        padding: "4rem 3rem 2.5rem",
+        borderTop: "1px solid var(--rule)",
+        background: "var(--ink)",
       }}
     >
       <div
         style={{
-          maxWidth: "1200px",
+          maxWidth: "1320px",
           margin: "0 auto",
         }}
       >
@@ -26,8 +26,8 @@ export function AxionFooter() {
             justifyContent: "space-between",
             alignItems: "flex-start",
             flexWrap: "wrap",
-            gap: "48px",
-            marginBottom: "56px",
+            gap: "3rem",
+            marginBottom: "3rem",
           }}
         >
           {/* Logo & tagline */}
@@ -39,13 +39,13 @@ export function AxionFooter() {
                 alignItems: "baseline",
                 gap: "8px",
                 textDecoration: "none",
-                marginBottom: "16px",
+                marginBottom: "12px",
               }}
             >
               <span
                 style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: "1.3rem",
+                  fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+                  fontSize: "1.4rem",
                   fontWeight: 600,
                   color: "var(--parchment)",
                 }}
@@ -54,9 +54,9 @@ export function AxionFooter() {
               </span>
               <span
                 style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.55rem",
-                  letterSpacing: "0.15em",
+                  fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                  fontSize: "0.52rem",
+                  letterSpacing: "0.16em",
                   textTransform: "uppercase",
                   color: "var(--gold)",
                 }}
@@ -66,14 +66,26 @@ export function AxionFooter() {
             </Link>
             <p
               style={{
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                 fontSize: "0.85rem",
-                fontWeight: 300,
-                color: "rgba(245,242,236,0.45)",
+                fontWeight: 400,
+                color: "var(--dim)",
                 lineHeight: 1.6,
+                marginBottom: "1rem",
               }}
             >
-              Instruments for the Structural Economy
+              Operating Intelligence · Bengaluru
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+                fontSize: "1rem",
+                fontStyle: "italic",
+                color: "var(--mist)",
+                lineHeight: 1.5,
+              }}
+            >
+              What holds organisations together is invisible. We make it designable.
             </p>
           </div>
 
@@ -81,7 +93,7 @@ export function AxionFooter() {
           <div
             style={{
               display: "flex",
-              gap: "64px",
+              gap: "4rem",
               flexWrap: "wrap",
             }}
           >
@@ -89,55 +101,112 @@ export function AxionFooter() {
             <div>
               <h4
                 style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.6rem",
+                  fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                  fontSize: "0.54rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "var(--gold)",
-                  marginBottom: "16px",
+                  marginBottom: "1rem",
                 }}
               >
-                Instruments
+                AI Edge Lab
               </h4>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
                 <li>
                   <Link
-                    href="/ai-edge-lab"
+                    href="https://www.axionindex.org/quick-mirror"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",
-                      color: "rgba(245,242,236,0.6)",
+                      color: "var(--mist)",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,242,236,0.6)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mist)")}
                   >
-                    AI Edge Lab
+                    Quick Mirror — Free
                   </Link>
                 </li>
                 <li>
-                  <span
+                  <Link
+                    href="https://www.axionindex.org/full-diagnostic"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",
-                      color: "rgba(245,242,236,0.3)",
+                      color: "var(--mist)",
+                      textDecoration: "none",
+                      transition: "color 0.2s",
                     }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mist)")}
                   >
-                    Capital Alignment Index
-                  </span>
+                    Full Diagnostic
+                  </Link>
                 </li>
                 <li>
-                  <span
+                  <Link
+                    href="https://www.axionindex.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",
-                      color: "rgba(245,242,236,0.3)",
+                      color: "var(--mist)",
+                      textDecoration: "none",
+                      transition: "color 0.2s",
                     }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mist)")}
                   >
-                    Governance Futures
-                  </span>
+                    All Instruments ↗
+                  </Link>
                 </li>
+              </ul>
+            </div>
+
+            {/* Navigate */}
+            <div>
+              <h4
+                style={{
+                  fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                  fontSize: "0.54rem",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "var(--gold)",
+                  marginBottom: "1rem",
+                }}
+              >
+                Navigate
+              </h4>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
+                {[
+                  { label: "What We Do", href: "#what-we-do" },
+                  { label: "The Framework", href: "#framework" },
+                  { label: "Domains", href: "#domains" },
+                  { label: "Contact", href: "#contact" },
+                ].map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      style={{
+                        fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
+                        fontSize: "0.85rem",
+                        color: "var(--mist)",
+                        textDecoration: "none",
+                        transition: "color 0.2s",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mist)")}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -145,51 +214,49 @@ export function AxionFooter() {
             <div>
               <h4
                 style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.6rem",
+                  fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                  fontSize: "0.54rem",
                   letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "var(--gold)",
-                  marginBottom: "16px",
+                  marginBottom: "1rem",
                 }}
               >
                 Connect
               </h4>
-              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
                 <li>
                   <Link
                     href="https://www.linkedin.com/in/nahatanitin/"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",
-                      color: "rgba(245,242,236,0.6)",
+                      color: "var(--mist)",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,242,236,0.6)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mist)")}
                   >
                     LinkedIn
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="https://www.perplexity.ai/computer/a/the-making-of-the-operating-ar-mXeHIIQeSJWFEvWxSQaKtw"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="mailto:nitin@axionindex.org"
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",
-                      color: "rgba(245,242,236,0.6)",
+                      color: "var(--mist)",
                       textDecoration: "none",
                       transition: "color 0.2s",
                     }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,242,236,0.6)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mist)")}
                   >
-                    About Nitin Nahata
+                    nitin@axionindex.org
                   </Link>
                 </li>
               </ul>
@@ -200,34 +267,34 @@ export function AxionFooter() {
         {/* Bottom row */}
         <div
           style={{
-            paddingTop: "24px",
-            borderTop: "1px solid var(--border)",
+            paddingTop: "1.5rem",
+            borderTop: "1px solid var(--rule2)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             flexWrap: "wrap",
-            gap: "16px",
+            gap: "1rem",
           }}
         >
           <p
             style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.58rem",
+              fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+              fontSize: "0.52rem",
               letterSpacing: "0.1em",
-              color: "rgba(245,242,236,0.3)",
+              color: "var(--dim)",
             }}
           >
             © {currentYear} Axion Index. All rights reserved.
           </p>
           <p
             style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.58rem",
+              fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+              fontSize: "0.52rem",
               letterSpacing: "0.1em",
-              color: "rgba(245,242,236,0.3)",
+              color: "var(--dim)",
             }}
           >
-            Built by Nitin Nahata
+            Built by Nitin Nahata · Bengaluru
           </p>
         </div>
       </div>

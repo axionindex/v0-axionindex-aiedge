@@ -75,11 +75,12 @@ export function AxionNavigation() {
               borderColor="var(--gold)"
               items={[
                 { type: "label", text: "The Organisation" },
+                { label: "Why This Matters", href: "#tension" },
                 { label: "What We Do", href: "#what-we-do" },
-                { label: "Why This Matters", href: "#why" },
                 { label: "Belief → Conviction → Rhythm", href: "#framework" },
                 { label: "The Axion Idea", href: "#axion-idea" },
-                { label: "Why We Operate Differently", href: "#unconventional" },
+                { label: "Why We're Different", href: "#unconventional" },
+                { label: "Our Position", href: "#positioning" },
                 { type: "divider" },
                 { type: "label", text: "Domains" },
                 { label: "Operating Architecture", href: "#domains" },
@@ -147,8 +148,8 @@ export function AxionNavigation() {
           }}
         >
           <div style={{ padding: "2rem 3rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <MobileNavLink label="Why This Matters" href="#tension" scrollTo={scrollToSection} />
             <MobileNavLink label="What We Do" href="#what-we-do" scrollTo={scrollToSection} />
-            <MobileNavLink label="Why This Matters" href="#why" scrollTo={scrollToSection} />
             <MobileNavLink label="Framework" href="#framework" scrollTo={scrollToSection} />
             <MobileNavLink label="Domains" href="#domains" scrollTo={scrollToSection} />
             <MobileNavLink label="AI Edge Lab" href="#aiedge" scrollTo={scrollToSection} isSteel />
@@ -343,7 +344,7 @@ function AIEdgeLabDropdown({ scrollTo }: { scrollTo: (id: string) => void }) {
           backdropFilter: "blur(20px)",
         }}
       >
-        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
+        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,107,138,0.5)" }}>
           Live Assessments
         </div>
         <DropdownItem label="Quick Mirror — Free" badge="LIVE" href="https://www.axionindex.org/quick-mirror" external green />
@@ -351,25 +352,27 @@ function AIEdgeLabDropdown({ scrollTo }: { scrollTo: (id: string) => void }) {
         <DropdownItem label="3i Labour Code Readiness Index™" badge="LIVE" href="#aiedge" scrollTo={scrollTo} green />
 
         <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
-        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
+        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,107,138,0.5)" }}>
           Doctrine & Framework
         </div>
         <DropdownItem label="The Three Structural Shifts" href="https://www.axionindex.org/#shifts" external />
         <DropdownItem label="E.D.G.E. Framework" href="https://www.axionindex.org/#edge" external />
         <DropdownItem label="Brainpower Density Curve™" href="https://www.axionindex.org/#bpdcurve" external />
+        <DropdownItem label="Ownership Ladders" href="https://www.axionindex.org/#ownership" external />
+        <DropdownItem label="Salary Defensibility Score" href="https://www.axionindex.org/#salary" external />
 
         <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
-        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
+        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(74,107,138,0.5)" }}>
           Building
         </div>
         <DropdownItem label="Workforce Architecture Diagnostics™" badge="BUILDING" href="#aiedge" scrollTo={scrollTo} />
+        <DropdownItem label="AI Exposure & Work Compression" badge="BUILDING" href="#aiedge" scrollTo={scrollTo} />
         <DropdownItem label="Decision Ownership Models™" badge="SOON" href="#aiedge" scrollTo={scrollTo} />
+        <DropdownItem label="Payroll Operating Control" badge="SOON" href="#aiedge" scrollTo={scrollTo} />
 
         <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
-        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
-          Resources
-        </div>
         <DropdownItem label="The Doctrine — PDF ↓" href="https://www.axionindex.org/AI-Edge-Doctrine-2026.pdf" external />
+        <DropdownItem label="Sample Diagnostic Report ↗" href="https://www.axionindex.org/sample-report" external />
       </div>
     </div>
   );

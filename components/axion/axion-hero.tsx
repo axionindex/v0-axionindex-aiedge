@@ -29,7 +29,7 @@ export function AxionHero() {
           right: "-10%",
           width: "800px",
           height: "800px",
-          background: "radial-gradient(ellipse, rgba(196,154,60,0.06) 0%, transparent 60%)",
+          background: "radial-gradient(ellipse, rgba(196,154,60,0.08) 0%, transparent 60%)",
           pointerEvents: "none",
         }}
       />
@@ -40,7 +40,7 @@ export function AxionHero() {
           left: "-10%",
           width: "600px",
           height: "600px",
-          background: "radial-gradient(ellipse, rgba(140,59,40,0.04) 0%, transparent 60%)",
+          background: "radial-gradient(ellipse, rgba(140,59,40,0.06) 0%, transparent 60%)",
           pointerEvents: "none",
         }}
       />
@@ -69,6 +69,7 @@ export function AxionHero() {
               marginBottom: "2rem",
               animationDelay: "0.2s",
               opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease",
             }}
           >
             <span style={{ width: "2.5rem", height: "1px", background: "var(--gold)" }} />
@@ -90,60 +91,62 @@ export function AxionHero() {
             className="hero-anim"
             style={{
               fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-              fontSize: "clamp(4rem, 8.5vw, 8rem)",
+              fontSize: "clamp(3.2rem, 7vw, 6.5rem)",
               fontWeight: 700,
-              lineHeight: 0.91,
+              lineHeight: 0.93,
               letterSpacing: "-0.025em",
               color: "var(--parchment)",
-              marginBottom: "2.5rem",
-              animationDelay: "0.38s",
+              marginBottom: "1.5rem",
+              animationDelay: "0.36s",
               opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.16s",
             }}
           >
-            Codified
+            What holds
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--gold)" }}>Energy</em>
+            organisations
             <br />
-            for the
+            together is
             <br />
-            Unfinished
+            <em style={{ fontStyle: "italic", color: "var(--gold)" }}>invisible.</em>
           </h1>
 
           {/* Subheadline */}
           <p
             className="hero-anim"
             style={{
-              fontSize: "1.08rem",
+              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontStyle: "italic",
+              fontSize: "1.4rem",
               color: "var(--mist)",
-              maxWidth: "46ch",
-              lineHeight: 1.7,
-              borderLeft: "2px solid var(--gold)",
-              paddingLeft: "1.4rem",
-              marginBottom: "1.5rem",
-              animationDelay: "0.55s",
+              marginBottom: "2rem",
+              animationDelay: "0.5s",
               opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.3s",
             }}
           >
-            Most organisations are not underprepared because they lack strategy.
-            They are underprepared because <strong style={{ color: "var(--parchment)" }}>the system underneath work is fragmented.</strong>
+            We make it designable.
           </p>
 
-          {/* Mission line */}
-          <p
+          {/* Deck paragraph */}
+          <div
             className="hero-anim"
             style={{
-              fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-              fontSize: "0.66rem",
-              letterSpacing: "0.08em",
-              color: "var(--dim)",
-              maxWidth: "50ch",
+              borderLeft: "2px solid var(--gold)",
+              paddingLeft: "1.4rem",
               marginBottom: "2.5rem",
-              animationDelay: "0.68s",
+              maxWidth: "540px",
+              animationDelay: "0.64s",
               opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.44s",
             }}
           >
-            <strong style={{ color: "var(--mist)" }}>In plain terms —</strong> We help you diagnose, redesign, and control that system before it breaks.
-          </p>
+            <p style={{ color: "var(--dim)", lineHeight: 1.85 }}>
+              Most organisations don't fail because of strategy.
+              They fail because <strong style={{ color: "var(--parchment)" }}>the system underneath cannot carry the strategy.</strong>{" "}
+              Axion Index helps organisations diagnose, design, and control the forces that determine whether they scale — or break.
+            </p>
+          </div>
 
           {/* Buttons */}
           <div
@@ -152,12 +155,16 @@ export function AxionHero() {
               display: "flex",
               gap: "1rem",
               flexWrap: "wrap",
-              animationDelay: "0.82s",
+              animationDelay: "0.8s",
               opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.6s",
             }}
           >
             <a href="#what-we-do" className="btn-gold">
               Explore Our Work
+            </a>
+            <a href="#framework" className="btn-dim">
+              Explore the Framework
             </a>
             <Link
               href="https://www.axionindex.org/quick-mirror"
@@ -167,21 +174,19 @@ export function AxionHero() {
             >
               Quick Mirror — Free ↗
             </Link>
-            <a href="#cta" className="btn-dim">
-              Start a Conversation
-            </a>
           </div>
         </div>
 
-        {/* Right Column - Live Instruments Panel */}
+        {/* Right Column - AI Edge Lab Panel */}
         <div
           className="hero-anim hide-mobile"
           style={{
-            background: "linear-gradient(160deg, rgba(74,107,138,0.08), rgba(42,74,104,0.12))",
+            background: "rgba(10,14,24,0.7)",
+            backdropFilter: "blur(20px)",
             border: "1px solid var(--srule)",
-            padding: "0",
-            animationDelay: "0.55s",
+            animationDelay: "0.5s",
             opacity: loaded ? 1 : 0,
+            transition: "opacity 0.6s ease 0.3s",
           }}
         >
           {/* Panel Header */}
@@ -194,12 +199,21 @@ export function AxionHero() {
               alignItems: "center",
             }}
           >
-            <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span
+                className="live-dot"
+                style={{
+                  width: "6px",
+                  height: "6px",
+                  background: "var(--green)",
+                  borderRadius: "50%",
+                }}
+              />
               <span
                 style={{
                   fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                  fontSize: "0.56rem",
-                  letterSpacing: "0.18em",
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.14em",
                   textTransform: "uppercase",
                   color: "var(--steel-lt)",
                 }}
@@ -222,55 +236,57 @@ export function AxionHero() {
 
           {/* Instrument Rows */}
           {[
-            { icon: "→", name: "Quick Mirror", desc: "5 min · AI exposure · Free", status: "Live", live: true },
-            { icon: "→", name: "Full Diagnostic", desc: "30 min · Edge Score · PDF", status: "Live", live: true },
-            { icon: "→", name: "3i Labour Code Index™", desc: "Classify · Cost · Comply", status: "Live", live: true },
-            { icon: "→", name: "Workforce Architecture", desc: "Structure · Control · Risk", status: "Building", building: true },
-            { icon: "→", name: "Decision Ownership™", desc: "Authority · Accountability", status: "Soon", soon: true },
-          ].map((item, i) => (
-            <div
-              key={i}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "24px 1fr auto",
-                gap: "12px",
-                alignItems: "center",
-                padding: "1rem 1.5rem",
-                borderBottom: i < 4 ? "1px solid var(--srule)" : "none",
-              }}
-            >
-              <span style={{ color: "var(--steel-lt)", fontSize: "0.9rem" }}>{item.icon}</span>
-              <div>
-                <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.88rem", color: "var(--parchment)", marginBottom: "2px" }}>
-                  {item.name}
+            { name: "Quick Mirror", desc: "5 min · AI exposure check · Free · Instant", status: "live", href: "/quick-mirror" },
+            { name: "Full Diagnostic", desc: "30 min · Edge Score · PDF report · Paid", status: "live", href: "/full-diagnostic" },
+            { name: "3i Labour Code Readiness Index™", desc: "Classify · Cost · Comply", status: "live", href: "#aiedge" },
+            { name: "Workforce Architecture Diagnostics™", desc: "Structure · Control · Risk", status: "building", href: "#aiedge" },
+            { name: "AI Exposure & Work Compression", desc: "Roles · Automation · Redesign", status: "building", href: "#aiedge" },
+            { name: "Decision Ownership Models™", desc: "Authority · Accountability · Speed", status: "soon", href: "#aiedge" },
+            { name: "Payroll Operating Control", desc: "Compliance · Controls · Architecture", status: "soon", href: "#aiedge" },
+          ].map((item, i) => {
+            const isClickable = item.status === "live" && (item.href === "/quick-mirror" || item.href === "/full-diagnostic");
+            const content = (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "20px 1fr auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "10px 1.5rem",
+                  background: "rgba(74,107,138,0.03)",
+                  borderBottom: i < 6 ? "1px solid rgba(74,107,138,0.1)" : "none",
+                  transition: "background 0.15s",
+                  cursor: isClickable ? "pointer" : "default",
+                }}
+              >
+                <span style={{ color: "var(--steel-lt)", fontSize: "0.85rem" }}>→</span>
+                <div>
+                  <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "var(--parchment)", marginBottom: "2px" }}>
+                    {item.name}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", color: "var(--dim)", letterSpacing: "0.05em" }}>
+                    {item.desc}
+                  </div>
                 </div>
-                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "var(--dim)", letterSpacing: "0.06em" }}>
-                  {item.desc}
-                </div>
+                <StatusBadge status={item.status as "live" | "building" | "soon"} />
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                <span
-                  style={{
-                    width: "6px",
-                    height: "6px",
-                    borderRadius: "50%",
-                    background: item.live ? "var(--green)" : item.building ? "var(--gold)" : "var(--dim)",
-                  }}
-                  className={item.live ? "live-dot" : ""}
-                />
-                <span
-                  style={{
-                    fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                    fontSize: "0.52rem",
-                    letterSpacing: "0.08em",
-                    color: item.live ? "var(--green)" : item.building ? "var(--gold)" : "var(--dim)",
-                  }}
+            );
+
+            if (isClickable) {
+              return (
+                <Link
+                  key={i}
+                  href={`https://www.axionindex.org${item.href}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none", display: "block" }}
                 >
-                  {item.status}
-                </span>
-              </div>
-            </div>
-          ))}
+                  {content}
+                </Link>
+              );
+            }
+            return <div key={i}>{content}</div>;
+          })}
 
           {/* Panel Footer */}
           <div
@@ -322,5 +338,34 @@ export function AxionHero() {
         }
       `}</style>
     </section>
+  );
+}
+
+function StatusBadge({ status }: { status: "live" | "building" | "soon" }) {
+  const styles: Record<string, { bg: string; color: string; dot: string; label: string }> = {
+    live: { bg: "var(--green-dim)", color: "var(--green)", dot: "●", label: "Live" },
+    building: { bg: "var(--gold-dim)", color: "var(--gold)", dot: "◐", label: "Building" },
+    soon: { bg: "rgba(107,99,88,0.2)", color: "var(--dim)", dot: "○", label: "Soon" },
+  };
+  const s = styles[status];
+
+  return (
+    <span
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "4px",
+        fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+        fontSize: "0.48rem",
+        letterSpacing: "0.06em",
+        padding: "3px 6px",
+        background: s.bg,
+        color: s.color,
+        whiteSpace: "nowrap",
+      }}
+    >
+      <span style={{ fontSize: "0.5rem" }}>{s.dot}</span>
+      {s.label}
+    </span>
   );
 }

@@ -45,7 +45,7 @@ export function AxionIdea() {
       id="axion-idea"
       ref={sectionRef}
       style={{
-        background: "var(--ink)",
+        background: "#080706",
         padding: "6rem 0",
       }}
     >
@@ -60,7 +60,7 @@ export function AxionIdea() {
         <div className={`rv ${visible ? "in" : ""}`} style={{ marginBottom: "3rem" }}>
           <div className="sec-lbl">The Axion Idea</div>
           <h2 className="sec-title">
-            What holds organisations together <em>is invisible.</em>
+            The forces that determine outcomes are <em>invisible.</em>
           </h2>
         </div>
 
@@ -79,10 +79,10 @@ export function AxionIdea() {
                 In physics, an axion is a theoretical particle that explains the invisible forces holding matter together. It accounts for what the standard model cannot. It is felt, inferred, essential — but never directly observed.
               </p>
               <p style={{ fontSize: "1rem", color: "var(--mist)", lineHeight: 1.85, marginBottom: "1.5rem" }}>
-                Organisations have the same invisible architecture. Belief systems, operating rhythms, decision structures, and human energy — these are the forces that determine whether growth sustains or collapses. They are rarely designed. They are almost never measured. But they are always present.
+                Organisations are no different. Belief systems, operating rhythms, decision structures, and human energy — these are the forces that determine whether growth sustains or collapses. They are rarely designed. They are almost never measured. But they are always present.
               </p>
               <p style={{ fontSize: "1rem", color: "var(--parchment)", lineHeight: 1.85, marginBottom: "2rem", fontWeight: 500 }}>
-                Axion Index makes these forces visible. And designable.
+                Axion Index exists to codify them.
               </p>
             </div>
 
@@ -90,7 +90,8 @@ export function AxionIdea() {
             <div
               className={`rv ${visible ? "in" : ""}`}
               style={{
-                border: "1px solid var(--rule)",
+                border: "1px solid var(--gold)",
+                background: "var(--gold-dim)",
                 padding: "1.75rem",
                 transitionDelay: "0.25s",
               }}

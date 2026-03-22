@@ -5,23 +5,23 @@ import { useEffect, useRef, useState } from "react";
 const failurePoints = [
   {
     badge: "Diagnose Risk",
-    title: "Workforce, compliance, and structural exposure — made visible",
+    title: "Identify hidden workforce, compliance, and structural risks before they surface",
     body: "Most operating risk is invisible until it becomes a crisis. We surface it first — workforce classification, decision latency, labour code exposure, founder dependency — and give you the architecture to respond before the market forces it.",
   },
   {
     badge: "Redesign Work",
-    title: "Roles, accountability, and decision rights — rebuilt for what's coming",
-    body: "Most organisations still run on role structures designed for a world where intelligence was scarce. We redesign the architecture — who owns what decision, how work is allocated, and where judgment lives — for an AI-native operating environment.",
+    title: "Rebuild roles, accountability, and decision logic for an AI-native environment",
+    body: "Most organisations still run on role structures designed for a world where intelligence was scarce. We redesign the architecture — who owns what decision, how work is allocated, where judgment lives.",
   },
   {
     badge: "Translate Regulation",
-    title: "Labour codes converted into cost, control, and design decisions",
+    title: "Convert labour codes into cost, control, and architecture decisions",
     body: "India's new Labour Codes are not primarily regulatory events. They are structural mirrors — exposing what your organisation has deferred. We translate legislative complexity into decisions your CFO and board can act on.",
   },
   {
     badge: "Prepare for AI",
-    title: "Which layers of work are compressing — and what remains defensible",
-    body: "Intelligence is becoming abundant. Judgment is becoming the scarce resource. We map exactly where AI is compressing your organisation's operating model — and redesign the architecture before role collapse becomes a board conversation.",
+    title: "Map which layers of work are compressing — and what remains defensible",
+    body: "Intelligence is becoming abundant. Judgment is becoming the scarce resource. We map exactly where AI is compressing your operating model — and redesign the architecture before role collapse becomes a board conversation.",
   },
 ];
 
@@ -73,7 +73,7 @@ export function AxionWhatWeDo() {
               marginBottom: "1.25rem",
             }}
           >
-            The system underneath work has <em style={{ fontStyle: "italic", color: "var(--rust)" }}>four failure points.</em>
+            We don&apos;t manage people. We <em style={{ fontStyle: "italic", color: "var(--rust)" }}>design the system</em> they operate in.
           </h2>
           <p
             style={{
@@ -83,7 +83,7 @@ export function AxionWhatWeDo() {
               maxWidth: "640px",
             }}
           >
-            We go deep on each — diagnosing, redesigning, and controlling the architecture before it becomes the reason growth stalls or trust breaks.
+            Four failure points. We go deep on each.
           </p>
         </div>
 
@@ -118,6 +118,8 @@ export function AxionWhatWeDo() {
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   color: "var(--rust)",
+                  background: "var(--rust-dim)",
+                  padding: "4px 10px",
                   display: "inline-block",
                   marginBottom: "1rem",
                 }}
@@ -129,7 +131,7 @@ export function AxionWhatWeDo() {
               <h3
                 style={{
                   fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-                  fontSize: "1.35rem",
+                  fontSize: "1.25rem",
                   fontWeight: 600,
                   lineHeight: 1.25,
                   color: "var(--ink)",

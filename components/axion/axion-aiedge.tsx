@@ -6,35 +6,57 @@ import Link from "next/link";
 const tools = [
   {
     name: "Quick Mirror",
-    desc: "5-minute AI exposure assessment. Instant results. No cost.",
-    status: "Free · Live",
-    live: true,
-    href: "/quick-mirror",
+    desc: "5 min · AI exposure check · Free · Instant",
+    status: "● Live",
+    statusColor: "var(--green)",
     borderColor: "var(--green)",
+    href: "https://www.axionindex.org/quick-mirror",
+    external: true,
   },
   {
     name: "Full Diagnostic",
-    desc: "30-minute deep analysis. Edge Score. Detailed PDF report.",
-    status: "Paid · Live",
-    live: true,
-    href: "/full-diagnostic",
+    desc: "30 min · Edge Score · PDF report · Paid",
+    status: "● Live",
+    statusColor: "var(--green)",
     borderColor: "var(--gold)",
+    href: "https://www.axionindex.org/full-diagnostic",
+    external: true,
   },
   {
     name: "Workforce Architecture Diagnostics™",
-    desc: "Structural risk mapping for people systems.",
+    desc: "Structure · Control · Risk",
     status: "◐ Building",
-    building: true,
-    href: "https://www.axionindex.org/",
+    statusColor: "var(--gold)",
     borderColor: "var(--gold)",
+    href: "#",
+    external: false,
+  },
+  {
+    name: "AI Exposure & Work Compression",
+    desc: "Roles · Automation · Redesign",
+    status: "◐ Building",
+    statusColor: "var(--gold)",
+    borderColor: "var(--gold)",
+    href: "#",
+    external: false,
   },
   {
     name: "Decision Ownership Models™",
-    desc: "Authority and accountability architecture.",
-    status: "○ Coming Soon",
-    soon: true,
-    href: "https://www.axionindex.org/",
-    borderColor: "var(--dim)",
+    desc: "Authority · Accountability · Speed",
+    status: "○ Soon",
+    statusColor: "var(--dim)",
+    borderColor: "var(--rule)",
+    href: "#",
+    external: false,
+  },
+  {
+    name: "Payroll Operating Control",
+    desc: "Compliance · Controls · Architecture",
+    status: "○ Soon",
+    statusColor: "var(--dim)",
+    borderColor: "var(--rule)",
+    href: "#",
+    external: false,
   },
 ];
 
@@ -73,7 +95,7 @@ export function AxionAIEdge() {
           fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
           fontSize: "8rem",
           fontWeight: 700,
-          color: "rgba(74,107,138,0.05)",
+          color: "rgba(74,107,138,0.03)",
           lineHeight: 1,
           pointerEvents: "none",
           whiteSpace: "nowrap",
@@ -122,7 +144,7 @@ export function AxionAIEdge() {
               marginBottom: "1rem",
             }}
           >
-            The AI Edge Lab — Diagnostic Engine
+            The AI Edge Lab — Diagnostic Instruments
           </div>
           <h2
             style={{
@@ -136,14 +158,17 @@ export function AxionAIEdge() {
           >
             Operating intelligence, <em style={{ fontStyle: "italic", color: "var(--steel-lt)" }}>made measurable.</em>
           </h2>
+          <p style={{ fontSize: "1rem", lineHeight: 1.8, color: "var(--mist)", maxWidth: "600px" }}>
+            Self-serve instruments that give organisations clear sight into AI exposure, labour code readiness, and operating system risk.
+          </p>
         </div>
 
         {/* 2-column layout */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1.2fr 1fr",
-            gap: "2rem",
+            gridTemplateColumns: "1.3fr 1fr",
+            gap: "2.5rem",
           }}
         >
           {/* Left - Featured live card */}
@@ -151,8 +176,8 @@ export function AxionAIEdge() {
             className={`rv ${visible ? "in" : ""}`}
             style={{
               border: "1px solid var(--green)",
-              background: "rgba(91,173,122,0.05)",
-              padding: "2rem",
+              background: "rgba(91,173,122,0.04)",
+              padding: "2.5rem",
               transitionDelay: "0.15s",
             }}
           >
@@ -168,7 +193,7 @@ export function AxionAIEdge() {
                   color: "var(--green)",
                 }}
               >
-                Live Now
+                Live Now · Free Entry Point
               </span>
             </div>
 
@@ -189,7 +214,7 @@ export function AxionAIEdge() {
             <h3
               style={{
                 fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-                fontSize: "1.5rem",
+                fontSize: "1.6rem",
                 fontWeight: 600,
                 color: "var(--parchment)",
                 marginBottom: "1rem",
@@ -211,16 +236,15 @@ export function AxionAIEdge() {
             </p>
 
             {/* Tags */}
-            <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.75rem" }}>
-              {["Classify", "Cost", "Comply"].map((tag) => (
+            <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.75rem", flexWrap: "wrap" }}>
+              {["5 min entry", "Instant results", "No login required", "PDF for stakeholders"].map((tag) => (
                 <span
                   key={tag}
                   style={{
                     fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                    fontSize: "0.54rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    padding: "6px 12px",
+                    fontSize: "0.52rem",
+                    letterSpacing: "0.08em",
+                    padding: "5px 10px",
                     border: "1px solid var(--srule)",
                     color: "var(--steel-lt)",
                   }}
@@ -232,7 +256,13 @@ export function AxionAIEdge() {
 
             {/* Buttons */}
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-              <Link href="/quick-mirror" className="btn-gold" style={{ padding: "12px 24px" }}>
+              <Link
+                href="https://www.axionindex.org/quick-mirror"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-green"
+                style={{ padding: "12px 24px" }}
+              >
                 Quick Mirror — Free →
               </Link>
               <Link
@@ -247,48 +277,46 @@ export function AxionAIEdge() {
             </div>
           </div>
 
-          {/* Right - 2x2 tools grid */}
+          {/* Right - 3x2 tools grid */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "1rem",
+              gap: "0.75rem",
             }}
           >
             {tools.map((t, i) => (
-              <Link
+              <div
                 key={i}
-                href={t.href}
-                target={t.href.startsWith("http") ? "_blank" : undefined}
-                rel={t.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className={`rv ${visible ? "in" : ""}`}
                 style={{
                   border: `1px solid ${t.borderColor}`,
-                  background: t.live ? `${t.borderColor}10` : "transparent",
-                  padding: "1.5rem",
-                  textDecoration: "none",
+                  background: t.status.includes("Live") ? "rgba(91,173,122,0.04)" : "transparent",
+                  padding: "1.25rem",
                   display: "flex",
                   flexDirection: "column",
-                  transitionDelay: `${0.2 + i * 0.08}s`,
-                  transition: "background 0.2s, border-color 0.2s, transform 0.2s",
+                  transitionDelay: `${0.2 + i * 0.06}s`,
+                  transition: "background 0.2s, transform 0.2s",
+                  cursor: t.external ? "pointer" : "default",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  if (!t.soon) e.currentTarget.style.borderColor = t.live ? "var(--green)" : "var(--gold)";
+                  if (t.external) e.currentTarget.style.transform = "translateY(-2px)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.borderColor = t.borderColor;
+                }}
+                onClick={() => {
+                  if (t.external) window.open(t.href, "_blank");
                 }}
               >
                 {/* Status badge */}
                 <span
                   style={{
                     fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                    fontSize: "0.5rem",
-                    letterSpacing: "0.1em",
-                    color: t.live ? "var(--green)" : t.building ? "var(--gold)" : "var(--dim)",
-                    marginBottom: "0.75rem",
+                    fontSize: "0.48rem",
+                    letterSpacing: "0.08em",
+                    color: t.statusColor,
+                    marginBottom: "0.6rem",
                   }}
                 >
                   {t.status}
@@ -298,10 +326,11 @@ export function AxionAIEdge() {
                 <h4
                   style={{
                     fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
-                    fontSize: "0.95rem",
+                    fontSize: "0.88rem",
                     fontWeight: 500,
                     color: "var(--parchment)",
-                    marginBottom: "0.5rem",
+                    marginBottom: "0.4rem",
+                    lineHeight: 1.3,
                   }}
                 >
                   {t.name}
@@ -310,15 +339,16 @@ export function AxionAIEdge() {
                 {/* Desc */}
                 <p
                   style={{
-                    fontSize: "0.78rem",
-                    lineHeight: 1.6,
+                    fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                    fontSize: "0.52rem",
+                    lineHeight: 1.5,
                     color: "var(--dim)",
                     flex: 1,
                   }}
                 >
                   {t.desc}
                 </p>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -326,7 +356,7 @@ export function AxionAIEdge() {
 
       {/* Responsive */}
       <style jsx>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
           section > div > div:last-child {
             grid-template-columns: 1fr !important;
           }

@@ -2,34 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const personas = [
+const engagements = [
   {
-    role: "Founder / CEO",
-    title: "You feel something is breaking before you can name it",
-    body: "Most founder-led companies don't fail on strategy. They fail because the belief that built the company never became conviction that could survive the founder's absence.",
-    outcome: "→ Reduce founder dependency risk before it becomes a board conversation",
+    phase: "Phase 01",
+    name: "Initial Diagnostic",
+    body: "We begin with a 3-week diagnostic. No consulting theater. No sixty-slide decks. A sharp, evidence-based assessment of where your operating system is breaking — and why.",
+    output: "Output: Diagnostic Brief + Risk Architecture",
   },
   {
-    role: "CFO",
-    title: "Workforce is your largest cost — and your least understood system",
-    body: "Labour codes, workforce classification, payroll controls, and operating structure are not HR problems. They are cost, risk, and liability problems. Axion Index translates these into the language of financial exposure — before they become balance-sheet events.",
-    outcome: "→ Expose hidden compliance cost before the regulator does",
+    phase: "Phase 02",
+    name: "Design Sprint",
+    body: "Three-week intensive. We redesign the specific system that's breaking — workforce structure, decision rights, compliance architecture, AI-readiness.",
+    output: "Output: Architecture + Implementation Playbook",
   },
   {
-    role: "CHRO",
-    title: "You are solving problems that are not \"HR problems\"",
-    body: "Engagement surveys, culture decks, and L&D calendars are not people systems. A people system is infrastructure — designed for load, tested for failure, built before the crisis demands it.",
-    outcome: "→ Improve decision clarity across leadership before structure hardens",
-  },
-  {
-    role: "Board",
-    title: "You see outcomes — not the system producing them",
-    body: "Decision latency, founder dependency curves, regretted attrition, cultural contract integrity — these are the real signals. Boards that wait for these to appear in P&L data are always acting too late.",
-    outcome: "→ Design systems that scale without breaking under growth pressure",
+    phase: "Phase 03",
+    name: "Embedded Advisory",
+    body: "Optional ongoing partnership. We sit alongside leadership as the operating system is built — ensuring design intent survives implementation.",
+    output: "Output: Monthly architecture review + crisis response",
   },
 ];
 
-export function AxionPersonas() {
+export function AxionHowWeWork() {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -46,7 +40,7 @@ export function AxionPersonas() {
 
   return (
     <section
-      id="personas"
+      id="how-we-work"
       ref={sectionRef}
       style={{
         background: "var(--parchment)",
@@ -62,8 +56,8 @@ export function AxionPersonas() {
         }}
       >
         {/* Section header */}
-        <div className={`rv ${visible ? "in" : ""}`} style={{ marginBottom: "3.5rem", maxWidth: "720px" }}>
-          <div className="sec-lbl-rust">What This Means for You</div>
+        <div className={`rv ${visible ? "in" : ""}`} style={{ marginBottom: "3rem", maxWidth: "720px" }}>
+          <div className="sec-lbl-rust">How We Work</div>
           <h2
             style={{
               fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
@@ -74,32 +68,53 @@ export function AxionPersonas() {
               marginBottom: "1.25rem",
             }}
           >
-            Different leaders. <em style={{ fontStyle: "italic", color: "var(--rust)" }}>Same underlying problem.</em>
+            Three phases. <em style={{ fontStyle: "italic", color: "var(--rust)" }}>One architecture.</em>
           </h2>
         </div>
 
-        {/* 2x2 Card grid */}
+        {/* 3-column engagement grid */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
+            gridTemplateColumns: "repeat(3, 1fr)",
             gap: "1.5rem",
           }}
         >
-          {personas.map((p, i) => (
+          {engagements.map((e, i) => (
             <div
               key={i}
-              className={`rv card-hover ${visible ? "in" : ""}`}
+              className={`rv ${visible ? "in" : ""}`}
               style={{
                 background: "var(--warm)",
-                borderLeft: "3px solid var(--rust)",
+                borderTop: "3px solid var(--rust)",
                 padding: "2rem",
                 display: "flex",
                 flexDirection: "column",
                 transitionDelay: `${i * 0.1}s`,
+                position: "relative",
               }}
             >
-              {/* Role label */}
+              {/* Arrow between cards */}
+              {i < 2 && (
+                <div
+                  className="hide-mobile"
+                  style={{
+                    position: "absolute",
+                    right: "-1.5rem",
+                    top: "50%",
+                    transform: "translate(50%, -50%)",
+                    color: "var(--rust)",
+                    fontSize: "1.5rem",
+                    zIndex: 1,
+                    background: "var(--parchment)",
+                    padding: "0 8px",
+                  }}
+                >
+                  →
+                </div>
+              )}
+
+              {/* Phase label */}
               <span
                 style={{
                   fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
@@ -110,21 +125,20 @@ export function AxionPersonas() {
                   marginBottom: "1rem",
                 }}
               >
-                {p.role}
+                {e.phase}
               </span>
 
-              {/* Title */}
+              {/* Name */}
               <h3
                 style={{
                   fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-                  fontSize: "1.3rem",
+                  fontSize: "1.4rem",
                   fontWeight: 600,
-                  lineHeight: 1.25,
                   color: "var(--ink)",
                   marginBottom: "1rem",
                 }}
               >
-                {p.title}
+                {e.name}
               </h3>
 
               {/* Body */}
@@ -136,26 +150,26 @@ export function AxionPersonas() {
                   flex: 1,
                 }}
               >
-                {p.body}
+                {e.body}
               </p>
 
-              {/* Outcome line */}
+              {/* Output line */}
               <div
                 style={{
                   borderTop: "1px solid rgba(140,59,40,0.15)",
                   paddingTop: "1rem",
-                  marginTop: "1.25rem",
+                  marginTop: "1.5rem",
                 }}
               >
                 <span
                   style={{
                     fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                    fontSize: "0.62rem",
+                    fontSize: "0.58rem",
                     letterSpacing: "0.06em",
                     color: "var(--rust)",
                   }}
                 >
-                  {p.outcome}
+                  {e.output}
                 </span>
               </div>
             </div>

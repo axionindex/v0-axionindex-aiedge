@@ -50,7 +50,7 @@ export function AxionFramework() {
       id="framework"
       ref={sectionRef}
       style={{
-        background: "var(--ink3)",
+        background: "var(--ink)",
         padding: "6rem 0",
       }}
     >
@@ -62,14 +62,11 @@ export function AxionFramework() {
         }}
       >
         {/* Section header */}
-        <div className={`rv ${visible ? "in" : ""}`} style={{ marginBottom: "2rem", maxWidth: "720px" }}>
+        <div className={`rv ${visible ? "in" : ""}`} style={{ marginBottom: "2.5rem", maxWidth: "720px" }}>
           <div className="sec-lbl">The Signature Framework</div>
           <h2 className="sec-title">
             Every organisation scales through <em>one sequence.</em>
           </h2>
-          <p className="sec-body">
-            The journey from founder-led intuition to scalable operating system follows a predictable path. Understanding where you are — and where you&apos;ve broken down — is the first step to redesigning what holds.
-          </p>
         </div>
 
         {/* 4-column flow grid */}
@@ -89,7 +86,7 @@ export function AxionFramework() {
               key={i}
               style={{
                 borderRight: i < 3 ? "1px solid var(--rule)" : "none",
-                background: s.isRust ? "var(--rust-dim)" : "transparent",
+                background: s.isRust ? "rgba(140,59,40,0.06)" : "transparent",
                 padding: "2rem 1.5rem",
                 position: "relative",
               }}
@@ -105,7 +102,7 @@ export function AxionFramework() {
                     color: "var(--gold)",
                     fontSize: "1.2rem",
                     zIndex: 1,
-                    background: s.isRust ? "rgba(140,59,40,0.12)" : "var(--ink3)",
+                    background: "var(--ink)",
                     padding: "0 4px",
                   }}
                 >
