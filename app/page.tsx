@@ -111,9 +111,7 @@ export default function AxionIndexSite() {
             {/* THE AI EDGE LAB - with pulsing green dot and dropdown */}
             <li className="relative h-[68px] flex items-center group">
               <Link
-                href="https://www.axionindex.org/"
-                target="_blank"
-                rel="noreferrer"
+                href="/ai-edge-lab"
                 className="inline-flex items-center gap-2 text-[0.85rem] text-[#C6A86E] no-underline px-[0.9rem] py-[0.45rem] rounded-full transition-all flex-shrink-0 whitespace-nowrap hover:text-[#DFC090] hover:bg-[rgba(198,168,110,0.08)]"
                 style={{ border: "1px solid rgba(198,168,110,0.3)" }}
               >
@@ -123,26 +121,26 @@ export default function AxionIndexSite() {
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 -translate-y-1 min-w-[280px] rounded-[0.8rem] p-[0.4rem_0] opacity-0 invisible pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto group-hover:translate-y-[6px] z-[200]" style={{ background: "rgba(16,15,14,0.97)", backdropFilter: "blur(24px)", border: "1px solid rgba(255,255,255,0.1)", borderTop: "2px solid #C6A86E" }}>
                 <div className="px-[1.1rem] py-[0.3rem] text-[0.52rem] tracking-[0.18em] uppercase text-white/40" style={{ fontFamily: "'DM Mono', monospace" }}>Live Assessments</div>
-                <a href="https://www.axionindex.org/quick-mirror" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
+                <Link href="/ai-edge-lab#quick-mirror" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
                   Quick Mirror — Free, 5 min
                   <span className="text-[0.5rem] px-[6px] py-[1px] rounded-[3px] flex-shrink-0" style={{ fontFamily: "'DM Mono', monospace", background: "rgba(91,173,122,0.15)", color: "#5BAD7A", border: "1px solid rgba(91,173,122,0.3)" }}>Live</span>
-                </a>
-                <a href="https://www.axionindex.org/full-diagnostic" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
+                </Link>
+                <Link href="/ai-edge-lab#full-diagnostic" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
                   Full Diagnostic — PDF Report
                   <span className="text-[0.5rem] px-[6px] py-[1px] rounded-[3px] flex-shrink-0" style={{ fontFamily: "'DM Mono', monospace", background: "rgba(91,173,122,0.15)", color: "#5BAD7A", border: "1px solid rgba(91,173,122,0.3)" }}>Live</span>
-                </a>
-                <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
+                </Link>
+                <Link href="/ai-edge-lab#3i-index" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
                   3i Labour Code Readiness Index™
                   <span className="text-[0.5rem] px-[6px] py-[1px] rounded-[3px] flex-shrink-0" style={{ fontFamily: "'DM Mono', monospace", background: "rgba(91,173,122,0.15)", color: "#5BAD7A", border: "1px solid rgba(91,173,122,0.3)" }}>Live</span>
-                </a>
+                </Link>
                 <div className="h-px bg-white/10 mx-[0.8rem] my-[0.3rem]" />
                 <div className="px-[1.1rem] py-[0.3rem] text-[0.52rem] tracking-[0.18em] uppercase text-white/40" style={{ fontFamily: "'DM Mono', monospace" }}>Doctrine &amp; Framework</div>
-                <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">E.D.G.E. Framework</a>
-                <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">Brainpower Density Curve™</a>
-                <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">Ownership Ladders</a>
+                <Link href="/ai-edge-lab#edge-framework" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">E.D.G.E. Framework</Link>
+                <Link href="/ai-edge-lab#bpd-curve" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">Brainpower Density Curve™</Link>
+                <Link href="/ai-edge-lab#ownership" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">Ownership Ladders</Link>
                 <div className="h-px bg-white/10 mx-[0.8rem] my-[0.3rem]" />
-                <a href="https://www.axionindex.org/AI-Edge-Doctrine-2026.pdf" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">The Doctrine — PDF ↓</a>
-                <a href="https://www.axionindex.org/sample-report" target="_blank" rel="noreferrer" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">Sample Diagnostic Report ↗</a>
+                <Link href="/ai-edge-lab#doctrine" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">The Doctrine — PDF ↓</Link>
+                <Link href="/ai-edge-lab#sample-report" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">Sample Diagnostic Report ↗</Link>
               </div>
             </li>
           </ul>
@@ -171,10 +169,10 @@ export default function AxionIndexSite() {
         </div>
         <div className="mb-8">
           <div className="text-[0.58rem] tracking-[0.2em] uppercase text-[#C6A86E] mb-[0.6rem] pb-[0.4rem] border-b border-white/10" style={{ fontFamily: "'DM Mono', monospace" }}>The AI Edge Lab</div>
-          <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Open AI Edge Lab ↗</a>
-          <a href="https://www.axionindex.org/quick-mirror" target="_blank" rel="noreferrer" className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Quick Mirror — Free ↗</a>
-          <a href="https://www.axionindex.org/full-diagnostic" target="_blank" rel="noreferrer" className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Full Diagnostic ↗</a>
-          <a href="https://www.axionindex.org/AI-Edge-Doctrine-2026.pdf" target="_blank" rel="noreferrer" className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">The Doctrine ↓</a>
+          <Link href="/ai-edge-lab" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Open AI Edge Lab ↗</Link>
+          <Link href="/ai-edge-lab#quick-mirror" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Quick Mirror — Free ↗</Link>
+          <Link href="/ai-edge-lab#full-diagnostic" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Full Diagnostic ↗</Link>
+          <Link href="/ai-edge-lab#doctrine" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">The Doctrine ↓</Link>
         </div>
         <div className="mb-8">
           <div className="text-[0.58rem] tracking-[0.2em] uppercase text-[#C6A86E] mb-[0.6rem] pb-[0.4rem] border-b border-white/10" style={{ fontFamily: "'DM Mono', monospace" }}>Contact</div>
@@ -200,10 +198,10 @@ export default function AxionIndexSite() {
               <a href="#what-we-do" className="text-[0.9rem] font-medium text-[#0A0A0A] bg-[#C6A86E] px-[1.8rem] py-[0.75rem] rounded-full no-underline transition-all inline-block hover:bg-[#DFC090] hover:scale-[1.02]">Explore Our Work</a>
               <a href="#framework" className="text-[0.9rem] text-white/85 border border-white/18 px-[1.8rem] py-[0.75rem] rounded-full no-underline transition-all inline-block hover:border-white/40 hover:bg-white/10">Explore the Framework</a>
             </div>
-            <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-[0.62rem] tracking-[0.12em] uppercase no-underline transition-colors animate-[fadeup_0.9s_0.7s_forwards] opacity-0 hover:text-[#C6A86E]" style={{ fontFamily: "'DM Mono', monospace", color: "rgba(198,168,110,0.55)" }}>
+            <Link href="/ai-edge-lab" className="mt-6 inline-flex items-center gap-2 text-[0.62rem] tracking-[0.12em] uppercase no-underline transition-colors animate-[fadeup_0.9s_0.7s_forwards] opacity-0 hover:text-[#C6A86E]" style={{ fontFamily: "'DM Mono', monospace", color: "rgba(198,168,110,0.55)" }}>
               <span className="w-[5px] h-[5px] rounded-full bg-[#5BAD7A] animate-pulse" />
               The AI Edge Lab — diagnostics &amp; instruments →
-            </a>
+            </Link>
           </div>
 
           {/* Framework Panel */}
@@ -492,10 +490,10 @@ export default function AxionIndexSite() {
             </div>
           </div>
           <div className="flex flex-col gap-[0.8rem] flex-shrink-0">
-            <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="text-[0.65rem] tracking-[0.12em] uppercase text-[#0A0A0A] bg-[#C6A86E] px-6 py-[0.7rem] rounded-full no-underline text-center transition-colors hover:bg-[#DFC090]" style={{ fontFamily: "'DM Mono', monospace" }}>Enter the Lab →</a>
-            <a href="https://www.axionindex.org/quick-mirror" target="_blank" rel="noreferrer" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Quick Mirror — Free, 5 min ↗</a>
-            <a href="https://www.axionindex.org/full-diagnostic" target="_blank" rel="noreferrer" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Full Diagnostic ↗</a>
-            <a href="https://www.axionindex.org/AI-Edge-Doctrine-2026.pdf" target="_blank" rel="noreferrer" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>The Doctrine — PDF ↓</a>
+            <Link href="/ai-edge-lab" className="text-[0.65rem] tracking-[0.12em] uppercase text-[#0A0A0A] bg-[#C6A86E] px-6 py-[0.7rem] rounded-full no-underline text-center transition-colors hover:bg-[#DFC090]" style={{ fontFamily: "'DM Mono', monospace" }}>Enter the Lab →</Link>
+            <Link href="/ai-edge-lab#quick-mirror" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Quick Mirror — Free, 5 min ↗</Link>
+            <Link href="/ai-edge-lab#full-diagnostic" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Full Diagnostic ↗</Link>
+            <Link href="/ai-edge-lab#doctrine" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>The Doctrine — PDF ↓</Link>
           </div>
         </div>
       </div>
@@ -586,7 +584,7 @@ export default function AxionIndexSite() {
               </div>
               <div className="flex flex-col gap-[0.7rem]">
                 <a href="mailto:nitin@axionindex.org" className="text-[0.9rem] font-medium text-[#0A0A0A] bg-[#C6A86E] px-[1.8rem] py-[0.75rem] rounded-full no-underline text-center transition-all hover:bg-[#DFC090] hover:scale-[1.02]">nitin@axionindex.org</a>
-                <a href="https://www.axionindex.org/quick-mirror" target="_blank" rel="noreferrer" className="text-[0.6rem] tracking-[0.1em] uppercase text-center no-underline transition-colors mt-[0.3rem] hover:text-[#C6A86E]" style={{ fontFamily: "'DM Mono', monospace", color: "rgba(198,168,110,0.6)" }}>Quick Mirror — Free, 5 min ↗</a>
+                <Link href="/ai-edge-lab#quick-mirror" className="text-[0.6rem] tracking-[0.1em] uppercase text-center no-underline transition-colors mt-[0.3rem] hover:text-[#C6A86E]" style={{ fontFamily: "'DM Mono', monospace", color: "rgba(198,168,110,0.6)" }}>Quick Mirror — Free, 5 min ↗</Link>
               </div>
             </div>
           </div>
@@ -604,7 +602,7 @@ export default function AxionIndexSite() {
             <a href="#why" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>About</a>
             <a href="#what-we-do" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>What We Do</a>
             <a href="#framework" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Framework</a>
-            <a href="https://www.axionindex.org/" target="_blank" rel="noreferrer" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>AI Edge Lab ↗</a>
+            <Link href="/ai-edge-lab" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>AI Edge Lab ↗</Link>
             <a href="#domains" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Domains</a>
             <a href="#founder" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Founder</a>
             <a href="#cta" className="text-[0.58rem] tracking-[0.12em] uppercase text-white/40 no-underline transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Contact</a>
