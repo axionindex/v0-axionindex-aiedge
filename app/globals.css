@@ -4,16 +4,29 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Axion Index Brand Colors */
-  --ink: #0D0D0D;
-  --parchment: #F5F2EC;
-  --gold: #C9A84C;
-  --gold-light: #ddb85c;
-  --gold-dim: #8a6e30;
-  --gold-glow: rgba(201,168,76,0.12);
-  --rust: #8B4513;
-  --slate: #2F4F4F;
-  --steel: #4A5568;
+  /* Axion Index Brand Colors - Final Production */
+  --ink: #0C0B09;
+  --ink2: #141210;
+  --ink3: #0A0908;
+  --parchment: #F4EFE6;
+  --warm: #FAF8F4;
+  --gold: #C49A3C;
+  --gold-pale: #E8D5A3;
+  --gold-dim: rgba(196,154,60,.12);
+  --rust: #8C3B28;
+  --rust-dim: rgba(140,59,40,.12);
+  --slate: #1A2030;
+  --steel: #4A6B8A;
+  --steel-lt: #7BA8CC;
+  --steel-dk: #2A4A68;
+  --green: #5BAD7A;
+  --green-dim: rgba(91,173,122,.12);
+  --dim: #6B6358;
+  --mist: #B0A898;
+  --rule: rgba(196,154,60,.18);
+  --rule2: rgba(196,154,60,.09);
+  --srule: rgba(74,107,138,.22);
+  --nav-h: 72px;
   
   /* Legacy AI Edge Lab colors (for subpages) */
   --black: #080808;
@@ -21,39 +34,38 @@
   --surface: #141414;
   --surface2: #1c1c1c;
   --border: rgba(255,255,255,0.07);
-  --white: #F5F2EC;
-  --white-dim: rgba(245,242,236,0.52);
-  --white-faint: rgba(245,242,236,0.18);
+  --white: #F4EFE6;
+  --white-dim: rgba(244,239,230,0.52);
+  --white-faint: rgba(244,239,230,0.18);
   --red: #C44B3A;
   --amber: #C9874C;
-  --green: #4A7C5F;
 
   /* Shadcn mappings */
   --background: var(--ink);
   --foreground: var(--parchment);
-  --card: #141414;
+  --card: var(--ink2);
   --card-foreground: var(--parchment);
-  --popover: #141414;
+  --popover: var(--ink2);
   --popover-foreground: var(--parchment);
   --primary: var(--gold);
   --primary-foreground: var(--ink);
-  --secondary: #1c1c1c;
+  --secondary: var(--ink2);
   --secondary-foreground: var(--parchment);
-  --muted: #1c1c1c;
-  --muted-foreground: rgba(245,242,236,0.52);
-  --accent: #1c1c1c;
+  --muted: var(--ink2);
+  --muted-foreground: var(--mist);
+  --accent: var(--ink2);
   --accent-foreground: var(--parchment);
   --destructive: var(--rust);
   --destructive-foreground: var(--parchment);
-  --input: var(--border);
+  --input: var(--rule);
   --ring: var(--gold);
   --radius: 0rem;
 }
 
 @theme inline {
-  --font-sans: 'DM Sans', sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-sans: var(--font-instrument), 'Instrument Sans', sans-serif;
+  --font-serif: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-mono: var(--font-dm-mono), 'DM Mono', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -77,26 +89,6 @@
   --radius-md: 0;
   --radius-lg: 0;
   --radius-xl: 0;
-  
-  /* Brand colors for Tailwind */
-  --color-ink: var(--ink);
-  --color-parchment: var(--parchment);
-  --color-gold: var(--gold);
-  --color-gold-light: var(--gold-light);
-  --color-gold-dim: var(--gold-dim);
-  --color-gold-glow: var(--gold-glow);
-  --color-rust: var(--rust);
-  --color-slate: var(--slate);
-  --color-steel: var(--steel);
-  --color-black: var(--black);
-  --color-near-black: var(--near-black);
-  --color-surface: var(--surface);
-  --color-surface2: var(--surface2);
-  --color-white-dim: var(--white-dim);
-  --color-white-faint: var(--white-faint);
-  --color-red: var(--red);
-  --color-amber: var(--amber);
-  --color-green: var(--green);
 }
 
 @layer base {
@@ -114,96 +106,108 @@
   body {
     background: var(--ink);
     color: var(--parchment);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
+    font-family: var(--font-instrument), 'Instrument Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.85;
     overflow-x: hidden;
   }
-  
-  /* Grain texture overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    opacity: 0.018;
-    pointer-events: none;
-    z-index: 999;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+}
+
+/* SVG Grain Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Reveal animations */
-.reveal {
+.rv {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
 }
 
-.reveal.vis {
+.rv.in {
   opacity: 1;
   transform: none;
 }
 
-/* Keyframes */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+/* Hero load animations */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(22px); }
   to { opacity: 1; transform: none; }
 }
 
-@keyframes lineSlide {
-  0% { left: -100%; }
-  100% { left: 100%; }
+.hero-anim {
+  opacity: 0;
+  animation: heroFadeUp 0.65s ease forwards;
 }
 
-@keyframes tickerL {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes tickerR {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes pulse {
+/* Live dot pulse */
+@keyframes livePulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.3; }
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.live-dot {
+  animation: livePulse 1.8s infinite;
+}
+
+/* Bar scale animations */
+@keyframes barScaleX {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Founding statement stagger */
+.founding-part {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.founding-part.in {
+  opacity: 1;
+  transform: none;
 }
 
 /* Selection */
 ::selection {
-  background-color: rgba(201,168,76,0.2);
+  background-color: rgba(196,154,60,0.2);
   color: var(--parchment);
 }
 
-/* Divider */
-.divider {
-  height: 1px;
-  background: var(--border);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Section shared styles */
+/* Section label */
 .sec-lbl {
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.62rem;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
+.sec-lbl-rust {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 18px;
+}
+
+/* Section title */
 .sec-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.9rem, 3.5vw, 3.1rem);
-  font-weight: 600;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
   line-height: 1.08;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: var(--parchment);
 }
 
 .sec-title em {
@@ -211,19 +215,94 @@
   color: var(--gold);
 }
 
+.sec-title em.rust {
+  color: var(--rust);
+}
+
+/* Section body */
 .sec-body {
-  font-size: 0.98rem;
-  color: var(--white-dim);
+  font-size: 1rem;
+  color: var(--mist);
   max-width: 640px;
   line-height: 1.85;
 }
 
-/* Button styles */
+/* Button - Gold filled */
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 14px 32px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-gold:hover {
+  background: var(--gold-pale);
+  transform: translateY(-1px);
+}
+
+/* Button - Steel ghost */
+.btn-steel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--srule);
+  color: var(--steel-lt);
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-steel:hover {
+  border-color: var(--steel-lt);
+  background: rgba(74,107,138,0.08);
+}
+
+/* Button - Dim ghost */
+.btn-dim {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--rule2);
+  color: var(--dim);
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-dim:hover {
+  border-color: var(--rule);
+  color: var(--mist);
+}
+
+/* Legacy button styles for AI Edge Lab pages */
 .btn-p {
   display: inline-block;
   background: var(--gold);
   color: var(--ink);
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -234,14 +313,14 @@
 }
 
 .btn-p:hover {
-  background: var(--gold-light);
+  background: var(--gold-pale);
 }
 
 .btn-g {
   display: inline-block;
-  border: 1px solid rgba(201,168,76,0.35);
+  border: 1px solid var(--rule);
   color: var(--gold);
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -252,12 +331,78 @@
 
 .btn-g:hover {
   border-color: var(--gold);
-  background: rgba(201,168,76,0.06);
+  background: var(--gold-dim);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Top bar animation on hover */
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--rust);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(.22,1,.36,1);
+}
+
+.card-hover:hover .top-bar {
+  transform: scaleX(1);
+}
+
+.top-bar-gold {
+  background: var(--gold);
+}
+
+/* Contrast table row hover */
+.contrast-row {
+  position: relative;
+  transition: background 0.2s;
+}
+
+.contrast-row::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gold);
+  transform: scaleY(0);
+  transition: transform 0.25s cubic-bezier(.22,1,.36,1);
+}
+
+.contrast-row:hover {
+  background: rgba(196,154,60,0.04);
+}
+
+.contrast-row:hover::before {
+  transform: scaleY(1);
 }
 
 /* Responsive */
 @media (max-width: 900px) {
   .hide-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 901px) {
+  .show-mobile {
     display: none !important;
   }
 }

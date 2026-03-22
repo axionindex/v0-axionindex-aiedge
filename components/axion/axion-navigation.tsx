@@ -8,212 +8,462 @@ export function AxionNavigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { label: "Thesis", href: "#thesis" },
-    { label: "Instruments", href: "#instruments" },
-    { label: "Philosophy", href: "#philosophy" },
-    { label: "Founder", href: "#founder" },
-  ];
+  const scrollToSection = (id: string) => {
+    const el = document.querySelector(id);
+    if (el) {
+      const offset = 72;
+      const y = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+    setMobileOpen(false);
+  };
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        background: scrolled ? "rgba(13,13,13,0.95)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
-        transition: "all 0.3s ease",
-      }}
-    >
+    <>
       <nav
         style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 32px",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
           height: "72px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
+          background: scrolled ? "rgba(12,11,9,0.99)" : "rgba(12,11,9,0.95)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid var(--rule)",
+          zIndex: 1000,
+          transition: "background 0.3s",
         }}
       >
-        {/* Logo */}
-        <Link
-          href="/"
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            gap: "8px",
-            textDecoration: "none",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: "1.4rem",
-              fontWeight: 600,
-              color: "var(--parchment)",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Axion
-          </span>
-          <span
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.6rem",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "var(--gold)",
-            }}
-          >
-            Index
-          </span>
-        </Link>
-
-        {/* Desktop Nav */}
         <div
-          className="hide-mobile"
           style={{
+            maxWidth: "1320px",
+            margin: "0 auto",
+            padding: "0 3rem",
+            height: "100%",
             display: "flex",
             alignItems: "center",
-            gap: "36px",
+            justifyContent: "space-between",
           }}
         >
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "0.82rem",
-                fontWeight: 400,
-                color: "rgba(245,242,236,0.6)",
-                textDecoration: "none",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,242,236,0.6)")}
-            >
-              {item.label}
-            </a>
-          ))}
+          {/* Logo */}
           <Link
-            href="/ai-edge-lab"
+            href="#home"
+            onClick={(e) => { e.preventDefault(); scrollToSection("#home"); }}
             style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.65rem",
-              letterSpacing: "0.12em",
+              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontSize: "1.08rem",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: "var(--gold)",
               textDecoration: "none",
-              padding: "10px 20px",
-              border: "1px solid rgba(201,168,76,0.35)",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--gold)";
-              e.currentTarget.style.background = "rgba(201,168,76,0.06)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "rgba(201,168,76,0.35)";
-              e.currentTarget.style.background = "transparent";
             }}
           >
-            AI Edge Lab
+            Axion Index
           </Link>
-        </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="mobile-only"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          style={{
-            display: "none",
-            background: "none",
-            border: "none",
-            color: "var(--parchment)",
-            cursor: "pointer",
-            padding: "8px",
-          }}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            {mobileOpen ? (
-              <path d="M6 6l12 12M6 18L18 6" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+          {/* Desktop Nav */}
+          <div className="hide-mobile" style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
+            {/* Dropdown 1: Axion Index */}
+            <NavDropdown
+              label="Axion Index"
+              borderColor="var(--gold)"
+              items={[
+                { type: "label", text: "The Organisation" },
+                { label: "What We Do", href: "#what-we-do" },
+                { label: "Why This Matters", href: "#why" },
+                { label: "Belief → Conviction → Rhythm", href: "#framework" },
+                { label: "The Axion Idea", href: "#axion-idea" },
+                { label: "Why We Operate Differently", href: "#unconventional" },
+                { type: "divider" },
+                { type: "label", text: "Domains" },
+                { label: "Operating Architecture", href: "#domains" },
+                { label: "Labour Code Readiness", href: "#domains" },
+                { label: "AI & Work Redesign", href: "#domains" },
+                { label: "Family Business HR", href: "#domains" },
+                { label: "Governance & Decision Ownership", href: "#domains" },
+                { label: "HR as Risk Architecture", href: "#domains" },
+                { type: "divider" },
+                { label: "Founder — Nitin Nahata", href: "#founder" },
+                { label: "Three-Layer Architecture", href: "#architecture" },
+              ]}
+              scrollTo={scrollToSection}
+            />
+
+            {/* AI Edge Lab - Distinct styling */}
+            <AIEdgeLabDropdown scrollTo={scrollToSection} />
+
+            {/* How We Work */}
+            <NavLink label="How We Work" href="#how-we-work" scrollTo={scrollToSection} />
+
+            {/* Founder */}
+            <NavLink label="Founder" href="#founder" scrollTo={scrollToSection} />
+
+            {/* CTA */}
+            <Link
+              href="#cta"
+              onClick={(e) => { e.preventDefault(); scrollToSection("#cta"); }}
+              className="btn-gold"
+              style={{ marginLeft: "1rem", padding: "10px 24px", fontSize: "0.62rem" }}
+            >
+              Start a Conversation
+            </Link>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className="show-mobile"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            style={{
+              background: "none",
+              border: "none",
+              color: "var(--parchment)",
+              fontSize: "1.5rem",
+              cursor: "pointer",
+              padding: "8px",
+              display: "none",
+            }}
+          >
+            {mobileOpen ? "✕" : "☰"}
+          </button>
+        </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile overlay */}
       {mobileOpen && (
         <div
           style={{
-            position: "absolute",
-            top: "72px",
-            left: 0,
-            right: 0,
-            background: "rgba(13,13,13,0.98)",
-            borderBottom: "1px solid var(--border)",
-            padding: "24px 32px",
+            position: "fixed",
+            inset: 0,
+            background: "var(--ink)",
+            zIndex: 999,
+            paddingTop: "72px",
+            overflowY: "auto",
           }}
         >
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              style={{
-                display: "block",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: "0.95rem",
-                color: "var(--parchment)",
-                textDecoration: "none",
-                padding: "12px 0",
-                borderBottom: "1px solid var(--border)",
-              }}
+          <div style={{ padding: "2rem 3rem", display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            <MobileNavLink label="What We Do" href="#what-we-do" scrollTo={scrollToSection} />
+            <MobileNavLink label="Why This Matters" href="#why" scrollTo={scrollToSection} />
+            <MobileNavLink label="Framework" href="#framework" scrollTo={scrollToSection} />
+            <MobileNavLink label="Domains" href="#domains" scrollTo={scrollToSection} />
+            <MobileNavLink label="AI Edge Lab" href="#aiedge" scrollTo={scrollToSection} isSteel />
+            <MobileNavLink label="How We Work" href="#how-we-work" scrollTo={scrollToSection} />
+            <MobileNavLink label="Architecture" href="#architecture" scrollTo={scrollToSection} />
+            <MobileNavLink label="Founder" href="#founder" scrollTo={scrollToSection} />
+            <Link
+              href="#cta"
+              onClick={(e) => { e.preventDefault(); scrollToSection("#cta"); }}
+              className="btn-gold"
+              style={{ marginTop: "1rem", textAlign: "center" }}
             >
-              {item.label}
-            </a>
-          ))}
-          <Link
-            href="/ai-edge-lab"
-            onClick={() => setMobileOpen(false)}
-            style={{
-              display: "block",
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.7rem",
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--gold)",
-              textDecoration: "none",
-              padding: "16px 0",
-            }}
-          >
-            AI Edge Lab →
-          </Link>
+              Start a Conversation
+            </Link>
+          </div>
         </div>
       )}
 
       <style jsx>{`
+        .nav-item {
+          position: relative;
+        }
+        .nav-item:hover .nav-dd {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+        .nav-trigger:hover {
+          color: var(--gold) !important;
+        }
+        .dd-item:hover {
+          background: rgba(196,154,60,0.06) !important;
+          border-left-color: var(--gold) !important;
+        }
+        .steel-trigger:hover {
+          border-color: var(--steel-lt) !important;
+          background: rgba(74,107,138,0.08) !important;
+        }
+        .steel-dd-item:hover {
+          background: rgba(74,107,138,0.08) !important;
+          border-left-color: var(--steel-lt) !important;
+        }
         @media (max-width: 900px) {
-          .mobile-only {
+          .show-mobile {
             display: block !important;
           }
         }
       `}</style>
-    </header>
+    </>
+  );
+}
+
+function NavDropdown({ label, items, scrollTo, borderColor }: { label: string; items: any[]; scrollTo: (id: string) => void; borderColor?: string }) {
+  return (
+    <div className="nav-item" style={{ position: "relative", height: "72px", display: "flex", alignItems: "center" }}>
+      <button
+        className="nav-trigger"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "0 14px",
+          height: "100%",
+          fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+          fontSize: "0.62rem",
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: "var(--dim)",
+          cursor: "pointer",
+          transition: "color 0.2s",
+          border: "none",
+          background: "none",
+        }}
+      >
+        {label}
+        <svg width="8" height="8" viewBox="0 0 10 6" fill="none" style={{ opacity: 0.5 }}>
+          <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+      </button>
+
+      <div
+        className="nav-dd"
+        style={{
+          position: "absolute",
+          top: "100%",
+          left: 0,
+          minWidth: "320px",
+          background: "rgba(12,11,9,0.99)",
+          border: "1px solid var(--rule)",
+          borderTop: `2px solid ${borderColor || "var(--gold)"}`,
+          padding: "8px 0",
+          opacity: 0,
+          visibility: "hidden",
+          transform: "translateY(8px)",
+          transition: "all 0.2s ease",
+          backdropFilter: "blur(20px)",
+        }}
+      >
+        {items.map((item, i) => {
+          if (item.type === "label") {
+            return (
+              <div
+                key={i}
+                style={{
+                  padding: "10px 20px 6px",
+                  fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                  fontSize: "0.54rem",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
+                  color: "var(--dim)",
+                }}
+              >
+                {item.text}
+              </div>
+            );
+          }
+          if (item.type === "divider") {
+            return <div key={i} style={{ height: "1px", background: "var(--rule)", margin: "8px 20px" }} />;
+          }
+          return (
+            <a
+              key={i}
+              href={item.href}
+              onClick={(e) => { e.preventDefault(); scrollTo(item.href); }}
+              className="dd-item"
+              style={{
+                display: "block",
+                padding: "10px 20px",
+                fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
+                fontSize: "0.85rem",
+                color: "var(--parchment)",
+                textDecoration: "none",
+                borderLeft: "2px solid transparent",
+                transition: "all 0.15s",
+              }}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function AIEdgeLabDropdown({ scrollTo }: { scrollTo: (id: string) => void }) {
+  return (
+    <div className="nav-item" style={{ position: "relative", height: "72px", display: "flex", alignItems: "center" }}>
+      <a
+        href="https://www.axionindex.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="steel-trigger"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "0 14px",
+          height: "34px",
+          margin: "0 0.3rem",
+          fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+          fontSize: "0.62rem",
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: "var(--steel-lt)",
+          cursor: "pointer",
+          transition: "all 0.2s",
+          border: "1px solid rgba(74,107,138,0.32)",
+          background: "none",
+          textDecoration: "none",
+        }}
+      >
+        <span className="live-dot" style={{ width: "6px", height: "6px", background: "var(--green)", borderRadius: "50%" }} />
+        The AI Edge Lab
+      </a>
+
+      <div
+        className="nav-dd"
+        style={{
+          position: "absolute",
+          top: "100%",
+          left: 0,
+          minWidth: "360px",
+          background: "rgba(12,11,9,0.99)",
+          border: "1px solid var(--srule)",
+          borderTop: "2px solid var(--steel)",
+          padding: "8px 0",
+          opacity: 0,
+          visibility: "hidden",
+          transform: "translateY(8px)",
+          transition: "all 0.2s ease",
+          backdropFilter: "blur(20px)",
+        }}
+      >
+        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
+          Live Assessments
+        </div>
+        <DropdownItem label="Quick Mirror — Free" badge="LIVE" href="https://www.axionindex.org/quick-mirror" external green />
+        <DropdownItem label="Full Diagnostic" badge="LIVE" href="https://www.axionindex.org/full-diagnostic" external green />
+        <DropdownItem label="3i Labour Code Readiness Index™" badge="LIVE" href="#aiedge" scrollTo={scrollTo} green />
+
+        <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
+        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
+          Doctrine & Framework
+        </div>
+        <DropdownItem label="The Three Structural Shifts" href="https://www.axionindex.org/#shifts" external />
+        <DropdownItem label="E.D.G.E. Framework" href="https://www.axionindex.org/#edge" external />
+        <DropdownItem label="Brainpower Density Curve™" href="https://www.axionindex.org/#bpdcurve" external />
+
+        <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
+        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
+          Building
+        </div>
+        <DropdownItem label="Workforce Architecture Diagnostics™" badge="BUILDING" href="#aiedge" scrollTo={scrollTo} />
+        <DropdownItem label="Decision Ownership Models™" badge="SOON" href="#aiedge" scrollTo={scrollTo} />
+
+        <div style={{ height: "1px", background: "var(--srule)", margin: "8px 20px" }} />
+        <div style={{ padding: "10px 20px 6px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--steel-lt)" }}>
+          Resources
+        </div>
+        <DropdownItem label="The Doctrine — PDF ↓" href="https://www.axionindex.org/AI-Edge-Doctrine-2026.pdf" external />
+      </div>
+    </div>
+  );
+}
+
+function DropdownItem({ label, badge, href, external, scrollTo, green }: { label: string; badge?: string; href: string; external?: boolean; scrollTo?: (id: string) => void; green?: boolean }) {
+  const handleClick = (e: React.MouseEvent) => {
+    if (!external && scrollTo) {
+      e.preventDefault();
+      scrollTo(href);
+    }
+  };
+
+  return (
+    <a
+      href={href}
+      onClick={handleClick}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      className="steel-dd-item"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "10px 20px",
+        fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
+        fontSize: "0.85rem",
+        color: "var(--parchment)",
+        textDecoration: "none",
+        borderLeft: "2px solid transparent",
+        transition: "all 0.15s",
+      }}
+    >
+      <span>{label}</span>
+      {badge && (
+        <span
+          style={{
+            fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+            fontSize: "0.5rem",
+            letterSpacing: "0.1em",
+            padding: "3px 8px",
+            background: green ? "var(--green-dim)" : badge === "BUILDING" ? "var(--gold-dim)" : "rgba(107,99,88,0.2)",
+            color: green ? "var(--green)" : badge === "BUILDING" ? "var(--gold)" : "var(--dim)",
+          }}
+        >
+          {badge}
+        </span>
+      )}
+    </a>
+  );
+}
+
+function NavLink({ label, href, scrollTo }: { label: string; href: string; scrollTo: (id: string) => void }) {
+  return (
+    <a
+      href={href}
+      onClick={(e) => { e.preventDefault(); scrollTo(href); }}
+      className="nav-trigger"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        padding: "0 14px",
+        height: "72px",
+        fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+        fontSize: "0.62rem",
+        letterSpacing: "0.16em",
+        textTransform: "uppercase",
+        color: "var(--dim)",
+        textDecoration: "none",
+        transition: "color 0.2s",
+      }}
+    >
+      {label}
+    </a>
+  );
+}
+
+function MobileNavLink({ label, href, scrollTo, isSteel }: { label: string; href: string; scrollTo: (id: string) => void; isSteel?: boolean }) {
+  return (
+    <a
+      href={href}
+      onClick={(e) => { e.preventDefault(); scrollTo(href); }}
+      style={{
+        fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+        fontSize: "0.75rem",
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        color: isSteel ? "var(--steel-lt)" : "var(--parchment)",
+        textDecoration: "none",
+        padding: "0.5rem 0",
+        borderBottom: "1px solid var(--rule2)",
+      }}
+    >
+      {label}
+    </a>
   );
 }
