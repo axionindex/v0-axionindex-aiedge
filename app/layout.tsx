@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
+import { Cormorant_Garamond, Instrument_Sans, DM_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
@@ -8,49 +8,49 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-cormorant",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
-const dmSans = DM_Sans({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-instrument",
   display: "swap",
-  weight: ["300", "400", "500"],
+  weight: ["400", "500", "600"],
 });
 
 const dmMono = DM_Mono({
   subsets: ["latin"],
   variable: "--font-dm-mono",
   display: "swap",
-  weight: ["300", "400", "500"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Axion Index — Instruments for the Structural Economy",
+  title: "Axion Index — Operating Intelligence for Unfinished Organisations",
   description:
-    "Research-grade diagnostic instruments and strategic frameworks for individuals and institutions navigating structural economic shifts. Built by Nitin Nahata.",
+    "Codified energy for the unfinished. We help founders diagnose, redesign, and control the system underneath work before it breaks. Research-grade diagnostics by Nitin Nahata.",
   keywords: [
-    "structural economics",
-    "AI",
-    "future of work",
-    "career",
-    "assessment",
-    "diagnostic",
+    "operating intelligence",
+    "HR architecture",
+    "people systems",
+    "AI work redesign",
+    "labour codes",
+    "founder dependency",
     "governance",
-    "capital alignment",
+    "Nitin Nahata",
   ],
   authors: [{ name: "Nitin Nahata" }],
   openGraph: {
-    title: "Axion Index",
+    title: "Axion Index — Codified Energy for the Unfinished",
     description:
-      "Instruments for the Structural Economy — Research-grade diagnostics by Nitin Nahata",
+      "Operating intelligence for unfinished organisations. Diagnostic instruments and strategic frameworks by Nitin Nahata.",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0D0D0D",
+  themeColor: "#0C0B09",
   width: "device-width",
   initialScale: 1,
 };
@@ -63,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
+      className={`${cormorant.variable} ${instrumentSans.variable} ${dmMono.variable}`}
     >
       <body className="min-h-screen antialiased">
         {children}

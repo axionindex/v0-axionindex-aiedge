@@ -1,157 +1,371 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export function AxionHero() {
-  const [visible, setVisible] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setVisible(true);
+    setLoaded(true);
   }, []);
 
   return (
     <section
+      id="home"
       style={{
         minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-        padding: "120px 32px 80px",
+        background: "var(--ink)",
         position: "relative",
+        paddingTop: "72px",
+        overflow: "hidden",
       }}
     >
-      {/* Subtle radial glow */}
+      {/* Radial glows */}
       <div
         style={{
           position: "absolute",
-          top: "30%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
+          top: "-20%",
+          right: "-10%",
           width: "800px",
+          height: "800px",
+          background: "radial-gradient(ellipse, rgba(196,154,60,0.08) 0%, transparent 60%)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-30%",
+          left: "-10%",
+          width: "600px",
           height: "600px",
-          background: "radial-gradient(ellipse, rgba(201,168,76,0.04) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(140,59,40,0.06) 0%, transparent 60%)",
           pointerEvents: "none",
         }}
       />
 
-      {/* Label */}
       <div
         style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(20px)",
-          transition: "all 0.8s ease 0.2s",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: "0.6rem",
-            letterSpacing: "0.35em",
-            textTransform: "uppercase",
-            color: "var(--gold)",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
-          <span style={{ width: "24px", height: "1px", background: "var(--gold)", opacity: 0.5 }} />
-          Est. 2024
-          <span style={{ width: "24px", height: "1px", background: "var(--gold)", opacity: 0.5 }} />
-        </span>
-      </div>
-
-      {/* Main Headline */}
-      <h1
-        style={{
-          fontFamily: "'Cormorant Garamond', Georgia, serif",
-          fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
-          fontWeight: 500,
-          lineHeight: 1.05,
-          color: "var(--parchment)",
-          maxWidth: "900px",
-          marginTop: "32px",
-          marginBottom: "28px",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(30px)",
-          transition: "all 0.8s ease 0.4s",
-        }}
-      >
-        Instruments for the{" "}
-        <em style={{ fontStyle: "italic", color: "var(--gold)" }}>Structural</em>{" "}
-        Economy
-      </h1>
-
-      {/* Subhead */}
-      <p
-        style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontSize: "clamp(1rem, 1.8vw, 1.15rem)",
-          fontWeight: 300,
-          lineHeight: 1.7,
-          color: "rgba(245,242,236,0.55)",
-          maxWidth: "580px",
-          marginBottom: "48px",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(30px)",
-          transition: "all 0.8s ease 0.6s",
-        }}
-      >
-        Research-grade diagnostic instruments and strategic frameworks for individuals
-        and institutions navigating structural economic shifts.
-      </p>
-
-      {/* CTA */}
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(30px)",
-          transition: "all 0.8s ease 0.8s",
-        }}
-      >
-        <a href="#instruments" className="btn-p">
-          Explore Instruments
-        </a>
-        <a href="#thesis" className="btn-g">
-          Read the Thesis
-        </a>
-      </div>
-
-      {/* Scroll indicator */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "40px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
+          maxWidth: "1320px",
+          margin: "0 auto",
+          padding: "6rem 3rem 4rem",
+          display: "grid",
+          gridTemplateColumns: "1fr 420px",
+          gap: "5rem",
           alignItems: "center",
-          gap: "8px",
-          opacity: visible ? 0.4 : 0,
-          transition: "opacity 0.8s ease 1.2s",
+          minHeight: "calc(100vh - 72px)",
         }}
       >
-        <span
+        {/* Left Column */}
+        <div>
+          {/* Eyebrow */}
+          <div
+            className="hero-anim"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+              marginBottom: "2rem",
+              animationDelay: "0.2s",
+              opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease",
+            }}
+          >
+            <span style={{ width: "2.5rem", height: "1px", background: "var(--gold)" }} />
+            <span
+              style={{
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                fontSize: "0.64rem",
+                letterSpacing: "0.24em",
+                textTransform: "uppercase",
+                color: "var(--gold)",
+              }}
+            >
+              Operating Intelligence · Bengaluru · 2026
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1
+            className="hero-anim"
+            style={{
+              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontSize: "clamp(3.2rem, 7vw, 6.5rem)",
+              fontWeight: 700,
+              lineHeight: 0.93,
+              letterSpacing: "-0.025em",
+              color: "var(--parchment)",
+              marginBottom: "1.5rem",
+              animationDelay: "0.36s",
+              opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.16s",
+            }}
+          >
+            What holds
+            <br />
+            organisations
+            <br />
+            together is
+            <br />
+            <em style={{ fontStyle: "italic", color: "var(--gold)" }}>invisible.</em>
+          </h1>
+
+          {/* Subheadline */}
+          <p
+            className="hero-anim"
+            style={{
+              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontStyle: "italic",
+              fontSize: "1.4rem",
+              color: "var(--mist)",
+              marginBottom: "2rem",
+              animationDelay: "0.5s",
+              opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.3s",
+            }}
+          >
+            We make it designable.
+          </p>
+
+          {/* Deck paragraph */}
+          <div
+            className="hero-anim"
+            style={{
+              borderLeft: "2px solid var(--gold)",
+              paddingLeft: "1.4rem",
+              marginBottom: "2.5rem",
+              maxWidth: "540px",
+              animationDelay: "0.64s",
+              opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.44s",
+            }}
+          >
+            <p style={{ color: "var(--dim)", lineHeight: 1.85 }}>
+              Most organisations don't fail because of strategy.
+              They fail because <strong style={{ color: "var(--parchment)" }}>the system underneath cannot carry the strategy.</strong>{" "}
+              Axion Index helps organisations diagnose, design, and control the forces that determine whether they scale — or break.
+            </p>
+          </div>
+
+          {/* Buttons */}
+          <div
+            className="hero-anim"
+            style={{
+              display: "flex",
+              gap: "1rem",
+              flexWrap: "wrap",
+              animationDelay: "0.8s",
+              opacity: loaded ? 1 : 0,
+              transition: "opacity 0.6s ease 0.6s",
+            }}
+          >
+            <a href="#what-we-do" className="btn-gold">
+              Explore Our Work
+            </a>
+            <a href="#framework" className="btn-dim">
+              Explore the Framework
+            </a>
+            <Link
+              href="https://www.axionindex.org/quick-mirror"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-steel"
+            >
+              Quick Mirror — Free ↗
+            </Link>
+          </div>
+        </div>
+
+        {/* Right Column - AI Edge Lab Panel */}
+        <div
+          className="hero-anim hide-mobile"
           style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: "0.55rem",
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "var(--parchment)",
+            background: "rgba(10,14,24,0.7)",
+            backdropFilter: "blur(20px)",
+            border: "1px solid var(--srule)",
+            animationDelay: "0.5s",
+            opacity: loaded ? 1 : 0,
+            transition: "opacity 0.6s ease 0.3s",
           }}
         >
-          Scroll
-        </span>
-        <svg width="12" height="24" viewBox="0 0 12 24" fill="none" stroke="var(--parchment)" strokeWidth="1">
-          <path d="M6 0v20M1 15l5 5 5-5" />
-        </svg>
+          {/* Panel Header */}
+          <div
+            style={{
+              padding: "1.25rem 1.5rem",
+              borderBottom: "1px solid var(--srule)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span
+                className="live-dot"
+                style={{
+                  width: "6px",
+                  height: "6px",
+                  background: "var(--green)",
+                  borderRadius: "50%",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--steel-lt)",
+                }}
+              >
+                The AI Edge Lab
+              </span>
+            </div>
+            <span
+              style={{
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                fontSize: "0.52rem",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "var(--dim)",
+              }}
+            >
+              Live Instruments
+            </span>
+          </div>
+
+          {/* Instrument Rows */}
+          {[
+            { name: "Quick Mirror", desc: "5 min · AI exposure check · Free · Instant", status: "live", href: "/quick-mirror" },
+            { name: "Full Diagnostic", desc: "30 min · Edge Score · PDF report · Paid", status: "live", href: "/full-diagnostic" },
+            { name: "3i Labour Code Readiness Index™", desc: "Classify · Cost · Comply", status: "live", href: "#aiedge" },
+            { name: "Workforce Architecture Diagnostics™", desc: "Structure · Control · Risk", status: "building", href: "#aiedge" },
+            { name: "AI Exposure & Work Compression", desc: "Roles · Automation · Redesign", status: "building", href: "#aiedge" },
+            { name: "Decision Ownership Models™", desc: "Authority · Accountability · Speed", status: "soon", href: "#aiedge" },
+            { name: "Payroll Operating Control", desc: "Compliance · Controls · Architecture", status: "soon", href: "#aiedge" },
+          ].map((item, i) => {
+            const isClickable = item.status === "live" && (item.href === "/quick-mirror" || item.href === "/full-diagnostic");
+            const content = (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "20px 1fr auto",
+                  gap: "12px",
+                  alignItems: "center",
+                  padding: "10px 1.5rem",
+                  background: "rgba(74,107,138,0.03)",
+                  borderBottom: i < 6 ? "1px solid rgba(74,107,138,0.1)" : "none",
+                  transition: "background 0.15s",
+                  cursor: isClickable ? "pointer" : "default",
+                }}
+              >
+                <span style={{ color: "var(--steel-lt)", fontSize: "0.85rem" }}>→</span>
+                <div>
+                  <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "var(--parchment)", marginBottom: "2px" }}>
+                    {item.name}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", color: "var(--dim)", letterSpacing: "0.05em" }}>
+                    {item.desc}
+                  </div>
+                </div>
+                <StatusBadge status={item.status as "live" | "building" | "soon"} />
+              </div>
+            );
+
+            if (isClickable) {
+              return (
+                <Link
+                  key={i}
+                  href={`https://www.axionindex.org${item.href}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none", display: "block" }}
+                >
+                  {content}
+                </Link>
+              );
+            }
+            return <div key={i}>{content}</div>;
+          })}
+
+          {/* Panel Footer */}
+          <div
+            style={{
+              padding: "1rem 1.5rem",
+              borderTop: "1px solid var(--srule)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                fontSize: "0.52rem",
+                letterSpacing: "0.1em",
+                color: "var(--dim)",
+              }}
+            >
+              axionindex.org · AI Edge Lab
+            </span>
+            <Link
+              href="https://www.axionindex.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                fontSize: "0.56rem",
+                letterSpacing: "0.1em",
+                color: "var(--steel-lt)",
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+            >
+              Open Lab →
+            </Link>
+          </div>
+        </div>
       </div>
+
+      {/* Mobile responsive */}
+      <style jsx>{`
+        @media (max-width: 1100px) {
+          section > div > div:first-child {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
+  );
+}
+
+function StatusBadge({ status }: { status: "live" | "building" | "soon" }) {
+  const styles: Record<string, { bg: string; color: string; dot: string; label: string }> = {
+    live: { bg: "var(--green-dim)", color: "var(--green)", dot: "●", label: "Live" },
+    building: { bg: "var(--gold-dim)", color: "var(--gold)", dot: "◐", label: "Building" },
+    soon: { bg: "rgba(107,99,88,0.2)", color: "var(--dim)", dot: "○", label: "Soon" },
+  };
+  const s = styles[status];
+
+  return (
+    <span
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "4px",
+        fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+        fontSize: "0.48rem",
+        letterSpacing: "0.06em",
+        padding: "3px 6px",
+        background: s.bg,
+        color: s.color,
+        whiteSpace: "nowrap",
+      }}
+    >
+      <span style={{ fontSize: "0.5rem" }}>{s.dot}</span>
+      {s.label}
+    </span>
   );
 }
