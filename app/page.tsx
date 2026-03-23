@@ -125,7 +125,7 @@ export default function AxionIndexSite() {
                   Quick Mirror — Free, 5 min
                   <span className="text-[0.5rem] px-[6px] py-[1px] rounded-[3px] flex-shrink-0" style={{ fontFamily: "'DM Mono', monospace", background: "rgba(91,173,122,0.15)", color: "#5BAD7A", border: "1px solid rgba(91,173,122,0.3)" }}>Live</span>
                 </Link>
-                <Link href="/ai-edge-lab#full-diagnostic" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
+                <Link href="/full-diagnostic" className="flex items-center justify-between px-[1.1rem] py-[0.5rem] text-[0.82rem] text-white/65 no-underline rounded-[0.4rem] mx-[0.3rem] transition-all hover:text-white hover:bg-white/10">
                   Full Diagnostic — PDF Report
                   <span className="text-[0.5rem] px-[6px] py-[1px] rounded-[3px] flex-shrink-0" style={{ fontFamily: "'DM Mono', monospace", background: "rgba(91,173,122,0.15)", color: "#5BAD7A", border: "1px solid rgba(91,173,122,0.3)" }}>Live</span>
                 </Link>
@@ -171,7 +171,7 @@ export default function AxionIndexSite() {
           <div className="text-[0.58rem] tracking-[0.2em] uppercase text-[#C6A86E] mb-[0.6rem] pb-[0.4rem] border-b border-white/10" style={{ fontFamily: "'DM Mono', monospace" }}>The AI Edge Lab</div>
           <Link href="/ai-edge-lab" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Open AI Edge Lab ↗</Link>
           <Link href="/ai-edge-lab#quick-mirror" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Quick Mirror — Free ↗</Link>
-          <Link href="/ai-edge-lab#full-diagnostic" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Full Diagnostic ↗</Link>
+          <Link href="/full-diagnostic" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">Full Diagnostic ↗</Link>
           <Link href="/ai-edge-lab#doctrine" onClick={() => setMobileNavOpen(false)} className="flex items-center justify-between py-[0.6rem] text-[0.95rem] text-white/65 no-underline border-b border-white/[0.06] hover:text-white">The Doctrine ↓</Link>
         </div>
         <div className="mb-8">
@@ -492,7 +492,7 @@ export default function AxionIndexSite() {
           <div className="flex flex-col gap-[0.8rem] flex-shrink-0">
             <Link href="/ai-edge-lab" className="text-[0.65rem] tracking-[0.12em] uppercase text-[#0A0A0A] bg-[#C6A86E] px-6 py-[0.7rem] rounded-full no-underline text-center transition-colors hover:bg-[#DFC090]" style={{ fontFamily: "'DM Mono', monospace" }}>Enter the Lab →</Link>
             <Link href="/ai-edge-lab#quick-mirror" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Quick Mirror — Free, 5 min ↗</Link>
-            <Link href="/ai-edge-lab#full-diagnostic" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Full Diagnostic ↗</Link>
+            <Link href="/full-diagnostic" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>Full Diagnostic ↗</Link>
             <Link href="/ai-edge-lab#doctrine" className="text-[0.6rem] tracking-[0.1em] uppercase text-white/40 no-underline text-center transition-colors hover:text-white" style={{ fontFamily: "'DM Mono', monospace" }}>The Doctrine — PDF ↓</Link>
           </div>
         </div>

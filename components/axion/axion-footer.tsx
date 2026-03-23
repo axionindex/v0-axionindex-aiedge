@@ -114,9 +114,7 @@ export function AxionFooter() {
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
                 <li>
                   <Link
-                    href="https://www.axionindex.org/quick-mirror"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/quick-mirror"
                     style={{
                       fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",
@@ -132,9 +130,7 @@ export function AxionFooter() {
                 </li>
                 <li>
                   <Link
-                    href="https://www.axionindex.org/full-diagnostic"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/full-diagnostic"
                     style={{
                       fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",

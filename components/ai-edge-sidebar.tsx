@@ -23,8 +23,8 @@ const navSections = [
   {
     label: "Assessment",
     items: [
-      { title: "Quick Mirror — Free", href: "https://www.axionindex.org/quick-mirror", external: true, live: true },
-      { title: "Full Diagnostic", href: "https://www.axionindex.org/full-diagnostic", external: true, live: true },
+      { title: "Quick Mirror — Free", href: "/quick-mirror", live: true },
+      { title: "Full Diagnostic", href: "/full-diagnostic", live: true },
       { title: "Salary Defensibility", href: "#salary" },
     ],
   },
