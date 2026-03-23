@@ -22,8 +22,8 @@ const footerNav = [
   {
     label: "Assessment",
     items: [
-      { title: "Quick Mirror", href: "https://www.axionindex.org/quick-mirror", external: true },
-      { title: "Full Diagnostic", href: "https://www.axionindex.org/full-diagnostic", external: true },
+      { title: "Quick Mirror", href: "/quick-mirror" },
+      { title: "Full Diagnostic", href: "/full-diagnostic" },
       { title: "Salary Score", href: "#salary" },
     ],
   },

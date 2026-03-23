@@ -10,8 +10,8 @@ const tools = [
     status: "● Live",
     statusColor: "var(--green)",
     borderColor: "var(--green)",
-    href: "https://www.axionindex.org/quick-mirror",
-    external: true,
+    href: "/quick-mirror",
+    external: false,
   },
   {
     name: "Full Diagnostic",
@@ -19,8 +19,8 @@ const tools = [
     status: "● Live",
     statusColor: "var(--green)",
     borderColor: "var(--gold)",
-    href: "https://www.axionindex.org/full-diagnostic",
-    external: true,
+    href: "/full-diagnostic",
+    external: false,
   },
   {
     name: "Workforce Architecture Diagnostics™",
