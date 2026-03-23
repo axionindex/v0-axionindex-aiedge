@@ -90,7 +90,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .confirm{background:var(--green-bg);border:1px solid var(--green-border);border-left:3px solid var(--green);padding:10px 13px;margin-top:10px;font-size:12px;color:#7AB090;line-height:1.6}
 `;
 
-// ── COHORT DATA ───────────────────────────────────────────────────────────────
+// ── COHORT DATA ─────────────────────────────────────��─────────────────────────
 const COHORT = {
   byLevel: {
     ic: { avg: 46, p25: 35, p75: 57, label: "Individual contributor" },
@@ -723,33 +723,700 @@ export default function FullDiagnosticPage() {
     return <Landing onStart={() => setScreen(1)} />;
   }
 
-  // For now, show a placeholder for the full diagnostic
-  // The complete implementation would include all 13 question screens
-  return (
-    <Shell progress={5} onBack={() => setScreen(0)}>
-      <div style={{ textAlign: "center", padding: "60px 0" }}>
-        <div style={{ fontFamily: "var(--serif)", fontSize: 28, color: "var(--gold)", marginBottom: 16 }}>
-          Full Diagnostic
+  // Screen 1: Profile Building
+  if (screen === 1) {
+    return (
+      <Shell progress={8} onBack={() => setScreen(0)}>
+        <div className="eyebrow">Profile Build</div>
+        <div className="q-hdr">
+          <span className="q-act">Your Context</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Required for cohort calibration</span>
         </div>
-        <div style={{ fontSize: 14, color: "var(--text3)", marginBottom: 24, lineHeight: 1.6, maxWidth: 400, margin: "0 auto 24px" }}>
-          The complete 13-question diagnostic with profile building, cohort comparison, salary defensibility assessment, and downloadable PDF report.
-        </div>
-        <div style={{ background: "var(--gold-bg)", border: "1px solid var(--gold-dim)", padding: "16px 20px", marginBottom: 20 }}>
-          <div style={{ fontSize: 11, color: "var(--gold)", letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 8 }}>
-            Coming Soon
+        <div className="q-q">Tell us about your current role</div>
+        <div className="q-nudge">This calibrates your cohort comparison and salary defensibility assessment.</div>
+        
+        <div className="profile-grid">
+          <div className="profile-field">
+            <div className="pf-label">Years of experience</div>
+            <div className="pf-select">
+              {[
+                { id: "e1", label: "0-3 years" },
+                { id: "e2", label: "4-7 years" },
+                { id: "e3", label: "8-12 years" },
+                { id: "e4", label: "13-18 years" },
+                { id: "e5", label: "19+ years" },
+              ].map((o) => (
+                <div
+                  key={o.id}
+                  className={`pf-chip ${profile.experience === o.id ? "sel" : ""}`}
+                  onClick={() => setProfile({ ...profile, experience: o.id })}
+                >
+                  {o.label}
+                </div>
+              ))}
+            </div>
           </div>
-          <div style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.5 }}>
-            The Full Diagnostic is currently being finalized. Join the waitlist to be notified when it launches.
+          <div className="profile-field">
+            <div className="pf-label">Years managing others</div>
+            <div className="pf-select">
+              {[
+                { id: "never", label: "Never" },
+                { id: "1-2", label: "1-2 years" },
+                { id: "3-5", label: "3-5 years" },
+                { id: "6-10", label: "6-10 years" },
+                { id: "10p", label: "10+ years" },
+              ].map((o) => (
+                <div
+                  key={o.id}
+                  className={`pf-chip ${profile.mgrYears === o.id ? "sel" : ""}`}
+                  onClick={() => setProfile({ ...profile, mgrYears: o.id })}
+                >
+                  {o.label}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+        
+        <Nav
+          onBack={() => setScreen(0)}
+          onNext={() => setScreen(2)}
+          disabled={!profile.experience || !profile.mgrYears}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 2: Work Structure Split (Q1)
+  if (screen === 2) {
+    const workItems = [
+      { id: "research", name: "Research & gathering", desc: "Finding, compiling, summarizing information" },
+      { id: "analysis", name: "Analysis & synthesis", desc: "Processing data, identifying patterns, building models" },
+      { id: "framing", name: "Problem framing", desc: "Defining what problem we are actually solving" },
+      { id: "deciding", name: "Decision-making", desc: "Choosing between options with real consequence" },
+      { id: "insight", name: "Insight generation", desc: "Surfacing non-obvious patterns or implications" },
+      { id: "executing", name: "Execution & delivery", desc: "Producing outputs, completing tasks" },
+    ];
+    const total = Object.values(splits.work || {}).reduce((a: number, b: any) => a + b, 0);
+    
+    return (
+      <Shell progress={15} onBack={() => setScreen(1)}>
+        <div className="eyebrow">Work Structure</div>
+        <div className="q-hdr">
+          <span className="q-act">Q1</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Work composition</span>
+        </div>
+        <div className="q-q">Where does your time actually go?</div>
+        <div className="q-nudge">Think about the last month. Allocate 100% across these six dimensions.</div>
+        
+        <SplitInput
+          items={workItems}
+          values={splits.work || {}}
+          onChange={(v) => setSplits({ ...splits, work: v })}
+        />
+        
+        <Why text="The distribution of your time across these six work dimensions determines your baseline AI exposure. Research, analysis, and execution are highly compressible. Framing, deciding, and insight generation are where human edge compounds." />
+        
+        <Nav
+          onBack={() => setScreen(1)}
+          onNext={() => setScreen(3)}
+          disabled={total !== 100}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 3: Decision Type (Q2)
+  if (screen === 3) {
+    return (
+      <Shell progress={23} onBack={() => setScreen(2)}>
+        <div className="eyebrow">Decision Density</div>
+        <div className="q-hdr">
+          <span className="q-act">Q2</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Decision taxonomy</span>
+        </div>
+        <div className="q-q">What types of decisions do you make?</div>
+        <div className="q-nudge">Select all that apply to your regular work. Then estimate the % of your decisions in each selected type.</div>
+        
+        <div style={{ marginBottom: 16 }}>
+          {[
+            { id: "rule", label: "Rule-based", desc: "Clear criteria, repeatable logic", tag: "compress" },
+            { id: "pattern", label: "Pattern-matching", desc: "Recognize → apply established response", tag: "neutral" },
+            { id: "tradeoff", label: "Trade-off balancing", desc: "Multiple valid options, context-dependent", tag: "neutral" },
+            { id: "context", label: "Context-dependent judgment", desc: "Requires reading the room, relationships", tag: "edge" },
+            { id: "unique", label: "Novel/unprecedented", desc: "No playbook exists", tag: "edge" },
+          ].map((dt) => (
+            <div
+              key={dt.id}
+              className={`opt ${qa.q2_core?.[dt.id] ? "sel" : ""} ${qa.q2_core?.[dt.id] ? dt.tag : ""}`}
+              onClick={() =>
+                setQa({
+                  ...qa,
+                  q2_core: { ...qa.q2_core, [dt.id]: !qa.q2_core?.[dt.id] },
+                })
+              }
+            >
+              <div className="opt-l">{qa.q2_core?.[dt.id] ? "●" : "○"}</div>
+              <div className="opt-body">
+                <div className="opt-t">{dt.label}</div>
+                <div className="opt-eg">{dt.desc}</div>
+                <div className="opt-s">
+                  {dt.tag === "compress" ? "AI-dominant" : dt.tag === "neutral" ? "AI-assisted" : "AI-proof"}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Why text="The type of decisions you make determines how compressible your judgment work is. Rule-based decisions are already being automated. Novel judgment under uncertainty remains distinctly human." />
+        
+        <Nav
+          onBack={() => setScreen(2)}
+          onNext={() => setScreen(4)}
+          disabled={!qa.q2_core || Object.values(qa.q2_core).filter(Boolean).length === 0}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 4: Framing (Q3)
+  if (screen === 4) {
+    return (
+      <Shell progress={31} onBack={() => setScreen(3)}>
+        <div className="eyebrow">Problem Framing</div>
+        <div className="q-hdr">
+          <span className="q-act">Q3</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Framing authority</span>
+        </div>
+        <div className="q-q">How often do you define the problem (vs. solve a given one)?</div>
+        
+        <div style={{ marginBottom: 12 }}>
+          {[
+            { id: "A", text: "Almost never — problems come to me pre-defined" },
+            { id: "B", text: "Occasionally — I sometimes question or reframe" },
+            { id: "C", text: "Regularly — I reshape problems before solving" },
+            { id: "D", text: "Frequently — framing is a significant part of my role" },
+            { id: "E", text: "Almost always — I determine what problems we work on" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`opt ${qa.q3a === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q3a: o.id })}
+            >
+              <div className="opt-l">{o.id}</div>
+              <div className="opt-body">
+                <div className="opt-t">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Why text="Problem framing is upstream of all analysis. AI can analyze a defined problem brilliantly — but choosing which problem to solve remains a human judgment call that compounds your structural edge." />
+        
+        <Nav
+          onBack={() => setScreen(3)}
+          onNext={() => setScreen(5)}
+          disabled={!qa.q3a}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 5: Consequence (Q4)
+  if (screen === 5) {
+    return (
+      <Shell progress={38} onBack={() => setScreen(4)}>
+        <div className="eyebrow">Consequence Ownership</div>
+        <div className="q-hdr">
+          <span className="q-act">Q4</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Accountability depth</span>
+        </div>
+        <div className="q-q">When your decisions are wrong, what happens?</div>
+        
+        <div style={{ marginBottom: 12 }}>
+          {[
+            { id: "A", text: "Minimal impact — easily corrected, rarely noticed" },
+            { id: "B", text: "Local friction — team or project affected" },
+            { id: "C", text: "Department impact — visible consequences beyond my team" },
+            { id: "D", text: "Business impact — affects company performance or reputation" },
+            { id: "E", text: "Structural impact — changes direction, resources, or strategy" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`opt ${qa.q4a === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q4a: o.id })}
+            >
+              <div className="opt-l">{o.id}</div>
+              <div className="opt-body">
+                <div className="opt-t">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Why text="Consequence ownership is the clearest marker of structural position. AI can recommend — but cannot bear accountability. The depth of consequence you carry maps directly to your salary defensibility." />
+        
+        <Nav
+          onBack={() => setScreen(4)}
+          onNext={() => setScreen(6)}
+          disabled={!qa.q4a}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 6: Impact Scope (Q5)
+  if (screen === 6) {
+    return (
+      <Shell progress={46} onBack={() => setScreen(5)}>
+        <div className="eyebrow">Impact Scope</div>
+        <div className="q-hdr">
+          <span className="q-act">Q5</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Boundary of influence</span>
+        </div>
+        <div className="q-q">How far do your decisions reach?</div>
+        
+        <div style={{ marginBottom: 12 }}>
+          {[
+            { id: "A", text: "My own work only" },
+            { id: "B", text: "My immediate team (2-5 people)" },
+            { id: "C", text: "Multiple teams or a function (10-50 people)" },
+            { id: "D", text: "Department or business unit (50-200 people)" },
+            { id: "E", text: "Organization-wide or external (200+ people)" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`opt ${qa.q5a === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q5a: o.id })}
+            >
+              <div className="opt-l">{o.id}</div>
+              <div className="opt-body">
+                <div className="opt-t">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Why text="Impact scope determines structural leverage. Decisions that affect 5 people vs. 500 people carry fundamentally different weight in how organizations value your contribution." />
+        
+        <Nav
+          onBack={() => setScreen(5)}
+          onNext={() => setScreen(7)}
+          disabled={!qa.q5a}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 7: AI Mirror (Q6)
+  if (screen === 7) {
+    return (
+      <Shell progress={54} onBack={() => setScreen(6)}>
+        <div className="eyebrow">AI Mirror</div>
+        <div className="q-hdr">
+          <span className="q-act">Q6</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Compression exposure</span>
+        </div>
+        <div className="q-q">If AI could do 80% of your current tasks, what would remain distinctly yours?</div>
+        
+        <div style={{ marginBottom: 12 }}>
+          {[
+            { id: "A", text: "Not much — most of my work is processable" },
+            { id: "B", text: "Some relationship and coordination work" },
+            { id: "C", text: "Judgment calls and stakeholder navigation" },
+            { id: "D", text: "Problem framing and strategic direction" },
+            { id: "E", text: "Almost everything — my edge is in areas AI cannot reach" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`opt ${qa.q6a === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q6a: o.id })}
+            >
+              <div className="opt-l">{o.id}</div>
+              <div className="opt-body">
+                <div className="opt-t">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Why text="This is the mirror test. What remains after AI compression reveals your structural edge — or the absence of one. The answer shapes your 90-day repositioning plan." />
+        
+        <Nav
+          onBack={() => setScreen(6)}
+          onNext={() => setScreen(8)}
+          disabled={!qa.q6a}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 8: Scope Shift (Q7)
+  if (screen === 8) {
+    return (
+      <Shell progress={62} onBack={() => setScreen(7)}>
+        <div className="eyebrow">Trajectory</div>
+        <div className="q-hdr">
+          <span className="q-act">Q7</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">6-month direction</span>
+        </div>
+        <div className="q-q">How has your role changed in the last 6 months?</div>
+        
+        <div style={{ marginBottom: 12 }}>
+          {[
+            { id: "A", text: "More execution and less decision-making" },
+            { id: "B", text: "About the same mix" },
+            { id: "C", text: "Slightly more judgment and framing work" },
+            { id: "D", text: "Significantly more ownership and consequence" },
+            { id: "E", text: "Major expansion into strategic territory" },
+            { id: "F", text: "Complete role transformation" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`opt ${qa.q7 === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q7: o.id })}
+            >
+              <div className="opt-l">{o.id}</div>
+              <div className="opt-body">
+                <div className="opt-t">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Why text="Trajectory matters as much as position. An edge that is growing compounds. An edge that is static becomes vulnerable as the compression line advances." />
+        
+        <Nav
+          onBack={() => setScreen(7)}
+          onNext={() => setScreen(9)}
+          disabled={!qa.q7}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 9: Thinking Ownership (Q8)
+  if (screen === 9) {
+    const thinkingItems = [
+      { id: "original", name: "Original thinking", desc: "Creating frameworks, theories, approaches from scratch" },
+      { id: "adaptive", name: "Adaptive thinking", desc: "Modifying existing approaches to new contexts" },
+      { id: "synthetic", name: "Synthetic thinking", desc: "Combining multiple inputs into coherent output" },
+      { id: "applied", name: "Applied thinking", desc: "Using established frameworks to solve problems" },
+    ];
+    const total = Object.values(splits.thinking || {}).reduce((a: number, b: any) => a + b, 0);
+    
+    return (
+      <Shell progress={69} onBack={() => setScreen(8)}>
+        <div className="eyebrow">Thinking Type</div>
+        <div className="q-hdr">
+          <span className="q-act">Q8</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Thinking composition</span>
+        </div>
+        <div className="q-q">What kind of thinking does your work require?</div>
+        <div className="q-nudge">Allocate 100% across these four dimensions.</div>
+        
+        <SplitInput
+          items={thinkingItems}
+          values={splits.thinking || {}}
+          onChange={(v) => setSplits({ ...splits, thinking: v })}
+        />
+        
+        <Why text="Original and adaptive thinking represent structural edge. Synthetic and applied thinking are increasingly AI-compressible. The ratio determines your defensibility." />
+        
+        <Nav
+          onBack={() => setScreen(8)}
+          onNext={() => setScreen(10)}
+          disabled={total !== 100}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 10: Depth (Q9)
+  if (screen === 10) {
+    return (
+      <Shell progress={77} onBack={() => setScreen(9)}>
+        <div className="eyebrow">Depth</div>
+        <div className="q-hdr">
+          <span className="q-act">Q9</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Domain expertise</span>
+        </div>
+        <div className="q-q">How deep is your domain expertise?</div>
+        
+        <div style={{ marginBottom: 12 }}>
+          {[
+            { id: "A", text: "Generalist — broad knowledge, no deep specialty" },
+            { id: "B", text: "Functional expert — deep in one business function" },
+            { id: "C", text: "Domain authority — recognized expertise in a specific area" },
+            { id: "D", text: "Rare expertise — few people in my context have this depth" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`opt ${qa.q9 === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q9: o.id })}
+            >
+              <div className="opt-l">{o.id}</div>
+              <div className="opt-body">
+                <div className="opt-t">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Why text="Depth compounds edge. AI has broad knowledge but shallow context. Domain expertise that is hard to replicate creates structural moats." />
+        
+        <Nav
+          onBack={() => setScreen(9)}
+          onNext={() => setScreen(11)}
+          disabled={!qa.q9}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 11: Time Horizon (Q10)
+  if (screen === 11) {
+    const horizonItems = [
+      { id: "daily", name: "Daily/weekly", desc: "Immediate tasks and deliverables" },
+      { id: "monthly", name: "Monthly", desc: "Project milestones and near-term goals" },
+      { id: "quarterly", name: "Quarterly", desc: "OKRs, quarterly plans, medium-term outcomes" },
+      { id: "annual", name: "Annual", desc: "Yearly strategy and planning" },
+      { id: "multiyear", name: "Multi-year", desc: "Long-term direction and transformation" },
+    ];
+    const total = Object.values(splits.horizon || {}).reduce((a: number, b: any) => a + b, 0);
+    
+    return (
+      <Shell progress={85} onBack={() => setScreen(10)}>
+        <div className="eyebrow">Time Horizon</div>
+        <div className="q-hdr">
+          <span className="q-act">Q10</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Planning horizon</span>
+        </div>
+        <div className="q-q">What time horizons does your work address?</div>
+        <div className="q-nudge">Allocate 100% across these horizons based on where your attention goes.</div>
+        
+        <SplitInput
+          items={horizonItems}
+          values={splits.horizon || {}}
+          onChange={(v) => setSplits({ ...splits, horizon: v })}
+        />
+        
+        <Why text="Longer time horizons require more judgment and less execution. Work that addresses multi-year outcomes is structurally harder to compress than daily task completion." />
+        
+        <Nav
+          onBack={() => setScreen(10)}
+          onNext={() => setScreen(12)}
+          disabled={total !== 100}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 12: Level (Q11)
+  if (screen === 12) {
+    return (
+      <Shell progress={92} onBack={() => setScreen(11)}>
+        <div className="eyebrow">Cohort Calibration</div>
+        <div className="q-hdr">
+          <span className="q-act">Q11</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Seniority level</span>
+        </div>
+        <div className="q-q">What is your current level?</div>
+        
+        <div style={{ marginBottom: 12 }}>
+          {[
+            { id: "ic", text: "Individual contributor" },
+            { id: "tl", text: "Team lead / senior IC" },
+            { id: "mgr", text: "Manager" },
+            { id: "sr", text: "Senior manager / director" },
+            { id: "vp", text: "VP / head of function" },
+            { id: "exec", text: "C-suite / executive" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`opt ${qa.q11 === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q11: o.id })}
+            >
+              <div className="opt-l">{o.id.toUpperCase()}</div>
+              <div className="opt-body">
+                <div className="opt-t">{o.text}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <Nav
+          onBack={() => setScreen(11)}
+          onNext={() => setScreen(13)}
+          disabled={!qa.q11}
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 13: Function (Q12)
+  if (screen === 13) {
+    return (
+      <Shell progress={96} onBack={() => setScreen(12)}>
+        <div className="eyebrow">Cohort Calibration</div>
+        <div className="q-hdr">
+          <span className="q-act">Q12</span>
+          <span className="q-sep">|</span>
+          <span className="q-num">Primary function</span>
+        </div>
+        <div className="q-q">What is your primary function?</div>
+        
+        <div className="multi-chip" style={{ gridTemplateColumns: "1fr 1fr" }}>
+          {[
+            { id: "strategy", text: "Strategy" },
+            { id: "product", text: "Product" },
+            { id: "finance", text: "Finance & FP&A" },
+            { id: "hr", text: "HR & People" },
+            { id: "operations", text: "Operations" },
+            { id: "marketing", text: "Marketing" },
+            { id: "sales", text: "Sales & Commercial" },
+            { id: "tech", text: "Technology" },
+            { id: "legal", text: "Legal & Compliance" },
+            { id: "consulting", text: "Consulting" },
+          ].map((o) => (
+            <div
+              key={o.id}
+              className={`chip ${qa.q12 === o.id ? "sel" : ""}`}
+              onClick={() => setQa({ ...qa, q12: o.id })}
+            >
+              <div className="chip-t">{o.text}</div>
+            </div>
+          ))}
+        </div>
+        
+        <Nav
+          onBack={() => setScreen(12)}
+          onNext={handleComplete}
+          disabled={!qa.q12}
+          nextLabel="Complete & View Results →"
+        />
+      </Shell>
+    );
+  }
+
+  // Screen 99: Results
+  if (screen === 99 && score) {
+    return (
+      <Shell progress={100}>
+        <div style={{ textAlign: "center", marginBottom: 32 }}>
+          <div style={{ fontSize: 9, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--text4)", marginBottom: 10 }}>
+            Your AI Edge Index
+          </div>
+          <div style={{ fontFamily: "var(--serif)", fontSize: 72, fontWeight: 700, color: score.archetype.color, lineHeight: 1 }}>
+            {score.idx}
+          </div>
+          <div style={{ fontSize: 12, color: "var(--text3)", marginTop: 4 }}>
+            Range: {score.rangeLow}–{score.rangeHigh}
+          </div>
+        </div>
+
+        <div style={{ background: "var(--bg3)", border: "1px solid var(--border)", padding: "20px", marginBottom: 16 }}>
+          <div style={{ fontSize: 9, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text4)", marginBottom: 8 }}>
+            Your Archetype
+          </div>
+          <div style={{ fontFamily: "var(--serif)", fontSize: 24, color: score.archetype.color, marginBottom: 8 }}>
+            {score.archetype.name}
+          </div>
+          <div style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.7 }}>
+            {score.archetype.desc}
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 16 }}>
+          <div style={{ background: "var(--bg3)", border: "1px solid var(--border)", padding: "16px" }}>
+            <div style={{ fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text4)", marginBottom: 4 }}>
+              Band
+            </div>
+            <div style={{ fontSize: 16, color: bandColor(score.band) }}>{bandName(score.band)}</div>
+          </div>
+          <div style={{ background: "var(--bg3)", border: "1px solid var(--border)", padding: "16px" }}>
+            <div style={{ fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text4)", marginBottom: 4 }}>
+              Trajectory
+            </div>
+            <div style={{ fontSize: 16, color: bandColor(score.traj) }}>{trajName(score.traj)}</div>
+          </div>
+        </div>
+
+        <div style={{ background: "var(--gold-bg)", border: "1px solid var(--gold-dim)", padding: "16px", marginBottom: 16 }}>
+          <div style={{ fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>
+            Salary Defensibility
+          </div>
+          <div style={{ fontSize: 15, color: salColors[score.salaryBand], marginBottom: 6 }}>
+            {salLabels[score.salaryBand]}
+          </div>
+          <div style={{ fontSize: 12, color: "var(--text3)", lineHeight: 1.6 }}>
+            {score.archetype.salary}
+          </div>
+        </div>
+
+        <div style={{ background: "var(--bg3)", border: "1px solid var(--border)", padding: "16px", marginBottom: 16 }}>
+          <div style={{ fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text4)", marginBottom: 12 }}>
+            Cohort Comparison
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+            <span style={{ fontSize: 12, color: "var(--text3)" }}>Your score</span>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 14, color: "var(--gold)" }}>{score.idx}</span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+            <span style={{ fontSize: 12, color: "var(--text3)" }}>Cohort average ({score.cLvl.label})</span>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 14, color: "var(--text2)" }}>{score.cLvl.avg}</span>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <span style={{ fontSize: 12, color: "var(--text3)" }}>Function average ({score.cFunc.label})</span>
+            <span style={{ fontFamily: "var(--mono)", fontSize: 14, color: "var(--text2)" }}>{score.cFunc.avg}</span>
+          </div>
+        </div>
+
+        <div style={{ background: "var(--bg3)", border: "1px solid var(--border)", padding: "16px", marginBottom: 24 }}>
+          <div style={{ fontSize: 9, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text4)", marginBottom: 12 }}>
+            Work Composition
+          </div>
+          <div style={{ display: "flex", gap: 4, marginBottom: 8 }}>
+            <div style={{ flex: score.aiProof, height: 8, background: "var(--green)" }} />
+            <div style={{ flex: score.aiAssist, height: 8, background: "var(--gold)" }} />
+            <div style={{ flex: score.aiDom, height: 8, background: "var(--red)" }} />
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "var(--text3)" }}>
+            <span>AI-proof: {score.aiProof}%</span>
+            <span>AI-assisted: {score.aiAssist}%</span>
+            <span>AI-dominant: {score.aiDom}%</span>
+          </div>
+        </div>
+
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-          <Link href="/quick-mirror" className="btn-g" style={{ textDecoration: "none" }}>
-            Take Quick Mirror Instead
-          </Link>
+          <button className="btn-g" onClick={() => setScreen(0)}>
+            Start Over
+          </button>
           <Link href="/#cta" className="btn-p" style={{ textDecoration: "none" }}>
-            Join Waitlist
+            Get Full Report
           </Link>
         </div>
+      </Shell>
+    );
+  }
+
+  // Fallback
+  return (
+    <Shell progress={0} onBack={() => setScreen(0)}>
+      <div style={{ textAlign: "center", padding: "40px 0" }}>
+        <div style={{ fontSize: 14, color: "var(--text3)" }}>Loading...</div>
       </div>
     </Shell>
   );
