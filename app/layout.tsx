@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Instrument_Sans, DM_Mono } from "next/font/google";
+import { Cormorant_Garamond, Instrument_Sans, DM_Mono, Lora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
@@ -24,6 +24,14 @@ const dmMono = DM_Mono({
   variable: "--font-dm-mono",
   display: "swap",
   weight: ["400", "500"],
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  display: "swap",
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -63,7 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${instrumentSans.variable} ${dmMono.variable}`}
+      className={`${cormorant.variable} ${instrumentSans.variable} ${dmMono.variable} ${lora.variable}`}
     >
       <body className="min-h-screen antialiased">
         {children}
