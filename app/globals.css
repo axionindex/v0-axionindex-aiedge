@@ -4,16 +4,58 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Axion Index Brand Colors - Final Production */
+  /* Axion Index Brand Colors - Apple Editorial Design System */
+  
+  /* Dark surfaces */
+  --pure-black: #000000;
+  --near-black: #0A0A0A;
+  --dark-lift: #111111;
+  --text-on-dark: rgba(255,255,255,0.85);
+  --muted-on-dark: rgba(255,255,255,0.38);
+  --dim-on-dark: rgba(255,255,255,0.18);
+  --lines-on-dark: rgba(255,255,255,0.07);
+  --lines-on-dark-subtle: rgba(255,255,255,0.04);
+  
+  /* Light surfaces */
+  --pure-white: #FFFFFF;
+  --off-white: #F7F6F3;
+  --subtle-white: #EEECEA;
+  --text-on-light: #141412;
+  --body-on-light: #3A3935;
+  --muted-on-light: #878580;
+  --lines-on-light: rgba(0,0,0,0.08);
+  
+  /* Gold - the single accent */
+  --gold: #C4972F;
+  --gold-light: #D9AE52;
+  --gold-dark: #A07820;
+  --gold-dim: rgba(196,151,47,0.04);
+  --gold-border: rgba(196,151,47,0.18);
+  --gold-border-hover: rgba(196,151,47,0.32);
+  
+  /* Rust - failure mode only */
+  --rust: #8C3B28;
+  --rust-bg: rgba(140,59,40,0.04);
+  --rust-border: rgba(140,59,40,0.3);
+  
+  /* Motion tokens */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-head: 900ms;
+  --dur-body: 600ms;
+  --dur-card: 550ms;
+  --dur-hover: 180ms;
+  --rise-head: 12px;
+  --rise-body: 8px;
+  --rise-card: 16px;
+  
+  /* Legacy aliases */
   --ink: #0C0B09;
   --ink2: #141210;
   --ink3: #0A0908;
   --parchment: #F4EFE6;
   --warm: #FAF8F4;
-  --gold: #C49A3C;
   --gold-pale: #E8D5A3;
-  --gold-dim: rgba(196,154,60,.12);
-  --rust: #8C3B28;
   --rust-dim: rgba(140,59,40,.12);
   --slate: #1A2030;
   --steel: #4A6B8A;
@@ -26,7 +68,7 @@
   --rule: rgba(196,154,60,.18);
   --rule2: rgba(196,154,60,.09);
   --srule: rgba(74,107,138,.22);
-  --nav-h: 72px;
+  --nav-h: 54px;
   
   /* Legacy AI Edge Lab colors (for subpages) */
   --black: #080808;
