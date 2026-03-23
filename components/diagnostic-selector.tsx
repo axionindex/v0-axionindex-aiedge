@@ -99,7 +99,7 @@ export function DiagnosticSelector() {
         </ul>
 
         <Link
-          href="/diagnostic/full-diagnostic"
+          href="/full-diagnostic"
           className="block w-full px-4 py-4 bg-gold text-ink font-label text-[11px] uppercase tracking-[0.15em] text-center hover:bg-gold2 transition-colors"
         >
           Start Full Diagnostic →

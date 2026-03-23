@@ -201,7 +201,7 @@ export function QuickMirrorResults({ results }: QuickMirrorResultsProps) {
           breakdown, and a 5-page PDF working document with 90-day action plan.
         </p>
         <Link
-          href="/diagnostic/full-diagnostic"
+          href="/full-diagnostic"
           className="inline-block px-8 py-4 bg-gold text-ink font-label text-[11px] uppercase tracking-[0.15em] hover:bg-gold2 transition-colors"
         >
           Take Full Diagnostic · ₹400
