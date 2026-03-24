@@ -304,8 +304,10 @@ export default function HomePage() {
             ].map((item, i) => (
               <div
                 key={item.verb}
-                className={`reveal reveal-d${i + 1} transition-all duration-[280ms] hover:bg-[#F7F6F3]`}
+                className={`reveal reveal-d${i + 1} transition-all duration-[280ms]`}
                 style={{ padding: "2.5rem 2rem", borderRight: i < 2 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#F7F6F3"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.08), inset 0 0 60px rgba(196,151,47,0.06)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1.9rem", fontWeight: 700, color: "#C4972F", marginBottom: "0.8rem" }}>
                   {item.verb}
