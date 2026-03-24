@@ -136,7 +136,7 @@ export default function HomePage() {
           href="/ai-edge-lab"
           className="no-underline transition-all duration-[180ms]"
           style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.5rem 1rem", borderRadius: "999px", boxShadow: "0 2px 8px rgba(196,151,47,0.15)" }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,151,47,0.4)"; }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 0 20px rgba(196,151,47,0.45), 0 0 8px rgba(196,151,47,0.30)"; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(196,151,47,0.15)"; }}
         >
           Quick Mirror — Free
@@ -217,7 +217,7 @@ export default function HomePage() {
               href="/ai-edge-lab"
               className="no-underline transition-all duration-[180ms]"
               style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.85rem 1.8rem", borderRadius: "4px", boxShadow: "0 4px 16px rgba(196,151,47,0.12)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(196,151,47,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(196,151,47,0.40), 0 3px 10px rgba(196,151,47,0.25)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,151,47,0.12)"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
               Try Quick Mirror — Free
@@ -264,7 +264,7 @@ export default function HomePage() {
                 key={signal.num}
                 className={`reveal reveal-d${i + 1} group relative transition-all duration-[280ms]`}
                 style={{ padding: "2.8rem 2.4rem", borderRight: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 40px rgba(196,151,47,0.04)"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,151,47,0.10), 0 4px 24px rgba(0,0,0,0.30)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C4972F", marginBottom: "0.8rem" }}>
@@ -341,15 +341,35 @@ export default function HomePage() {
             ].map((row, i) => (
               <div
                 key={row.letter}
-                className={`reveal reveal-d${i + 1} group flex items-start gap-5 transition-all duration-[180ms] hover:translate-x-[3px]`}
-                style={{ padding: "1.5rem 0", borderBottom: i < 2 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
+                className={`reveal reveal-d${i + 1} group grid transition-all duration-[180ms]`}
+                style={{ 
+                  gridTemplateColumns: "3.5rem 1fr", 
+                  gap: "1.6rem", 
+                  alignItems: "center", 
+                  padding: "1.8rem 0", 
+                  borderBottom: i < 2 ? "1px solid rgba(0,0,0,0.08)" : "none",
+                  width: "100%",
+                  overflow: "hidden"
+                }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.background = "rgba(0,0,0,0.02)"; 
+                  e.currentTarget.style.transform = "translateX(3px)"; 
+                  const letter = e.currentTarget.querySelector(".row-letter") as HTMLElement;
+                  if (letter) letter.style.color = "#C4972F";
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.background = "transparent"; 
+                  e.currentTarget.style.transform = "translateX(0)"; 
+                  const letter = e.currentTarget.querySelector(".row-letter") as HTMLElement;
+                  if (letter) letter.style.color = "rgba(0,0,0,0.12)";
+                }}
               >
-                <div className="transition-colors duration-[180ms] group-hover:text-[#C4972F]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, color: "rgba(0,0,0,0.12)", lineHeight: 1 }}>
+                <div className="row-letter transition-colors duration-[180ms]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, color: "rgba(0,0,0,0.12)", lineHeight: 1 }}>
                   {row.letter}
                 </div>
-                <div>
+                <div style={{ minWidth: 0 }}>
                   <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.95rem", fontWeight: 600, color: "#141412", marginBottom: "0.3rem" }}>{row.title}</div>
-                  <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.82rem", color: "#878580", lineHeight: 1.7 }}>{row.body}</p>
+                  <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.82rem", color: "#878580", lineHeight: 1.7, wordWrap: "break-word", overflowWrap: "break-word" }}>{row.body}</p>
                 </div>
               </div>
             ))}
@@ -416,28 +436,28 @@ export default function HomePage() {
               />
             </svg>
 
-            {/* Quadrant labels - positioned in corners */}
+            {/* Quadrant labels - anchored to corners */}
             <div
               className="absolute transition-opacity duration-500"
-              style={{ top: "6%", right: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1600ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
+              style={{ top: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Judgment Work
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ top: "6%", left: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
+              style={{ top: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Insight Work
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "6%", right: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1800ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
+              style={{ bottom: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Execution Work
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "6%", left: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1900ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
+              style={{ bottom: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Automated Work
             </div>
@@ -445,13 +465,13 @@ export default function HomePage() {
             {/* Zone labels - positioned along the diagonal */}
             <div
               className="absolute transition-opacity duration-500"
-              style={{ top: "18%", left: "18%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", color: "#C4972F", textTransform: "uppercase" }}
+              style={{ top: "28%", left: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", color: "#C4972F", textTransform: "uppercase", fontWeight: 500 }}
             >
               Defensible
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "18%", right: "18%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", color: "#C4972F", textTransform: "uppercase" }}
+              style={{ bottom: "12%", right: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", color: "#C4972F", textTransform: "uppercase", fontWeight: 500 }}
             >
               Compressible
             </div>
@@ -470,7 +490,7 @@ export default function HomePage() {
                 }}
                 onMouseEnter={(e) => {
                   const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
-                  if (inner) { inner.style.transform = "scale(2.4)"; inner.style.background = "#C4972F"; inner.style.boxShadow = "0 0 18px rgba(196,151,47,0.55)"; }
+                  if (inner) { inner.style.transform = "scale(2.6)"; inner.style.background = "#C4972F"; inner.style.boxShadow = "0 0 16px rgba(196,151,47,0.65), 0 0 32px rgba(196,151,47,0.35)"; }
                 }}
                 onMouseLeave={(e) => {
                   const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
@@ -517,8 +537,8 @@ export default function HomePage() {
             href="/ai-edge-lab"
             className="inline-flex items-center gap-3 mt-8 no-underline transition-all duration-[180ms]"
             style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C4972F", border: "1px solid rgba(196,151,47,0.25)", padding: "0.9rem 1.6rem", borderRadius: "4px" }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.08)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.4)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(196,151,47,0.15)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.25)"; e.currentTarget.style.boxShadow = "none"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.08)"; e.currentTarget.style.borderColor = "#C4972F"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 0 24px rgba(196,151,47,0.28), 0 4px 16px rgba(196,151,47,0.15)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
           >
             Locate your role — Try Quick Mirror
           </Link>
@@ -553,7 +573,7 @@ export default function HomePage() {
                   borderRight: i < 2 ? "1px solid rgba(255,255,255,0.07)" : "none",
                   opacity: frameworkStep > i ? 1 : 0.1,
                 }}
-                onMouseEnter={(e) => { if (frameworkStep > i) e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,151,47,0.04)"; }}
+                onMouseEnter={(e) => { if (frameworkStep > i) e.currentTarget.style.boxShadow = "inset 0 0 80px rgba(196,151,47,0.10), 0 2px 16px rgba(0,0,0,0.25)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", color: frameworkStep > i ? "#C4972F" : "rgba(255,255,255,0.2)", marginBottom: "1rem" }}>
@@ -621,7 +641,7 @@ export default function HomePage() {
                 href={card.href}
                 className={`reveal reveal-d${i + 1} group block no-underline transition-all duration-[180ms]`}
                 style={{ background: "rgba(196,151,47,0.04)", border: "1px solid rgba(196,151,47,0.18)", borderRadius: "4px", padding: "1.7rem 2rem" }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateX(5px) translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 28px rgba(196,151,47,0.15)"; e.currentTarget.style.background = "rgba(196,151,47,0.08)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.35)"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateX(5px) translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(196,151,47,0.18), 0 0 24px rgba(196,151,47,0.12)"; e.currentTarget.style.background = "rgba(196,151,47,0.08)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.35)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = "translateX(0) translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(196,151,47,0.04)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.18)"; }}
               >
                 <div className="flex items-start justify-between gap-4">
@@ -661,8 +681,10 @@ export default function HomePage() {
             ].map((step, i) => (
               <div
                 key={step.num}
-                className={`reveal reveal-d${i + 1} group relative transition-all duration-[280ms] hover:bg-white`}
+                className={`reveal reveal-d${i + 1} group relative transition-all duration-[280ms]`}
                 style={{ padding: "2.5rem 2rem", borderRight: i < 2 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 28px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div className="transition-colors duration-[180ms] group-hover:text-[#C4972F]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "3.5rem", fontWeight: 300, color: "rgba(0,0,0,0.08)", lineHeight: 1, marginBottom: "1rem" }}>
                   {step.num}
@@ -699,8 +721,8 @@ export default function HomePage() {
                 key={row.title}
                 className={`reveal reveal-d${i + 1} group flex items-start gap-4 transition-all duration-[180ms]`}
                 style={{ padding: "1.5rem 0 1.5rem 1rem", borderLeft: "2px solid rgba(196,151,47,0.15)", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateX(3px)"; e.currentTarget.style.borderLeftColor = "#C4972F"; e.currentTarget.style.boxShadow = "inset 0 0 30px rgba(196,151,47,0.04)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateX(0)"; e.currentTarget.style.borderLeftColor = "rgba(196,151,47,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#111111"; e.currentTarget.style.transform = "translateX(3px)"; e.currentTarget.style.borderLeftColor = "#C4972F"; e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,151,47,0.10), -2px 0 16px rgba(196,151,47,0.15)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateX(0)"; e.currentTarget.style.borderLeftColor = "rgba(196,151,47,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div className="transition-all duration-[180ms] group-hover:text-[#C4972F] group-hover:scale-[1.15]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.9rem", color: "rgba(255,255,255,0.3)" }}>
                   ×
@@ -735,7 +757,7 @@ export default function HomePage() {
                 key={item.num}
                 className={`reveal reveal-d${i + 1} group transition-all duration-[280ms]`}
                 style={{ padding: "3rem 2.4rem", borderRight: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 50px rgba(196,151,47,0.04)"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 80px rgba(196,151,47,0.10), 0 4px 20px rgba(0,0,0,0.20)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div className="transition-colors duration-[180ms] group-hover:text-[rgba(196,151,47,0.2)]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, color: "rgba(255,255,255,0.06)", lineHeight: 1, marginBottom: "1.5rem" }}>
@@ -862,8 +884,10 @@ export default function HomePage() {
               href="https://www.perplexity.ai/computer/a/the-making-of-the-operating-ar-mXeHIIQeSJWFEvWxSQaKtw"
               target="_blank"
               rel="noopener noreferrer"
-              className="reveal flex items-center gap-4 no-underline transition-all duration-[180ms] group hover:translate-x-[3px]"
+              className="reveal flex items-center gap-4 no-underline transition-all duration-[180ms] group"
               style={{ marginTop: "0.8rem", padding: "1.1rem 1.5rem", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.08)", borderLeft: "3px solid #C4972F" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.05)"; e.currentTarget.style.borderLeftColor = "#C4972F"; e.currentTarget.style.transform = "translateX(3px)"; e.currentTarget.style.boxShadow = "0 2px 20px rgba(196,151,47,0.12)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.borderLeftColor = "#C4972F"; e.currentTarget.style.transform = "translateX(0)"; e.currentTarget.style.boxShadow = "none"; }}
             >
               <div className="flex-shrink-0">
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C4972F" }}>Read</div>
@@ -917,7 +941,7 @@ export default function HomePage() {
             href="/ai-edge-lab"
             className="reveal reveal-d2 inline-block no-underline transition-all duration-[180ms]"
             style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.72rem", letterSpacing: "0.14em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "1rem 2.8rem", borderRadius: "4px", boxShadow: "0 4px 20px rgba(196,151,47,0.15)" }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 10px 40px rgba(196,151,47,0.35), 0 2px 10px rgba(196,151,47,0.2)"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 48px rgba(196,151,47,0.40), 0 6px 16px rgba(196,151,47,0.25), 0 0 80px rgba(196,151,47,0.10)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(196,151,47,0.15)"; }}
           >
             Try Quick Mirror — Free
