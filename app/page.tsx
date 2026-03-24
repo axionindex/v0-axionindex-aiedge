@@ -112,7 +112,13 @@ export default function HomePage() {
           backdropFilter: "blur(24px) saturate(160%)",
         }}
       >
-        <a href="#" className="no-underline transition-colors duration-[180ms] hover:text-[#C4972F]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.85)" }}>
+        <a 
+          href="#" 
+          className="no-underline transition-all duration-[180ms]" 
+          style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.85)" }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "#C4972F"; e.currentTarget.style.textShadow = "0 0 20px rgba(196,151,47,0.4)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.textShadow = "none"; }}
+        >
           Axion Index
         </a>
         <div className="hidden md:flex items-center gap-8">
@@ -218,8 +224,10 @@ export default function HomePage() {
             </Link>
             <Link
               href="/full-diagnostic"
-              className="no-underline transition-all duration-[180ms] hover:bg-white/10 hover:border-white/40"
+              className="no-underline transition-all duration-[180ms]"
               style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.18)", padding: "0.85rem 1.8rem", borderRadius: "4px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(255,255,255,0.06)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.boxShadow = "none"; }}
             >
               Open Full Diagnostic
             </Link>
@@ -254,8 +262,10 @@ export default function HomePage() {
             ].map((signal, i) => (
               <div
                 key={signal.num}
-                className={`reveal reveal-d${i + 1} group relative transition-all duration-[280ms] hover:-translate-y-0.5 hover:bg-[#111111]`}
+                className={`reveal reveal-d${i + 1} group relative transition-all duration-[280ms]`}
                 style={{ padding: "2.8rem 2.4rem", borderRight: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 40px rgba(196,151,47,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C4972F", marginBottom: "0.8rem" }}>
                   Signal {signal.num}
@@ -537,12 +547,14 @@ export default function HomePage() {
             ].map((node, i) => (
               <div
                 key={node.stage}
-                className="relative transition-all duration-300"
+                className="relative transition-all duration-300 cursor-default"
                 style={{
                   padding: "3rem 2rem",
                   borderRight: i < 2 ? "1px solid rgba(255,255,255,0.07)" : "none",
                   opacity: frameworkStep > i ? 1 : 0.1,
                 }}
+                onMouseEnter={(e) => { if (frameworkStep > i) e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,151,47,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", color: frameworkStep > i ? "#C4972F" : "rgba(255,255,255,0.2)", marginBottom: "1rem" }}>
                   Stage {node.stage}
@@ -685,8 +697,10 @@ export default function HomePage() {
             ].map((row, i) => (
               <div
                 key={row.title}
-                className={`reveal reveal-d${i + 1} group flex items-start gap-4 transition-all duration-[180ms] hover:translate-x-[3px] hover:border-l-[#C4972F]`}
+                className={`reveal reveal-d${i + 1} group flex items-start gap-4 transition-all duration-[180ms]`}
                 style={{ padding: "1.5rem 0 1.5rem 1rem", borderLeft: "2px solid rgba(196,151,47,0.15)", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateX(3px)"; e.currentTarget.style.borderLeftColor = "#C4972F"; e.currentTarget.style.boxShadow = "inset 0 0 30px rgba(196,151,47,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateX(0)"; e.currentTarget.style.borderLeftColor = "rgba(196,151,47,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div className="transition-all duration-[180ms] group-hover:text-[#C4972F] group-hover:scale-[1.15]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.9rem", color: "rgba(255,255,255,0.3)" }}>
                   ×
@@ -719,8 +733,10 @@ export default function HomePage() {
             ].map((item, i) => (
               <div
                 key={item.num}
-                className={`reveal reveal-d${i + 1} group transition-all duration-[280ms] hover:bg-[#111111]`}
+                className={`reveal reveal-d${i + 1} group transition-all duration-[280ms]`}
                 style={{ padding: "3rem 2.4rem", borderRight: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 50px rgba(196,151,47,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "transparent"; e.currentTarget.style.boxShadow = "none"; }}
               >
                 <div className="transition-colors duration-[180ms] group-hover:text-[rgba(196,151,47,0.2)]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, color: "rgba(255,255,255,0.06)", lineHeight: 1, marginBottom: "1.5rem" }}>
                   {item.num}
