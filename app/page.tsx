@@ -434,16 +434,16 @@ export default function HomePage() {
 
             {/* Field container */}
             <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
-              {/* Grid - with bolder lines */}
+              {/* Grid - with bolder, thicker lines */}
               <div
                 className="absolute inset-0 transition-opacity duration-[600ms]"
                 style={{
-                  border: "1px solid rgba(255,255,255,0.25)",
+                  border: "2px solid rgba(255,255,255,0.35)",
                   opacity: fieldActivated ? 1 : 0,
                 }}
               >
-                <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(255,255,255,0.15)" }} />
-                <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.15)" }} />
+                <div className="absolute top-1/2 left-0 right-0" style={{ height: "2px", background: "rgba(255,255,255,0.25)", transform: "translateY(-50%)" }} />
+                <div className="absolute left-1/2 top-0 bottom-0" style={{ width: "2px", background: "rgba(255,255,255,0.25)", transform: "translateX(-50%)" }} />
               </div>
 
             {/* Diagonal */}
