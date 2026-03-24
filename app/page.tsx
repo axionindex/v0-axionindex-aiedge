@@ -683,44 +683,100 @@ export default function AxionIndexHomepage() {
 
       {/* S11 — FOUNDER (LIGHT, #F7F6F3) */}
       <section id="founder" style={{ background: "#F7F6F3", padding: "8rem 3.5rem" }}>
-        <div className="max-w-[1060px] mx-auto grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12 items-start">
+        <div className="max-w-[1060px] mx-auto grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-12 lg:gap-[5.5rem] items-start">
           {/* Badge card */}
-          <div className="reveal lg:sticky lg:top-[70px] text-center" style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "4px", padding: "2rem 1.5rem" }}>
-            <div className="w-[72px] h-[72px] rounded-full mx-auto mb-4 flex items-center justify-center" style={{ background: "linear-gradient(135deg, #C4972F, #8C3B28)" }}>
-              <span style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2rem", fontWeight: 700, color: "#FFFFFF" }}>N</span>
+          <div className="reveal lg:sticky lg:top-[70px] overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.08)", borderRadius: "4px" }}>
+            {/* Photo block */}
+            <div className="w-full overflow-hidden group" style={{ aspectRatio: "3/4", background: "#EEECEA" }}>
+              <img 
+                src="/founder-photo.jpg" 
+                alt="Nitin Nahata, Founder of Axion Index"
+                className="w-full h-full object-cover transition-all duration-[600ms] ease-out"
+                style={{ objectPosition: "center 18%", filter: "grayscale(8%)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.025)"; e.currentTarget.style.filter = "grayscale(0%)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.filter = "grayscale(8%)"; }}
+              />
             </div>
-            <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.3rem", fontWeight: 700, color: "#141412", marginBottom: "0.3rem" }}>Nitin Nahata</div>
-            <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C4972F", marginBottom: "1rem" }}>Founder, Axion Index</div>
-            <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.77rem", color: "#878580", lineHeight: 1.7 }}>
-              Tata Group · Standard Chartered<br />Udaan · Gameskraft<br />22 Years · Operating Architect
+            
+            {/* Name + role */}
+            <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.15rem", fontWeight: 700, color: "#141412", margin: "1.1rem 1.4rem 0.2rem" }}>Nitin Nahata</div>
+            <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C4972F", margin: "0 1.4rem 0.9rem" }}>Founder, Axion Index</div>
+            
+            {/* Brand institution strip */}
+            <div className="flex flex-wrap items-center" style={{ gap: "0.25rem 0.35rem", padding: "0.75rem 1.4rem", borderTop: "1px solid rgba(0,0,0,0.08)", borderBottom: "1px solid rgba(0,0,0,0.08)" }}>
+              {["Tata", "Standard Chartered", "HSBC", "Udaan", "Gameskraft", "Marico", "Lodha", "Wipro e-Peripherals"].map((brand, i, arr) => (
+                <span key={brand} className="flex items-center gap-[0.35rem]">
+                  <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#141412", fontWeight: 500 }}>{brand}</span>
+                  {i < arr.length - 1 && <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", color: "#878580" }}>·</span>}
+                </span>
+              ))}
+            </div>
+            
+            {/* Years line */}
+            <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#878580", padding: "0.7rem 1.4rem" }}>
+              22 Years · Operating Architect
             </div>
           </div>
 
           {/* Content */}
           <div>
-            <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "#A07820", marginBottom: "2rem" }}>
-              THE FOUNDER
+            <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#A07820", marginBottom: "2rem" }}>
+              The Founder
             </div>
 
             {/* Quote */}
-            <blockquote className="reveal mb-8" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.55rem", fontStyle: "italic", color: "#141412", borderLeft: "3px solid #C4972F", paddingLeft: "1.5rem", lineHeight: 1.5, margin: 0 }}>
+            <blockquote className="reveal mb-7" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.55rem", fontStyle: "italic", color: "#141412", borderLeft: "3px solid #C4972F", paddingLeft: "1.4rem", lineHeight: 1.5, margin: 0 }}>
               "Most startup failures are not strategy failures. They are people system failures — happening silently, long before anyone notices."
             </blockquote>
 
             {/* Bio */}
-            <p className="reveal mb-8" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.9rem", color: "#3A3935", lineHeight: 1.85 }}>
+            <p className="reveal mb-4" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.9rem", color: "#3A3935", lineHeight: 1.88 }}>
               22 years across Tata Group, Standard Chartered, Udaan, and Gameskraft — designing people systems under hypergrowth, regulatory shock, and institutional stress. Creator of the Operating Architect framework. Author of <em>Baptism by Chaos.</em>
             </p>
 
             {/* Origin case block */}
-            <div className="reveal" style={{ background: "#FFFFFF", borderLeft: "3px solid #8C3B28", padding: "1.2rem 1.5rem" }}>
-              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "0.8rem" }}>
-                THE ORIGIN · GAMESKRAFT · 4AM · 2022
+            <div className="reveal" style={{ marginTop: "2rem", padding: "1.5rem", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.08)", borderLeft: "3px solid #8C3B28" }}>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#8C3B28", opacity: 0.8, marginBottom: "0.6rem" }}>
+                The Origin · Gameskraft · 4AM · 2022
               </div>
-              <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.85rem", color: "#3A3935", lineHeight: 1.8, margin: 0 }}>
+              <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.85rem", color: "#3A3935", lineHeight: 1.78, margin: 0 }}>
                 A regulatory notification threatened to erase an entire industry overnight. Leading the response — protecting organisational dignity under existential pressure, maintaining operating rhythm, rebuilding the architecture from inside — is the founding experience of everything Axion Index stands for.
               </p>
             </div>
+
+            {/* Perplexity read link */}
+            <a 
+              href="https://www.perplexity.ai/computer/a/the-making-of-the-operating-ar-mXeHIIQeSJWFEvWxSQaKtw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="reveal flex items-center gap-4 no-underline transition-all duration-[180ms] group"
+              style={{ marginTop: "0.8rem", padding: "1.1rem 1.5rem", background: "#FFFFFF", border: "1px solid rgba(0,0,0,0.08)", borderLeft: "3px solid #C4972F" }}
+              onMouseEnter={(e) => { 
+                e.currentTarget.style.background = "rgba(196,151,47,0.04)"; 
+                e.currentTarget.style.borderLeftColor = "#D9AE52"; 
+                e.currentTarget.style.transform = "translateX(3px)"; 
+              }}
+              onMouseLeave={(e) => { 
+                e.currentTarget.style.background = "#FFFFFF"; 
+                e.currentTarget.style.borderLeftColor = "#C4972F"; 
+                e.currentTarget.style.transform = "translateX(0)"; 
+              }}
+            >
+              {/* Label column */}
+              <div className="flex-shrink-0">
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C4972F", marginBottom: "0.25rem" }}>Read</div>
+              </div>
+              
+              {/* Title */}
+              <div className="flex-1" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.88rem", fontWeight: 500, color: "#141412" }}>
+                The Making of the Operating Architect
+              </div>
+              
+              {/* Arrow */}
+              <div className="flex-shrink-0 transition-all duration-[180ms] group-hover:text-[#C4972F] group-hover:translate-x-[3px]" style={{ fontSize: "0.9rem", color: "#878580" }}>
+                →
+              </div>
+            </a>
           </div>
         </div>
       </section>
