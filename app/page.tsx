@@ -402,35 +402,45 @@ export default function HomePage() {
               />
             </svg>
 
-            {/* Zone labels */}
+            {/* Quadrant labels - positioned in corners */}
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "25%", right: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "rgba(196,151,47,0.35)" }}
+              style={{ top: "6%", right: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1600ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
             >
-              Compressible
+              Judgment Work
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ top: "25%", left: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "rgba(196,151,47,0.35)" }}
+              style={{ top: "6%", left: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
+            >
+              Insight Work
+            </div>
+            <div
+              className="absolute transition-opacity duration-500"
+              style={{ bottom: "6%", right: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1800ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
+            >
+              Execution Work
+            </div>
+            <div
+              className="absolute transition-opacity duration-500"
+              style={{ bottom: "6%", left: "6%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1900ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.25)" }}
+            >
+              Automated Work
+            </div>
+
+            {/* Zone labels - positioned along the diagonal */}
+            <div
+              className="absolute transition-opacity duration-500"
+              style={{ top: "18%", left: "18%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", color: "#C4972F", textTransform: "uppercase" }}
             >
               Defensible
             </div>
-
-            {/* Quadrant labels */}
-            {[
-              { label: "Judgment Work", pos: "top-[8%] right-[8%]" },
-              { label: "Insight Work", pos: "top-[8%] left-[8%]" },
-              { label: "Execution Work", pos: "bottom-[8%] right-[8%]" },
-              { label: "Automated Work", pos: "bottom-[8%] left-[8%]" },
-            ].map((q, i) => (
-              <div
-                key={q.label}
-                className={`absolute ${q.pos} transition-opacity duration-400`}
-                style={{ opacity: fieldActivated ? 1 : 0, transitionDelay: `${1700 + i * 100}ms`, fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "rgba(255,255,255,0.2)" }}
-              >
-                {q.label}
-              </div>
-            ))}
+            <div
+              className="absolute transition-opacity duration-500"
+              style={{ bottom: "18%", right: "18%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", color: "#C4972F", textTransform: "uppercase" }}
+            >
+              Compressible
+            </div>
 
             {/* Role dots */}
             {roleDots.map((dot, i) => (
