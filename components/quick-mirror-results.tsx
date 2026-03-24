@@ -200,12 +200,11 @@ export function QuickMirrorResults({ results }: QuickMirrorResultsProps) {
           Get a comprehensive structural audit with 24+ inputs, detailed scoring
           breakdown, and a 5-page PDF working document with 90-day action plan.
         </p>
-        <Link
-          href="/full-diagnostic"
-          className="inline-block px-8 py-4 bg-gold text-ink font-label text-[11px] uppercase tracking-[0.15em] hover:bg-gold2 transition-colors"
+        <span
+          className="inline-block px-8 py-4 bg-gold/50 text-ink font-label text-[11px] uppercase tracking-[0.15em] cursor-not-allowed"
         >
-          Take Full Diagnostic · ₹400
-        </Link>
+          Full Diagnostic — Coming Soon
+        </span>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const navSections = [
     label: "Assessment",
     items: [
       { title: "Quick Mirror — Free", href: "/quick-mirror", live: true },
-      { title: "Full Diagnostic", href: "/full-diagnostic", live: true },
+      { title: "Full Diagnostic — Coming Soon", href: "#", live: false },
       { title: "Salary Defensibility", href: "#salary" },
     ],
   },

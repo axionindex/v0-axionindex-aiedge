@@ -129,20 +129,17 @@ export function AxionFooter() {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/full-diagnostic"
+                  <span
                     style={{
                       fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif",
                       fontSize: "0.85rem",
                       color: "var(--mist)",
-                      textDecoration: "none",
-                      transition: "color 0.2s",
+                      opacity: 0.5,
+                      cursor: "not-allowed",
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--parchment)")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--mist)")}
                   >
-                    Full Diagnostic
-                  </Link>
+                    Full Diagnostic — Coming Soon
+                  </span>
                 </li>
                 <li>
                   <Link

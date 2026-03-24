@@ -98,12 +98,11 @@ export function DiagnosticSelector() {
           </li>
         </ul>
 
-        <Link
-          href="/full-diagnostic"
-          className="block w-full px-4 py-4 bg-gold text-ink font-label text-[11px] uppercase tracking-[0.15em] text-center hover:bg-gold2 transition-colors"
+        <span
+          className="block w-full px-4 py-4 bg-gold/50 text-ink font-label text-[11px] uppercase tracking-[0.15em] text-center cursor-not-allowed"
         >
-          Start Full Diagnostic →
-        </Link>
+          Full Diagnostic — Coming Soon
+        </span>
       </div>
     </div>
   );

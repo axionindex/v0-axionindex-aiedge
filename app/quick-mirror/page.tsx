@@ -716,7 +716,7 @@ export default function QuickMirrorPage() {
               <div className="r-up-price">$49 USD</div>
               <div className="r-up-price-sub">One-time · PDF delivered via email</div>
             </div>
-            <Link href="/full-diagnostic" className="r-up-btn">Start Full Diagnostic →</Link>
+            <span className="r-up-btn" style={{ opacity: 0.5, cursor: "not-allowed" }}>Full Diagnostic — Coming Soon</span>
           </div>
         </div>
 
