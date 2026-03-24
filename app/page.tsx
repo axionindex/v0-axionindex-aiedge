@@ -403,16 +403,16 @@ export default function HomePage() {
               <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.05)" }} />
             </div>
 
-            {/* Axes */}
+            {/* Axes - positioned outside the field grid */}
             <div
-              className="absolute bottom-2 right-3 flex items-center gap-1 transition-opacity duration-500"
-              style={{ opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.3)" }}
+              className="absolute transition-opacity duration-500"
+              style={{ bottom: "-1.5rem", left: "50%", transform: "translateX(-50%)", opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", color: "rgba(255,255,255,0.35)" }}
             >
               AI Compression →
             </div>
             <div
-              className="absolute top-3 left-3 flex items-center gap-1 transition-opacity duration-500"
-              style={{ opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", transform: "rotate(-90deg)", transformOrigin: "left top", marginLeft: "1rem" }}
+              className="absolute transition-opacity duration-500"
+              style={{ top: "50%", left: "-2.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", color: "rgba(255,255,255,0.35)", transform: "rotate(-90deg) translateX(-50%)", transformOrigin: "center center", whiteSpace: "nowrap" }}
             >
               ↑ Judgment Ownership
             </div>
