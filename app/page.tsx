@@ -106,7 +106,7 @@ export default function HomePage() {
 
       {/* ═══ NAV ═══ */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 h-[54px] flex items-center justify-between px-4 sm:px-8 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-50 h-[54px] flex items-center justify-between px-6 md:px-10 transition-all duration-300"
         style={{
           background: scrolled ? "rgba(0,0,0,0.96)" : "rgba(0,0,0,0.88)",
           backdropFilter: "blur(24px) saturate(160%)",
@@ -114,7 +114,7 @@ export default function HomePage() {
       >
         <a 
           href="#" 
-          className="no-underline transition-all duration-[180ms]" 
+          className="flex-shrink-0 no-underline transition-all duration-[180ms]" 
           style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.85)" }}
           onMouseEnter={(e) => { e.currentTarget.style.color = "#C4972F"; e.currentTarget.style.textShadow = "0 0 20px rgba(196,151,47,0.4)"; }}
           onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.textShadow = "none"; }}
@@ -134,7 +134,7 @@ export default function HomePage() {
         </div>
         <Link
           href="/ai-edge-lab"
-          className="no-underline transition-all duration-[180ms]"
+          className="flex-shrink-0 whitespace-nowrap no-underline transition-all duration-[180ms]"
           style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.5rem 1rem", borderRadius: "999px", boxShadow: "0 2px 8px rgba(196,151,47,0.15)" }}
           onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 0 20px rgba(196,151,47,0.45), 0 0 8px rgba(196,151,47,0.30)"; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(196,151,47,0.15)"; }}
@@ -377,16 +377,19 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S04.5 — COMPRESSION-JUDGMENT FIELD ═══ */}
-      <section ref={fieldRef} style={{ background: "#000000", padding: "9rem 1.5rem 10rem" }} className="sm:px-14">
+      <section ref={fieldRef} style={{ background: "#000000", padding: "6rem 1.5rem 8rem" }} className="sm:px-16 md:px-24 lg:px-32">
         <div className="max-w-[1060px] mx-auto text-center">
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F", marginBottom: "1.5rem" }}>
+          {/* Section tag */}
+          <p className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F", opacity: 0.6, marginBottom: "1.5rem" }}>
             The Axion Field
-          </div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem" }}>
+          </p>
+          {/* Headline */}
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 700, color: "rgba(255,255,255,0.92)", lineHeight: 1.1, marginBottom: "1.5rem" }}>
             Where work is <em style={{ fontStyle: "italic", color: "#C4972F" }}>moving.</em>
           </h2>
-          <p className="reveal reveal-d2 max-w-[52ch] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.92rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.8, marginBottom: "4rem" }}>
-            Work does not disappear. It moves — downward into compression, or upward into judgment. The question is not whether AI replaces your work. It is where your work sits on this field.
+          {/* Supporting paragraph */}
+          <p className="reveal reveal-d2 max-w-[520px] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "1rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.7, marginBottom: "4rem" }}>
+            Work does not disappear. It moves — into compression or into judgment. The real question is where your work sits.
           </p>
 
           {/* The Field */}
@@ -403,18 +406,20 @@ export default function HomePage() {
               <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.05)" }} />
             </div>
 
-            {/* Axes - positioned outside the field grid */}
+            {/* Axes */}
+            {/* X-axis label - below field, right-aligned */}
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "-1.5rem", left: "50%", transform: "translateX(-50%)", opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", color: "rgba(255,255,255,0.35)" }}
+              style={{ bottom: "-1.8rem", right: "0", opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}
             >
               AI Compression →
             </div>
+            {/* Y-axis label - inside field, left edge, rotated */}
             <div
-              className="absolute transition-opacity duration-500"
-              style={{ top: "50%", left: "-2.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", color: "rgba(255,255,255,0.35)", transform: "rotate(-90deg) translateX(-50%)", transformOrigin: "center center", whiteSpace: "nowrap" }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 -rotate-90 origin-center transition-opacity duration-500"
+              style={{ opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", whiteSpace: "nowrap" }}
             >
-              ↑ Judgment Ownership
+              Judgment Ownership ↑
             </div>
 
             {/* Diagonal */}
