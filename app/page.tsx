@@ -410,25 +410,26 @@ export default function HomePage() {
 
           {/* The Field - with wrapper for axis labels */}
           <div className="relative max-w-[680px] mx-auto pl-14">
-            {/* Y-axis label - OUTSIDE field, left side, rotated */}
+            {/* Y-axis label - OUTSIDE field, left side, rotated, golden */}
             <div
               className="absolute transition-opacity duration-500"
               style={{ 
-                left: "0", 
+                left: "-0.5rem", 
                 top: "50%", 
                 transform: "translateY(-50%) rotate(-90deg)", 
                 transformOrigin: "center center",
                 opacity: fieldActivated ? 1 : 0, 
                 transitionDelay: "400ms", 
                 fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
-                fontSize: "0.55rem", 
+                fontSize: "0.6rem", 
+                fontWeight: 500,
                 letterSpacing: "0.16em", 
                 textTransform: "uppercase", 
-                color: "rgba(255,255,255,0.35)", 
+                color: "#C4972F", 
                 whiteSpace: "nowrap" 
               }}
             >
-              Judgment Ownership ↑
+              ↑ Judgment Ownership
             </div>
 
             {/* Field container */}
@@ -604,7 +605,7 @@ export default function HomePage() {
             })}
             </div>
 
-            {/* X-axis label - OUTSIDE field, below, right-aligned */}
+            {/* X-axis label - OUTSIDE field, below, right-aligned, golden */}
             <div
               className="transition-opacity duration-500"
               style={{ 
@@ -613,10 +614,11 @@ export default function HomePage() {
                 opacity: fieldActivated ? 1 : 0, 
                 transitionDelay: "400ms", 
                 fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
-                fontSize: "0.55rem", 
+                fontSize: "0.6rem", 
+                fontWeight: 500,
                 letterSpacing: "0.16em", 
                 textTransform: "uppercase", 
-                color: "rgba(255,255,255,0.35)" 
+                color: "#C4972F" 
               }}
             >
               AI Compression →
