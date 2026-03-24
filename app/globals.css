@@ -30,6 +30,8 @@
   --gold-light: #D9AE52;
   --gold-dark: #A07820;
   --gold-dim: rgba(196,151,47,0.04);
+  --gold-glow: rgba(196,151,47,0.12);
+  --gold-glow2: rgba(196,151,47,0.06);
   --gold-border: rgba(196,151,47,0.18);
   --gold-border-hover: rgba(196,151,47,0.32);
   

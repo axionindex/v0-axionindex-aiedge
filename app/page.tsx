@@ -128,8 +128,8 @@ export default function HomePage() {
         </div>
         <Link
           href="/ai-edge-lab"
-          className="no-underline transition-all duration-[180ms] hover:bg-[#D9AE52]"
-          style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.5rem 1rem", borderRadius: "999px" }}
+          className="no-underline transition-all duration-[180ms] hover:bg-[#D9AE52] hover:shadow-[0_4px_16px_rgba(196,151,47,0.3)]"
+          style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.5rem 1rem", borderRadius: "999px", boxShadow: "0 2px 8px rgba(196,151,47,0.15)" }}
         >
           Quick Mirror — Free
         </Link>
@@ -207,8 +207,8 @@ export default function HomePage() {
           >
             <Link
               href="/ai-edge-lab"
-              className="no-underline transition-all duration-[180ms] hover:bg-[#D9AE52] hover:-translate-y-0.5"
-              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.85rem 1.8rem", borderRadius: "4px" }}
+              className="no-underline transition-all duration-[180ms] hover:bg-[#D9AE52] hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(196,151,47,0.25)]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.85rem 1.8rem", borderRadius: "4px", boxShadow: "0 4px 16px rgba(196,151,47,0.12)" }}
             >
               Try Quick Mirror — Free
             </Link>
@@ -456,7 +456,7 @@ export default function HomePage() {
                 }}
               >
                 <div
-                  className="w-3 h-3 rounded-full transition-all duration-200 group-hover:scale-[2.4]"
+                  className="w-3 h-3 rounded-full transition-all duration-200 group-hover:scale-[2.4] group-hover:!bg-[#C4972F] group-hover:shadow-[0_0_18px_rgba(196,151,47,0.55)]"
                   style={{
                     background: dot.gold ? "#C4972F" : dot.mid ? "rgba(255,255,255,0.55)" : dot.dim ? "rgba(255,255,255,0.3)" : dot.muted ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.55)",
                     boxShadow: dot.gold ? "0 0 12px rgba(196,151,47,0.4)" : "none",
@@ -591,7 +591,7 @@ export default function HomePage() {
               <Link
                 key={card.name}
                 href={card.href}
-                className={`reveal reveal-d${i + 1} group block no-underline transition-all duration-[180ms] hover:translate-x-[5px] hover:-translate-y-px`}
+                className={`reveal reveal-d${i + 1} group block no-underline transition-all duration-[180ms] hover:translate-x-[5px] hover:-translate-y-px hover:shadow-[0_6px_28px_rgba(196,151,47,0.1)] hover:bg-[rgba(196,151,47,0.08)] hover:border-[rgba(196,151,47,0.32)]`}
                 style={{ background: "rgba(196,151,47,0.04)", border: "1px solid rgba(196,151,47,0.18)", borderRadius: "4px", padding: "1.7rem 2rem" }}
               >
                 <div className="flex items-start justify-between gap-4">
