@@ -697,6 +697,15 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section break between Axion Field and Framework */}
+      <div style={{ background: "#000000", padding: "0 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[400px] mx-auto flex items-center gap-6">
+          <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(196,151,47,0.3))" }} />
+          <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.2em", color: "rgba(196,151,47,0.4)" }}>◆</div>
+          <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(196,151,47,0.3))" }} />
+        </div>
+      </div>
+
       {/* ═══ S05 — FRAMEWORK ═══ */}
       <section id="framework" ref={frameworkRef} style={{ background: "#000000", padding: "9rem 1.5rem 10rem" }} className="sm:px-14">
         <div className="max-w-[1060px] mx-auto text-center">
