@@ -489,6 +489,10 @@ export default function HomePage() {
               <div
                 className="absolute transition-opacity duration-500"
                 style={{ bottom: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "right" }}
+              >
+                Execution Work
+              </div>
+
               {/* Zone labels - positioned along the diagonal */}
             <div
               className="absolute transition-opacity duration-500"
