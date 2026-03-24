@@ -74,17 +74,33 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, [frameworkStep]);
 
-  // Role dots data for the compression field
-  const roleDots = [
-    { role: "Founder / CEO", score: 91, dir: "Holding", left: 78, top: 15, gold: true },
-    { role: "Operating Architect", score: 96, dir: "Expanding", left: 55, top: 10, gold: true },
-    { role: "Board Member", score: 88, dir: "Holding", left: 28, top: 12, mid: true },
-    { role: "CHRO", score: 74, dir: "Rising", left: 38, top: 22, normal: true },
-    { role: "CFO", score: 68, dir: "Rising", left: 58, top: 28, normal: true },
-    { role: "Engineer", score: 45, dir: "Under pressure", left: 72, top: 52, dim: true },
-    { role: "Data Analyst", score: 38, dir: "Compressing", left: 75, top: 65, dim: true },
-    { role: "Payroll Exec", score: 18, dir: "High risk", left: 85, top: 82, muted: true },
+  // Archetype definitions for the tier system
+  const ARCHETYPES = {
+    STRUCTURAL: { label: "Structural Architect", desc: "AI amplifies your leverage. You direct; others produce.", color: "#C4972F", scoreRange: "80–100" },
+    LEVERAGER: { label: "Strategic Leverager", desc: "Judgment-dominant. Your 6-month target.", color: "#C4972F", scoreRange: "70–79" },
+    BUILDER: { label: "Boundary Builder", desc: "Edge established. Deliberate compounding needed.", color: "#C4972F", scoreRange: "60–69" },
+    MANAGER: { label: "Output Manager", desc: "Judgment and output balanced. Active management required.", color: "#C4972F", scoreRange: "50–59" },
+    OPERATOR: { label: "Execution Operator", desc: "Output-primary. Immediate composition shift required.", color: "#C4972F", scoreRange: "<50" },
+  };
+
+  // Role dots data with archetype assigned to each role
+  const dots = [
+    { role: "Operating Architect", score: 96, direction: "Expanding", left: 55, top: 10, isGold: true, archetype: ARCHETYPES.STRUCTURAL },
+    { role: "Founder / CEO", score: 91, direction: "Holding", left: 78, top: 15, isGold: true, archetype: ARCHETYPES.STRUCTURAL },
+    { role: "Board Member", score: 88, direction: "Holding", left: 28, top: 12, isGold: false, archetype: ARCHETYPES.STRUCTURAL },
+    { role: "CHRO", score: 74, direction: "Rising", left: 38, top: 22, isGold: false, archetype: ARCHETYPES.LEVERAGER },
+    { role: "CFO", score: 68, direction: "Rising", left: 58, top: 28, isGold: false, archetype: ARCHETYPES.BUILDER },
+    { role: "Engineer", score: 45, direction: "Under pressure", left: 72, top: 52, isGold: false, archetype: ARCHETYPES.OPERATOR },
+    { role: "Data Analyst", score: 38, direction: "Compressing", left: 75, top: 65, isGold: false, archetype: ARCHETYPES.OPERATOR },
+    { role: "Payroll Exec", score: 18, direction: "High risk", left: 85, top: 82, isGold: false, archetype: ARCHETYPES.OPERATOR },
   ];
+
+  // Tooltip positioning logic - flips when dot is near edges
+  const getTooltipPosition = (leftPct: number, topPct: number) => {
+    const flipH = leftPct > 60;
+    const flipV = topPct < 20;
+    return { flipH, flipV };
+  };
 
   return (
     <>
@@ -106,7 +122,7 @@ export default function HomePage() {
 
       {/* ═══ NAV ═══ */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 h-[54px] flex items-center justify-between px-4 sm:px-8 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-50 h-[54px] flex items-center justify-between px-6 md:px-10 transition-all duration-300"
         style={{
           background: scrolled ? "rgba(0,0,0,0.96)" : "rgba(0,0,0,0.88)",
           backdropFilter: "blur(24px) saturate(160%)",
@@ -114,7 +130,7 @@ export default function HomePage() {
       >
         <a 
           href="#" 
-          className="no-underline transition-all duration-[180ms]" 
+          className="flex-shrink-0 no-underline transition-all duration-[180ms]" 
           style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(255,255,255,0.85)" }}
           onMouseEnter={(e) => { e.currentTarget.style.color = "#C4972F"; e.currentTarget.style.textShadow = "0 0 20px rgba(196,151,47,0.4)"; }}
           onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.85)"; e.currentTarget.style.textShadow = "none"; }}
@@ -134,7 +150,7 @@ export default function HomePage() {
         </div>
         <Link
           href="/ai-edge-lab"
-          className="no-underline transition-all duration-[180ms]"
+          className="flex-shrink-0 whitespace-nowrap no-underline transition-all duration-[180ms]"
           style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.5rem 1rem", borderRadius: "999px", boxShadow: "0 2px 8px rgba(196,151,47,0.15)" }}
           onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 0 20px rgba(196,151,47,0.45), 0 0 8px rgba(196,151,47,0.30)"; }}
           onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(196,151,47,0.15)"; }}
@@ -377,45 +393,57 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S04.5 — COMPRESSION-JUDGMENT FIELD ═══ */}
-      <section ref={fieldRef} style={{ background: "#000000", padding: "9rem 1.5rem 10rem" }} className="sm:px-14">
+      <section ref={fieldRef} style={{ background: "#000000", padding: "6rem 1.5rem 8rem" }} className="sm:px-16 md:px-24 lg:px-32">
         <div className="max-w-[1060px] mx-auto text-center">
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F", marginBottom: "1.5rem" }}>
+          {/* Section tag */}
+          <p className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F", opacity: 0.6, marginBottom: "1.5rem" }}>
             The Axion Field
-          </div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem" }}>
+          </p>
+          {/* Headline */}
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 700, color: "rgba(255,255,255,0.92)", lineHeight: 1.1, marginBottom: "1.5rem" }}>
             Where work is <em style={{ fontStyle: "italic", color: "#C4972F" }}>moving.</em>
           </h2>
-          <p className="reveal reveal-d2 max-w-[52ch] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.92rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.8, marginBottom: "4rem" }}>
-            Work does not disappear. It moves — downward into compression, or upward into judgment. The question is not whether AI replaces your work. It is where your work sits on this field.
+          {/* Supporting paragraph */}
+          <p className="reveal reveal-d2 max-w-[520px] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "1rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.7, marginBottom: "4rem" }}>
+            Work does not disappear. It moves — into compression or into judgment. The real question is where your work sits.
           </p>
 
-          {/* The Field */}
-          <div className="relative max-w-[680px] mx-auto" style={{ aspectRatio: "4/3" }}>
-            {/* Grid */}
+          {/* The Field - with wrapper for axis labels */}
+          <div className="relative max-w-[680px] mx-auto pl-14">
+            {/* Y-axis label - OUTSIDE field, left side, rotated */}
             <div
-              className="absolute inset-0 transition-opacity duration-[600ms]"
-              style={{
-                border: "1px solid rgba(255,255,255,0.05)",
-                opacity: fieldActivated ? 1 : 0,
+              className="absolute transition-opacity duration-500"
+              style={{ 
+                left: "0", 
+                top: "50%", 
+                transform: "translateY(-50%) rotate(-90deg)", 
+                transformOrigin: "center center",
+                opacity: fieldActivated ? 1 : 0, 
+                transitionDelay: "400ms", 
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
+                fontSize: "0.55rem", 
+                letterSpacing: "0.16em", 
+                textTransform: "uppercase", 
+                color: "rgba(255,255,255,0.35)", 
+                whiteSpace: "nowrap" 
               }}
             >
-              <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
-              <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.05)" }} />
+              Judgment Ownership ↑
             </div>
 
-            {/* Axes */}
-            <div
-              className="absolute bottom-2 right-3 flex items-center gap-1 transition-opacity duration-500"
-              style={{ opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.3)" }}
-            >
-              AI Compression →
-            </div>
-            <div
-              className="absolute top-3 left-3 flex items-center gap-1 transition-opacity duration-500"
-              style={{ opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", transform: "rotate(-90deg)", transformOrigin: "left top", marginLeft: "1rem" }}
-            >
-              ↑ Judgment Ownership
-            </div>
+            {/* Field container */}
+            <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
+              {/* Grid - with bolder lines */}
+              <div
+                className="absolute inset-0 transition-opacity duration-[600ms]"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.25)",
+                  opacity: fieldActivated ? 1 : 0,
+                }}
+              >
+                <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(255,255,255,0.15)" }} />
+                <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.15)" }} />
+              </div>
 
             {/* Diagonal */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -435,33 +463,33 @@ export default function HomePage() {
               />
             </svg>
 
-            {/* Quadrant labels - anchored to corners */}
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ top: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Judgment Work
-            </div>
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ top: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Insight Work
-            </div>
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ bottom: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Execution Work
-            </div>
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ bottom: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Automated Work
-            </div>
-
-            {/* Zone labels - positioned along the diagonal */}
+              {/* Quadrant labels - all four visible with consistent styling */}
+              {/* Top-left: Insight Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ top: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}
+              >
+                Insight Work
+              </div>
+              {/* Top-right: Judgment Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ top: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "right" }}
+              >
+                Judgment Work
+              </div>
+              {/* Bottom-left: Automated Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ bottom: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}
+              >
+                Automated Work
+              </div>
+              {/* Bottom-right: Execution Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ bottom: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "right" }}
+              {/* Zone labels - positioned along the diagonal */}
             <div
               className="absolute transition-opacity duration-500"
               style={{ top: "28%", left: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", color: "#C4972F", textTransform: "uppercase", fontWeight: 500 }}
@@ -476,51 +504,119 @@ export default function HomePage() {
             </div>
 
             {/* Role dots */}
-            {roleDots.map((dot, i) => (
-              <div
-                key={dot.role}
-                className="absolute cursor-pointer group"
-                style={{
-                  left: `${dot.left}%`,
-                  top: `${dot.top}%`,
-                  transform: "translate(-50%, -50%)",
-                  opacity: fieldActivated ? 1 : 0,
-                  transition: `opacity 350ms ease-out ${2100 + i * 75}ms`,
-                }}
-                onMouseEnter={(e) => {
-                  const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
-                  if (inner) { inner.style.transform = "scale(2.6)"; inner.style.background = "#C4972F"; inner.style.boxShadow = "0 0 16px rgba(196,151,47,0.65), 0 0 32px rgba(196,151,47,0.35)"; }
-                }}
-                onMouseLeave={(e) => {
-                  const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
-                  const bgColor = dot.gold ? "#C4972F" : dot.mid ? "rgba(255,255,255,0.55)" : dot.dim ? "rgba(255,255,255,0.3)" : dot.muted ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.55)";
-                  const shadow = dot.gold ? "0 0 12px rgba(196,151,47,0.4)" : "none";
-                  if (inner) { inner.style.transform = "scale(1)"; inner.style.background = bgColor; inner.style.boxShadow = shadow; }
-                }}
-              >
+            {dots.map((dot, i) => {
+              const { flipH, flipV } = getTooltipPosition(dot.left, dot.top);
+              const getDotColor = () => {
+                if (dot.isGold) return "#C4972F";
+                if (dot.score >= 80) return "rgba(255,255,255,0.55)";
+                if (dot.score >= 60) return "rgba(255,255,255,0.45)";
+                if (dot.score >= 50) return "rgba(255,255,255,0.35)";
+                return "rgba(255,255,255,0.25)";
+              };
+              return (
                 <div
-                  className="dot-inner w-3 h-3 rounded-full transition-all duration-200"
+                  key={dot.role}
+                  className="group absolute cursor-pointer"
                   style={{
-                    background: dot.gold ? "#C4972F" : dot.mid ? "rgba(255,255,255,0.55)" : dot.dim ? "rgba(255,255,255,0.3)" : dot.muted ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.55)",
-                    boxShadow: dot.gold ? "0 0 12px rgba(196,151,47,0.4)" : "none",
+                    left: `${dot.left}%`,
+                    top: `${dot.top}%`,
+                    transform: "translate(-50%, -50%)",
+                    opacity: fieldActivated ? 1 : 0,
+                    transition: `opacity 350ms ease-out ${2100 + i * 75}ms`,
                   }}
-                />
-                {dot.gold && fieldActivated && (
-                  <div
-                    className="absolute inset-0 w-3 h-3 rounded-full pointer-events-none"
-                    style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
-                  />
-                )}
-                {/* Tooltip */}
-                <div
-                  className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100 whitespace-nowrap z-10"
-                  style={{ background: "rgba(17,17,17,0.97)", borderLeft: "2px solid #C4972F", borderRadius: "2px" }}
+                  onMouseEnter={(e) => {
+                    const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
+                    if (inner) { inner.style.transform = "scale(2.6)"; inner.style.background = "#C4972F"; inner.style.boxShadow = "0 0 16px rgba(196,151,47,0.65), 0 0 32px rgba(196,151,47,0.35)"; }
+                  }}
+                  onMouseLeave={(e) => {
+                    const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
+                    if (inner) { inner.style.transform = "scale(1)"; inner.style.background = getDotColor(); inner.style.boxShadow = dot.isGold ? "0 0 12px rgba(196,151,47,0.4)" : "none"; }
+                  }}
                 >
-                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "#C4972F", marginBottom: "2px" }}>{dot.role}</div>
-                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", color: "rgba(255,255,255,0.5)" }}>Edge Score: {dot.score} · {dot.dir}</div>
+                  <div
+                    className="dot-inner w-3 h-3 rounded-full transition-all duration-200"
+                    style={{
+                      background: getDotColor(),
+                      boxShadow: dot.isGold ? "0 0 12px rgba(196,151,47,0.4)" : "none",
+                    }}
+                  />
+                  {dot.isGold && fieldActivated && (
+                    <div
+                      className="absolute inset-0 w-3 h-3 rounded-full pointer-events-none"
+                      style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
+                    />
+                  )}
+                  {/* Tiny archetype badge floating above hovered dot */}
+                  <div
+                    className="absolute opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100"
+                    style={{
+                      bottom: "calc(100% + 6px)",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      whiteSpace: "nowrap",
+                      fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                      fontSize: "0.42rem",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "#C4972F",
+                      background: "rgba(10,10,10,0.9)",
+                      border: "1px solid rgba(196,151,47,0.2)",
+                      padding: "2px 6px",
+                    }}
+                  >
+                    {dot.archetype.label}
+                  </div>
+                  {/* Enhanced Tooltip with Archetype System */}
+                  <div
+                    className={`absolute opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100 z-20 ${flipH ? 'right-full mr-3' : 'left-full ml-3'} ${flipV ? 'top-0' : 'bottom-0'}`}
+                    style={{ minWidth: "210px", maxWidth: "250px" }}
+                  >
+                    <div style={{ background: "rgba(10,10,10,0.97)", border: "1px solid rgba(196,151,47,0.2)", borderLeft: "2px solid #C4972F", padding: "1.1rem 1.3rem", boxShadow: "0 8px 32px rgba(0,0,0,0.6)" }}>
+                      {/* Role name */}
+                      <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 600, color: "rgba(255,255,255,0.85)", marginBottom: "0.6rem", lineHeight: 1.2 }}>
+                        {dot.role}
+                      </div>
+                      {/* Divider */}
+                      <div style={{ height: "1px", background: "rgba(255,255,255,0.06)", marginBottom: "0.6rem" }} />
+                      {/* Score row */}
+                      <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.7rem" }}>
+                        <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)" }}>Edge Score</span>
+                        <span style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.6rem", fontWeight: 700, color: "#C4972F", lineHeight: 1 }}>{dot.score}</span>
+                        <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginLeft: "auto" }}>{dot.direction}</span>
+                      </div>
+                      {/* Archetype badge */}
+                      <div style={{ background: "rgba(196,151,47,0.08)", border: "1px solid rgba(196,151,47,0.2)", padding: "0.5rem 0.7rem", marginBottom: "0.5rem" }}>
+                        <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#C4972F", marginBottom: "0.25rem" }}>
+                          {dot.archetype.scoreRange} · {dot.archetype.label}
+                        </div>
+                        <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.75rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
+                          {dot.archetype.desc}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
+            </div>
+
+            {/* X-axis label - OUTSIDE field, below, right-aligned */}
+            <div
+              className="transition-opacity duration-500"
+              style={{ 
+                textAlign: "right", 
+                marginTop: "0.75rem",
+                opacity: fieldActivated ? 1 : 0, 
+                transitionDelay: "400ms", 
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
+                fontSize: "0.55rem", 
+                letterSpacing: "0.16em", 
+                textTransform: "uppercase", 
+                color: "rgba(255,255,255,0.35)" 
+              }}
+            >
+              AI Compression →
+            </div>
           </div>
 
           {/* Caption */}
@@ -529,6 +625,55 @@ export default function HomePage() {
           </p>
           <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", color: "rgba(255,255,255,0.16)", marginTop: "0.8rem" }}>
             Role positions are illustrative.
+          </div>
+
+          {/* Archetype Legend — 3-column grid */}
+          <div style={{ maxWidth: "560px", margin: "2.5rem auto 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+            {/* Header row */}
+            <div style={{ display: "grid", gridTemplateColumns: "5rem 1fr 1fr", gap: "1rem", padding: "0.6rem 0", borderBottom: "1px solid rgba(255,255,255,0.06)", marginBottom: "0.2rem" }}>
+              {["Score", "Archetype", "What it means"].map((h) => (
+                <span key={h} style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>
+                  {h}
+                </span>
+              ))}
+            </div>
+            {/* Tier rows */}
+            {[
+              { range: "80–100", label: "Structural Architect", desc: "AI amplifies your leverage. You direct; others produce.", highlight: false },
+              { range: "70–79", label: "Strategic Leverager", desc: "Judgment-dominant. Your 6-month target.", highlight: false },
+              { range: "60–69", label: "Boundary Builder", desc: "Edge established. Deliberate compounding needed.", highlight: true },
+              { range: "50–59", label: "Output Manager", desc: "Judgment and output balanced. Active management required.", highlight: false },
+              { range: "<50", label: "Execution Operator", desc: "Output-primary. Immediate composition shift required.", highlight: false },
+            ].map((tier, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "5rem 1fr 1fr",
+                  gap: "1rem",
+                  padding: "0.7rem 0",
+                  borderBottom: "1px solid rgba(255,255,255,0.04)",
+                  background: tier.highlight ? "rgba(196,151,47,0.04)" : "transparent",
+                  transition: "background 200ms ease",
+                }}
+              >
+                {/* Score range */}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                  {tier.highlight && <span style={{ color: "#C4972F", fontSize: "0.5rem" }}>◀</span>}
+                  <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", color: tier.highlight ? "#C4972F" : "rgba(255,255,255,0.22)" }}>
+                    {tier.range}
+                  </span>
+                </div>
+                {/* Archetype name */}
+                <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.78rem", fontWeight: tier.highlight ? 500 : 400, color: tier.highlight ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.3)" }}>
+                  {tier.label}
+                </span>
+                {/* Description */}
+                <span style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.7rem", color: tier.highlight ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.18)", lineHeight: 1.45 }}>
+                  {tier.desc}
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* CTA */}
@@ -657,7 +802,7 @@ export default function HomePage() {
           </div>
 
           <p className="reveal mt-6" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#878580" }}>
-            More instruments inside the Lab — 3i Labour Code Index™, Workforce Architecture Diagnostics™, and more building.
+            More instruments inside the Lab ��� 3i Labour Code Index™, Workforce Architecture Diagnostics™, and more building.
           </p>
         </div>
       </section>
