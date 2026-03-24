@@ -128,8 +128,10 @@ export default function HomePage() {
         </div>
         <Link
           href="/ai-edge-lab"
-          className="no-underline transition-all duration-[180ms] hover:bg-[#D9AE52] hover:shadow-[0_4px_16px_rgba(196,151,47,0.3)]"
+          className="no-underline transition-all duration-[180ms]"
           style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.5rem 1rem", borderRadius: "999px", boxShadow: "0 2px 8px rgba(196,151,47,0.15)" }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,151,47,0.4)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(196,151,47,0.15)"; }}
         >
           Quick Mirror — Free
         </Link>
@@ -207,8 +209,10 @@ export default function HomePage() {
           >
             <Link
               href="/ai-edge-lab"
-              className="no-underline transition-all duration-[180ms] hover:bg-[#D9AE52] hover:-translate-y-0.5 hover:shadow-[0_6px_24px_rgba(196,151,47,0.25)]"
+              className="no-underline transition-all duration-[180ms]"
               style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.85rem 1.8rem", borderRadius: "4px", boxShadow: "0 4px 16px rgba(196,151,47,0.12)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(196,151,47,0.35)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,151,47,0.12)"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
               Try Quick Mirror — Free
             </Link>
@@ -446,7 +450,7 @@ export default function HomePage() {
             {roleDots.map((dot, i) => (
               <div
                 key={dot.role}
-                className="absolute group"
+                className="absolute cursor-pointer group"
                 style={{
                   left: `${dot.left}%`,
                   top: `${dot.top}%`,
@@ -454,9 +458,19 @@ export default function HomePage() {
                   opacity: fieldActivated ? 1 : 0,
                   transition: `opacity 350ms ease-out ${2100 + i * 75}ms`,
                 }}
+                onMouseEnter={(e) => {
+                  const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
+                  if (inner) { inner.style.transform = "scale(2.4)"; inner.style.background = "#C4972F"; inner.style.boxShadow = "0 0 18px rgba(196,151,47,0.55)"; }
+                }}
+                onMouseLeave={(e) => {
+                  const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
+                  const bgColor = dot.gold ? "#C4972F" : dot.mid ? "rgba(255,255,255,0.55)" : dot.dim ? "rgba(255,255,255,0.3)" : dot.muted ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.55)";
+                  const shadow = dot.gold ? "0 0 12px rgba(196,151,47,0.4)" : "none";
+                  if (inner) { inner.style.transform = "scale(1)"; inner.style.background = bgColor; inner.style.boxShadow = shadow; }
+                }}
               >
                 <div
-                  className="w-3 h-3 rounded-full transition-all duration-200 group-hover:scale-[2.4] group-hover:!bg-[#C4972F] group-hover:shadow-[0_0_18px_rgba(196,151,47,0.55)]"
+                  className="dot-inner w-3 h-3 rounded-full transition-all duration-200"
                   style={{
                     background: dot.gold ? "#C4972F" : dot.mid ? "rgba(255,255,255,0.55)" : dot.dim ? "rgba(255,255,255,0.3)" : dot.muted ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.55)",
                     boxShadow: dot.gold ? "0 0 12px rgba(196,151,47,0.4)" : "none",
@@ -491,8 +505,10 @@ export default function HomePage() {
           {/* CTA */}
           <Link
             href="/ai-edge-lab"
-            className="inline-flex items-center gap-3 mt-8 no-underline transition-all duration-[180ms] hover:bg-[rgba(196,151,47,0.08)] hover:border-[rgba(196,151,47,0.4)]"
+            className="inline-flex items-center gap-3 mt-8 no-underline transition-all duration-[180ms]"
             style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C4972F", border: "1px solid rgba(196,151,47,0.25)", padding: "0.9rem 1.6rem", borderRadius: "4px" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.08)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.4)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(196,151,47,0.15)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.25)"; e.currentTarget.style.boxShadow = "none"; }}
           >
             Locate your role — Try Quick Mirror
           </Link>
@@ -591,8 +607,10 @@ export default function HomePage() {
               <Link
                 key={card.name}
                 href={card.href}
-                className={`reveal reveal-d${i + 1} group block no-underline transition-all duration-[180ms] hover:translate-x-[5px] hover:-translate-y-px hover:shadow-[0_6px_28px_rgba(196,151,47,0.1)] hover:bg-[rgba(196,151,47,0.08)] hover:border-[rgba(196,151,47,0.32)]`}
+                className={`reveal reveal-d${i + 1} group block no-underline transition-all duration-[180ms]`}
                 style={{ background: "rgba(196,151,47,0.04)", border: "1px solid rgba(196,151,47,0.18)", borderRadius: "4px", padding: "1.7rem 2rem" }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "translateX(5px) translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 28px rgba(196,151,47,0.15)"; e.currentTarget.style.background = "rgba(196,151,47,0.08)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.35)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "translateX(0) translateY(0)"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.background = "rgba(196,151,47,0.04)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.18)"; }}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -881,8 +899,10 @@ export default function HomePage() {
           </p>
           <Link
             href="/ai-edge-lab"
-            className="reveal reveal-d2 inline-block no-underline transition-all duration-[180ms] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(196,151,47,0.28),0_2px_8px_rgba(196,151,47,0.15)]"
+            className="reveal reveal-d2 inline-block no-underline transition-all duration-[180ms]"
             style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.72rem", letterSpacing: "0.14em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "1rem 2.8rem", borderRadius: "4px", boxShadow: "0 4px 20px rgba(196,151,47,0.15)" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 10px 40px rgba(196,151,47,0.35), 0 2px 10px rgba(196,151,47,0.2)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(196,151,47,0.15)"; }}
           >
             Try Quick Mirror — Free
           </Link>
