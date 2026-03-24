@@ -410,21 +410,22 @@ export default function HomePage() {
 
           {/* The Field - with wrapper for axis labels */}
           <div className="relative max-w-[680px] mx-auto pl-14">
-            {/* Y-axis label - OUTSIDE field, left side, rotated */}
+            {/* Y-axis label - OUTSIDE field, far left, rotated, golden, arrow on right */}
             <div
               className="absolute transition-opacity duration-500"
               style={{ 
-                left: "0", 
+                left: "-2rem", 
                 top: "50%", 
                 transform: "translateY(-50%) rotate(-90deg)", 
                 transformOrigin: "center center",
                 opacity: fieldActivated ? 1 : 0, 
                 transitionDelay: "400ms", 
                 fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
-                fontSize: "0.55rem", 
+                fontSize: "0.6rem", 
+                fontWeight: 500,
                 letterSpacing: "0.16em", 
                 textTransform: "uppercase", 
-                color: "rgba(255,255,255,0.35)", 
+                color: "#C4972F", 
                 whiteSpace: "nowrap" 
               }}
             >
@@ -433,16 +434,16 @@ export default function HomePage() {
 
             {/* Field container */}
             <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
-              {/* Grid - with bolder lines */}
+              {/* Grid - with bolder, thicker lines */}
               <div
                 className="absolute inset-0 transition-opacity duration-[600ms]"
                 style={{
-                  border: "1px solid rgba(255,255,255,0.25)",
+                  border: "2px solid rgba(255,255,255,0.35)",
                   opacity: fieldActivated ? 1 : 0,
                 }}
               >
-                <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(255,255,255,0.15)" }} />
-                <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.15)" }} />
+                <div className="absolute top-1/2 left-0 right-0" style={{ height: "2px", background: "rgba(255,255,255,0.25)", transform: "translateY(-50%)" }} />
+                <div className="absolute left-1/2 top-0 bottom-0" style={{ width: "2px", background: "rgba(255,255,255,0.25)", transform: "translateX(-50%)" }} />
               </div>
 
             {/* Diagonal */}
@@ -463,32 +464,36 @@ export default function HomePage() {
               />
             </svg>
 
-              {/* Quadrant labels - all four visible with consistent styling */}
+              {/* Quadrant labels - all four visible, bold and slightly bigger */}
               {/* Top-left: Insight Work */}
               <div
                 className="absolute transition-opacity duration-500"
-                style={{ top: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}
+                style={{ top: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.38)" }}
               >
                 Insight Work
               </div>
               {/* Top-right: Judgment Work */}
               <div
                 className="absolute transition-opacity duration-500"
-                style={{ top: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "right" }}
+                style={{ top: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.38)", textAlign: "right" }}
               >
                 Judgment Work
               </div>
               {/* Bottom-left: Automated Work */}
               <div
                 className="absolute transition-opacity duration-500"
-                style={{ bottom: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}
+                style={{ bottom: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.38)" }}
               >
                 Automated Work
               </div>
               {/* Bottom-right: Execution Work */}
               <div
                 className="absolute transition-opacity duration-500"
-                style={{ bottom: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "right" }}
+                style={{ bottom: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.38)", textAlign: "right" }}
+              >
+                Execution Work
+              </div>
+
               {/* Zone labels - positioned along the diagonal */}
             <div
               className="absolute transition-opacity duration-500"
@@ -546,25 +551,27 @@ export default function HomePage() {
                       style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
                     />
                   )}
-                  {/* Tiny archetype badge floating above hovered dot */}
+                  {/* Role + Archetype badge floating above hovered dot */}
                   <div
-                    className="absolute opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100"
+                    className="absolute opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100 z-30"
                     style={{
-                      bottom: "calc(100% + 6px)",
+                      bottom: "calc(100% + 10px)",
                       left: "50%",
                       transform: "translateX(-50%)",
                       whiteSpace: "nowrap",
-                      fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                      fontSize: "0.42rem",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      color: "#C4972F",
-                      background: "rgba(10,10,10,0.9)",
-                      border: "1px solid rgba(196,151,47,0.2)",
-                      padding: "2px 6px",
+                      background: "rgba(0,0,0,0.95)",
+                      border: "1px solid rgba(196,151,47,0.4)",
+                      padding: "6px 12px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
+                      textAlign: "center",
                     }}
                   >
-                    {dot.archetype.label}
+                    <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "0.85rem", fontWeight: 600, color: "rgba(255,255,255,0.9)", marginBottom: "2px" }}>
+                      {dot.role}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#C4972F" }}>
+                      {dot.archetype.label}
+                    </div>
                   </div>
                   {/* Enhanced Tooltip with Archetype System */}
                   <div
@@ -600,7 +607,7 @@ export default function HomePage() {
             })}
             </div>
 
-            {/* X-axis label - OUTSIDE field, below, right-aligned */}
+            {/* X-axis label - OUTSIDE field, below, right-aligned, golden */}
             <div
               className="transition-opacity duration-500"
               style={{ 
@@ -609,10 +616,11 @@ export default function HomePage() {
                 opacity: fieldActivated ? 1 : 0, 
                 transitionDelay: "400ms", 
                 fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
-                fontSize: "0.55rem", 
+                fontSize: "0.6rem", 
+                fontWeight: 500,
                 letterSpacing: "0.16em", 
                 textTransform: "uppercase", 
-                color: "rgba(255,255,255,0.35)" 
+                color: "#C4972F" 
               }}
             >
               AI Compression →
@@ -688,6 +696,15 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      {/* Section break between Axion Field and Framework */}
+      <div style={{ background: "#000000", padding: "0 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[400px] mx-auto flex items-center gap-6">
+          <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(196,151,47,0.3))" }} />
+          <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.2em", color: "rgba(196,151,47,0.4)" }}>◆</div>
+          <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(196,151,47,0.3))" }} />
+        </div>
+      </div>
 
       {/* ═══ S05 — FRAMEWORK ═══ */}
       <section id="framework" ref={frameworkRef} style={{ background: "#000000", padding: "9rem 1.5rem 10rem" }} className="sm:px-14">
