@@ -74,17 +74,26 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, [frameworkStep]);
 
-  // Role dots data for the compression field
+  // Role dots data for the compression field - with tier system
   const roleDots = [
-    { role: "Founder / CEO", score: 91, dir: "Holding", left: 78, top: 15, gold: true },
-    { role: "Operating Architect", score: 96, dir: "Expanding", left: 55, top: 10, gold: true },
-    { role: "Board Member", score: 88, dir: "Holding", left: 28, top: 12, mid: true },
-    { role: "CHRO", score: 74, dir: "Rising", left: 38, top: 22, normal: true },
-    { role: "CFO", score: 68, dir: "Rising", left: 58, top: 28, normal: true },
-    { role: "Engineer", score: 45, dir: "Under pressure", left: 72, top: 52, dim: true },
-    { role: "Data Analyst", score: 38, dir: "Compressing", left: 75, top: 65, dim: true },
-    { role: "Payroll Exec", score: 18, dir: "High risk", left: 85, top: 82, muted: true },
+    { role: "Founder / CEO", score: 91, direction: "Holding", left: 78, top: 15, tier: "Structural Architect", tierDesc: "AI amplifies your leverage. You direct; others produce.", isGold: true },
+    { role: "Operating Architect", score: 96, direction: "Expanding", left: 55, top: 10, tier: "Structural Architect", tierDesc: "AI amplifies your leverage. You direct; others produce.", isGold: true },
+    { role: "Board Member", score: 88, direction: "Holding", left: 28, top: 12, tier: "Structural Architect", tierDesc: "AI amplifies your leverage. You direct; others produce.", isGold: false },
+    { role: "CHRO", score: 74, direction: "Rising", left: 38, top: 22, tier: "Strategic Leverager", tierDesc: "Judgment-dominant. Your 6-month target.", isGold: false },
+    { role: "CFO", score: 68, direction: "Rising", left: 58, top: 28, tier: "Boundary Builder", tierDesc: "Edge established. Deliberate compounding needed.", isGold: false },
+    { role: "Engineer", score: 45, direction: "Under pressure", left: 72, top: 52, tier: "Execution Operator", tierDesc: "Output-primary. Immediate composition shift required.", isGold: false },
+    { role: "Data Analyst", score: 38, direction: "Compressing", left: 75, top: 65, tier: "Execution Operator", tierDesc: "Output-primary. Immediate composition shift required.", isGold: false },
+    { role: "Payroll Exec", score: 18, direction: "High risk", left: 85, top: 82, tier: "Execution Operator", tierDesc: "Output-primary. Immediate composition shift required.", isGold: false },
   ];
+
+  // Tooltip positioning logic - flips when dot is near edges
+  const getTooltipPosition = (leftPct: number, topPct: number) => {
+    // Flip horizontal if dot is in right 35% of field
+    const flipH = leftPct > 65;
+    // Flip vertical if dot is in top 20% of field  
+    const flipV = topPct < 20;
+    return { flipH, flipV };
+  };
 
   return (
     <>
@@ -481,51 +490,81 @@ export default function HomePage() {
             </div>
 
             {/* Role dots */}
-            {roleDots.map((dot, i) => (
-              <div
-                key={dot.role}
-                className="absolute cursor-pointer group"
-                style={{
-                  left: `${dot.left}%`,
-                  top: `${dot.top}%`,
-                  transform: "translate(-50%, -50%)",
-                  opacity: fieldActivated ? 1 : 0,
-                  transition: `opacity 350ms ease-out ${2100 + i * 75}ms`,
-                }}
-                onMouseEnter={(e) => {
-                  const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
-                  if (inner) { inner.style.transform = "scale(2.6)"; inner.style.background = "#C4972F"; inner.style.boxShadow = "0 0 16px rgba(196,151,47,0.65), 0 0 32px rgba(196,151,47,0.35)"; }
-                }}
-                onMouseLeave={(e) => {
-                  const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
-                  const bgColor = dot.gold ? "#C4972F" : dot.mid ? "rgba(255,255,255,0.55)" : dot.dim ? "rgba(255,255,255,0.3)" : dot.muted ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.55)";
-                  const shadow = dot.gold ? "0 0 12px rgba(196,151,47,0.4)" : "none";
-                  if (inner) { inner.style.transform = "scale(1)"; inner.style.background = bgColor; inner.style.boxShadow = shadow; }
-                }}
-              >
+            {roleDots.map((dot, i) => {
+              const { flipH, flipV } = getTooltipPosition(dot.left, dot.top);
+              const getDotColor = () => {
+                if (dot.isGold) return "#C4972F";
+                if (dot.score >= 80) return "rgba(255,255,255,0.55)";
+                if (dot.score >= 60) return "rgba(255,255,255,0.45)";
+                if (dot.score >= 50) return "rgba(255,255,255,0.35)";
+                return "rgba(255,255,255,0.25)";
+              };
+              return (
                 <div
-                  className="dot-inner w-3 h-3 rounded-full transition-all duration-200"
+                  key={dot.role}
+                  className="group absolute cursor-pointer"
                   style={{
-                    background: dot.gold ? "#C4972F" : dot.mid ? "rgba(255,255,255,0.55)" : dot.dim ? "rgba(255,255,255,0.3)" : dot.muted ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.55)",
-                    boxShadow: dot.gold ? "0 0 12px rgba(196,151,47,0.4)" : "none",
+                    left: `${dot.left}%`,
+                    top: `${dot.top}%`,
+                    transform: "translate(-50%, -50%)",
+                    opacity: fieldActivated ? 1 : 0,
+                    transition: `opacity 350ms ease-out ${2100 + i * 75}ms`,
                   }}
-                />
-                {dot.gold && fieldActivated && (
-                  <div
-                    className="absolute inset-0 w-3 h-3 rounded-full pointer-events-none"
-                    style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
-                  />
-                )}
-                {/* Tooltip */}
-                <div
-                  className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100 whitespace-nowrap z-10"
-                  style={{ background: "rgba(17,17,17,0.97)", borderLeft: "2px solid #C4972F", borderRadius: "2px" }}
+                  onMouseEnter={(e) => {
+                    const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
+                    if (inner) { inner.style.transform = "scale(2.6)"; inner.style.background = "#C4972F"; inner.style.boxShadow = "0 0 16px rgba(196,151,47,0.65), 0 0 32px rgba(196,151,47,0.35)"; }
+                  }}
+                  onMouseLeave={(e) => {
+                    const inner = e.currentTarget.querySelector(".dot-inner") as HTMLElement;
+                    if (inner) { inner.style.transform = "scale(1)"; inner.style.background = getDotColor(); inner.style.boxShadow = dot.isGold ? "0 0 12px rgba(196,151,47,0.4)" : "none"; }
+                  }}
                 >
-                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "#C4972F", marginBottom: "2px" }}>{dot.role}</div>
-                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", color: "rgba(255,255,255,0.5)" }}>Edge Score: {dot.score} · {dot.dir}</div>
+                  <div
+                    className="dot-inner w-3 h-3 rounded-full transition-all duration-200"
+                    style={{
+                      background: getDotColor(),
+                      boxShadow: dot.isGold ? "0 0 12px rgba(196,151,47,0.4)" : "none",
+                    }}
+                  />
+                  {dot.isGold && fieldActivated && (
+                    <div
+                      className="absolute inset-0 w-3 h-3 rounded-full pointer-events-none"
+                      style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
+                    />
+                  )}
+                  {/* Enhanced Tooltip with Tier System */}
+                  <div
+                    className={`absolute opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100 z-20 ${flipH ? 'right-full mr-3' : 'left-full ml-3'} ${flipV ? 'top-0' : 'bottom-0'}`}
+                    style={{ minWidth: "200px", maxWidth: "240px" }}
+                  >
+                    <div style={{ background: "rgba(12,12,12,0.97)", border: "1px solid rgba(196,151,47,0.25)", borderLeft: "2px solid #C4972F", padding: "1rem 1.2rem" }}>
+                      {/* Role name */}
+                      <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 600, color: "rgba(255,255,255,0.85)", marginBottom: "0.5rem", lineHeight: 1.2 }}>
+                        {dot.role}
+                      </div>
+                      {/* Divider */}
+                      <div style={{ width: "100%", height: "1px", background: "rgba(255,255,255,0.06)", marginBottom: "0.5rem" }} />
+                      {/* Edge Score + direction row */}
+                      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                        <div style={{ display: "flex", alignItems: "baseline", gap: "0.3rem" }}>
+                          <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C4972F", opacity: 0.7 }}>Edge Score</span>
+                          <span style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 700, color: "#C4972F", lineHeight: 1 }}>{dot.score}</span>
+                        </div>
+                        <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>{dot.direction}</span>
+                      </div>
+                      {/* Tier label */}
+                      <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C4972F", marginBottom: "0.25rem" }}>
+                        {dot.tier}
+                      </div>
+                      {/* Tier description */}
+                      <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.75rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.55 }}>
+                        {dot.tierDesc}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Caption */}
@@ -534,6 +573,30 @@ export default function HomePage() {
           </p>
           <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", color: "rgba(255,255,255,0.16)", marginTop: "0.8rem" }}>
             Role positions are illustrative.
+          </div>
+
+          {/* Tier Legend */}
+          <div className="mt-10 mx-auto" style={{ maxWidth: "400px" }}>
+            {[
+              { range: "80–100", label: "Structural Architect" },
+              { range: "70–79", label: "Strategic Leverager" },
+              { range: "60–69", label: "Boundary Builder" },
+              { range: "50–59", label: "Output Manager" },
+              { range: "<50", label: "Execution Operator" },
+            ].map((tier, i) => (
+              <div
+                key={tier.range}
+                className="flex items-center justify-between py-2"
+                style={{ borderBottom: i < 4 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
+              >
+                <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}>
+                  {tier.range}
+                </span>
+                <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.72rem", color: "rgba(255,255,255,0.32)" }}>
+                  {tier.label}
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* CTA */}
