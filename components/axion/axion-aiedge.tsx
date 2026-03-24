@@ -14,12 +14,12 @@ const tools = [
     external: false,
   },
   {
-    name: "Full Diagnostic",
+    name: "Full Diagnostic — Coming Soon",
     desc: "30 min · Edge Score · PDF report · Paid",
-    status: "● Live",
-    statusColor: "var(--green)",
+    status: "○ Coming Soon",
+    statusColor: "var(--mist)",
     borderColor: "var(--gold)",
-    href: "/full-diagnostic",
+    href: "#",
     external: false,
   },
   {

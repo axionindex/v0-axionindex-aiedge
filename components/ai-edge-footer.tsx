@@ -23,7 +23,7 @@ const footerNav = [
     label: "Assessment",
     items: [
       { title: "Quick Mirror", href: "/quick-mirror" },
-      { title: "Full Diagnostic", href: "/full-diagnostic" },
+      { title: "Full Diagnostic — Coming Soon", href: "#" },
       { title: "Salary Score", href: "#salary" },
     ],
   },

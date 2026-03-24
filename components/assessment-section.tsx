@@ -304,8 +304,7 @@ export function AssessmentSection() {
               ))}
             </div>
 
-            <Link
-              href="/full-diagnostic"
+            <span
               className="btn-p"
               style={{
                 display: "inline-flex",
@@ -313,10 +312,12 @@ export function AssessmentSection() {
                 justifyContent: "center",
                 gap: "8px",
                 width: "100%",
+                opacity: 0.5,
+                cursor: "not-allowed",
               }}
             >
-              Start Full Diagnostic
-            </Link>
+              Full Diagnostic — Coming Soon
+            </span>
           </div>
         </div>
       </div>

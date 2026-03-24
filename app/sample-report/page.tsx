@@ -321,22 +321,21 @@ export default function SampleReportPage() {
         >
           AI <span style={{ color: "#C9A96E" }}>EDGE</span> LAB
         </Link>
-        <Link
-          href="/full-diagnostic"
+        <span
           style={{
             fontFamily: "'IBM Plex Mono', monospace",
             fontSize: "0.7rem",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "#C9A96E",
-            textDecoration: "none",
+            color: "rgba(201,169,110,0.5)",
             padding: "10px 20px",
-            border: "1px solid rgba(201,169,110,0.4)",
+            border: "1px solid rgba(201,169,110,0.2)",
+            cursor: "not-allowed",
             transition: "all 0.2s",
           }}
         >
-          Take Full Diagnostic
-        </Link>
+          Full Diagnostic — Coming Soon
+        </span>
       </nav>
 
       {/* Cover Band */}
@@ -851,11 +850,10 @@ export default function SampleReportPage() {
         >
           This is a sample report showing what the Full Diagnostic produces
         </p>
-        <Link
-          href="/full-diagnostic"
+        <span
           style={{
             display: "inline-block",
-            background: "#C9A96E",
+            background: "rgba(201,169,110,0.5)",
             color: "#0B0B0A",
             fontFamily: "'IBM Plex Mono', monospace",
             fontSize: "0.75rem",
@@ -863,12 +861,11 @@ export default function SampleReportPage() {
             textTransform: "uppercase",
             fontWeight: 500,
             padding: "18px 40px",
-            textDecoration: "none",
-            transition: "background 0.2s",
+            cursor: "not-allowed",
           }}
         >
-          Take the Full Diagnostic →
-        </Link>
+          Full Diagnostic — Coming Soon
+        </span>
       </section>
     </div>
   );

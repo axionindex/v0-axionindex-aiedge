@@ -237,7 +237,7 @@ export function AxionHero() {
           {/* Instrument Rows */}
           {[
             { name: "Quick Mirror", desc: "5 min · AI exposure check · Free · Instant", status: "live", href: "/quick-mirror" },
-            { name: "Full Diagnostic", desc: "30 min · Edge Score · PDF report · Paid", status: "live", href: "/full-diagnostic" },
+            { name: "Full Diagnostic — Coming Soon", desc: "30 min · Edge Score · PDF report · Paid", status: "soon", href: "#" },
             { name: "3i Labour Code Readiness Index™", desc: "Classify · Cost · Comply", status: "live", href: "#aiedge" },
             { name: "Workforce Architecture Diagnostics™", desc: "Structure · Control · Risk", status: "building", href: "#aiedge" },
             { name: "AI Exposure & Work Compression", desc: "Roles · Automation · Redesign", status: "building", href: "#aiedge" },

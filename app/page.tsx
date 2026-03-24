@@ -222,15 +222,12 @@ export default function HomePage() {
             >
               Try Quick Mirror — Free
             </Link>
-            <Link
-              href="/full-diagnostic"
-              className="no-underline transition-all duration-[180ms]"
-              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.55)", border: "1px solid rgba(255,255,255,0.18)", padding: "0.85rem 1.8rem", borderRadius: "4px" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.1)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(255,255,255,0.06)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; e.currentTarget.style.boxShadow = "none"; }}
+            <span
+              className="cursor-not-allowed opacity-50"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.12)", padding: "0.85rem 1.8rem", borderRadius: "4px" }}
             >
-              Open Full Diagnostic
-            </Link>
+              Full Diagnostic — Coming Soon
+            </span>
           </div>
         </div>
 
@@ -636,7 +633,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[0.6rem]">
             {[
               { name: "Quick Mirror", sub: "5-minute organisational health snapshot", badge: "Free", href: "/ai-edge-lab" },
-              { name: "Full Diagnostic — PDF Report", sub: "Comprehensive people system audit", badge: "Paid", href: "/full-diagnostic" },
+              { name: "Full Diagnostic — PDF Report", sub: "Comprehensive people system audit", badge: "Coming Soon", href: "#", disabled: true },
             ].map((card, i) => (
               <Link
                 key={card.name}

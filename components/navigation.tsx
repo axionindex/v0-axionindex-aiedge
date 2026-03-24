@@ -59,7 +59,7 @@ const navItems = [
         label: "Choose Your Instrument",
         items: [
           { num: "◇", title: "Quick Mirror — Free", sub: "5 min · Instant results on page", href: "/quick-mirror", isPage: true },
-          { num: "◆", title: "Full Diagnostic — Paid", sub: "30 min · PDF report via email", href: "/full-diagnostic", isPage: true },
+          { num: "◆", title: "Full Diagnostic — Coming Soon", sub: "30 min · PDF report via email", href: "#", isPage: false, disabled: true },
         ],
       },
     ],
