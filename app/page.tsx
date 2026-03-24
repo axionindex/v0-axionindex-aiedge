@@ -551,22 +551,24 @@ export default function HomePage() {
                       style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
                     />
                   )}
-                  {/* Tiny archetype badge floating above hovered dot */}
+                  {/* Archetype badge floating above hovered dot */}
                   <div
-                    className="absolute opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100"
+                    className="absolute opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100 z-30"
                     style={{
-                      bottom: "calc(100% + 6px)",
+                      bottom: "calc(100% + 10px)",
                       left: "50%",
                       transform: "translateX(-50%)",
                       whiteSpace: "nowrap",
                       fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                      fontSize: "0.42rem",
-                      letterSpacing: "0.12em",
+                      fontSize: "0.55rem",
+                      fontWeight: 500,
+                      letterSpacing: "0.1em",
                       textTransform: "uppercase",
                       color: "#C4972F",
-                      background: "rgba(10,10,10,0.9)",
-                      border: "1px solid rgba(196,151,47,0.2)",
-                      padding: "2px 6px",
+                      background: "rgba(0,0,0,0.95)",
+                      border: "1px solid rgba(196,151,47,0.4)",
+                      padding: "4px 10px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
                     }}
                   >
                     {dot.archetype.label}
