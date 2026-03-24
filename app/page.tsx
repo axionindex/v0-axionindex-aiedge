@@ -351,10 +351,20 @@ export default function HomePage() {
                   width: "100%",
                   overflow: "hidden"
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.transform = "translateX(3px)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateX(0)"; }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.background = "rgba(0,0,0,0.02)"; 
+                  e.currentTarget.style.transform = "translateX(3px)"; 
+                  const letter = e.currentTarget.querySelector(".row-letter") as HTMLElement;
+                  if (letter) letter.style.color = "#C4972F";
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.background = "transparent"; 
+                  e.currentTarget.style.transform = "translateX(0)"; 
+                  const letter = e.currentTarget.querySelector(".row-letter") as HTMLElement;
+                  if (letter) letter.style.color = "rgba(0,0,0,0.12)";
+                }}
               >
-                <div className="transition-colors duration-[180ms] group-hover:text-[#C4972F]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, color: "rgba(0,0,0,0.12)", lineHeight: 1 }}>
+                <div className="row-letter transition-colors duration-[180ms]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, color: "rgba(0,0,0,0.12)", lineHeight: 1 }}>
                   {row.letter}
                 </div>
                 <div style={{ minWidth: 0 }}>
