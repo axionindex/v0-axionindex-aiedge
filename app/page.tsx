@@ -74,23 +74,30 @@ export default function HomePage() {
     return () => observer.disconnect();
   }, [frameworkStep]);
 
-  // Role dots data for the compression field - with tier system
-  const roleDots = [
-    { role: "Founder / CEO", score: 91, direction: "Holding", left: 78, top: 15, tier: "Structural Architect", tierDesc: "AI amplifies your leverage. You direct; others produce.", isGold: true },
-    { role: "Operating Architect", score: 96, direction: "Expanding", left: 55, top: 10, tier: "Structural Architect", tierDesc: "AI amplifies your leverage. You direct; others produce.", isGold: true },
-    { role: "Board Member", score: 88, direction: "Holding", left: 28, top: 12, tier: "Structural Architect", tierDesc: "AI amplifies your leverage. You direct; others produce.", isGold: false },
-    { role: "CHRO", score: 74, direction: "Rising", left: 38, top: 22, tier: "Strategic Leverager", tierDesc: "Judgment-dominant. Your 6-month target.", isGold: false },
-    { role: "CFO", score: 68, direction: "Rising", left: 58, top: 28, tier: "Boundary Builder", tierDesc: "Edge established. Deliberate compounding needed.", isGold: false },
-    { role: "Engineer", score: 45, direction: "Under pressure", left: 72, top: 52, tier: "Execution Operator", tierDesc: "Output-primary. Immediate composition shift required.", isGold: false },
-    { role: "Data Analyst", score: 38, direction: "Compressing", left: 75, top: 65, tier: "Execution Operator", tierDesc: "Output-primary. Immediate composition shift required.", isGold: false },
-    { role: "Payroll Exec", score: 18, direction: "High risk", left: 85, top: 82, tier: "Execution Operator", tierDesc: "Output-primary. Immediate composition shift required.", isGold: false },
+  // Archetype definitions for the tier system
+  const ARCHETYPES = {
+    STRUCTURAL: { label: "Structural Architect", desc: "AI amplifies your leverage. You direct; others produce.", color: "#C4972F", scoreRange: "80–100" },
+    LEVERAGER: { label: "Strategic Leverager", desc: "Judgment-dominant. Your 6-month target.", color: "#C4972F", scoreRange: "70–79" },
+    BUILDER: { label: "Boundary Builder", desc: "Edge established. Deliberate compounding needed.", color: "#C4972F", scoreRange: "60–69" },
+    MANAGER: { label: "Output Manager", desc: "Judgment and output balanced. Active management required.", color: "#C4972F", scoreRange: "50–59" },
+    OPERATOR: { label: "Execution Operator", desc: "Output-primary. Immediate composition shift required.", color: "#C4972F", scoreRange: "<50" },
+  };
+
+  // Role dots data with archetype assigned to each role
+  const dots = [
+    { role: "Operating Architect", score: 96, direction: "Expanding", left: 55, top: 10, isGold: true, archetype: ARCHETYPES.STRUCTURAL },
+    { role: "Founder / CEO", score: 91, direction: "Holding", left: 78, top: 15, isGold: true, archetype: ARCHETYPES.STRUCTURAL },
+    { role: "Board Member", score: 88, direction: "Holding", left: 28, top: 12, isGold: false, archetype: ARCHETYPES.STRUCTURAL },
+    { role: "CHRO", score: 74, direction: "Rising", left: 38, top: 22, isGold: false, archetype: ARCHETYPES.LEVERAGER },
+    { role: "CFO", score: 68, direction: "Rising", left: 58, top: 28, isGold: false, archetype: ARCHETYPES.BUILDER },
+    { role: "Engineer", score: 45, direction: "Under pressure", left: 72, top: 52, isGold: false, archetype: ARCHETYPES.OPERATOR },
+    { role: "Data Analyst", score: 38, direction: "Compressing", left: 75, top: 65, isGold: false, archetype: ARCHETYPES.OPERATOR },
+    { role: "Payroll Exec", score: 18, direction: "High risk", left: 85, top: 82, isGold: false, archetype: ARCHETYPES.OPERATOR },
   ];
 
   // Tooltip positioning logic - flips when dot is near edges
   const getTooltipPosition = (leftPct: number, topPct: number) => {
-    // Flip horizontal if dot is in right 35% of field
-    const flipH = leftPct > 65;
-    // Flip vertical if dot is in top 20% of field  
+    const flipH = leftPct > 60;
     const flipV = topPct < 20;
     return { flipH, flipV };
   };
@@ -497,7 +504,7 @@ export default function HomePage() {
             </div>
 
             {/* Role dots */}
-            {roleDots.map((dot, i) => {
+            {dots.map((dot, i) => {
               const { flipH, flipV } = getTooltipPosition(dot.left, dot.top);
               const getDotColor = () => {
                 if (dot.isGold) return "#C4972F";
@@ -539,33 +546,52 @@ export default function HomePage() {
                       style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
                     />
                   )}
-                  {/* Enhanced Tooltip with Tier System */}
+                  {/* Tiny archetype badge floating above hovered dot */}
+                  <div
+                    className="absolute opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100"
+                    style={{
+                      bottom: "calc(100% + 6px)",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      whiteSpace: "nowrap",
+                      fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                      fontSize: "0.42rem",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "#C4972F",
+                      background: "rgba(10,10,10,0.9)",
+                      border: "1px solid rgba(196,151,47,0.2)",
+                      padding: "2px 6px",
+                    }}
+                  >
+                    {dot.archetype.label}
+                  </div>
+                  {/* Enhanced Tooltip with Archetype System */}
                   <div
                     className={`absolute opacity-0 pointer-events-none transition-opacity duration-200 group-hover:opacity-100 z-20 ${flipH ? 'right-full mr-3' : 'left-full ml-3'} ${flipV ? 'top-0' : 'bottom-0'}`}
-                    style={{ minWidth: "200px", maxWidth: "240px" }}
+                    style={{ minWidth: "210px", maxWidth: "250px" }}
                   >
-                    <div style={{ background: "rgba(12,12,12,0.97)", border: "1px solid rgba(196,151,47,0.25)", borderLeft: "2px solid #C4972F", padding: "1rem 1.2rem" }}>
+                    <div style={{ background: "rgba(10,10,10,0.97)", border: "1px solid rgba(196,151,47,0.2)", borderLeft: "2px solid #C4972F", padding: "1.1rem 1.3rem", boxShadow: "0 8px 32px rgba(0,0,0,0.6)" }}>
                       {/* Role name */}
-                      <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 600, color: "rgba(255,255,255,0.85)", marginBottom: "0.5rem", lineHeight: 1.2 }}>
+                      <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 600, color: "rgba(255,255,255,0.85)", marginBottom: "0.6rem", lineHeight: 1.2 }}>
                         {dot.role}
                       </div>
                       {/* Divider */}
-                      <div style={{ width: "100%", height: "1px", background: "rgba(255,255,255,0.06)", marginBottom: "0.5rem" }} />
-                      {/* Edge Score + direction row */}
-                      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                        <div style={{ display: "flex", alignItems: "baseline", gap: "0.3rem" }}>
-                          <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C4972F", opacity: 0.7 }}>Edge Score</span>
-                          <span style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 700, color: "#C4972F", lineHeight: 1 }}>{dot.score}</span>
+                      <div style={{ height: "1px", background: "rgba(255,255,255,0.06)", marginBottom: "0.6rem" }} />
+                      {/* Score row */}
+                      <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.7rem" }}>
+                        <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)" }}>Edge Score</span>
+                        <span style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.6rem", fontWeight: 700, color: "#C4972F", lineHeight: 1 }}>{dot.score}</span>
+                        <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginLeft: "auto" }}>{dot.direction}</span>
+                      </div>
+                      {/* Archetype badge */}
+                      <div style={{ background: "rgba(196,151,47,0.08)", border: "1px solid rgba(196,151,47,0.2)", padding: "0.5rem 0.7rem", marginBottom: "0.5rem" }}>
+                        <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#C4972F", marginBottom: "0.25rem" }}>
+                          {dot.archetype.scoreRange} · {dot.archetype.label}
                         </div>
-                        <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.45rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}>{dot.direction}</span>
-                      </div>
-                      {/* Tier label */}
-                      <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C4972F", marginBottom: "0.25rem" }}>
-                        {dot.tier}
-                      </div>
-                      {/* Tier description */}
-                      <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.75rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.55 }}>
-                        {dot.tierDesc}
+                        <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.75rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.5 }}>
+                          {dot.archetype.desc}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -601,25 +627,50 @@ export default function HomePage() {
             Role positions are illustrative.
           </div>
 
-          {/* Tier Legend */}
-          <div className="mt-10 mx-auto" style={{ maxWidth: "400px" }}>
+          {/* Archetype Legend — 3-column grid */}
+          <div style={{ maxWidth: "560px", margin: "2.5rem auto 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+            {/* Header row */}
+            <div style={{ display: "grid", gridTemplateColumns: "5rem 1fr 1fr", gap: "1rem", padding: "0.6rem 0", borderBottom: "1px solid rgba(255,255,255,0.06)", marginBottom: "0.2rem" }}>
+              {["Score", "Archetype", "What it means"].map((h) => (
+                <span key={h} style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>
+                  {h}
+                </span>
+              ))}
+            </div>
+            {/* Tier rows */}
             {[
-              { range: "80–100", label: "Structural Architect" },
-              { range: "70–79", label: "Strategic Leverager" },
-              { range: "60–69", label: "Boundary Builder" },
-              { range: "50–59", label: "Output Manager" },
-              { range: "<50", label: "Execution Operator" },
+              { range: "80–100", label: "Structural Architect", desc: "AI amplifies your leverage. You direct; others produce.", highlight: false },
+              { range: "70–79", label: "Strategic Leverager", desc: "Judgment-dominant. Your 6-month target.", highlight: false },
+              { range: "60–69", label: "Boundary Builder", desc: "Edge established. Deliberate compounding needed.", highlight: true },
+              { range: "50–59", label: "Output Manager", desc: "Judgment and output balanced. Active management required.", highlight: false },
+              { range: "<50", label: "Execution Operator", desc: "Output-primary. Immediate composition shift required.", highlight: false },
             ].map((tier, i) => (
               <div
-                key={tier.range}
-                className="flex items-center justify-between py-2"
-                style={{ borderBottom: i < 4 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
+                key={i}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "5rem 1fr 1fr",
+                  gap: "1rem",
+                  padding: "0.7rem 0",
+                  borderBottom: "1px solid rgba(255,255,255,0.04)",
+                  background: tier.highlight ? "rgba(196,151,47,0.04)" : "transparent",
+                  transition: "background 200ms ease",
+                }}
               >
-                <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}>
-                  {tier.range}
-                </span>
-                <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.72rem", color: "rgba(255,255,255,0.32)" }}>
+                {/* Score range */}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                  {tier.highlight && <span style={{ color: "#C4972F", fontSize: "0.5rem" }}>◀</span>}
+                  <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", color: tier.highlight ? "#C4972F" : "rgba(255,255,255,0.22)" }}>
+                    {tier.range}
+                  </span>
+                </div>
+                {/* Archetype name */}
+                <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.78rem", fontWeight: tier.highlight ? 500 : 400, color: tier.highlight ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.3)" }}>
                   {tier.label}
+                </span>
+                {/* Description */}
+                <span style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.7rem", color: tier.highlight ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.18)", lineHeight: 1.45 }}>
+                  {tier.desc}
                 </span>
               </div>
             ))}
@@ -751,7 +802,7 @@ export default function HomePage() {
           </div>
 
           <p className="reveal mt-6" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#878580" }}>
-            More instruments inside the Lab — 3i Labour Code Index™, Workforce Architecture Diagnostics™, and more building.
+            More instruments inside the Lab ��� 3i Labour Code Index™, Workforce Architecture Diagnostics™, and more building.
           </p>
         </div>
       </section>
