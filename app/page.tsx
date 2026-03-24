@@ -401,35 +401,42 @@ export default function HomePage() {
             Work does not disappear. It moves — into compression or into judgment. The real question is where your work sits.
           </p>
 
-          {/* The Field */}
-          <div className="relative max-w-[680px] mx-auto" style={{ aspectRatio: "4/3" }}>
-            {/* Grid */}
-            <div
-              className="absolute inset-0 transition-opacity duration-[600ms]"
-              style={{
-                border: "1px solid rgba(255,255,255,0.05)",
-                opacity: fieldActivated ? 1 : 0,
-              }}
-            >
-              <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(255,255,255,0.05)" }} />
-              <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.05)" }} />
-            </div>
-
-            {/* Axes */}
-            {/* X-axis label - below field, right-aligned */}
+          {/* The Field - with wrapper for axis labels */}
+          <div className="relative max-w-[680px] mx-auto pl-14">
+            {/* Y-axis label - OUTSIDE field, left side, rotated */}
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "-1.8rem", right: "0", opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)" }}
-            >
-              AI Compression →
-            </div>
-            {/* Y-axis label - inside field, left edge, rotated */}
-            <div
-              className="absolute left-3 top-1/2 -translate-y-1/2 -rotate-90 origin-center transition-opacity duration-500"
-              style={{ opacity: fieldActivated ? 1 : 0, transitionDelay: "400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", whiteSpace: "nowrap" }}
+              style={{ 
+                left: "0", 
+                top: "50%", 
+                transform: "translateY(-50%) rotate(-90deg)", 
+                transformOrigin: "center center",
+                opacity: fieldActivated ? 1 : 0, 
+                transitionDelay: "400ms", 
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
+                fontSize: "0.55rem", 
+                letterSpacing: "0.16em", 
+                textTransform: "uppercase", 
+                color: "rgba(255,255,255,0.35)", 
+                whiteSpace: "nowrap" 
+              }}
             >
               Judgment Ownership ↑
             </div>
+
+            {/* Field container */}
+            <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
+              {/* Grid - with bolder lines */}
+              <div
+                className="absolute inset-0 transition-opacity duration-[600ms]"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.25)",
+                  opacity: fieldActivated ? 1 : 0,
+                }}
+              >
+                <div className="absolute top-1/2 left-0 right-0 h-px" style={{ background: "rgba(255,255,255,0.15)" }} />
+                <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: "rgba(255,255,255,0.15)" }} />
+              </div>
 
             {/* Diagonal */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -449,33 +456,33 @@ export default function HomePage() {
               />
             </svg>
 
-            {/* Quadrant labels - anchored to corners */}
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ top: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Judgment Work
-            </div>
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ top: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Insight Work
-            </div>
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ bottom: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Execution Work
-            </div>
-            <div
-              className="absolute transition-opacity duration-500"
-              style={{ bottom: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
-            >
-              Automated Work
-            </div>
-
-            {/* Zone labels - positioned along the diagonal */}
+              {/* Quadrant labels - all four visible with consistent styling */}
+              {/* Top-left: Insight Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ top: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}
+              >
+                Insight Work
+              </div>
+              {/* Top-right: Judgment Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ top: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "right" }}
+              >
+                Judgment Work
+              </div>
+              {/* Bottom-left: Automated Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ bottom: "1rem", left: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)" }}
+              >
+                Automated Work
+              </div>
+              {/* Bottom-right: Execution Work */}
+              <div
+                className="absolute transition-opacity duration-500"
+                style={{ bottom: "1rem", right: "1rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(255,255,255,0.28)", textAlign: "right" }}
+              {/* Zone labels - positioned along the diagonal */}
             <div
               className="absolute transition-opacity duration-500"
               style={{ top: "28%", left: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", color: "#C4972F", textTransform: "uppercase", fontWeight: 500 }}
@@ -565,6 +572,25 @@ export default function HomePage() {
                 </div>
               );
             })}
+            </div>
+
+            {/* X-axis label - OUTSIDE field, below, right-aligned */}
+            <div
+              className="transition-opacity duration-500"
+              style={{ 
+                textAlign: "right", 
+                marginTop: "0.75rem",
+                opacity: fieldActivated ? 1 : 0, 
+                transitionDelay: "400ms", 
+                fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
+                fontSize: "0.55rem", 
+                letterSpacing: "0.16em", 
+                textTransform: "uppercase", 
+                color: "rgba(255,255,255,0.35)" 
+              }}
+            >
+              AI Compression →
+            </div>
           </div>
 
           {/* Caption */}
