@@ -436,28 +436,28 @@ export default function HomePage() {
               />
             </svg>
 
-            {/* Quadrant labels - positioned 8% inset from corners */}
+            {/* Quadrant labels - anchored to corners */}
             <div
               className="absolute transition-opacity duration-500"
-              style={{ top: "8%", right: "8%", textAlign: "right", padding: "0.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
+              style={{ top: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Judgment Work
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ top: "8%", left: "8%", padding: "0.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
+              style={{ top: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Insight Work
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "8%", right: "8%", textAlign: "right", padding: "0.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
+              style={{ bottom: "1rem", right: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Execution Work
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "8%", left: "8%", padding: "0.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
+              style={{ bottom: "1rem", left: "1.5rem", opacity: fieldActivated ? 1 : 0, transitionDelay: "1700ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
             >
               Automated Work
             </div>
@@ -465,13 +465,13 @@ export default function HomePage() {
             {/* Zone labels - positioned along the diagonal */}
             <div
               className="absolute transition-opacity duration-500"
-              style={{ top: "18%", left: "18%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", color: "#C4972F", textTransform: "uppercase" }}
+              style={{ top: "28%", left: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", color: "#C4972F", textTransform: "uppercase", fontWeight: 500 }}
             >
               Defensible
             </div>
             <div
               className="absolute transition-opacity duration-500"
-              style={{ bottom: "18%", right: "18%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", color: "#C4972F", textTransform: "uppercase" }}
+              style={{ bottom: "12%", right: "12%", opacity: fieldActivated ? 1 : 0, transitionDelay: "1400ms", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.14em", color: "#C4972F", textTransform: "uppercase", fontWeight: 500 }}
             >
               Compressible
             </div>
