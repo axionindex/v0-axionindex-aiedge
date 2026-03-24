@@ -410,11 +410,11 @@ export default function HomePage() {
 
           {/* The Field - with wrapper for axis labels */}
           <div className="relative max-w-[680px] mx-auto pl-14">
-            {/* Y-axis label - OUTSIDE field, left side, rotated, golden */}
+            {/* Y-axis label - OUTSIDE field, far left, rotated, golden, arrow on right */}
             <div
               className="absolute transition-opacity duration-500"
               style={{ 
-                left: "-0.5rem", 
+                left: "-2rem", 
                 top: "50%", 
                 transform: "translateY(-50%) rotate(-90deg)", 
                 transformOrigin: "center center",
@@ -429,7 +429,7 @@ export default function HomePage() {
                 whiteSpace: "nowrap" 
               }}
             >
-              ↑ Judgment Ownership
+              Judgment Ownership ↑
             </div>
 
             {/* Field container */}
