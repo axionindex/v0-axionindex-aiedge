@@ -551,7 +551,7 @@ export default function HomePage() {
                       style={{ background: "#C4972F", animation: "pulse 2.6s infinite", animationDelay: `${2900 + i * 200}ms` }}
                     />
                   )}
-                  {/* Archetype badge floating above hovered dot */}
+                  {/* Role + Archetype badge floating above hovered dot */}
                   <div
                     className="absolute opacity-0 pointer-events-none transition-opacity duration-150 group-hover:opacity-100 z-30"
                     style={{
@@ -559,19 +559,19 @@ export default function HomePage() {
                       left: "50%",
                       transform: "translateX(-50%)",
                       whiteSpace: "nowrap",
-                      fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-                      fontSize: "0.55rem",
-                      fontWeight: 500,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "#C4972F",
                       background: "rgba(0,0,0,0.95)",
                       border: "1px solid rgba(196,151,47,0.4)",
-                      padding: "4px 10px",
+                      padding: "6px 12px",
                       boxShadow: "0 4px 12px rgba(0,0,0,0.5)",
+                      textAlign: "center",
                     }}
                   >
-                    {dot.archetype.label}
+                    <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "0.85rem", fontWeight: 600, color: "rgba(255,255,255,0.9)", marginBottom: "2px" }}>
+                      {dot.role}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "#C4972F" }}>
+                      {dot.archetype.label}
+                    </div>
                   </div>
                   {/* Enhanced Tooltip with Archetype System */}
                   <div
