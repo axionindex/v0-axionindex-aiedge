@@ -459,24 +459,39 @@ export default function QuickMirrorPage() {
           <div className="q-sub">{c.sub}</div>
           <div className="q-block">
             {c.items.map((item: SliderItem | WorkType) => (
-              <div key={item.id} className="q-row">
-                <div>
+              <div key={item.id} className="q-row-num">
+                <div className="q-row-info">
                   <div className="q-row-name">{item.name}</div>
                   {item.desc && <div className="q-row-desc">{item.desc}</div>}
                   {c.badges && "badge" in item && (
                     <span className={`q-row-badge ${item.bc}`}>{item.badge}</span>
                   )}
                 </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  step="5"
-                  value={vals[item.id] || 0}
-                  className="q-slider"
-                  onChange={(e) => setter(prev => ({ ...prev, [item.id]: parseInt(e.target.value) }))}
-                />
-                <div className="q-val">{vals[item.id] || 0}%</div>
+                <div className="q-num-input-wrap">
+                  <button 
+                    className="q-num-btn" 
+                    onClick={() => setter(prev => ({ ...prev, [item.id]: Math.max(0, (prev[item.id] || 0) - 5) }))}
+                    disabled={(vals[item.id] || 0) <= 0}
+                  >−</button>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="5"
+                    value={vals[item.id] || 0}
+                    className="q-num-input"
+                    onChange={(e) => {
+                      const val = Math.min(100, Math.max(0, parseInt(e.target.value) || 0));
+                      setter(prev => ({ ...prev, [item.id]: val }));
+                    }}
+                  />
+                  <button 
+                    className="q-num-btn" 
+                    onClick={() => setter(prev => ({ ...prev, [item.id]: Math.min(100, (prev[item.id] || 0) + 5) }))}
+                    disabled={(vals[item.id] || 0) >= 100}
+                  >+</button>
+                  <span className="q-num-pct">%</span>
+                </div>
               </div>
             ))}
           </div>
@@ -871,18 +886,29 @@ export default function QuickMirrorPage() {
         .q-text { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.8vw, 24px); font-weight: 400; line-height: 1.4; margin-bottom: 6px; }
         .q-sub { font-size: 12px; color: var(--text3); line-height: 1.6; margin-bottom: 20px; font-style: italic; max-width: 580px; padding-left: 10px; border-left: 1px solid var(--border); }
         .q-block { border: 1px solid var(--border); }
-        .q-row { display: grid; grid-template-columns: 1fr 150px 56px; align-items: center; padding: 11px 14px; border-bottom: 1px solid var(--border); gap: 12px; }
-        .q-row:last-child { border-bottom: none; }
-        @media (max-width: 560px) { .q-row { grid-template-columns: 1fr 56px; } }
+        .q-row-num { display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border); gap: 12px; }
+        .q-row-num:last-child { border-bottom: none; }
+        .q-row-info { flex: 1; min-width: 0; }
         .q-row-name { font-size: 13px; font-weight: 500; color: var(--text); }
         .q-row-desc { font-size: 10px; color: var(--text4); margin-top: 2px; }
         .q-row-badge { font-size: 9px; letter-spacing: 0.06em; padding: 1px 6px; border: 1px solid; margin-top: 4px; display: inline-block; }
         .badge-proof { color: var(--green); border-color: var(--gbrd); background: var(--gbg2); }
         .badge-dom { color: var(--red); border-color: var(--rbrd); background: var(--rbg); }
         .badge-asst { color: var(--blue); border-color: var(--bbrd); background: var(--bbg); }
-        @media (max-width: 560px) { .q-row-desc, .q-row-badge { display: none; } }
-        .q-slider { width: 100%; accent-color: var(--gold); cursor: pointer; }
-        .q-val { font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: var(--gold); text-align: right; }
+        .q-num-input-wrap { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+        .q-num-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--bg4); border: 1px solid var(--border2); color: var(--text2); font-size: 18px; cursor: pointer; transition: all 0.15s; border-radius: 4px; font-family: inherit; }
+        .q-num-btn:hover:not(:disabled) { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+        .q-num-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+        .q-num-input { width: 56px; height: 36px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 16px; color: var(--gold); background: var(--bg2); border: 1px solid var(--border2); border-radius: 4px; -moz-appearance: textfield; }
+        .q-num-input::-webkit-outer-spin-button, .q-num-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .q-num-input:focus { outline: none; border-color: var(--gold); }
+        .q-num-pct { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--text4); }
+        @media (max-width: 560px) { 
+          .q-row-num { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 14px; }
+          .q-num-input-wrap { justify-content: flex-end; }
+          .q-row-desc { display: block; }
+          .q-row-badge { display: inline-block; }
+        }
         .q-total { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--bg3); border: 1px solid var(--border); margin-top: 2px; }
         .q-total.ok { border-color: var(--gbrd); background: var(--gbg2); }
         .q-total.over { border-color: var(--rbrd); background: var(--rbg); }
