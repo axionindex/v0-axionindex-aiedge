@@ -31,8 +31,8 @@ const navSections = [
   {
     label: "Resources",
     items: [
-      { title: "The Doctrine PDF", href: "https://www.axionindex.org/AI-Edge-Doctrine-2026.pdf", external: true },
-      { title: "Sample Report", href: "https://www.axionindex.org/sample-report", external: true },
+      { title: "The Doctrine PDF", href: "/AI-Edge-Doctrine-2026.pdf", external: true },
+      { title: "Sample Report", href: "/sample-report", live: true },
     ],
   },
   {
