@@ -708,14 +708,14 @@ export default function HomePage() {
 
       {/* ═══ S05 — FRAMEWORK ═══ */}
       <section id="framework" ref={frameworkRef} style={{ background: "#000000", padding: "9rem 1.5rem 10rem" }} className="sm:px-14">
-        <div className="max-w-[1060px] mx-auto text-center">
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginBottom: "1.5rem" }}>
+        <div className="max-w-[1060px] mx-auto text-center" style={{ background: "transparent" }}>
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginBottom: "1.5rem", background: "transparent" }}>
             The Signature Framework
           </div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 5.5vw, 5rem)", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem" }}>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 5.5vw, 5rem)", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem", background: "transparent" }}>
             Belief → Conviction → <em style={{ fontStyle: "italic", color: "#C4972F" }}>Rhythm</em>
           </h2>
-          <p className="reveal reveal-d2 max-w-[44ch] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.92rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.8, marginBottom: "4rem" }}>
+          <p className="reveal reveal-d2 max-w-[44ch] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.92rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.8, marginBottom: "4rem", background: "transparent" }}>
             Every organisation fails at the same inflection point. This sequence makes the failure visible — before it becomes irreversible.
           </p>
 
