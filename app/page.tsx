@@ -113,6 +113,8 @@ export default function HomePage() {
         @keyframes heroLock { 0% { opacity: 0; transform: translateY(16px); } 70% { transform: translateY(-2px); } 100% { opacity: 1; transform: translateY(0); } }
         @keyframes breathe { 0%, 100% { opacity: 0.4; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.15); } }
         @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(3.8); opacity: 0; } }
+        @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .ticker-track { will-change: transform; }
         .reveal { opacity: 0; transform: translateY(8px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
         .reveal.revealed { opacity: 1; transform: translateY(0); }
         .reveal-d1 { transition-delay: 0.1s; }
@@ -164,7 +166,7 @@ export default function HomePage() {
       <section
         ref={heroRef}
         className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4 sm:px-8"
-        style={{ background: "#000000" }}
+        style={{ background: "#0C0B09" }}
       >
         {/* Glow layer */}
         <div
@@ -178,24 +180,24 @@ export default function HomePage() {
 
         {/* Content */}
         <div className="relative z-10" style={{ transform: `translateY(${-heroProgress * 18}px)` }}>
-          {/* Kicker */}
-          <div className="flex items-center justify-center gap-4 mb-6" style={{ opacity: 0, animation: "heroRise 0.7s var(--ease) 0.1s forwards" }}>
-            <div className="h-px w-7" style={{ background: "linear-gradient(90deg, transparent, #C4972F)" }} />
-            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#C4972F" }}>
-              Axion Index · Bengaluru · 2026
+          {/* Eyebrow */}
+          <div className="flex items-center justify-center gap-4 mb-6" style={{ opacity: 0, animation: "heroRise 0.7s var(--ease) 0.2s forwards" }}>
+            <div className="h-px w-8" style={{ background: "linear-gradient(90deg, transparent, rgba(196,151,47,0.5))" }} />
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F" }}>
+              Operating Intelligence · 2026
             </span>
-            <div className="h-px w-7" style={{ background: "linear-gradient(90deg, #C4972F, transparent)" }} />
+            <div className="h-px w-8" style={{ background: "linear-gradient(90deg, rgba(196,151,47,0.5), transparent)" }} />
           </div>
 
           {/* H1 */}
           <h1
             style={{
               fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-              fontSize: "clamp(3.2rem, 8.5vw, 8.5rem)",
+              fontSize: "clamp(3rem, 9vw, 9rem)",
               fontWeight: 700,
-              lineHeight: 0.9,
+              lineHeight: 0.88,
               letterSpacing: "-0.03em",
-              color: "rgba(255,255,255,0.85)",
+              color: "rgba(244,239,230,0.92)",
               opacity: 0,
               animation: "heroLock 1.15s cubic-bezier(0.16,1,0.3,1) 0.38s forwards",
             }}
@@ -205,21 +207,20 @@ export default function HomePage() {
             of Work
           </h1>
 
-          {/* Tagline */}
+          {/* Subheadline */}
           <p
-            className="max-w-[38ch] mx-auto mt-8"
+            className="max-w-[44ch] mx-auto mt-8"
             style={{
               fontFamily: "var(--font-lora), 'Lora', serif",
               fontStyle: "italic",
-              fontSize: "clamp(0.95rem, 1.5vw, 1.12rem)",
-              color: "rgba(255,255,255,0.38)",
-              lineHeight: 1.7,
+              fontSize: "clamp(0.95rem, 1.5vw, 1.15rem)",
+              color: "rgba(176,168,152,0.8)",
+              lineHeight: 1.72,
               opacity: 0,
-              animation: "heroRise 0.85s var(--ease) 0.82s forwards",
+              animation: "heroRise 0.85s var(--ease) 0.55s forwards",
             }}
           >
-            Most organisations don't fail because of strategy.<br />
-            <strong style={{ color: "rgba(255,255,255,0.75)" }}>They fail because the system underneath cannot carry it.</strong>
+            Most organisations don&apos;t fail because of strategy. They fail because the <strong style={{ color: "rgba(244,239,230,0.85)", fontWeight: 500 }}>system underneath cannot carry it.</strong>
           </p>
 
           {/* CTA pair */}
@@ -227,36 +228,64 @@ export default function HomePage() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10"
             style={{
               opacity: 0,
-              animation: "heroRise 0.8s var(--ease) 1.22s forwards",
+              animation: "heroRise 0.8s var(--ease) 0.72s forwards",
             }}
           >
             <Link
               href="/ai-edge-lab"
               className="no-underline transition-all duration-[180ms]"
-              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.85rem 1.8rem", borderRadius: "4px", boxShadow: "0 4px 16px rgba(196,151,47,0.12)" }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(196,151,47,0.40), 0 3px 10px rgba(196,151,47,0.25)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.boxShadow = "0 4px 16px rgba(196,151,47,0.12)"; e.currentTarget.style.transform = "translateY(0)"; }}
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "#C4972F", color: "#0C0B09", padding: "14px 32px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#E8D5A3"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
-              Try Quick Mirror — Free
+              Enter the AI Edge Lab
             </Link>
-            <span
-              className="cursor-not-allowed opacity-50"
-              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.12)", padding: "0.85rem 1.8rem", borderRadius: "4px" }}
+            <Link
+              href="/engage"
+              className="no-underline transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(176,168,152,0.7)", border: "1px solid rgba(196,154,60,0.18)", padding: "14px 32px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C4972F"; e.currentTarget.style.background = "rgba(196,154,60,0.04)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,0.18)"; e.currentTarget.style.background = "transparent"; }}
             >
-              Full Diagnostic — Coming Soon
-            </span>
+              Start an Engagement
+            </Link>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-          style={{ opacity: Math.max(0, 1 - heroProgress * 2) }}
-        >
-          <div className="w-px h-6" style={{ background: "#C4972F", animation: "breathe 2s ease-in-out infinite" }} />
-          <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,151,47,0.5)" }}>Scroll</span>
-        </div>
       </section>
+
+      {/* ═══ TICKER ═══ */}
+      <div style={{ background: "#141210", padding: "14px 0", borderTop: "1px solid rgba(196,154,60,0.09)", borderBottom: "1px solid rgba(196,154,60,0.09)", overflow: "hidden" }}>
+        <div 
+          className="ticker-track flex items-center whitespace-nowrap"
+          style={{ 
+            animation: "tick 140s linear infinite",
+            width: "fit-content",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.animationPlayState = "paused"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.animationPlayState = "running"; }}
+        >
+          {[...Array(2)].map((_, setIdx) => (
+            <div key={setIdx} className="flex items-center">
+              {[
+                "AI Replaceability Index",
+                "Brainpower Density Index",
+                "AI Aligned Index",
+                "Organisation Decision Architecture",
+                "Labour Code Design",
+                "Family Business HR",
+                "Operating Rhythm Diagnostics",
+              ].map((item, i) => (
+                <span key={`${setIdx}-${i}`} className="flex items-center" style={{ marginRight: "3rem" }}>
+                  <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(176,168,152,0.45)" }}>
+                    {item}
+                  </span>
+                  <span style={{ marginLeft: "3rem", color: "rgba(196,154,60,0.3)", fontSize: "0.5rem" }}>◆</span>
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* ═══ S02 — PROBLEM ═══ */}
       <section style={{ background: "#0A0A0A", padding: "9rem 1.5rem" }} className="sm:px-14">
@@ -297,117 +326,234 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ S03 — WHAT AXION INDEX IS ═══ */}
-      <section style={{ background: "#FFFFFF", padding: "8rem 1.5rem" }} className="sm:px-14">
-        <div className="max-w-[1060px] mx-auto">
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#A07820", marginBottom: "2rem" }}>
-            What Axion Index Is
+      {/* ═══ S03 — THE INDEXES ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section label */}
+          <div className="reveal flex items-center gap-4 mb-8">
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F" }}>
+              The Indexes
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(196,154,60,0.2)" }} />
           </div>
-          <h2 className="reveal reveal-d1 max-w-[24ch]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(1.9rem, 3.8vw, 3.2rem)", fontWeight: 700, color: "#141412", lineHeight: 1.15, marginBottom: "1.5rem" }}>
-            Axion Index diagnoses, quantifies, and redesigns the <em style={{ fontStyle: "italic", color: "#C4972F" }}>operating architecture</em> of work.
+          
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(244,239,230,0.92)", lineHeight: 1.08, marginBottom: "1rem" }}>
+            Four proprietary instruments for measuring <em style={{ fontStyle: "italic", color: "#C4972F" }}>structural readiness.</em>
           </h2>
-          <p className="reveal reveal-d2 max-w-[52ch]" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.95rem", color: "#3A3935", lineHeight: 1.8, marginBottom: "4rem" }}>
-            Most organisations don't fail because of strategy. They fail because the system underneath cannot carry the strategy. Axion Index exists to solve that gap.
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "1rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.85, marginBottom: "3rem", maxWidth: "640px" }}>
+            Each index produces a decision-grade signal. Together, they form a complete diagnostic architecture for the AI economy.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3" style={{ border: "1px solid rgba(0,0,0,0.08)" }}>
+          {/* 2x2 Grid of Index Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2" style={{ border: "1px solid rgba(196,154,60,0.18)" }}>
             {[
-              { verb: "Diagnose", body: "Surface structural, compliance, and workforce risk before it becomes visible as strategy failure." },
-              { verb: "Quantify", body: "Turn invisible organisational forces into decision-grade signals." },
-              { verb: "Redesign", body: "Rebuild the operating architecture so scale does not produce silent fracture." },
-            ].map((item, i) => (
+              { 
+                num: "01", 
+                title: "AI Replaceability Index", 
+                tag: "Individual",
+                body: "Measures how much of your current work AI can perform — and what that means for your professional defensibility. Quick Mirror is the free 5-minute version. The full diagnostic maps role-level risk across an entire organisation.",
+                link: "/replaceability",
+                live: true
+              },
+              { 
+                num: "02", 
+                title: "Brainpower Density Index", 
+                tag: "Leadership",
+                body: "What percentage of a leader&apos;s time is genuinely consequential work? This index measures the gap between organisational altitude and operational drag — and produces a redesign target.",
+                link: "/brainpower",
+                live: false
+              },
+              { 
+                num: "03", 
+                title: "AI Aligned Index", 
+                tag: "Strategic Readiness",
+                body: "Measures whether leadership teams are aligned on AI&apos;s role in the organisation. Surfaces hidden disagreements about urgency, adoption, and structural change before they become operational failure.",
+                link: "/ai-aligned",
+                live: false
+              },
+              { 
+                num: "04", 
+                title: "Organisation Decision Architecture", 
+                tag: "Organisation",
+                body: "Maps structural AI exposure across the entire organisation. Identifies where decision authority is misaligned with AI reality. Produces a redesign roadmap with hard 12-month targets. Delivered as a full engagement.",
+                link: "/org-design",
+                live: false
+              },
+            ].map((idx, i) => (
               <div
-                key={item.verb}
-                className={`reveal reveal-d${i + 1} transition-all duration-[280ms]`}
-                style={{ padding: "2.5rem 2rem", borderRight: i < 2 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#F7F6F3"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,0,0,0.08), inset 0 0 60px rgba(196,151,47,0.06)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+                key={idx.num}
+                className={`reveal reveal-d${i + 1} relative group transition-all duration-[250ms]`}
+                style={{ 
+                  padding: "2.2rem 2rem", 
+                  borderRight: i % 2 === 0 ? "1px solid rgba(196,154,60,0.18)" : "none",
+                  borderBottom: i < 2 ? "1px solid rgba(196,154,60,0.18)" : "none",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,154,60,0.04)"; e.currentTarget.style.boxShadow = "inset 0 0 40px rgba(196,154,60,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.boxShadow = "none"; }}
               >
-                <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1.9rem", fontWeight: 700, color: "#C4972F", marginBottom: "0.8rem" }}>
-                  {item.verb}
+                {/* Top bar on hover */}
+                <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#C4972F] origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+                
+                {/* Header row */}
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C4972F" }}>
+                      Index {idx.num}
+                    </span>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(176,168,152,0.5)", padding: "2px 6px", border: "1px solid rgba(196,154,60,0.18)" }}>
+                      {idx.tag}
+                    </span>
+                  </div>
+                  {idx.live && (
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#5BAD7A] live-dot" />
+                      <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#5BAD7A" }}>Live</span>
+                    </span>
+                  )}
                 </div>
-                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.83rem", color: "#3A3935", lineHeight: 1.7 }}>
-                  {item.body}
+                
+                {/* Title */}
+                <h3 style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.5rem", fontWeight: 700, color: "rgba(244,239,230,0.92)", marginBottom: "0.8rem", lineHeight: 1.2 }}>
+                  {idx.title}
+                </h3>
+                
+                {/* Body */}
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.85rem", color: "rgba(176,168,152,0.7)", lineHeight: 1.75, marginBottom: "1.2rem" }}>
+                  {idx.body}
                 </p>
+                
+                {/* Link */}
+                <Link 
+                  href={idx.link}
+                  className="no-underline transition-colors duration-[180ms] hover:text-[#E8D5A3]"
+                  style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C4972F" }}
+                >
+                  {idx.live ? "Try Quick Mirror →" : "Learn More →"}
+                </Link>
               </div>
             ))}
+          </div>
+
+          {/* Primary CTA below grid */}
+          <div className="reveal mt-8">
+            <Link
+              href="/ai-edge-lab"
+              className="inline-block no-underline transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "#C4972F", color: "#0C0B09", padding: "14px 32px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#E8D5A3"; e.currentTarget.style.transform = "translateY(-1px)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.transform = "translateY(0)"; }}
+            >
+              Enter the AI Edge Lab →
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ═══ S04 — IN PRACTICE ═══ */}
-      <section style={{ background: "#F7F6F3", padding: "7rem 1.5rem" }} className="sm:px-14">
-        <div className="max-w-[1060px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          <div>
-            <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#878580", marginBottom: "2rem" }}>
-              In Practice
+      {/* ═══ S04 — SYSTEM FLOW ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section label */}
+          <div className="reveal flex items-center gap-4 mb-8">
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F" }}>
+              The Compound Logic
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(196,154,60,0.2)" }} />
+          </div>
+          
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(244,239,230,0.92)", lineHeight: 1.08, marginBottom: "1rem" }}>
+            Individual scores build into <em style={{ fontStyle: "italic", color: "#C4972F" }}>organisational intelligence.</em>
+          </h2>
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "1rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.85, marginBottom: "3rem", maxWidth: "640px" }}>
+            The four indexes are not independent assessments. They are a layered system — each level feeding into the next.
+          </p>
+
+          {/* System Flow Container */}
+          <div 
+            className="reveal reveal-d3"
+            style={{ 
+              border: "1px solid rgba(196,154,60,0.18)", 
+              padding: "2.5rem", 
+              background: "rgba(196,154,60,0.03)",
+            }}
+          >
+            {/* Header label */}
+            <div className="text-center mb-6" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(176,168,152,0.5)" }}>
+              How the indexes compound
             </div>
-            <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 700, color: "#141412", lineHeight: 1.2, marginBottom: "1rem" }}>
-              Three instruments. <em style={{ fontStyle: "italic", color: "#C4972F" }}>One system.</em>
-            </h2>
-            <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.9rem", color: "#3A3935", lineHeight: 1.8 }}>
-              Every engagement follows the same sequenced logic — regardless of entry point.
+
+            {/* 4 Nodes in a row with → separators */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
+              {[
+                { tier: "Index 01", title: "Individual Score", metric: "Edge Score 0–100" },
+                { tier: "Index 02", title: "Leadership Score", metric: "Density % + Altitude" },
+                { tier: "Index 04", title: "Org Architecture", metric: "Exposure Map + Roadmap" },
+                { tier: "Output", title: "Redesign Logic", metric: "12-Month Targets" },
+              ].map((node, i, arr) => (
+                <div key={node.tier} className="flex items-center">
+                  {/* Node */}
+                  <div 
+                    className="text-center transition-all duration-[250ms]"
+                    style={{ 
+                      padding: "1.5rem 2rem", 
+                      border: "1px solid rgba(196,154,60,0.18)", 
+                      minWidth: "180px",
+                      background: "transparent",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,154,60,0.03)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; }}
+                  >
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(176,168,152,0.5)", marginBottom: "0.5rem" }}>
+                      {node.tier}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.3rem", fontWeight: 700, color: "rgba(244,239,230,0.85)", marginBottom: "0.3rem" }}>
+                      {node.title}
+                    </div>
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", color: "#C4972F" }}>
+                      {node.metric}
+                    </div>
+                  </div>
+                  
+                  {/* Arrow separator (not on last) */}
+                  {i < arr.length - 1 && (
+                    <span className="hidden md:block px-4" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "1.2rem", color: "rgba(196,154,60,0.4)" }}>→</span>
+                  )}
+                  {i < arr.length - 1 && (
+                    <span className="block md:hidden py-2" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "1.2rem", color: "rgba(196,154,60,0.4)" }}>↓</span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Caption */}
+            <p className="text-center mt-6" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.95rem", color: "rgba(176,168,152,0.6)" }}>
+              The system builds on itself — <strong style={{ color: "#C4972F", fontStyle: "normal", fontWeight: 700 }}>individual clarity becomes organisational intelligence.</strong>
             </p>
           </div>
-          <div className="flex flex-col gap-0">
-            {[
-              { letter: "I", title: "Indices", body: "Frameworks that codify structural realities conventional HR instruments cannot measure." },
-              { letter: "D", title: "Diagnostics", body: "Live tools that turn abstract operating risk into immediate signal." },
-              { letter: "A", title: "Operating Frameworks", body: "The design layer that converts diagnosis into repeatable organisational rhythm." },
-            ].map((row, i) => (
-              <div
-                key={row.letter}
-                className={`reveal reveal-d${i + 1} group grid transition-all duration-[180ms]`}
-                style={{ 
-                  gridTemplateColumns: "3.5rem 1fr", 
-                  gap: "1.6rem", 
-                  alignItems: "center", 
-                  padding: "1.8rem 0", 
-                  borderBottom: i < 2 ? "1px solid rgba(0,0,0,0.08)" : "none",
-                  width: "100%",
-                  overflow: "hidden"
-                }}
-                onMouseEnter={(e) => { 
-                  e.currentTarget.style.background = "rgba(0,0,0,0.02)"; 
-                  e.currentTarget.style.transform = "translateX(3px)"; 
-                  const letter = e.currentTarget.querySelector(".row-letter") as HTMLElement;
-                  if (letter) letter.style.color = "#C4972F";
-                }}
-                onMouseLeave={(e) => { 
-                  e.currentTarget.style.background = "transparent"; 
-                  e.currentTarget.style.transform = "translateX(0)"; 
-                  const letter = e.currentTarget.querySelector(".row-letter") as HTMLElement;
-                  if (letter) letter.style.color = "rgba(0,0,0,0.12)";
-                }}
-              >
-                <div className="row-letter transition-colors duration-[180ms]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 300, color: "rgba(0,0,0,0.12)", lineHeight: 1 }}>
-                  {row.letter}
-                </div>
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.95rem", fontWeight: 600, color: "#141412", marginBottom: "0.3rem" }}>{row.title}</div>
-                  <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.82rem", color: "#878580", lineHeight: 1.7, wordWrap: "break-word", overflowWrap: "break-word" }}>{row.body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ═══ S04.5 — COMPRESSION-JUDGMENT FIELD ═══ */}
-      <section ref={fieldRef} style={{ background: "#000000", padding: "6rem 1.5rem 8rem" }} className="sm:px-16 md:px-24 lg:px-32">
-        <div className="max-w-[1060px] mx-auto text-center">
-          {/* Section tag */}
-          <p className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F", opacity: 0.6, marginBottom: "1.5rem" }}>
-            The Axion Field
-          </p>
+      {/* ═══ S05 — COMPRESSION-JUDGMENT FIELD ═══ */}
+      <section ref={fieldRef} style={{ background: "#2C2824", padding: "6rem 1.5rem 8rem" }} className="sm:px-14">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section label */}
+          <div className="reveal flex items-center gap-4 mb-8">
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F" }}>
+              The Compression-Judgment Field
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(196,154,60,0.2)" }} />
+          </div>
+          
           {/* Headline */}
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 700, color: "rgba(255,255,255,0.92)", lineHeight: 1.1, marginBottom: "1.5rem" }}>
-            Where work is <em style={{ fontStyle: "italic", color: "#C4972F" }}>moving.</em>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(244,239,230,0.92)", lineHeight: 1.08, marginBottom: "1rem" }}>
+            Every role has an <em style={{ fontStyle: "italic", color: "#C4972F" }}>address.</em>
           </h2>
-          {/* Supporting paragraph */}
-          <p className="reveal reveal-d2 max-w-[520px] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "1rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.7, marginBottom: "4rem" }}>
-            Work does not disappear. It moves — into compression or into judgment. The real question is where your work sits.
+          {/* Sub */}
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "1rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.85, marginBottom: "3rem", maxWidth: "640px" }}>
+            The CJF is Axion Index&apos;s signature diagnostic map — plotting the two forces that determine every role&apos;s future: how much of the work AI can compress, and how much judgment it demands.
           </p>
+          
+          {/* 2-column grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16 items-start">
 
           {/* The Field - with wrapper for axis labels */}
           <div className="relative max-w-[680px] mx-auto pl-14">
@@ -628,155 +774,230 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Caption */}
-          <p className="mt-8 max-w-[48ch] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.88rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.7 }}>
-            The future does not reward more work. It rewards work that sits <em style={{ color: "#C4972F" }}>above the compression line.</em>
-          </p>
-          <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", color: "rgba(255,255,255,0.16)", marginTop: "0.8rem" }}>
-            Role positions are illustrative.
-          </div>
+            {/* Right Column: Explanation + Legend */}
+            <div>
+              {/* Two paragraphs */}
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.88rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.8, marginBottom: "1.2rem" }}>
+                The Compression-Judgment Field maps two axes that determine every role&apos;s future. The vertical axis measures how much genuine human judgment the role requires. The horizontal axis measures how much of the work AI can already compress.
+              </p>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.88rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.8, marginBottom: "2rem" }}>
+                Your position on the field is your Edge Score. The higher and further left, the more defensible your role. The lower and further right, the more at risk from compression.
+              </p>
 
-          {/* Archetype Legend — 3-column grid */}
-          <div style={{ maxWidth: "560px", margin: "2.5rem auto 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-            {/* Header row */}
-            <div style={{ display: "grid", gridTemplateColumns: "5rem 1fr 1fr", gap: "1rem", padding: "0.6rem 0", borderBottom: "1px solid rgba(255,255,255,0.06)", marginBottom: "0.2rem" }}>
-              {["Score", "Archetype", "What it means"].map((h) => (
-                <span key={h} style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.42rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}>
-                  {h}
-                </span>
-              ))}
-            </div>
-            {/* Tier rows */}
-            {[
-              { range: "80–100", label: "Structural Architect", desc: "AI amplifies your leverage. You direct; others produce.", highlight: false },
-              { range: "70–79", label: "Strategic Leverager", desc: "Judgment-dominant. Your 6-month target.", highlight: false },
-              { range: "60–69", label: "Boundary Builder", desc: "Edge established. Deliberate compounding needed.", highlight: true },
-              { range: "50–59", label: "Output Manager", desc: "Judgment and output balanced. Active management required.", highlight: false },
-              { range: "<50", label: "Execution Operator", desc: "Output-primary. Immediate composition shift required.", highlight: false },
-            ].map((tier, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "5rem 1fr 1fr",
-                  gap: "1rem",
-                  padding: "0.7rem 0",
-                  borderBottom: "1px solid rgba(255,255,255,0.04)",
-                  background: tier.highlight ? "rgba(196,151,47,0.04)" : "transparent",
-                  transition: "background 200ms ease",
-                }}
+              {/* Archetype Legend Table */}
+              <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: "1.5rem" }}>
+                <thead>
+                  <tr style={{ borderBottom: "1px solid rgba(196,154,60,0.18)" }}>
+                    <th style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(176,168,152,0.5)", padding: "0.5rem 0.8rem", textAlign: "left" }}>Archetype</th>
+                    <th style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(176,168,152,0.5)", padding: "0.5rem 0.8rem", textAlign: "left" }}>Characteristic</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { archetype: "Structural Architect", char: "Designs systems. AI cannot replace systemic judgment." },
+                    { archetype: "Strategic Leverager", char: "Uses AI to amplify judgment. Stays above compression." },
+                    { archetype: "Boundary Builder", char: "Manages AI-human interface. Role evolving rapidly." },
+                    { archetype: "Output Manager", char: "Manages AI outputs. Partial compression exposure." },
+                    { archetype: "Execution Operator", char: "High compression risk. Redesign required now." },
+                  ].map((row, i, arr) => (
+                    <tr key={row.archetype} style={{ borderBottom: i < arr.length - 1 ? "1px solid rgba(196,154,60,0.09)" : "none" }}>
+                      <td style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "#C4972F", padding: "0.55rem 0.8rem" }}>{row.archetype}</td>
+                      <td style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.78rem", color: "rgba(176,168,152,0.6)", padding: "0.55rem 0.8rem" }}>{row.char}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {/* CTA */}
+              <a
+                href="https://www.axionindex.org/ai-edge-lab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 no-underline transition-all duration-[180ms]"
+                style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(176,168,152,0.7)", border: "1px solid rgba(196,154,60,0.18)", padding: "0.8rem 1.4rem" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C4972F"; e.currentTarget.style.background = "rgba(196,154,60,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,0.18)"; e.currentTarget.style.background = "transparent"; }}
               >
-                {/* Score range */}
-                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                  {tier.highlight && <span style={{ color: "#C4972F", fontSize: "0.5rem" }}>◀</span>}
-                  <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", color: tier.highlight ? "#C4972F" : "rgba(255,255,255,0.22)" }}>
-                    {tier.range}
-                  </span>
-                </div>
-                {/* Archetype name */}
-                <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.78rem", fontWeight: tier.highlight ? 500 : 400, color: tier.highlight ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.3)" }}>
-                  {tier.label}
-                </span>
-                {/* Description */}
-                <span style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.7rem", color: tier.highlight ? "rgba(255,255,255,0.45)" : "rgba(255,255,255,0.18)", lineHeight: 1.45 }}>
-                  {tier.desc}
-                </span>
-              </div>
-            ))}
+                Locate your role — Try Quick Mirror →
+              </a>
+            </div>
           </div>
-
-          {/* CTA */}
-          <Link
-            href="/ai-edge-lab"
-            className="inline-flex items-center gap-3 mt-8 no-underline transition-all duration-[180ms]"
-            style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C4972F", border: "1px solid rgba(196,151,47,0.25)", padding: "0.9rem 1.6rem", borderRadius: "4px" }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.08)"; e.currentTarget.style.borderColor = "#C4972F"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 0 24px rgba(196,151,47,0.28), 0 4px 16px rgba(196,151,47,0.15)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.25)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
-          >
-            Locate your role — Try Quick Mirror
-          </Link>
         </div>
       </section>
 
-      {/* Section break between Axion Field and Framework */}
-      <div style={{ background: "#000000", padding: "0 1.5rem" }} className="sm:px-14">
-        <div className="max-w-[400px] mx-auto flex items-center gap-6">
-          <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(196,151,47,0.3))" }} />
-          <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.2em", color: "rgba(196,151,47,0.4)" }}>◆</div>
-          <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(196,151,47,0.3))" }} />
-        </div>
-      </div>
-
-      {/* ═══ S05 — FRAMEWORK ═══ */}
-      <section id="framework" ref={frameworkRef} style={{ background: "#000000", padding: "9rem 1.5rem 10rem" }} className="sm:px-14">
-        <div className="max-w-[1060px] mx-auto text-center" style={{ background: "transparent" }}>
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginBottom: "1.5rem", background: "transparent" }}>
-            The Signature Framework
+      {/* ═══ S06 — BRAINPOWER DENSITY ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section label */}
+          <div className="reveal flex items-center gap-4 mb-8">
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F" }}>
+              Brainpower Density Index
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(196,154,60,0.2)" }} />
           </div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2.8rem, 5.5vw, 5rem)", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem", background: "transparent" }}>
+          
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(244,239,230,0.92)", lineHeight: 1.08, marginBottom: "3rem" }}>
+            What percentage of your week is <em style={{ fontStyle: "italic", color: "#C4972F" }}>genuinely consequential?</em>
+          </h2>
+
+          {/* 2-column grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Left: Intro + Tabs */}
+            <div>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.85, marginBottom: "1.2rem" }}>
+                Most leaders believe they work in high-impact, judgment-led work most of the time. The data says otherwise. The Brainpower Density Index measures the gap — and gives leaders the language and architecture to close it.
+              </p>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.85, marginBottom: "2rem" }}>
+                Select your density profile to see what a typical week looks like — and what it should look like.
+              </p>
+
+              {/* 3-tab selector */}
+              <div className="flex" style={{ border: "1px solid rgba(196,154,60,0.18)" }}>
+                {["Low Density", "Mid Density", "High Density"].map((tab, i) => (
+                  <button
+                    key={tab}
+                    onClick={() => {
+                      const insight = document.getElementById("density-insight");
+                      const bars = document.querySelectorAll(".density-bar");
+                      const values = [
+                        [15, 10, 35, 25, 15],
+                        [35, 20, 25, 12, 8],
+                        [60, 22, 10, 5, 3],
+                      ];
+                      const insights = [
+                        "<strong>Low Density Leader</strong> — Less than 25% of working hours are in genuinely judgment-led work. The rest is execution, coordination, and reporting that should sit below the leader's altitude. Decision latency is high. Strategic output is compressed.",
+                        "<strong>Mid Density Leader</strong> — Around 55% in judgment and strategic work. Better than average, but coordination and execution still consume a significant fraction. Redesign opportunity exists at the margins — where 10% reallocation produces disproportionate output gain.",
+                        "<strong>High Density Leader</strong> — Over 80% in judgment-led and strategic work. The operating architecture is working. Decision latency is low. This leader is functioning at the altitude the role demands — and the organisation benefits proportionally.",
+                      ];
+                      if (insight) insight.innerHTML = insights[i];
+                      bars.forEach((bar, bi) => {
+                        (bar as HTMLElement).style.width = values[i][bi] + "%";
+                      });
+                      document.querySelectorAll(".density-tab").forEach((t, ti) => {
+                        (t as HTMLElement).style.background = ti === i ? "rgba(196,154,60,0.1)" : "transparent";
+                        (t as HTMLElement).style.color = ti === i ? "#C4972F" : "rgba(176,168,152,0.5)";
+                      });
+                    }}
+                    className="density-tab flex-1 text-center cursor-pointer transition-all duration-[180ms]"
+                    style={{ 
+                      fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
+                      fontSize: "0.58rem", 
+                      letterSpacing: "0.08em", 
+                      textTransform: "uppercase", 
+                      padding: "0.6rem 1.2rem",
+                      background: i === 0 ? "rgba(196,154,60,0.1)" : "transparent",
+                      color: i === 0 ? "#C4972F" : "rgba(176,168,152,0.5)",
+                      border: "none",
+                      borderRight: i < 2 ? "1px solid rgba(196,154,60,0.18)" : "none",
+                    }}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
+              {/* Insight box */}
+              <div id="density-insight" style={{ padding: "1rem 1.3rem", border: "1px solid rgba(196,154,60,0.18)", borderTop: "none", background: "rgba(196,154,60,0.04)", fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.7 }}>
+                <strong style={{ color: "#C4972F" }}>Low Density Leader</strong> — Less than 25% of working hours are in genuinely judgment-led work. The rest is execution, coordination, and reporting that should sit below the leader&apos;s altitude. Decision latency is high. Strategic output is compressed.
+              </div>
+            </div>
+
+            {/* Right: Bar Chart */}
+            <div style={{ border: "1px solid rgba(196,154,60,0.18)", padding: "1.5rem", background: "rgba(196,154,60,0.02)" }}>
+              {[
+                { label: "Judgment work", value: 15, type: "hi" },
+                { label: "Strategic input", value: 10, type: "hi" },
+                { label: "Coordination", value: 35, type: "lo" },
+                { label: "Execution", value: 25, type: "lo" },
+                { label: "Reporting / admin", value: 15, type: "lo" },
+              ].map((bar, i) => (
+                <div key={bar.label} className="flex items-center gap-3 mb-3">
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "rgba(176,168,152,0.5)", minWidth: "120px", textAlign: "right" }}>
+                    {bar.label}
+                  </div>
+                  <div className="flex-1" style={{ height: "8px", background: "rgba(196,154,60,0.1)" }}>
+                    <div 
+                      className="density-bar h-full transition-all duration-500"
+                      style={{ 
+                        width: bar.value + "%", 
+                        background: bar.type === "hi" ? "#C4972F" : "#8C3B28",
+                      }}
+                    />
+                  </div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "rgba(176,168,152,0.5)", minWidth: "2.5rem" }}>
+                    {bar.value}%
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S07 — FRAMEWORK ═══ */}
+      <section id="framework" ref={frameworkRef} style={{ background: "#1A2030", padding: "6rem 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section label */}
+          <div className="reveal flex items-center gap-4 mb-8">
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F" }}>
+              The Core Framework
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(196,154,60,0.2)" }} />
+          </div>
+          
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(244,239,230,0.92)", lineHeight: 1.08, marginBottom: "1rem" }}>
             Belief → Conviction → <em style={{ fontStyle: "italic", color: "#C4972F" }}>Rhythm</em>
           </h2>
-          <p className="reveal reveal-d2 max-w-[44ch] mx-auto" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.92rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.8, marginBottom: "4rem", background: "transparent" }}>
-            Every organisation fails at the same inflection point. This sequence makes the failure visible — before it becomes irreversible.
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "1rem", color: "rgba(176,168,152,0.8)", lineHeight: 1.85, marginBottom: "3rem", maxWidth: "640px" }}>
+            Every Axion Index engagement diagnoses where an organisation is stuck in this sequence. This is not a leadership philosophy. It is an operating sequence — and its failure at any stage is detectable before it becomes catastrophic.
           </p>
 
-          {/* 3-node sequence */}
-          <div className="grid grid-cols-1 md:grid-cols-3" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
+          {/* 4-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-4" style={{ border: "1px solid rgba(196,154,60,0.18)" }}>
             {[
-              { stage: "01", word: "Belief", desc: "Founder-led. Powerful — but unscalable if it lives in one person's head." },
-              { stage: "02", word: "Conviction", desc: "Shared, tested, internalised. Survives disagreement. Moves without the founder in the room." },
-              { stage: "03", word: "Rhythm", desc: "Repeatable behaviour. Consistent decisions. Governance that holds under pressure." },
+              { stage: "Stage 01", word: "Belief", desc: "The founder's private conviction. Felt before it can be articulated. Fragile if it lives in one person's head.", isFailure: false },
+              { stage: "Stage 02", word: "Conviction", desc: "Belief that has been shared, tested, and internalised. It can now survive disagreement without the founder in the room.", isFailure: false },
+              { stage: "Stage 03", word: "Rhythm", desc: "Conviction that has become repeatable behaviour — consistent decisions, predictable culture, governance that holds under pressure.", isFailure: false },
+              { stage: "Failure Mode", word: "Fragility", desc: "Belief without conviction becomes fragility. Conviction without rhythm becomes bureaucracy. This is where most organisations lose the plot.", isFailure: true },
             ].map((node, i) => (
               <div
                 key={node.stage}
-                className="relative transition-all duration-300 cursor-default"
+                className="relative transition-all duration-300"
                 style={{
-                  padding: "3rem 2rem",
-                  borderRight: i < 2 ? "1px solid rgba(255,255,255,0.07)" : "none",
-                  opacity: frameworkStep > i ? 1 : 0.1,
+                  padding: "2.2rem 1.5rem",
+                  borderRight: i < 3 ? "1px solid rgba(196,154,60,0.18)" : "none",
+                  background: node.isFailure ? "rgba(140,59,40,0.06)" : "transparent",
                 }}
-                onMouseEnter={(e) => { if (frameworkStep > i) e.currentTarget.style.boxShadow = "inset 0 0 80px rgba(196,151,47,0.10), 0 2px 16px rgba(0,0,0,0.25)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = node.isFailure ? "rgba(140,59,40,0.1)" : "rgba(196,154,60,0.05)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = node.isFailure ? "rgba(140,59,40,0.06)" : "transparent"; }}
               >
-                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", color: frameworkStep > i ? "#C4972F" : "rgba(255,255,255,0.2)", marginBottom: "1rem" }}>
-                  Stage {node.stage}
-                </div>
-                <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 700, color: frameworkStep > i ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.1)", marginBottom: "0.8rem" }}>
-                  {node.word}
-                </div>
-                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: frameworkStep > i ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.1)", lineHeight: 1.7 }}>
-                  {node.desc}
-                </p>
-                {/* Connector arrow */}
-                {i < 2 && (
-                  <div
-                    className="hidden md:block absolute top-1/2 -right-3 -translate-y-1/2 transition-opacity duration-300"
-                    style={{ opacity: frameworkStep > i + 1 ? 1 : 0, color: "#C4972F", fontSize: "1.2rem" }}
+                {/* Arrow connector (not on last) */}
+                {i < 3 && (
+                  <div 
+                    className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 items-center justify-center z-10"
+                    style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.9rem", color: "#C4972F", background: "#1A2030", border: "1px solid rgba(196,154,60,0.18)", padding: "2px 4px" }}
                   >
                     →
                   </div>
                 )}
+                
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.14em", textTransform: "uppercase", color: node.isFailure ? "#8C3B28" : "#C4972F", marginBottom: "1rem" }}>
+                  {node.stage}
+                </div>
+                <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, color: node.isFailure ? "#8C3B28" : "rgba(244,239,230,0.85)", marginBottom: "0.8rem" }}>
+                  {node.word}
+                </div>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "rgba(176,168,152,0.6)", lineHeight: 1.75 }}>
+                  {node.desc}
+                </p>
               </div>
             ))}
           </div>
 
-          {/* Failure band */}
-          <div
-            className="mt-8 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 text-left transition-opacity duration-500"
-            style={{
-              opacity: frameworkStep >= 6 ? 1 : 0,
-              background: "rgba(140,59,40,0.04)",
-              border: "1px solid rgba(140,59,40,0.3)",
-              padding: "2rem 2.5rem",
-            }}
-          >
-            <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.4rem", fontWeight: 700, color: "#8C3B28" }}>
-              Fragility
-            </div>
-            <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.88rem", color: "#8C3B28", lineHeight: 1.8 }}>
-              Belief without conviction becomes fragility. Conviction without rhythm becomes bureaucracy. Every engagement begins with one question: <strong>where in this sequence has your organisation broken down?</strong>
-            </p>
-          </div>
+          {/* Caption */}
+          <p className="reveal text-center mt-6" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1rem", color: "rgba(176,168,152,0.6)" }}>
+            Every engagement begins with one question: <strong style={{ color: "#C4972F", fontStyle: "normal", fontWeight: 700 }}>where in this sequence has your organisation broken down?</strong>
+          </p>
         </div>
       </section>
 
@@ -825,74 +1046,117 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ S07 — HOW IT WORKS ═══ */}
-      <section style={{ background: "#F7F6F3", padding: "7rem 1.5rem" }} className="sm:px-14">
-        <div className="max-w-[780px] mx-auto text-center">
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#878580", marginBottom: "2rem" }}>
-            How It Works
+      {/* ═══ S08 — DOMAINS ═══ */}
+      <section style={{ background: "#F4EFE6", padding: "6rem 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section label */}
+          <div className="reveal flex items-center gap-4 mb-8">
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28" }}>
+              Areas of Practice
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(140,59,40,0.2)" }} />
           </div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 700, color: "#141412", marginBottom: "3rem" }}>
-            Three steps. <em style={{ fontStyle: "italic", color: "#C4972F" }}>No ambiguity.</em>
+          
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#0C0B09", lineHeight: 1.08, marginBottom: "3rem" }}>
+            Deep expertise in the domains <em style={{ fontStyle: "italic", color: "#C4972F" }}>conventional HR has left most exposed.</em>
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3" style={{ border: "1px solid rgba(0,0,0,0.08)" }}>
+          {/* 2-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { num: "1", title: "Diagnose", body: "Start with signal." },
-              { num: "2", title: "Identify structural gaps", body: "Surface where the operating architecture is breaking." },
-              { num: "3", title: "Redesign", body: "Rebuild the system before scale hardens the fracture." },
-            ].map((step, i) => (
+              { 
+                title: "Labour Codes as Organisational Design",
+                body: "India's new Labour Codes are not primarily a compliance question. They are a design problem — exposing the institutional debt organisations built while scaling past human infrastructure. Axion Index translates legislative complexity into operating architecture: compliance as a people system, not a legal checkbox.",
+                link: "/labour-codes"
+              },
+              { 
+                title: "Family Business HR",
+                body: "The largest employer class in India has almost no frameworks designed for it. Loyalty vs merit, patriarch authority, multi-generational belief systems — Axion Index builds operating logic for organisations where blood and business intersect. This is not conventional HR. It is a distinct operating discipline.",
+                link: "/family-business"
+              },
+            ].map((card, i) => (
               <div
-                key={step.num}
-                className={`reveal reveal-d${i + 1} group relative transition-all duration-[280ms]`}
-                style={{ padding: "2.5rem 2rem", borderRight: i < 2 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 6px 28px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+                key={card.title}
+                className={`reveal reveal-d${i + 1} group relative transition-all duration-[250ms]`}
+                style={{ padding: "2.2rem", border: "1px solid rgba(140,59,40,0.15)", background: "#FAF8F4" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#8C3B28"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "inset 0 0 50px rgba(196,154,60,0.07)"; const bar = e.currentTarget.querySelector(".top-bar") as HTMLElement; if (bar) bar.style.transform = "scaleX(1)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(140,59,40,0.15)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; const bar = e.currentTarget.querySelector(".top-bar") as HTMLElement; if (bar) bar.style.transform = "scaleX(0)"; }}
               >
-                <div className="transition-colors duration-[180ms] group-hover:text-[#C4972F]" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "3.5rem", fontWeight: 300, color: "rgba(0,0,0,0.08)", lineHeight: 1, marginBottom: "1rem" }}>
-                  {step.num}
+                {/* Top bar */}
+                <div className="top-bar absolute top-0 left-0 right-0 h-[3px] bg-[#8C3B28] origin-left transition-transform duration-300" style={{ transform: "scaleX(0)" }} />
+                
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
+                  Domain Practice
                 </div>
-                <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.95rem", fontWeight: 600, color: "#141412", marginBottom: "0.5rem" }}>{step.title}</div>
-                <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.82rem", color: "#878580", lineHeight: 1.7 }}>{step.body}</p>
+                <h3 style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 700, color: "#0C0B09", marginBottom: "0.8rem" }}>
+                  {card.title}
+                </h3>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.85rem", color: "#4A433C", lineHeight: 1.75, marginBottom: "1.2rem" }}>
+                  {card.body}
+                </p>
+                <Link
+                  href={card.link}
+                  className="no-underline transition-colors duration-[180ms]"
+                  style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8C3B28" }}
+                >
+                  Explore →
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ S08 — WHAT WE ARE NOT ═══ */}
-      <section style={{ background: "#000000", padding: "8rem 1.5rem" }} className="sm:px-14">
-        <div className="max-w-[1060px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          <div>
-            <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,151,47,0.5)", marginBottom: "2rem" }}>
-              Positioning
-            </div>
-            <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 700, color: "rgba(255,255,255,0.85)", lineHeight: 1.2, marginBottom: "1rem" }}>
-              We are not what you <em style={{ fontStyle: "italic", color: "#C4972F" }}>think</em> we are.
-            </h2>
-            <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.88rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.8 }}>
-              The distinction matters. Most of what is sold as HR transformation is not architecture. It is maintenance — of a system that was already the wrong design.
-            </p>
+      {/* ═══ S09 — PROOF NUMBERS ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 1.5rem" }} className="sm:px-14">
+        <div className="max-w-[1240px] mx-auto">
+          {/* Section label */}
+          <div className="reveal flex items-center gap-4 mb-8">
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C4972F" }}>
+              The Evidence
+            </span>
+            <div className="flex-1 h-px" style={{ background: "rgba(196,154,60,0.2)" }} />
           </div>
-          <div className="flex flex-col gap-0">
+          
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "rgba(244,239,230,0.92)", lineHeight: 1.08, marginBottom: "3rem" }}>
+            The numbers that make <em style={{ fontStyle: "italic", color: "#C4972F" }}>the argument.</em>
+          </h2>
+
+          {/* 3-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3" style={{ border: "1px solid rgba(196,154,60,0.18)" }}>
             {[
-              { title: "We do not run HR programs.", body: "We redesign the system beneath them." },
-              { title: "We do not implement systems.", body: "Implementation without architecture is just installing the wrong infrastructure faster." },
-              { title: "We do not sell software.", body: "The framework came first. The software is the proof, not the premise." },
-            ].map((row, i) => (
+              { 
+                number: "60%",
+                label: "of work tasks are AI-compressible",
+                body: "In the average knowledge-work role, more than half of daily task volume can be partially or fully performed by AI — without loss of output quality."
+              },
+              { 
+                number: "<40%",
+                label: "of leadership time is genuinely consequential",
+                body: "In most organisations, senior leaders spend less than 40% of their working week in the judgment-led work their role was designed for. The rest is execution drag."
+              },
+              { 
+                number: "1.3–1.5×",
+                label: "productivity uplift from architectural redesign",
+                body: "Organisations that realign role design with the Compression-Judgment framework consistently see measurable output gains — not from harder work, but from better architecture."
+              },
+            ].map((stat, i) => (
               <div
-                key={row.title}
-                className={`reveal reveal-d${i + 1} group flex items-start gap-4 transition-all duration-[180ms]`}
-                style={{ padding: "1.5rem 0 1.5rem 1rem", borderLeft: "2px solid rgba(196,151,47,0.15)", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.04)" : "none" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#111111"; e.currentTarget.style.transform = "translateX(3px)"; e.currentTarget.style.borderLeftColor = "#C4972F"; e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,151,47,0.10), -2px 0 16px rgba(196,151,47,0.15)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateX(0)"; e.currentTarget.style.borderLeftColor = "rgba(196,151,47,0.15)"; e.currentTarget.style.boxShadow = "none"; }}
+                key={stat.number}
+                className={`reveal reveal-d${i + 1} text-center transition-all duration-[250ms]`}
+                style={{ padding: "3rem 2.5rem", borderRight: i < 2 ? "1px solid rgba(196,154,60,0.18)" : "none" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,154,60,0.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
               >
-                <div className="transition-all duration-[180ms] group-hover:text-[#C4972F] group-hover:scale-[1.15]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.9rem", color: "rgba(255,255,255,0.3)" }}>
-                  ×
+                <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(3.5rem, 7vw, 6rem)", fontWeight: 700, color: "#C4972F", lineHeight: 1, letterSpacing: "-0.03em", marginBottom: "0.8rem" }}>
+                  {stat.number}
                 </div>
-                <div>
-                  <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.95rem", fontWeight: 600, color: "rgba(255,255,255,0.85)", marginBottom: "0.3rem" }}>{row.title}</div>
-                  <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.7 }}>{row.body}</p>
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(176,168,152,0.7)", marginBottom: "1rem" }}>
+                  {stat.label}
                 </div>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif', fontSize: "0.82rem", color: "rgba(176,168,152,0.6)", lineHeight: 1.75 }}>
+                  {stat.body}
+                </p>
               </div>
             ))}
           </div>
