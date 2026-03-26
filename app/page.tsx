@@ -169,6 +169,16 @@ export default function HomePage() {
         .hamburger.open span:nth-child(3) {
           transform: rotate(-45deg) translate(4px, -4px);
         }
+        
+        /* Mobile responsive hero */
+        @media (max-width: 960px) {
+          .hero-section {
+            padding: calc(72px + 3rem) 1.5rem 3rem !important;
+          }
+          .hero-h1 {
+            font-size: clamp(2.8rem, 8vw, 3.8rem) !important;
+          }
+        }
       `}</style>
 
       {/* ═══ NAV ═══ */}
@@ -564,7 +574,7 @@ export default function HomePage() {
       {/* ═══ HERO ═══ */}
       <section
         ref={heroRef}
-        className="relative min-h-screen overflow-hidden"
+        className="hero-section relative min-h-screen overflow-hidden"
         style={{ 
           background: "#0C0B09",
           padding: "calc(72px + 5rem) 3.5rem 5rem"
@@ -594,7 +604,7 @@ export default function HomePage() {
 
             {/* H1 */}
             <h1
-              className="fade-up fade-up-d2"
+              className="hero-h1 fade-up fade-up-d2"
               style={{
                 fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
                 fontSize: "clamp(3rem, 5.5vw, 5.2rem)",
@@ -796,17 +806,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Mobile: hide padding adjustment */}
-        <style jsx>{`
-          @media (max-width: 960px) {
-            section {
-              padding: calc(72px + 3rem) 1.5rem 3rem !important;
-            }
-            h1 {
-              font-size: clamp(2.8rem, 8vw, 3.8rem) !important;
-            }
-          }
-        `}</style>
       </section>
 
       {/* ═══ TICKER ═══ */}
