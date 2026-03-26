@@ -1154,7 +1154,7 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(176,168,152,0.7)", marginBottom: "1rem" }}>
                   {stat.label}
                 </div>
-                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif', fontSize: "0.82rem", color: "rgba(176,168,152,0.6)", lineHeight: 1.75 }}>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "rgba(176,168,152,0.6)", lineHeight: 1.75 }}>
                   {stat.body}
                 </p>
               </div>
