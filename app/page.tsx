@@ -1048,12 +1048,296 @@ export default function HomePage() {
       {/* ═══ S6 — BRAINPOWER DENSITY ═══ */}
       <BrainpowerDensitySection />
 
-      {/* Placeholder for remaining sections - Part 3 will add these */}
-      <section style={{ background: "#0C0B09", padding: "6rem 2rem", textAlign: "center" }}>
-        <p style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.7rem", color: "rgba(196,154,60,.4)", letterSpacing: "0.1em" }}>
-          [Remaining sections will be added in Part 3]
-        </p>
+      {/* ═══ S7 — FRAMEWORK ═══ */}
+      <section style={{ background: "#1A2030", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+            The Core Framework
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>
+            Belief → Conviction → <em style={{ fontStyle: "italic", color: "#C49A3C" }}>Rhythm</em>
+          </h2>
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginBottom: "3rem", maxWidth: "64ch" }}>
+            Every Axion Index engagement diagnoses where an organisation is stuck in this sequence. Not a leadership philosophy — an operating sequence whose failure is detectable before it becomes catastrophic.
+          </p>
+
+          <div className="reveal reveal-d3 grid grid-cols-1 lg:grid-cols-4" style={{ border: "1px solid rgba(196,154,60,.2)" }}>
+            {[
+              { stage: "Stage 01", word: "Belief", body: "The founder's private conviction. Felt before it can be articulated. Fragile if it lives in one person's head.", isLast: false },
+              { stage: "Stage 02", word: "Conviction", body: "Belief that has been shared, tested, and internalised. Survives disagreement without the founder in the room.", isLast: false },
+              { stage: "Stage 03", word: "Rhythm", body: "Conviction that has become repeatable behaviour — consistent decisions, predictable culture, governance under pressure.", isLast: false },
+              { stage: "Failure Mode", word: "Fragility", body: "Belief without conviction becomes fragility. Conviction without rhythm becomes bureaucracy. This is where most organisations lose the plot.", isLast: true },
+            ].map((node, i) => (
+              <div
+                key={node.stage}
+                className="relative transition-colors duration-[180ms]"
+                style={{ padding: "2.2rem 1.5rem", borderRight: i < 3 ? "1px solid rgba(196,154,60,.2)" : "none", borderBottom: "1px solid rgba(196,154,60,.2)", background: node.isLast ? "rgba(140,59,40,.06)" : "transparent" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = node.isLast ? "rgba(140,59,40,.1)" : "rgba(196,154,60,.05)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = node.isLast ? "rgba(140,59,40,.06)" : "transparent"; }}
+              >
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.14em", textTransform: "uppercase", color: node.isLast ? "#8C3B28" : "#C49A3C", marginBottom: "0.8rem" }}>{node.stage}</div>
+                <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, color: node.isLast ? "#8C3B28" : "#F4EFE6", marginBottom: "0.8rem" }}>{node.word}</div>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", lineHeight: 1.75 }}>{node.body}</p>
+                {!node.isLast && (
+                  <div className="hidden lg:flex absolute items-center justify-center" style={{ right: "-13px", top: "50%", transform: "translateY(-50%)", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.9rem", color: "#C49A3C", background: "#1A2030", border: "1px solid rgba(196,154,60,.2)", padding: "2px 4px", zIndex: 2 }}>→</div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <p className="reveal text-center" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1rem", color: "#6B6358", marginTop: "1.6rem" }}>
+            Every engagement begins with one question: <strong style={{ color: "#C49A3C", fontStyle: "normal" }}>where in this sequence has your organisation broken down?</strong>
+          </p>
+        </div>
       </section>
+
+      {/* ═══ S8 — DOMAINS ═══ */}
+      <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
+            Areas of Practice
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#0C0B09", marginBottom: "3rem" }}>
+            Deep expertise in the domains <em style={{ fontStyle: "italic", color: "#8C3B28" }}>conventional HR has left most exposed.</em>
+          </h2>
+
+          <div className="reveal reveal-d2 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              { tag: "Domain Practice", title: "Labour Codes as Organisational Design", body: "India's new Labour Codes are not primarily a compliance question. They are a design problem — exposing the institutional debt organisations built while scaling past human infrastructure. Axion Index translates legislative complexity into operating architecture.", link: "Explore →", href: "/labour-codes" },
+              { tag: "Domain Practice", title: "Family Business HR", body: "The largest employer class in India has almost no frameworks designed for it. Loyalty vs merit, patriarch authority, multi-generational belief systems — Axion Index builds operating logic for organisations where blood and business intersect.", link: "Explore →", href: "/family-business" },
+            ].map((card) => (
+              <div
+                key={card.title}
+                className="relative group transition-all duration-[250ms]"
+                style={{ padding: "2.2rem", border: "1px solid rgba(140,59,40,.15)", background: "#FAF8F4" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#8C3B28"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(140,59,40,.15)"; e.currentTarget.style.transform = "translateY(0)"; }}
+              >
+                <div className="absolute top-0 left-0 right-0 h-[3px] origin-left transition-transform duration-[300ms] scale-x-0 group-hover:scale-x-100" style={{ background: "#8C3B28" }} />
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>{card.tag}</div>
+                <h3 style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.4rem", fontWeight: 700, color: "#0C0B09", marginBottom: "0.8rem" }}>{card.title}</h3>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.85rem", color: "#4A433C", lineHeight: 1.65, marginBottom: "1.5rem" }}>{card.body}</p>
+                <Link href={card.href} className="no-underline transition-colors duration-[150ms] hover:opacity-70" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28" }}>{card.link}</Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S9 — PROOF NUMBERS ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+            The Evidence
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "3rem" }}>
+            The numbers that make <em style={{ fontStyle: "italic", color: "#C49A3C" }}>the argument.</em>
+          </h2>
+
+          <div className="reveal reveal-d2 grid grid-cols-1 md:grid-cols-3" style={{ border: "1px solid rgba(196,154,60,.2)" }}>
+            {[
+              { num: "60%", label: "of work tasks are AI-compressible", body: "In the average knowledge-work role, more than half of daily task volume can be partially or fully performed by AI — without loss of output quality." },
+              { num: "<40%", label: "of leadership time is genuinely consequential", body: "In most organisations, senior leaders spend less than 40% of their working week in the judgment-led work their role was designed for. The rest is execution drag." },
+              { num: "1.3–1.5×", label: "productivity uplift from architectural redesign", body: "Organisations that realign role design with the Compression-Judgment framework consistently see measurable output gains — not from harder work, but from better architecture." },
+            ].map((stat, i) => (
+              <div
+                key={stat.num}
+                className="transition-colors duration-[180ms] text-center"
+                style={{ padding: "3rem 2.5rem", borderRight: i < 2 ? "1px solid rgba(196,154,60,.2)" : "none" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,154,60,.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+              >
+                <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(3.5rem, 7vw, 6rem)", fontWeight: 700, color: "#C49A3C", lineHeight: 1, letterSpacing: "-0.03em", marginBottom: "0.8rem" }}>{stat.num}</div>
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358", marginBottom: "1rem" }}>{stat.label}</div>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#6B6358", lineHeight: 1.65 }}>{stat.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S10 — ABOUT / INSTITUTION ═══ */}
+      <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
+            The Institution
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#0C0B09", marginBottom: "3rem" }}>
+            Axion Index is not a consulting firm. It is not a software company. <em style={{ fontStyle: "italic", color: "#8C3B28" }}>It is an operating intelligence platform.</em>
+          </h2>
+
+          <div className="reveal reveal-d2 grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-16">
+            {/* Left: Paragraphs */}
+            <div>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9, marginBottom: "1.5rem" }}>
+                Axion Index measures the impact of AI on individuals, leaders, and organisations through four proprietary indexes. It redesigns organisations for the AI economy through expert engagements. It builds intellectual frameworks that define how serious organisations think about work.
+              </p>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9, marginBottom: "1.5rem" }}>
+                Every engagement begins with measurement, not assumption. The four indexes — AI Replaceability, Brainpower Density, AI Aligned, and the Organisation Decision Architecture Index — are Axion Index&apos;s signature intellectual property. <strong>They are not generic tools.</strong> The output of a specific point of view about how AI is restructuring the economics of work.
+              </p>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9, marginBottom: "1.5rem" }}>
+                Axion Index operates under the intellectual influence of <strong>Nitin Nahata</strong>, Operating Architect, with 22 years across Tata Group, Standard Chartered, Udaan, and Gameskraft. The thinking behind the platform is his. The platform itself is designed to scale beyond any one practitioner. <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.3)" }}>nitinnahata.com →</a>
+              </p>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9 }}>
+                Most organisations don&apos;t fail because of bad strategy. They fail because the system underneath cannot carry the strategy. Axion Index exists to solve that gap — before the break becomes visible.
+              </p>
+            </div>
+
+            {/* Right: What Axion Index Is Not */}
+            <div style={{ border: "1px solid rgba(140,59,40,.15)", padding: "1.8rem", background: "#FAF8F4" }}>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.1)", paddingBottom: "0.6rem", marginBottom: "1rem" }}>
+                What Axion Index Is Not
+              </div>
+              {[
+                "Not a consulting firm — does not sell time",
+                "Not a software company — does not sell licenses",
+                "Not a training company — does not sell courses",
+                "Not a personal brand platform — Nitin has his own site",
+              ].map((item) => (
+                <div key={item} style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#4A433C", padding: "0.55rem 0", borderBottom: "1px solid rgba(140,59,40,.07)" }}>
+                  <strong style={{ color: "#8C3B28" }}>Not</strong>{item.substring(3)}
+                </div>
+              ))}
+              <p style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.95rem", color: "#8C3B28", lineHeight: 1.6, marginTop: "1rem" }}>
+                It is an operating intelligence platform — a new category.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STATEMENT BAND ═══ */}
+      <section style={{ background: "#F4EFE6", padding: "7rem 3.5rem", textAlign: "center", borderBottom: "1px solid rgba(196,154,60,.2)" }}>
+        <div className="max-w-[800px] mx-auto">
+          <div className="reveal flex items-center justify-center gap-4" style={{ marginBottom: "2rem" }}>
+            <div style={{ width: "2.2rem", height: "1px", background: "#8C3B28", opacity: 0.5 }} />
+            <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.57rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28" }}>The Founding Statement</span>
+            <div style={{ width: "2.2rem", height: "1px", background: "#8C3B28", opacity: 0.5 }} />
+          </div>
+
+          <blockquote className="reveal reveal-d1 relative" style={{ maxWidth: "56ch", margin: "0 auto 2rem", fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)", color: "#0C0B09", lineHeight: 1.65 }}>
+            <span className="absolute hidden md:block" style={{ top: "-1.5rem", left: "-2rem", fontSize: "5.5rem", fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", color: "#8C3B28", opacity: 0.13, lineHeight: 1 }}>&ldquo;</span>
+            &ldquo;HR&apos;s role is not to manage people or protect culture — but to architect the operating system that aligns human energy with organisational rhythm, so belief becomes conviction, conviction becomes repeatable behaviour, and chaos evolves into sustainable performance.&rdquo;
+          </blockquote>
+
+          <div className="reveal reveal-d2" style={{ width: "2.5rem", height: "1px", background: "#8C3B28", opacity: 0.4, margin: "0.35rem auto 1rem" }} />
+          <div className="reveal reveal-d3" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#8C3B28" }}>
+            Nitin Nahata, Founder · Axion Index
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S11 — FINAL CTA ═══ */}
+      <section style={{ background: "#0C0B09", padding: "6rem 3.5rem", borderBottom: "1px solid rgba(196,154,60,.2)" }}>
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
+          {/* Left */}
+          <div>
+            <h2 className="reveal" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(3rem, 7vw, 6.5rem)", fontWeight: 700, lineHeight: 0.92, letterSpacing: "-0.02em", color: "#F4EFE6" }}>
+              Is your organisation<br />
+              structurally built for<br />
+              what <em style={{ fontStyle: "italic", color: "#C49A3C" }}>comes next?</em>
+            </h2>
+            <p className="reveal reveal-d1" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginTop: "1.2rem", maxWidth: "42ch", lineHeight: 1.75, borderLeft: "2px solid rgba(196,154,60,.2)", paddingLeft: "1.2rem" }}>
+              Whether you are exploring a diagnostic, a strategic engagement, or a domain practice — Axion Index begins with measurement, not assumption.
+            </p>
+          </div>
+
+          {/* Right */}
+          <div className="reveal reveal-d2 flex flex-col gap-4">
+            <Link
+              href="/engage"
+              className="no-underline text-center transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C49A3C", color: "#0C0B09", padding: "16px 32px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#C49A3C"; }}
+            >
+              Start an Engagement →
+            </Link>
+            <Link
+              href="/ai-edge-lab"
+              className="no-underline text-center transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6B6358", border: "1px solid rgba(196,154,60,.2)", padding: "16px 32px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C49A3C"; e.currentTarget.style.color = "#C49A3C"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.2)"; e.currentTarget.style.color = "#6B6358"; }}
+            >
+              Enter the AI Edge Lab
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ FOOTER ═══ */}
+      <footer style={{ background: "#141210", borderTop: "1px solid rgba(196,154,60,.2)", padding: "3rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          {/* Top: 5-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
+            {/* Col 1: Brand */}
+            <div className="lg:col-span-1">
+              <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "0.5rem" }}>Axion Index</div>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", maxWidth: "26ch" }}>Codified energy for the unfinished organisation.</p>
+            </div>
+
+            {/* Col 2: AI Edge Lab */}
+            <div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C49A3C", borderBottom: "1px solid rgba(196,154,60,.1)", paddingBottom: "0.5rem", marginBottom: "0.9rem" }}>AI Edge Lab</div>
+              {[
+                { label: "AI Replaceability Index", href: "/replaceability" },
+                { label: "Brainpower Density Index", href: "/brainpower" },
+                { label: "AI Aligned Index", href: "/ai-aligned" },
+                { label: "Org Decision Architecture", href: "/org-design" },
+              ].map((link) => (
+                <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
+              ))}
+            </div>
+
+            {/* Col 3: Expertise */}
+            <div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C49A3C", borderBottom: "1px solid rgba(196,154,60,.1)", paddingBottom: "0.5rem", marginBottom: "0.9rem" }}>Expertise</div>
+              {[
+                { label: "Labour Codes", href: "/labour-codes" },
+                { label: "Family Business HR", href: "/family-business" },
+                { label: "Org Design", href: "/org-design" },
+              ].map((link) => (
+                <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
+              ))}
+            </div>
+
+            {/* Col 4: Ideas */}
+            <div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C49A3C", borderBottom: "1px solid rgba(196,154,60,.1)", paddingBottom: "0.5rem", marginBottom: "0.9rem" }}>Ideas</div>
+              {[
+                { label: "The Framework", href: "/framework" },
+                { label: "Axion Lexicon", href: "/lexicon" },
+                { label: "Writing", href: "/writing" },
+              ].map((link) => (
+                <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
+              ))}
+            </div>
+
+            {/* Col 5: Platform */}
+            <div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C49A3C", borderBottom: "1px solid rgba(196,154,60,.1)", paddingBottom: "0.5rem", marginBottom: "0.9rem" }}>Platform</div>
+              {[
+                { label: "About", href: "/about" },
+                { label: "Engage", href: "/engage" },
+              ].map((link) => (
+                <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
+              ))}
+              <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>Nitin Nahata ↗</a>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderTop: "1px solid rgba(196,154,60,.1)", paddingTop: "1.5rem" }}>
+            <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>
+              axionindex.org · Bengaluru · 2026 · <a href="mailto:nitin@axionindex.org" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358" }}>nitin@axionindex.org</a>
+            </div>
+            <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.88rem", color: "#6B6358" }}>
+              Intellectual foundation: <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358", borderBottom: "1px solid rgba(196,154,60,.1)" }}>Nitin Nahata →</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
