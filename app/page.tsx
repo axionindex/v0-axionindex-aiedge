@@ -933,6 +933,204 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ═══ S09.5 — ORGANISATION DECISION ARCHITECTURE ═══ */}
+      <section id="organisation-design" className="s-oda" style={{ background: "#000000", padding: "9rem 1.5rem 10rem", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+        <div className="max-w-[1060px] mx-auto">
+          {/* BLOCK 1 — HEADER */}
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginBottom: "1.5rem" }}>
+            The Engagement
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2.4rem, 5vw, 4.5rem)", fontWeight: 700, lineHeight: 0.92, letterSpacing: "-0.02em", color: "rgba(255,255,255,0.85)", marginBottom: "1.8rem", maxWidth: "18ch" }}>
+            Organisation<br />
+            <em style={{ fontStyle: "italic", color: "#C4972F" }}>Decision</em><br />
+            Architecture
+          </h2>
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "1.05rem", color: "rgba(255,255,255,0.38)", maxWidth: "44ch", lineHeight: 1.72, borderLeft: "2px solid rgba(196,151,47,0.3)", paddingLeft: "1.3rem", marginBottom: "0.8rem" }}>
+            You are overpaying for work AI already does.
+          </p>
+          <p className="reveal reveal-d3" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "rgba(255,255,255,0.25)", maxWidth: "52ch", lineHeight: 1.82, marginBottom: "4rem" }}>
+            Most organisations deploy AI and expect productivity gains. What they get instead is faster output with the same broken structure underneath.
+          </p>
+
+          {/* BLOCK 2 — THREE LAYERS */}
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(196,151,47,0.45)", marginBottom: "1.5rem" }}>
+            Every role has three layers. Most organisations have never mapped them.
+          </div>
+          <div className="reveal reveal-d1 grid grid-cols-1 md:grid-cols-3" style={{ border: "1px solid rgba(255,255,255,0.07)", marginBottom: "3rem" }}>
+            {/* Column 1 — COMPRESSIBLE */}
+            <div 
+              className="relative group transition-all duration-[180ms]"
+              style={{ padding: "2rem 1.8rem", borderRight: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,151,47,0.08)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.boxShadow = "none"; }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: "#8C3B28" }} />
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>AI Dominated</div>
+              <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem" }}>Compressible</div>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.65, marginBottom: "1.5rem" }}>Research · Reports · Scheduling · Data gathering</p>
+              <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", paddingTop: "1.2rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                <div>
+                  <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, lineHeight: 1, color: "rgba(255,255,255,0.28)" }}>60%</div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginTop: "0.3rem" }}>Today</div>
+                </div>
+                <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.85rem" }}>→</span>
+                <div>
+                  <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, lineHeight: 1, color: "#8C3B28" }}>30%</div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(140,59,40,0.6)", marginTop: "0.3rem" }}>Target</div>
+                </div>
+              </div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28", marginTop: "1.2rem" }}>Automate it.</div>
+            </div>
+
+            {/* Column 2 — AUGMENTED */}
+            <div 
+              className="relative group transition-all duration-[180ms]"
+              style={{ padding: "2rem 1.8rem", borderRight: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#111111"; e.currentTarget.style.boxShadow = "inset 0 0 60px rgba(196,151,47,0.08)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.boxShadow = "none"; }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: "rgba(196,151,47,0.4)" }} />
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginBottom: "1rem" }}>AI Assisted</div>
+              <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem" }}>Augmented</div>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.65, marginBottom: "1.5rem" }}>Analysis · Planning · Problem-solving · Synthesis</p>
+              <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", paddingTop: "1.2rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                <div>
+                  <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, lineHeight: 1, color: "rgba(255,255,255,0.28)" }}>25%</div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginTop: "0.3rem" }}>Today</div>
+                </div>
+                <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.85rem" }}>→</span>
+                <div>
+                  <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, lineHeight: 1, color: "#C4972F" }}>35%</div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginTop: "0.3rem" }}>Target</div>
+                </div>
+              </div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C4972F", marginTop: "1.2rem" }}>Augment it.</div>
+            </div>
+
+            {/* Column 3 — CONSEQUENTIAL */}
+            <div 
+              className="relative group transition-all duration-[180ms]"
+              style={{ padding: "2rem 1.8rem", background: "rgba(196,151,47,0.03)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.07)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.03)"; }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: "#C4972F" }} />
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C4972F", marginBottom: "1rem" }}>AI Proof</div>
+              <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.9rem", fontWeight: 700, color: "rgba(255,255,255,0.85)", marginBottom: "1rem" }}>Consequential</div>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.65, marginBottom: "1.5rem" }}>Judgment · Decisions · Accountability · Relationships</p>
+              <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", paddingTop: "1.2rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                <div>
+                  <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, lineHeight: 1, color: "rgba(255,255,255,0.28)" }}>15%</div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginTop: "0.3rem" }}>Today</div>
+                </div>
+                <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "0.85rem" }}>→</span>
+                <div>
+                  <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, lineHeight: 1, color: "#C4972F" }}>35%</div>
+                  <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginTop: "0.3rem" }}>Target</div>
+                </div>
+              </div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C4972F", marginTop: "1.2rem" }}>Protect it.</div>
+            </div>
+          </div>
+
+          {/* BLOCK 3 — IMPACT INDEX */}
+          <div className="reveal grid grid-cols-1 md:grid-cols-2" style={{ border: "1px solid rgba(255,255,255,0.07)", marginBottom: "5rem" }}>
+            <div style={{ padding: "2rem 2.4rem", borderRight: "1px solid rgba(255,255,255,0.07)", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)", marginBottom: "0.5rem" }}>Today</div>
+              <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.6rem", fontWeight: 700, color: "rgba(255,255,255,0.3)", lineHeight: 1, marginBottom: "0.3rem" }}>1.0</div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "0.6rem" }}>Impact Index</div>
+              <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.78rem", color: "rgba(255,255,255,0.18)" }}>Revenue / Manpower Cost</div>
+            </div>
+            <div style={{ padding: "2rem 2.4rem", background: "rgba(196,151,47,0.04)" }}>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginBottom: "0.5rem" }}>Organisation Decision Architecture Target</div>
+              <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "2.6rem", fontWeight: 700, color: "#C4972F", lineHeight: 1, marginBottom: "0.3rem" }}>1.3–1.5×</div>
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(196,151,47,0.6)", marginBottom: "0.6rem" }}>Impact Index</div>
+              <div style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.78rem", color: "rgba(255,255,255,0.35)" }}>Same cost. Higher-value output.</div>
+            </div>
+          </div>
+
+          {/* BLOCK 4 — THE FIVE-STEP ENGAGEMENT */}
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(196,151,47,0.45)", marginBottom: "1rem" }}>The Engagement</div>
+          <h3 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 700, color: "rgba(255,255,255,0.85)", lineHeight: 1.1, marginBottom: "2.5rem" }}>
+            Five steps. Hard targets.<br />
+            <em style={{ fontStyle: "italic", color: "#C4972F" }}>Numbers only.</em>
+          </h3>
+          <div style={{ marginBottom: "4rem" }}>
+            {[
+              { num: "01", label: "Diagnostic", desc: "Each person completes a 20-minute assessment of their actual work — not their job description." },
+              { num: "02", label: "Structural Map", desc: "Which roles are above the AI line, at it, or below it. Where is payroll structurally exposed?" },
+              { num: "03", label: "Redesign", desc: "Role by role. AI handles compressible. Humans own consequential. Depth non-negotiable." },
+              { num: "04", label: "Baseline + Targets", desc: "Hard numbers agreed before work begins. Brainpower Density Index set. 12-month targets locked." },
+              { num: "05", label: "Quarterly Review", desc: "Progress tracked against agreed metrics. Numbers only. The organisation gets stronger each cycle." },
+            ].map((step, i) => (
+              <div
+                key={step.num}
+                className={`reveal reveal-d${i + 1} transition-all duration-[180ms]`}
+                style={{ display: "grid", gridTemplateColumns: "3.5rem 1fr", gap: "1.8rem", padding: "1.6rem 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,151,47,0.03)"; e.currentTarget.style.paddingLeft = "0.5rem"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.paddingLeft = "0"; }}
+              >
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", color: "rgba(196,151,47,0.45)" }}>{step.num}</div>
+                <div>
+                  <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 700, color: "rgba(255,255,255,0.82)", marginBottom: "0.4rem" }}>{step.label}</div>
+                  <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.85rem", color: "rgba(255,255,255,0.28)", lineHeight: 1.72 }}>{step.desc}</p>
+                </div>
+              </div>
+            ))}
+            <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }} />
+          </div>
+
+          {/* BLOCK 5 — MEASUREMENT METRICS */}
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "1.5rem" }}>Five signals. Agreed before work begins.</div>
+          <div className="reveal reveal-d1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ border: "1px solid rgba(255,255,255,0.07)", marginBottom: "3.5rem" }}>
+            {[
+              { name: "Brainpower Density Index™", desc: "% of total hours in consequential work — the headline measure" },
+              { name: "Compressible Work Load", desc: "Hours lost weekly to work AI can fully replace" },
+              { name: "Decision Layer Integrity", desc: "Are decision-makers working at the right altitude?" },
+              { name: "Payroll Value Density", desc: "Value of current work distribution vs. redesigned model" },
+            ].map((metric, i) => (
+              <div
+                key={metric.name}
+                className="transition-all duration-[180ms]"
+                style={{ padding: "1.6rem 1.4rem", borderRight: i < 3 ? "1px solid rgba(255,255,255,0.07)" : "none", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#111111"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+              >
+                <div style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", fontWeight: 600, color: "rgba(255,255,255,0.7)", marginBottom: "0.5rem" }}>{metric.name}</div>
+                <p style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "0.75rem", color: "rgba(255,255,255,0.25)", lineHeight: 1.65 }}>{metric.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* BLOCK 6 — CLOSING QUOTE + CTA */}
+          <blockquote className="reveal" style={{ fontFamily: "var(--font-lora), 'Lora', serif", fontStyle: "italic", fontSize: "1rem", color: "rgba(255,255,255,0.32)", lineHeight: 1.72, borderLeft: "3px solid rgba(196,151,47,0.4)", paddingLeft: "1.5rem", maxWidth: "52ch", marginBottom: "3.5rem" }}>
+            "If AI can do 30% of your team&apos;s work, why hasn&apos;t your org structure changed by 30%?"
+          </blockquote>
+          <div className="reveal reveal-d1 flex flex-wrap items-center gap-4">
+            <a
+              href="mailto:nitin@axionindex.org"
+              className="no-underline transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.65rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C4972F", color: "#000000", padding: "0.9rem 2rem", display: "inline-block" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 28px rgba(196,151,47,0.40)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#C4972F"; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; }}
+            >
+              Begin the engagement
+            </a>
+            <a
+              href="https://www.axionindex.org/ai-edge-lab"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(196,151,47,0.55)", borderBottom: "1px solid rgba(196,151,47,0.22)", paddingBottom: "1px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "#C4972F"; e.currentTarget.style.borderColor = "#C4972F"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(196,151,47,0.55)"; e.currentTarget.style.borderColor = "rgba(196,151,47,0.22)"; }}
+            >
+              Start with Quick Mirror — Free →
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ═══ S10 — AI EDGE LAB ═══ */}
       <section style={{ background: "#FFFFFF", padding: "8rem 1.5rem" }} className="sm:px-14">
         <div className="max-w-[1060px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
