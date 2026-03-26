@@ -863,17 +863,532 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Placeholder for remaining sections - Parts 2 and 3 will add these */}
+      {/* ═══ CAROUSEL ═══ */}
+      <CarouselSection />
+
+      {/* ═══ S1 — SYSTEM MAP ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+            How the System Works
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>
+            Four instruments. <em style={{ fontStyle: "italic", color: "#C49A3C" }}>One compound logic.</em>
+          </h2>
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginBottom: "3rem", maxWidth: "52ch" }}>
+            Every Axion Index engagement begins with measurement, not assumption.
+          </p>
+
+          <div className="reveal reveal-d3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ border: "1px solid rgba(196,154,60,.2)" }}>
+            {[
+              { step: "Step 01", title: "Measure the Role", body: "AI Replaceability Index maps what % of the role's core tasks AI can already perform — returns an Edge Score 0–100." },
+              { step: "Step 02", title: "Measure the Leader", body: "Brainpower Density Index measures what % of leadership hours are in genuinely consequential work vs. work at the wrong altitude." },
+              { step: "Step 03", title: "Map the Organisation", body: "Org Decision Architecture aggregates scores — producing a structural AI exposure map and redesign roadmap." },
+              { step: "Step 04", title: "Apply Domain Expertise", body: "Labour Codes, Family Business HR, and bespoke engagements apply the framework to your specific operating context." },
+            ].map((item, i) => (
+              <div
+                key={item.step}
+                className="relative transition-colors duration-[180ms]"
+                style={{ padding: "2rem 1.5rem", borderRight: i < 3 ? "1px solid rgba(196,154,60,.2)" : "none", borderBottom: "1px solid rgba(196,154,60,.2)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,154,60,.04)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+              >
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "1rem" }}>{item.step}</div>
+                <h3 style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.3rem", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>{item.title}</h3>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", lineHeight: 1.65 }}>{item.body}</p>
+                {i < 3 && (
+                  <div className="hidden lg:flex absolute items-center justify-center" style={{ right: "-14px", top: "50%", transform: "translateY(-50%)", width: "28px", height: "28px", background: "#141210", border: "1px solid rgba(196,154,60,.2)", zIndex: 2 }}>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.8rem", color: "#C49A3C" }}>→</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S2 — THREE AUDIENCES ═══ */}
+      <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
+            Where Do You Need to Start?
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#0C0B09", marginBottom: "3rem" }}>
+            The same question. <em style={{ fontStyle: "italic", color: "#8C3B28" }}>Three different answers.</em>
+          </h2>
+
+          <div className="reveal reveal-d2 grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[
+              { tag: "For Individuals", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Take the Index →", href: "/replaceability" },
+              { tag: "For Senior Leaders", q: "Are you creating impact at the right altitude?", body: "The Brainpower Density Index measures what % of your leadership time is in genuinely consequential work vs work that should never reach you.", cta: "Measure Your Impact →", href: "/brainpower" },
+              { tag: "For Organisations", q: "Is your organisation structured for the AI economy?", body: "The Org Decision Architecture Index maps structural AI exposure and builds a redesign roadmap with hard 12-month targets.", cta: "Begin the Engagement →", href: "/org-design" },
+            ].map((card) => (
+              <div
+                key={card.tag}
+                className="relative transition-all duration-[180ms] group"
+                style={{ padding: "2rem 1.6rem", border: "1px solid rgba(140,59,40,.15)", background: "#FAF8F4" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#8C3B28"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(140,59,40,.15)"; e.currentTarget.style.transform = "translateY(0)"; }}
+              >
+                <div className="absolute top-0 left-0 right-0 h-[2px] origin-left transition-transform duration-[300ms] scale-x-0 group-hover:scale-x-100" style={{ background: "#8C3B28" }} />
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>{card.tag}</div>
+                <p style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1.2rem", color: "#0C0B09", marginBottom: "1rem", lineHeight: 1.4 }}>{card.q}</p>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#4A433C", lineHeight: 1.65, marginBottom: "1.5rem" }}>{card.body}</p>
+                <Link href={card.href} className="no-underline transition-colors duration-[150ms] hover:opacity-70" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28" }}>{card.cta}</Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S3 — FOUR INDEXES ═══ */}
+      <section style={{ background: "#0C0B09", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1200px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+            The AI Edge Lab
+          </div>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>
+            Four indexes. One framework. <em style={{ fontStyle: "italic", color: "#C49A3C" }}>The signature work of Axion Index.</em>
+          </h2>
+          <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginBottom: "3rem", maxWidth: "64ch" }}>
+            The AI Edge Lab is Axion Index&apos;s specialisation in understanding the impact of AI on workplaces. Not generic tools — the output of a specific point of view.
+          </p>
+
+          <div className="reveal reveal-d3 grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { audience: "For Individuals", name: "AI Replaceability Index", body: "Measures where a role sits on the Compression-Judgment Field. Returns Edge Score 0–100.", link: "Take the Index →", href: "/replaceability", live: true },
+              { audience: "For CSOs & Senior Leaders", name: "Brainpower Density Index", body: "Measures % of leadership week in judgment-led work. Returns density score with redesign logic.", link: "Measure Your Impact →", href: "/brainpower", live: false },
+              { audience: "For MBA Students & Early Career", name: "AI Aligned Index", body: "Measures AI readiness and orientation. Returns alignment profile and career architecture guidance.", link: "Coming Soon →", href: "/ai-aligned", live: false },
+              { audience: "For Organisations", name: "Organisation Decision Architecture Index", body: "Maps structural AI exposure. Produces redesign roadmap with 12-month targets. Full engagement.", link: "Begin the Engagement →", href: "/org-design", live: false },
+            ].map((card) => (
+              <div
+                key={card.name}
+                className="relative transition-all duration-[180ms] group"
+                style={{ padding: "1.8rem", border: "1px solid rgba(196,154,60,.2)", background: "rgba(196,154,60,.03)" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.4)"; e.currentTarget.style.background = "rgba(196,154,60,.05)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.2)"; e.currentTarget.style.background = "rgba(196,154,60,.03)"; }}
+              >
+                <div className="absolute top-0 left-0 right-0 h-[2px] origin-left transition-transform duration-[300ms] scale-x-0 group-hover:scale-x-100" style={{ background: "#C49A3C" }} />
+                {card.live && (
+                  <div className="absolute top-4 right-4" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.06em", color: "#5BAD7A", background: "rgba(91,173,122,.1)", border: "1px solid rgba(91,173,122,.25)", padding: "2px 6px" }}>LIVE</div>
+                )}
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358", marginBottom: "0.8rem" }}>{card.audience}</div>
+                <h3 style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.25rem", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.6rem" }}>{card.name}</h3>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", lineHeight: 1.6, marginBottom: "1.2rem" }}>{card.body}</p>
+                <Link href={card.href} className="no-underline transition-colors duration-[150ms] hover:opacity-70" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C49A3C" }}>{card.link}</Link>
+              </div>
+            ))}
+          </div>
+
+          <div className="reveal mt-8 text-center">
+            <Link
+              href="/ai-edge-lab"
+              className="inline-block no-underline transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "#C49A3C", color: "#0C0B09", padding: "14px 32px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#C49A3C"; }}
+            >
+              Enter the AI Edge Lab →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S4 — SYSTEM FLOW ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[900px] mx-auto">
+          <div className="reveal text-center" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+            The Compound Logic
+          </div>
+          <h2 className="reveal reveal-d1 text-center" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>
+            Individual scores build into <em style={{ fontStyle: "italic", color: "#C49A3C" }}>organisational intelligence.</em>
+          </h2>
+          <p className="reveal reveal-d2 text-center" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginBottom: "3rem", maxWidth: "52ch", marginLeft: "auto", marginRight: "auto" }}>
+            The four indexes are not independent. They are a layered system.
+          </p>
+
+          <div className="reveal reveal-d3" style={{ border: "1px solid rgba(196,154,60,.2)", padding: "2.5rem", background: "rgba(196,154,60,.03)" }}>
+            <div className="text-center" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358", marginBottom: "2rem" }}>
+              How the indexes compound
+            </div>
+
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
+              {[
+                { tier: "Index 01", title: "Individual Score", metric: "Edge Score 0–100" },
+                { tier: "Index 02", title: "Leadership Score", metric: "Density % + Altitude" },
+                { tier: "Index 04", title: "Org Architecture", metric: "Exposure Map + Map" },
+                { tier: "Output", title: "Redesign Logic", metric: "12-Month Targets" },
+              ].map((node, i) => (
+                <div key={node.tier} className="flex items-center gap-4">
+                  <div className="text-center" style={{ padding: "1.5rem 2rem", border: "1px solid rgba(196,154,60,.2)", minWidth: "180px" }}>
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358", marginBottom: "0.5rem" }}>{node.tier}</div>
+                    <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.3rem", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.3rem" }}>{node.title}</div>
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#C49A3C" }}>{node.metric}</div>
+                  </div>
+                  {i < 3 && (
+                    <span className="hidden lg:block" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "1.2rem", color: "rgba(196,154,60,.4)" }}>→</span>
+                  )}
+                  {i < 3 && (
+                    <span className="lg:hidden" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "1.2rem", color: "rgba(196,154,60,.4)" }}>↓</span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <p className="text-center" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.95rem", color: "#6B6358", marginTop: "1.8rem" }}>
+              The system builds on itself — <strong style={{ color: "#C49A3C" }}>individual clarity becomes organisational intelligence.</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ S5 — AXION FIELD ═══ */}
+      <AxionFieldSection />
+
+      {/* ═══ S6 — BRAINPOWER DENSITY ═══ */}
+      <BrainpowerDensitySection />
+
+      {/* Placeholder for remaining sections - Part 3 will add these */}
       <section style={{ background: "#0C0B09", padding: "6rem 2rem", textAlign: "center" }}>
-        <p style={{ 
-          fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
-          fontSize: "0.7rem", 
-          color: "rgba(196,154,60,.4)",
-          letterSpacing: "0.1em"
-        }}>
-          [Remaining sections will be added in Parts 2 and 3]
+        <p style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.7rem", color: "rgba(196,154,60,.4)", letterSpacing: "0.1em" }}>
+          [Remaining sections will be added in Part 3]
         </p>
       </section>
     </>
+  );
+}
+
+// ═══ CAROUSEL COMPONENT ═══
+function CarouselSection() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const slides = [
+    { world: "ink", pre: "The Operating Question", headline: "Is your organisation structurally built for what", em: "comes next?", body: "Most organisations have a strategy. Almost none have the operating architecture to carry it. Axion Index makes the gap visible.", cta: "Begin the Engagement →", href: "/engage" },
+    { world: "grey", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Take the Index →", href: "/replaceability", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
+    { world: "ink", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Measure Your Impact →", href: "/brainpower" },
+    { world: "grey", pre: "For Organisations", headline: "What is your organisation's true", em: "AI exposure?", body: "The Org Decision Architecture Index maps structural AI exposure across your entire organisation — produces a redesign roadmap with hard 12-month targets.", cta: "Begin the Engagement →", href: "/org-design" },
+    { world: "paper", pre: "On Labour Codes", headline: "India's Labour Codes are not a compliance question.", em: "They are a mirror.", body: "They expose every structural decision an organisation deferred. Compliance failure is philosophy failure.", cta: "Explore →", href: "/labour-codes" },
+    { world: "ink", pre: "On Family Business", headline: "The largest employer class in India has almost", em: "no frameworks designed for it.", body: "Loyalty vs merit. Patriarch authority. Multi-generational belief systems.", cta: "Explore →", href: "/family-business" },
+    { world: "grey", pre: "The Foundation", headline: "Belief becomes conviction. Conviction becomes", em: "rhythm.", body: "Every Axion Index engagement traces back to one governing logic. Where has your organisation broken down in this sequence?", cta: "Explore the Framework →", href: "/framework" },
+  ];
+
+  const getWorldStyles = (world: string) => {
+    if (world === "paper") {
+      return { bg: "#EDE9E0", headline: "#0C0B09", em: "#8C3B28", body: "#4A433C", border: "#8C3B28", ctaBg: "#8C3B28", ctaText: "#FFFFFF" };
+    }
+    if (world === "grey") {
+      return { bg: "#2C2824", headline: "#F4EFE6", em: "#C49A3C", body: "#B0A898", border: "#C49A3C", ctaBg: "#C49A3C", ctaText: "#0C0B09" };
+    }
+    return { bg: "#0C0B09", headline: "#F4EFE6", em: "#C49A3C", body: "#B0A898", border: "#C49A3C", ctaBg: "#C49A3C", ctaText: "#0C0B09" };
+  };
+
+  const resetAutoPlay = () => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    autoPlayRef.current = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+  };
+
+  useEffect(() => {
+    resetAutoPlay();
+    return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
+  }, []);
+
+  const goTo = (i: number) => { setActiveSlide(i); resetAutoPlay(); };
+  const prev = () => { setActiveSlide((p) => (p - 1 + slides.length) % slides.length); resetAutoPlay(); };
+  const next = () => { setActiveSlide((p) => (p + 1) % slides.length); resetAutoPlay(); };
+
+  const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.touches[0].clientX);
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStart;
+    if (dx > 40) prev();
+    else if (dx < -40) next();
+  };
+
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
+
+  const currentStyles = getWorldStyles(slides[activeSlide].world);
+
+  return (
+    <div
+      className="relative overflow-hidden"
+      style={{ height: "92vh", borderBottom: "1px solid rgba(196,154,60,.2)", background: currentStyles.bg, transition: "background 1s ease" }}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {slides.map((slide, i) => {
+        const styles = getWorldStyles(slide.world);
+        return (
+          <div
+            key={i}
+            className="absolute inset-0 flex items-center transition-opacity duration-500"
+            style={{ padding: "0 3.5rem", opacity: activeSlide === i ? 1 : 0, pointerEvents: activeSlide === i ? "auto" : "none" }}
+          >
+            <div style={{ maxWidth: "640px" }}>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px" style={{ width: "2rem", background: styles.em }} />
+                <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.16em", textTransform: "uppercase", color: styles.em }}>{slide.pre}</span>
+              </div>
+              <h2 style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(3rem, 7vw, 6rem)", fontWeight: 700, lineHeight: 0.95, color: styles.headline, marginBottom: "1.5rem" }}>
+                {slide.headline} <em style={{ fontStyle: "italic", color: styles.em }}>{slide.em}</em>
+              </h2>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.96rem", color: styles.body, borderLeft: `2px solid ${styles.border}`, paddingLeft: "1.2rem", maxWidth: "52ch", lineHeight: 1.7, marginBottom: "2rem" }}>{slide.body}</p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href={slide.href}
+                  className="no-underline transition-all duration-[180ms]"
+                  style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: styles.ctaBg, color: styles.ctaText, padding: "14px 28px" }}
+                >
+                  {slide.cta}
+                </Link>
+                {slide.cta2 && (
+                  <Link
+                    href={slide.href2 || "#"}
+                    className="no-underline transition-all duration-[180ms]"
+                    style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", color: styles.body, border: `1px solid ${styles.border}`, padding: "14px 28px", opacity: 0.7 }}
+                  >
+                    {slide.cta2}
+                  </Link>
+                )}
+              </div>
+            </div>
+            <div className="absolute" style={{ right: "3.5rem", bottom: "3rem", fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "6rem", fontWeight: 700, color: "rgba(196,154,60,.06)" }}>
+              {String(i + 1).padStart(2, "0")}
+            </div>
+          </div>
+        );
+      })}
+
+      {/* Controls */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4">
+        <button onClick={prev} className="flex items-center justify-center transition-colors duration-[150ms] cursor-pointer" style={{ width: "36px", height: "36px", border: "1px solid rgba(196,154,60,.2)", background: "rgba(12,11,9,.5)", color: "#C49A3C" }} aria-label="Previous">
+          <span style={{ fontSize: "1rem" }}>←</span>
+        </button>
+        <div className="flex gap-2">
+          {slides.map((_, i) => (
+            <button key={i} onClick={() => goTo(i)} className="h-[2px] transition-all duration-[200ms] cursor-pointer border-none" style={{ width: activeSlide === i ? "32px" : "20px", background: activeSlide === i ? "#C49A3C" : "rgba(196,154,60,.2)" }} aria-label={`Go to slide ${i + 1}`} />
+          ))}
+        </div>
+        <button onClick={next} className="flex items-center justify-center transition-colors duration-[150ms] cursor-pointer" style={{ width: "36px", height: "36px", border: "1px solid rgba(196,154,60,.2)", background: "rgba(12,11,9,.5)", color: "#C49A3C" }} aria-label="Next">
+          <span style={{ fontSize: "1rem" }}>→</span>
+        </button>
+      </div>
+
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 h-[2px]" style={{ width: `${((activeSlide + 1) / slides.length) * 100}%`, background: "#C49A3C", opacity: 0.5, transition: "width 0.5s ease" }} />
+    </div>
+  );
+}
+
+// ═══ AXION FIELD COMPONENT ═══
+function AxionFieldSection() {
+  const [hoveredDot, setHoveredDot] = useState<string | null>(null);
+
+  const dots = [
+    { role: "Operating Architect", tier: "hi", left: 18, top: 12, score: 96 },
+    { role: "Founder / CEO", tier: "hi", left: 24, top: 20, score: 91 },
+    { role: "Board Member", tier: "hi", left: 16, top: 30, score: 88 },
+    { role: "CHRO", tier: "mid", left: 34, top: 38, score: 74 },
+    { role: "CFO", tier: "mid", left: 40, top: 46, score: 68 },
+    { role: "Engineer", tier: "lo", left: 62, top: 62, score: 45 },
+    { role: "Data Analyst", tier: "lo", left: 72, top: 72, score: 38 },
+    { role: "Payroll Executive", tier: "lo", left: 82, top: 80, score: 18 },
+  ];
+
+  const getDotColor = (tier: string) => {
+    if (tier === "hi") return "#C49A3C";
+    if (tier === "mid") return "rgba(196,154,60,.5)";
+    return "#6B6358";
+  };
+
+  const legend = [
+    { name: "Structural Architect", desc: "Designs systems. AI cannot replace systemic judgment." },
+    { name: "Strategic Leverager", desc: "Uses AI to amplify judgment. Stays above compression." },
+    { name: "Boundary Builder", desc: "Manages AI-human interface. Role evolving rapidly." },
+    { name: "Output Manager", desc: "Manages AI outputs. Partial compression exposure." },
+    { name: "Execution Operator", desc: "High compression risk. Redesign required now." },
+  ];
+
+  return (
+    <section style={{ background: "#2C2824", padding: "6rem 3.5rem" }}>
+      <div className="max-w-[1200px] mx-auto">
+        <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+          The Compression-Judgment Field
+        </div>
+        <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>
+          Every role has an <em style={{ fontStyle: "italic", color: "#C49A3C" }}>address.</em>
+        </h2>
+        <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginBottom: "3rem", maxWidth: "64ch" }}>
+          The CJF plots two forces: AI compression and judgment ownership. Where you sit determines what you must do next.
+        </p>
+
+        <div className="reveal reveal-d3 grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Left: Field */}
+          <div className="relative" style={{ aspectRatio: "1/1", border: "1px solid rgba(196,154,60,.2)", background: "rgba(196,154,60,.03)" }}>
+            {/* Axis labels */}
+            <div className="absolute hidden lg:block" style={{ bottom: "1rem", left: "50%", transform: "translateX(-50%)", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358" }}>AI Compression →</div>
+            <div className="absolute hidden lg:block" style={{ left: "1rem", top: "50%", transform: "translateY(-50%) rotate(-90deg)", transformOrigin: "center", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358" }}>← Human Judgment</div>
+
+            {/* Quadrant labels */}
+            <div className="absolute" style={{ top: "1rem", right: "1rem", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#C49A3C" }}>Judgment Work</div>
+            <div className="absolute" style={{ top: "1rem", left: "1rem", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#6B6358" }}>Insight Work</div>
+            <div className="absolute" style={{ bottom: "1rem", left: "1rem", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#6B6358" }}>Automated Work</div>
+            <div className="absolute" style={{ bottom: "1rem", right: "1rem", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.5rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#6B6358" }}>Execution Work</div>
+
+            {/* Zone labels */}
+            <div className="absolute hidden lg:block" style={{ right: 0, top: "30%", transform: "translateX(50%)", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#C49A3C", border: "1px solid rgba(196,154,60,.2)", background: "#2C2824", padding: "4px 8px" }}>Defensible ↑</div>
+            <div className="absolute hidden lg:block" style={{ left: 0, bottom: "30%", transform: "translateX(-50%)", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", textTransform: "uppercase", color: "#8C3B28", border: "1px solid rgba(140,59,40,.25)", background: "#2C2824", padding: "4px 8px" }}>↑ Compressible</div>
+
+            {/* Dots */}
+            {dots.map((dot) => (
+              <div
+                key={dot.role}
+                className="absolute cursor-pointer transition-transform duration-[150ms]"
+                style={{ left: `${dot.left}%`, top: `${dot.top}%`, transform: hoveredDot === dot.role ? "scale(1.6)" : "scale(1)" }}
+                onMouseEnter={() => setHoveredDot(dot.role)}
+                onMouseLeave={() => setHoveredDot(null)}
+              >
+                <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: getDotColor(dot.tier) }} />
+                {hoveredDot === dot.role && (
+                  <div className="absolute z-10" style={{ bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)", background: "rgba(13,12,10,.97)", border: "1px solid rgba(196,154,60,.2)", padding: "0.6rem 0.9rem", whiteSpace: "nowrap" }}>
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "#F4EFE6", marginBottom: "0.2rem" }}>{dot.role}</div>
+                    <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "#C49A3C" }}>Edge Score: {dot.score}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Right: Text + Legend */}
+          <div>
+            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.88rem", color: "#B0A898", lineHeight: 1.7, marginBottom: "1rem" }}>
+              The Compression-Judgment Field is Axion Index&apos;s proprietary model for mapping the impact of AI on work. Every role occupies a position in the field — determined by two forces.
+            </p>
+            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.88rem", color: "#B0A898", lineHeight: 1.7, marginBottom: "2rem" }}>
+              Roles high on judgment ownership are defensible. Roles high on AI compression are exposed. The AI Replaceability Index returns an Edge Score that locates your role precisely.
+            </p>
+
+            {/* Legend Table */}
+            <div style={{ width: "100%" }}>
+              <div className="flex" style={{ borderBottom: "1px solid rgba(196,154,60,.2)", paddingBottom: "0.5rem", marginBottom: "0.5rem" }}>
+                <div style={{ flex: "0 0 140px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358" }}>Tier</div>
+                <div style={{ flex: 1, fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#6B6358" }}>Description</div>
+              </div>
+              {legend.map((row) => (
+                <div key={row.name} className="flex" style={{ borderBottom: "1px solid rgba(196,154,60,.1)", padding: "0.6rem 0" }}>
+                  <div style={{ flex: "0 0 140px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", color: "#C49A3C" }}>{row.name}</div>
+                  <div style={{ flex: 1, fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.78rem", color: "#6B6358" }}>{row.desc}</div>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="https://www.axionindex.org/ai-edge-lab"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block no-underline mt-6 transition-all duration-[180ms]"
+              style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.62rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#B0A898", border: "1px solid rgba(196,154,60,.2)", padding: "12px 24px" }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C49A3C"; e.currentTarget.style.color = "#C49A3C"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.2)"; e.currentTarget.style.color = "#B0A898"; }}
+            >
+              Locate your role — Try Quick Mirror →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ═══ BRAINPOWER DENSITY COMPONENT ═══
+function BrainpowerDensitySection() {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const tabs = ["Low Density", "Mid Density", "High Density"];
+  const data = [
+    { bars: [15, 10, 35, 25, 15], insight: "Low Density Leader", desc: "Less than 25% in judgment-led work. Execution, coordination and reporting dominate. Decision latency is high. Strategic output is compressed." },
+    { bars: [35, 20, 25, 12, 8], insight: "Mid Density Leader", desc: "Around 55% in judgment and strategic work. Redesign opportunity exists — 10% reallocation produces disproportionate output gain." },
+    { bars: [60, 22, 10, 5, 3], insight: "High Density Leader", desc: "Over 80% in judgment-led work. Operating architecture is working. Decision latency is low." },
+  ];
+  const labels = ["Judgment work", "Strategic input", "Coordination", "Execution", "Reporting/admin"];
+  const colors = ["#C49A3C", "#C49A3C", "#8C3B28", "#8C3B28", "#8C3B28"];
+
+  return (
+    <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+      <div className="max-w-[1200px] mx-auto">
+        <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+          Brainpower Density Index
+        </div>
+        <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "3rem" }}>
+          What percentage of your week is <em style={{ fontStyle: "italic", color: "#C49A3C" }}>genuinely consequential?</em>
+        </h2>
+
+        <div className="reveal reveal-d2 grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Left: Tabs + Insight */}
+          <div>
+            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#B0A898", lineHeight: 1.7, marginBottom: "1rem" }}>
+              Most senior leaders spend less than 30% of their time in work that actually requires them. The rest is coordination, execution, and administration that should never reach their desk.
+            </p>
+            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#B0A898", lineHeight: 1.7, marginBottom: "2rem" }}>
+              The Brainpower Density Index measures this distribution and returns a redesign roadmap.
+            </p>
+
+            {/* Tab selector */}
+            <div className="flex" style={{ border: "1px solid rgba(196,154,60,.2)", marginBottom: "1.5rem" }}>
+              {tabs.map((tab, i) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(i)}
+                  className="flex-1 text-center cursor-pointer transition-colors duration-[150ms]"
+                  style={{
+                    fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+                    fontSize: "0.58rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    padding: "0.6rem 1.2rem",
+                    borderRight: i < 2 ? "1px solid rgba(196,154,60,.2)" : "none",
+                    background: activeTab === i ? "rgba(196,154,60,.1)" : "transparent",
+                    color: activeTab === i ? "#C49A3C" : "#6B6358",
+                    border: "none",
+                    borderBottom: "none",
+                  }}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+
+            {/* Insight box */}
+            <div style={{ padding: "1rem 1.3rem", border: "1px solid rgba(196,154,60,.2)", background: "rgba(196,154,60,.04)" }}>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#B0A898", lineHeight: 1.6 }}>
+                <strong style={{ color: "#C49A3C" }}>{data[activeTab].insight}</strong> — {data[activeTab].desc}
+              </p>
+            </div>
+          </div>
+
+          {/* Right: Bar Chart */}
+          <div style={{ border: "1px solid rgba(196,154,60,.2)", padding: "1.5rem", background: "rgba(196,154,60,.02)" }}>
+            {labels.map((label, i) => (
+              <div key={label} className="flex items-center gap-3 mb-4">
+                <div style={{ minWidth: "120px", textAlign: "right", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "#6B6358" }}>{label}</div>
+                <div className="flex-1" style={{ height: "8px", background: "rgba(196,154,60,.1)" }}>
+                  <div style={{ height: "100%", width: `${data[activeTab].bars[i]}%`, background: colors[i], transition: "width 0.5s ease" }} />
+                </div>
+                <div style={{ minWidth: "32px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>{data[activeTab].bars[i]}%</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
