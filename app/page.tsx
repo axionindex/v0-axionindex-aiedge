@@ -140,6 +140,7 @@ export default function HomePage() {
         <div className="hidden md:flex items-center gap-8">
           {[
             { label: "Framework", href: "#framework" },
+            { label: "Org Design", href: "#organisation-design" },
             { label: "AI Edge Lab", href: "#diagnostics" },
             { label: "Founder", href: "#founder" },
           ].map((link) => (
