@@ -1604,7 +1604,13 @@ function BrainpowerDensitySection() {
     { bars: [60, 22, 10, 5, 3], insight: "High Density Leader", desc: "Over 80% in judgment-led work. Operating architecture is working. Decision latency is low." },
   ];
   const labels = ["Judgment work", "Strategic input", "Coordination", "Execution", "Reporting/admin"];
-  const colors = ["#C49A3C", "#C49A3C", "#8C3B28", "#8C3B28", "#8C3B28"];
+  
+  // Dynamic color based on value: green (65+), gold (55-64), rust (<55)
+  const getBarColor = (value: number) => {
+    if (value >= 65) return "#5BAD7A"; // Green for high
+    if (value >= 55) return "#C49A3C"; // Gold for medium
+    return "#8C3B28"; // Rust for low
+  };
 
   return (
     <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
@@ -1665,7 +1671,7 @@ function BrainpowerDensitySection() {
               <div key={label} className="flex items-center gap-3 mb-4">
                 <div style={{ minWidth: "120px", textAlign: "right", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "#6B6358" }}>{label}</div>
                 <div className="flex-1" style={{ height: "8px", background: "rgba(196,154,60,.1)" }}>
-                  <div style={{ height: "100%", width: `${data[activeTab].bars[i]}%`, background: colors[i], transition: "width 0.5s ease" }} />
+                  <div style={{ height: "100%", width: `${data[activeTab].bars[i]}%`, background: getBarColor(data[activeTab].bars[i]), transition: "width 0.5s ease" }} />
                 </div>
                 <div style={{ minWidth: "32px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>{data[activeTab].bars[i]}%</div>
               </div>
