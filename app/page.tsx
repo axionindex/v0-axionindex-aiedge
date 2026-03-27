@@ -1605,11 +1605,41 @@ function BrainpowerDensitySection() {
   ];
   const labels = ["Judgment work", "Strategic input", "Coordination", "Execution", "Reporting/admin"];
   
-  // Dynamic color based on value: green (65+), gold (55-64), rust (<55)
-  const getBarColor = (value: number) => {
-    if (value >= 65) return "#5BAD7A"; // Green for high
-    if (value >= 55) return "#C49A3C"; // Gold for medium
-    return "#8C3B28"; // Rust for low
+  // Dynamic color based on category and value
+  // For positive metrics (Judgment, Strategic): higher is better (green)
+  // For negative metrics (Coordination, Execution, Reporting): lower is better (green)
+  const getBarColor = (value: number, categoryIndex: number) => {
+    // Judgment work: >50% green, 30-50% gold, <30% rust
+    if (categoryIndex === 0) {
+      if (value >= 50) return "#5BAD7A";
+      if (value >= 30) return "#C49A3C";
+      return "#8C3B28";
+    }
+    // Strategic input: >18% green, 12-18% gold, <12% rust
+    if (categoryIndex === 1) {
+      if (value >= 18) return "#5BAD7A";
+      if (value >= 12) return "#C49A3C";
+      return "#8C3B28";
+    }
+    // Coordination: <15% green, 15-25% gold, >25% rust (inverse)
+    if (categoryIndex === 2) {
+      if (value <= 15) return "#5BAD7A";
+      if (value <= 25) return "#C49A3C";
+      return "#8C3B28";
+    }
+    // Execution: <10% green, 10-20% gold, >20% rust (inverse)
+    if (categoryIndex === 3) {
+      if (value <= 10) return "#5BAD7A";
+      if (value <= 20) return "#C49A3C";
+      return "#8C3B28";
+    }
+    // Reporting/admin: <8% green, 8-12% gold, >12% rust (inverse)
+    if (categoryIndex === 4) {
+      if (value <= 8) return "#5BAD7A";
+      if (value <= 12) return "#C49A3C";
+      return "#8C3B28";
+    }
+    return "#C49A3C";
   };
 
   return (
@@ -1671,7 +1701,7 @@ function BrainpowerDensitySection() {
               <div key={label} className="flex items-center gap-3 mb-4">
                 <div style={{ minWidth: "120px", textAlign: "right", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.55rem", color: "#6B6358" }}>{label}</div>
                 <div className="flex-1" style={{ height: "8px", background: "rgba(196,154,60,.1)" }}>
-                  <div style={{ height: "100%", width: `${data[activeTab].bars[i]}%`, background: getBarColor(data[activeTab].bars[i]), transition: "width 0.5s ease" }} />
+                  <div style={{ height: "100%", width: `${data[activeTab].bars[i]}%`, background: getBarColor(data[activeTab].bars[i], i), transition: "width 0.5s ease" }} />
                 </div>
                 <div style={{ minWidth: "32px", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>{data[activeTab].bars[i]}%</div>
               </div>
