@@ -1253,7 +1253,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2" style={{ marginBottom: "1rem" }}>
                   <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.08em", color: item.roleColor }}>{item.role}</span>
                   {item.isBuilding && (
-                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace', fontSize: "0.44rem", letterSpacing: "0.06em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 6px" }}>BUILDING</span>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.06em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 6px" }}>BUILDING</span>
                   )}
                 </div>
                 <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#B0A898", lineHeight: 1.65, marginBottom: "1.5rem" }}>{item.desc}</p>
