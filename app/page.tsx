@@ -407,26 +407,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* CTA Button */}
-        <Link
-          href="/engage"
-          className="hidden lg:block flex-shrink-0 whitespace-nowrap no-underline transition-all duration-[180ms]"
-          style={{ 
-            fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
-            fontSize: "0.6rem", 
-            letterSpacing: "0.1em", 
-            textTransform: "uppercase", 
-            background: "#C49A3C", 
-            color: "#0C0B09", 
-            padding: "0.7rem 1.4rem",
-            fontWeight: 500
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = "#C49A3C"; }}
-        >
-          Start an Engagement
-        </Link>
-
         {/* Mobile Hamburger */}
         <button 
           className={`lg:hidden hamburger flex flex-col gap-[5px] bg-transparent border-none cursor-pointer p-2 ${mobileMenuOpen ? "open" : ""}`}
