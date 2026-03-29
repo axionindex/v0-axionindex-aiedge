@@ -1012,24 +1012,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ S3 — THE AI EDGE LAB (Steel Theme) ═══ */}
-      <section style={{ background: "linear-gradient(180deg, #1A2030 0%, #141820 100%)", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
+      {/* ═══ S3 — THE AI EDGE LAB ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
         {/* Large watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(6rem, 18vw, 14rem)", fontWeight: 700, color: "rgba(74,107,138,.04)", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(6rem, 18vw, 14rem)", fontWeight: 700, color: "rgba(196,154,60,.04)", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
           AI EDGE LAB
         </div>
 
         <div className="max-w-[1200px] mx-auto relative z-10">
           {/* Breadcrumb */}
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", color: "rgba(123,168,204,.5)", marginBottom: "1.5rem" }}>
-            axionindex.org / <span style={{ color: "#7BA8CC" }}>The AI Edge Lab</span>
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", color: "rgba(196,154,60,.5)", marginBottom: "1.5rem" }}>
+            axionindex.org / <span style={{ color: "#C49A3C" }}>The AI Edge Lab</span>
           </div>
 
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4A6B8A", marginBottom: "1rem" }}>
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "1rem" }}>
             07 — The AI Edge Lab
           </div>
           <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>
-            Operating intelligence, <em style={{ fontStyle: "italic", color: "#7BA8CC" }}>made measurable.</em>
+            Operating intelligence, <em style={{ fontStyle: "italic", color: "#C49A3C" }}>made measurable.</em>
           </h2>
           <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#B0A898", marginBottom: "1.5rem", maxWidth: "64ch", lineHeight: 1.75 }}>
             The AI Edge Lab is Axion Index&apos;s work at the intersection of AI, Org Design and Human beings in the evolving workspace landscape. It translates complex workforce, compliance, and structural questions into quantified, decision-grade signals for founders, CFOs, CHROs, and boards.
@@ -1051,18 +1051,18 @@ export default function HomePage() {
               <Link
                 href="/ai-edge-lab"
                 className="inline-block no-underline transition-all duration-[180ms]"
-                style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "#4A6B8A", color: "#FFFFFF", padding: "14px 32px" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#5A7B9A"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#4A6B8A"; }}
+                style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "#C49A3C", color: "#0C0B09", padding: "14px 32px" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "#C49A3C"; }}
               >
                 Access the Lab →
               </Link>
             </div>
 
             {/* Right: 5 diagnostic tools */}
-            <div style={{ border: "1px solid rgba(74,107,138,.25)", background: "rgba(74,107,138,.05)" }}>
-              <div style={{ padding: "1rem 1.2rem", borderBottom: "1px solid rgba(74,107,138,.15)" }}>
-                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#7BA8CC" }}>Diagnostic Tools</div>
+            <div style={{ border: "1px solid rgba(196,154,60,.25)", background: "rgba(196,154,60,.03)" }}>
+              <div style={{ padding: "1rem 1.2rem", borderBottom: "1px solid rgba(196,154,60,.15)" }}>
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
                 { name: "3i Labour Code Readiness Index™", status: "live", href: "/coming-soon" },
@@ -1074,8 +1074,8 @@ export default function HomePage() {
                 <div
                   key={tool.name}
                   className="flex items-center justify-between transition-colors duration-[150ms]"
-                  style={{ padding: "0.9rem 1.2rem", borderBottom: "1px solid rgba(74,107,138,.1)" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(74,107,138,.08)"; }}
+                  style={{ padding: "0.9rem 1.2rem", borderBottom: "1px solid rgba(196,154,60,.1)" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,154,60,.06)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
                 >
                   <Link href={tool.href} className="no-underline flex-1" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: tool.status === "live" ? "#F4EFE6" : "#6B6358" }}>
@@ -1088,15 +1088,15 @@ export default function HomePage() {
                     </span>
                   )}
                   {tool.status === "building" && (
-                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#7BA8CC", background: "rgba(74,107,138,.15)", border: "1px solid rgba(74,107,138,.25)", padding: "2px 8px" }}>BUILDING</span>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 8px" }}>BUILDING</span>
                   )}
                   {tool.status === "soon" && (
                     <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#6B6358", background: "rgba(107,99,88,.1)", border: "1px solid rgba(107,99,88,.2)", padding: "2px 8px" }}>SOON</span>
                   )}
                 </div>
               ))}
-              <div style={{ padding: "0.8rem 1.2rem", borderTop: "1px solid rgba(74,107,138,.15)" }}>
-                <Link href="/ai-edge-lab" className="no-underline" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", color: "#7BA8CC" }}>
+              <div style={{ padding: "0.8rem 1.2rem", borderTop: "1px solid rgba(196,154,60,.15)" }}>
+                <Link href="/ai-edge-lab" className="no-underline" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", color: "#C49A3C" }}>
                   View all tools →
                 </Link>
               </div>
@@ -1258,7 +1258,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2" style={{ marginBottom: "1rem" }}>
                   <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.08em", color: item.roleColor }}>{item.role}</span>
                   {item.isBuilding && (
-                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.06em", color: "#4A6B8A", background: "rgba(74,107,138,.15)", border: "1px solid rgba(74,107,138,.25)", padding: "2px 6px" }}>BUILDING</span>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace', fontSize: "0.44rem", letterSpacing: "0.06em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 6px" }}>BUILDING</span>
                   )}
                 </div>
                 <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#B0A898", lineHeight: 1.65, marginBottom: "1.5rem" }}>{item.desc}</p>
