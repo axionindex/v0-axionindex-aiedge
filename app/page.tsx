@@ -221,7 +221,7 @@ export default function HomePage() {
                 color: "#6B6358" 
               }}
             >
-              <span className="w-[6px] h-[6px] rounded-full live-dot" style={{ background: "#5BAD7A" }} />
+              <span className="w-[6px] h-[6px] rounded-full" style={{ background: "#C49A3C" }} />
               AI Edge Lab
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style={{ marginLeft: "2px" }}>
                 <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -254,9 +254,9 @@ export default function HomePage() {
                 </div>
                 
                 {[
-                  { name: "AI Replaceability Index", href: "/replaceability", badge: "LIVE", badgeType: "live" },
+                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "SOON", badgeType: "soon" },
+                  { name: "AI Replaceability Index", href: "/replaceability", badge: "SOON", badgeType: "soon" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
-                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
                 ].map((item) => (
                   <Link
@@ -465,10 +465,10 @@ export default function HomePage() {
               AI Edge Lab
             </div>
             {[
-              { name: "AI Replaceability Index", href: "/replaceability", live: true },
-              { name: "Brainpower Density Index", href: "/brainpower" },
-              { name: "AI Aligned Index", href: "/ai-aligned" },
-              { name: "Org Decision Architecture", href: "/org-design" },
+              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Soon" },
+              { name: "AI Replaceability Index", href: "/replaceability", badge: "Soon" },
+              { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
+              { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
             ].map((item) => (
               <Link
                 key={item.name}
@@ -482,16 +482,16 @@ export default function HomePage() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
-                {item.live && (
+                {item.badge && (
                   <span style={{
                     fontSize: "0.45rem",
                     letterSpacing: "0.06em",
                     padding: "2px 6px",
-                    background: "rgba(91,173,122,.15)",
-                    color: "#5BAD7A",
-                    border: "1px solid rgba(91,173,122,.3)",
+                    background: item.badge === "Building" ? "rgba(196,154,60,.1)" : "rgba(107,99,88,.1)",
+                    color: item.badge === "Building" ? "#C49A3C" : "#6B6358",
+                    border: `1px solid ${item.badge === "Building" ? "rgba(196,154,60,.25)" : "rgba(107,99,88,.2)"}`,
                   }}>
-                    LIVE
+                    {item.badge.toUpperCase()}
                   </span>
                 )}
               </Link>
@@ -713,16 +713,16 @@ export default function HomePage() {
                   fontSize: "0.53rem", 
                   color: "#6B6358" 
                 }}>
-                  Four Indexes · One Framework
+                  The operating intelligence layer
                 </span>
               </div>
 
               {/* Index Rows */}
               {[
-                { num: "01", name: "AI Replaceability Index", sub: "Role defensibility · Edge Score", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
-                { num: "02", name: "Brainpower Density Index", sub: "Leadership impact altitude", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
-                { num: "03", name: "AI Aligned Index", sub: "AI readiness & adaptability", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
-                { num: "04", name: "Org Decision Architecture", sub: "Structural AI exposure + redesign", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "03", name: "Brainpower Density Index", sub: "Judgment · Energy · Leverage", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
+                { num: "04", name: "Org Decision Architecture", sub: "Authority · Accountability · Speed", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
               ].map((item, i) => (
                 <div 
                   key={item.num}
@@ -1036,9 +1036,9 @@ export default function HomePage() {
           </p>
 
           {/* Current site notice */}
-          <div className="reveal reveal-d2" style={{ padding: "1rem 1.2rem", background: "rgba(91,173,122,.08)", border: "1px solid rgba(91,173,122,.2)", marginBottom: "3rem", maxWidth: "64ch" }}>
-            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "rgba(91,173,122,.8)", lineHeight: 1.6 }}>
-              <strong style={{ color: "#5BAD7A" }}>Note:</strong> The AI Edge Lab was previously the primary face of axionindex.org. It now sits as the diagnostic engine within the broader Axion Index platform.
+          <div className="reveal reveal-d2" style={{ padding: "1rem 1.2rem", background: "rgba(196,154,60,.06)", border: "1px solid rgba(196,154,60,.2)", marginBottom: "3rem", maxWidth: "64ch" }}>
+            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#B0A898", lineHeight: 1.6 }}>
+              <strong style={{ color: "#C49A3C" }}>The AI Edge Lab is live and building.</strong> Four indices are in development — each translating an invisible organisational force into a quantified, decision-grade signal.
             </p>
           </div>
 
@@ -1065,11 +1065,10 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
-                { name: "3i Labour Code Readiness Index™", status: "live", href: "/coming-soon" },
-                { name: "Workforce Architecture Diagnostics™", status: "building", href: "#" },
-                { name: "AI Exposure & Work Compression", status: "building", href: "#" },
-                { name: "Decision Ownership Models™", status: "soon", href: "#" },
-                { name: "Payroll Operating Control", status: "soon", href: "#" },
+                { name: "AI Aligned Index", status: "soon", href: "/ai-aligned" },
+                { name: "AI Replaceability Index", status: "soon", href: "/replaceability" },
+                { name: "Brainpower Density Index", status: "building", href: "/brainpower" },
+                { name: "Org Decision Architecture", status: "engagement", href: "/org-design" },
               ].map((tool) => (
                 <div
                   key={tool.name}
@@ -1092,6 +1091,9 @@ export default function HomePage() {
                   )}
                   {tool.status === "soon" && (
                     <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#6B6358", background: "rgba(107,99,88,.1)", border: "1px solid rgba(107,99,88,.2)", padding: "2px 8px" }}>SOON</span>
+                  )}
+                  {tool.status === "engagement" && (
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#6B6358", background: "rgba(107,99,88,.1)", border: "1px solid rgba(107,99,88,.2)", padding: "2px 8px" }}>ENGAGEMENT</span>
                   )}
                 </div>
               ))}
