@@ -1155,7 +1155,7 @@ export default function HomePage() {
       <BrainpowerDensitySection />
 
       {/* ═══ S7 — FRAMEWORK ═══ */}
-      <section style={{ background: "#1A2030", padding: "6rem 3.5rem" }}>
+      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
         <div className="max-w-[1200px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             The Core Framework
@@ -1185,7 +1185,7 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.7rem", fontWeight: 700, color: node.isLast ? "#8C3B28" : "#F4EFE6", marginBottom: "0.8rem" }}>{node.word}</div>
                 <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", lineHeight: 1.75 }}>{node.body}</p>
                 {!node.isLast && (
-                  <div className="hidden lg:flex absolute items-center justify-center" style={{ right: "-13px", top: "50%", transform: "translateY(-50%)", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.9rem", color: "#C49A3C", background: "#1A2030", border: "1px solid rgba(196,154,60,.2)", padding: "2px 4px", zIndex: 2 }}>→</div>
+                  <div className="hidden lg:flex absolute items-center justify-center" style={{ right: "-13px", top: "50%", transform: "translateY(-50%)", fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.9rem", color: "#C49A3C", background: "#141210", border: "1px solid rgba(196,154,60,.2)", padding: "2px 4px", zIndex: 2 }}>→</div>
                 )}
               </div>
             ))}
@@ -1198,7 +1198,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ THREE-LAYER ARCHITECTURE ═══ */}
-      <section style={{ background: "#1A2030", padding: "6rem 3.5rem" }}>
+      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
         <div className="max-w-[1200px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             04 — The Architecture
@@ -1253,7 +1253,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2" style={{ marginBottom: "1rem" }}>
                   <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.08em", color: item.roleColor }}>{item.role}</span>
                   {item.isBuilding && (
-                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace', fontSize: "0.44rem", letterSpacing: "0.06em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 6px" }}>BUILDING</span>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.06em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 6px" }}>BUILDING</span>
                   )}
                 </div>
                 <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#B0A898", lineHeight: 1.65, marginBottom: "1.5rem" }}>{item.desc}</p>
@@ -1263,7 +1263,7 @@ export default function HomePage() {
 
                 {/* Connector arrow */}
                 {i < 2 && (
-                  <div className="hidden lg:flex absolute items-center justify-center" style={{ right: "-22px", top: "50%", transform: "translateY(-50%)", width: "36px", height: "36px", background: "#1A2030", border: "1px solid rgba(196,154,60,.15)", zIndex: 2 }}>
+                  <div className="hidden lg:flex absolute items-center justify-center" style={{ right: "-22px", top: "50%", transform: "translateY(-50%)", width: "36px", height: "36px", background: "#141210", border: "1px solid rgba(196,154,60,.15)", zIndex: 2 }}>
                     <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "1rem", color: "#C49A3C" }}>→</span>
                   </div>
                 )}
