@@ -861,10 +861,10 @@ export default function HomePage() {
 
           <div className="reveal reveal-d3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ border: "1px solid rgba(196,154,60,.2)" }}>
             {[
-              { step: "Step 01", title: "Measure the Role", body: "AI Replaceability Index maps what % of the role's core tasks AI can already perform — returns an Edge Score 0–100." },
-              { step: "Step 02", title: "Measure the Leader", body: "Brainpower Density Index measures what % of leadership hours are in genuinely consequential work vs. work at the wrong altitude." },
-              { step: "Step 03", title: "Map the Organisation", body: "Org Decision Architecture aggregates scores — producing a structural AI exposure map and redesign roadmap." },
-              { step: "Step 04", title: "Apply Domain Expertise", body: "Labour Codes, Family Business HR, and bespoke engagements apply the framework to your specific operating context." },
+              { step: "Step 01", title: "Measure AI Alignment", body: "AI Aligned Index measures how ready your organisation's belief system, architecture, and operating model are for AI integration." },
+              { step: "Step 02", title: "Measure Role Exposure", body: "AI Replaceability Index maps what % of the role's core tasks AI can already perform — returns an Edge Score 0–100." },
+              { step: "Step 03", title: "Measure Leadership Impact", body: "Brainpower Density Index measures what % of leadership hours are in genuinely consequential work vs. work at the wrong altitude." },
+              { step: "Step 04", title: "Map the Organisation", body: "Org Decision Architecture aggregates scores — producing a structural AI exposure map and redesign roadmap." },
             ].map((item, i) => (
               <div
                 key={item.step}
@@ -899,9 +899,9 @@ export default function HomePage() {
 
           <div className="reveal reveal-d2 grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { tag: "For Individuals", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Take the Index →", href: "/replaceability" },
+              { tag: "For Organisations", q: "Is your organisation AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the Index →", href: "/ai-aligned" },
+              { tag: "For Individuals", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Measure Your Edge →", href: "/replaceability" },
               { tag: "For Senior Leaders", q: "Are you creating impact at the right altitude?", body: "The Brainpower Density Index measures what % of your leadership time is in genuinely consequential work vs work that should never reach you.", cta: "Measure Your Impact →", href: "/brainpower" },
-              { tag: "For Organisations", q: "Is your organisation structured for the AI economy?", body: "The Org Decision Architecture Index maps structural AI exposure and builds a redesign roadmap with hard 12-month targets.", cta: "Begin the Engagement →", href: "/org-design" },
             ].map((card) => (
               <div
                 key={card.tag}
@@ -1524,9 +1524,9 @@ export default function HomePage() {
             <div>
               <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C49A3C", borderBottom: "1px solid rgba(196,154,60,.1)", paddingBottom: "0.5rem", marginBottom: "0.9rem" }}>AI Edge Lab</div>
               {[
+                { label: "AI Aligned Index", href: "/ai-aligned" },
                 { label: "AI Replaceability Index", href: "/replaceability" },
                 { label: "Brainpower Density Index", href: "/brainpower" },
-                { label: "AI Aligned Index", href: "/ai-aligned" },
                 { label: "Org Decision Architecture", href: "/org-design" },
               ].map((link) => (
                 <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
@@ -1597,9 +1597,9 @@ function CarouselSection() {
 
   const slides = [
     { world: "ink", pre: "The Operating Question", headline: "Is your organisation structurally built for what", em: "comes next?", body: "Most organisations have a strategy. Almost none have the operating architecture to carry it. Axion Index makes the gap visible.", cta: "Begin the Engagement →", href: "/engage" },
-    { world: "grey", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Take the Index →", href: "/replaceability", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
-    { world: "ink", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Measure Your Impact →", href: "/brainpower" },
-    { world: "grey", pre: "For Organisations", headline: "What is your organisation's true", em: "AI exposure?", body: "The Org Decision Architecture Index maps structural AI exposure across your entire organisation — produces a redesign roadmap with hard 12-month targets.", cta: "Begin the Engagement →", href: "/org-design" },
+    { world: "grey", pre: "For Organisations", headline: "Is your organisation", em: "AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the Index →", href: "/ai-aligned", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
+    { world: "ink", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Measure Your Edge →", href: "/replaceability" },
+    { world: "grey", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Measure Your Impact →", href: "/brainpower" },
     { world: "paper", pre: "On Labour Codes", headline: "India's Labour Codes are not a compliance question.", em: "They are a mirror.", body: "They expose every structural decision an organisation deferred. Compliance failure is philosophy failure.", cta: "Explore →", href: "/labour-codes" },
     { world: "ink", pre: "On Family Business", headline: "The largest employer class in India has almost", em: "no frameworks designed for it.", body: "Loyalty vs merit. Patriarch authority. Multi-generational belief systems.", cta: "Explore →", href: "/family-business" },
     { world: "grey", pre: "The Foundation", headline: "Belief becomes conviction. Conviction becomes", em: "rhythm.", body: "Every Axion Index engagement traces back to one governing logic. Where has your organisation broken down in this sequence?", cta: "Explore the Framework →", href: "/framework" },
