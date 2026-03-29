@@ -221,7 +221,7 @@ export default function HomePage() {
                 color: "#6B6358" 
               }}
             >
-              <span className="w-[6px] h-[6px] rounded-full live-dot" style={{ background: "#5BAD7A" }} />
+              <span className="w-[6px] h-[6px] rounded-full" style={{ background: "#C49A3C" }} />
               AI Edge Lab
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style={{ marginLeft: "2px" }}>
                 <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -254,9 +254,9 @@ export default function HomePage() {
                 </div>
                 
                 {[
-                  { name: "AI Replaceability Index", href: "/replaceability", badge: "LIVE", badgeType: "live" },
+                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "SOON", badgeType: "soon" },
+                  { name: "AI Replaceability Index", href: "/replaceability", badge: "SOON", badgeType: "soon" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
-                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
                 ].map((item) => (
                   <Link
@@ -465,10 +465,10 @@ export default function HomePage() {
               AI Edge Lab
             </div>
             {[
-              { name: "AI Replaceability Index", href: "/replaceability", live: true },
-              { name: "Brainpower Density Index", href: "/brainpower" },
-              { name: "AI Aligned Index", href: "/ai-aligned" },
-              { name: "Org Decision Architecture", href: "/org-design" },
+              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Soon" },
+              { name: "AI Replaceability Index", href: "/replaceability", badge: "Soon" },
+              { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
+              { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
             ].map((item) => (
               <Link
                 key={item.name}
@@ -482,16 +482,16 @@ export default function HomePage() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
-                {item.live && (
+                {item.badge && (
                   <span style={{
                     fontSize: "0.45rem",
                     letterSpacing: "0.06em",
                     padding: "2px 6px",
-                    background: "rgba(91,173,122,.15)",
-                    color: "#5BAD7A",
-                    border: "1px solid rgba(91,173,122,.3)",
+                    background: item.badge === "Building" ? "rgba(196,154,60,.1)" : "rgba(107,99,88,.1)",
+                    color: item.badge === "Building" ? "#C49A3C" : "#6B6358",
+                    border: `1px solid ${item.badge === "Building" ? "rgba(196,154,60,.25)" : "rgba(107,99,88,.2)"}`,
                   }}>
-                    LIVE
+                    {item.badge.toUpperCase()}
                   </span>
                 )}
               </Link>
@@ -713,16 +713,16 @@ export default function HomePage() {
                   fontSize: "0.53rem", 
                   color: "#6B6358" 
                 }}>
-                  Four Indexes · One Framework
+                  The operating intelligence layer
                 </span>
               </div>
 
               {/* Index Rows */}
               {[
-                { num: "01", name: "AI Replaceability Index", sub: "Role defensibility · Edge Score", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
-                { num: "02", name: "Brainpower Density Index", sub: "Leadership impact altitude", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
-                { num: "03", name: "AI Aligned Index", sub: "AI readiness & adaptability", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
-                { num: "04", name: "Org Decision Architecture", sub: "Structural AI exposure + redesign", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "03", name: "Brainpower Density Index", sub: "Judgment · Energy · Leverage", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
+                { num: "04", name: "Org Decision Architecture", sub: "Authority · Accountability · Speed", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
               ].map((item, i) => (
                 <div 
                   key={item.num}
@@ -839,7 +839,7 @@ export default function HomePage() {
                 "Org Decision Architecture",
                 "Labour Codes as Organisational Design",
                 "Belief → Conviction → Rhythm",
-                "The Unfinished Organisation",
+                "The Evolving Organisation",
                 "Compression-Judgment Field",
                 "Edge Score",
                 "Family Business HR",
@@ -1012,33 +1012,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ S3 — THE AI EDGE LAB (Steel Theme) ═══ */}
-      <section style={{ background: "linear-gradient(180deg, #1A2030 0%, #141820 100%)", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
+      {/* ═══ S3 — THE AI EDGE LAB ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
         {/* Large watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(6rem, 18vw, 14rem)", fontWeight: 700, color: "rgba(74,107,138,.04)", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(6rem, 18vw, 14rem)", fontWeight: 700, color: "rgba(196,154,60,.04)", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
           AI EDGE LAB
         </div>
 
         <div className="max-w-[1200px] mx-auto relative z-10">
           {/* Breadcrumb */}
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", color: "rgba(123,168,204,.5)", marginBottom: "1.5rem" }}>
-            axionindex.org / <span style={{ color: "#7BA8CC" }}>The AI Edge Lab</span>
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", color: "rgba(196,154,60,.5)", marginBottom: "1.5rem" }}>
+            axionindex.org / <span style={{ color: "#C49A3C" }}>The AI Edge Lab</span>
           </div>
 
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4A6B8A", marginBottom: "1rem" }}>
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "1rem" }}>
             07 — The AI Edge Lab
           </div>
           <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "0.8rem" }}>
-            Operating intelligence, <em style={{ fontStyle: "italic", color: "#7BA8CC" }}>made measurable.</em>
+            Operating intelligence, <em style={{ fontStyle: "italic", color: "#C49A3C" }}>made measurable.</em>
           </h2>
           <p className="reveal reveal-d2" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#B0A898", marginBottom: "1.5rem", maxWidth: "64ch", lineHeight: 1.75 }}>
             The AI Edge Lab is Axion Index&apos;s work at the intersection of AI, Org Design and Human beings in the evolving workspace landscape. It translates complex workforce, compliance, and structural questions into quantified, decision-grade signals for founders, CFOs, CHROs, and boards.
           </p>
 
           {/* Current site notice */}
-          <div className="reveal reveal-d2" style={{ padding: "1rem 1.2rem", background: "rgba(91,173,122,.08)", border: "1px solid rgba(91,173,122,.2)", marginBottom: "3rem", maxWidth: "64ch" }}>
-            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "rgba(91,173,122,.8)", lineHeight: 1.6 }}>
-              <strong style={{ color: "#5BAD7A" }}>Note:</strong> The AI Edge Lab was previously the primary face of axionindex.org. It now sits as the diagnostic engine within the broader Axion Index platform.
+          <div className="reveal reveal-d2" style={{ padding: "1rem 1.2rem", background: "rgba(196,154,60,.06)", border: "1px solid rgba(196,154,60,.2)", marginBottom: "3rem", maxWidth: "64ch" }}>
+            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#B0A898", lineHeight: 1.6 }}>
+              <strong style={{ color: "#C49A3C" }}>The AI Edge Lab is live and building.</strong> Four indices are in development — each translating an invisible organisational force into a quantified, decision-grade signal.
             </p>
           </div>
 
@@ -1051,31 +1051,30 @@ export default function HomePage() {
               <Link
                 href="/ai-edge-lab"
                 className="inline-block no-underline transition-all duration-[180ms]"
-                style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "#4A6B8A", color: "#FFFFFF", padding: "14px 32px" }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = "#5A7B9A"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = "#4A6B8A"; }}
+                style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, background: "#C49A3C", color: "#0C0B09", padding: "14px 32px" }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "#C49A3C"; }}
               >
                 Access the Lab →
               </Link>
             </div>
 
             {/* Right: 5 diagnostic tools */}
-            <div style={{ border: "1px solid rgba(74,107,138,.25)", background: "rgba(74,107,138,.05)" }}>
-              <div style={{ padding: "1rem 1.2rem", borderBottom: "1px solid rgba(74,107,138,.15)" }}>
-                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#7BA8CC" }}>Diagnostic Tools</div>
+            <div style={{ border: "1px solid rgba(196,154,60,.25)", background: "rgba(196,154,60,.03)" }}>
+              <div style={{ padding: "1rem 1.2rem", borderBottom: "1px solid rgba(196,154,60,.15)" }}>
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
-                { name: "3i Labour Code Readiness Index™", status: "live", href: "/coming-soon" },
-                { name: "Workforce Architecture Diagnostics™", status: "building", href: "#" },
-                { name: "AI Exposure & Work Compression", status: "building", href: "#" },
-                { name: "Decision Ownership Models™", status: "soon", href: "#" },
-                { name: "Payroll Operating Control", status: "soon", href: "#" },
+                { name: "AI Aligned Index", status: "soon", href: "/ai-aligned" },
+                { name: "AI Replaceability Index", status: "soon", href: "/replaceability" },
+                { name: "Brainpower Density Index", status: "building", href: "/brainpower" },
+                { name: "Org Decision Architecture", status: "engagement", href: "/org-design" },
               ].map((tool) => (
                 <div
                   key={tool.name}
                   className="flex items-center justify-between transition-colors duration-[150ms]"
-                  style={{ padding: "0.9rem 1.2rem", borderBottom: "1px solid rgba(74,107,138,.1)" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(74,107,138,.08)"; }}
+                  style={{ padding: "0.9rem 1.2rem", borderBottom: "1px solid rgba(196,154,60,.1)" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(196,154,60,.06)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
                 >
                   <Link href={tool.href} className="no-underline flex-1" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: tool.status === "live" ? "#F4EFE6" : "#6B6358" }}>
@@ -1088,15 +1087,18 @@ export default function HomePage() {
                     </span>
                   )}
                   {tool.status === "building" && (
-                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#7BA8CC", background: "rgba(74,107,138,.15)", border: "1px solid rgba(74,107,138,.25)", padding: "2px 8px" }}>BUILDING</span>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 8px" }}>BUILDING</span>
                   )}
                   {tool.status === "soon" && (
                     <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#6B6358", background: "rgba(107,99,88,.1)", border: "1px solid rgba(107,99,88,.2)", padding: "2px 8px" }}>SOON</span>
                   )}
+                  {tool.status === "engagement" && (
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.48rem", letterSpacing: "0.08em", color: "#6B6358", background: "rgba(107,99,88,.1)", border: "1px solid rgba(107,99,88,.2)", padding: "2px 8px" }}>ENGAGEMENT</span>
+                  )}
                 </div>
               ))}
-              <div style={{ padding: "0.8rem 1.2rem", borderTop: "1px solid rgba(74,107,138,.15)" }}>
-                <Link href="/ai-edge-lab" className="no-underline" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", color: "#7BA8CC" }}>
+              <div style={{ padding: "0.8rem 1.2rem", borderTop: "1px solid rgba(196,154,60,.15)" }}>
+                <Link href="/ai-edge-lab" className="no-underline" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", color: "#C49A3C" }}>
                   View all tools →
                 </Link>
               </div>
@@ -1258,7 +1260,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2" style={{ marginBottom: "1rem" }}>
                   <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.56rem", letterSpacing: "0.08em", color: item.roleColor }}>{item.role}</span>
                   {item.isBuilding && (
-                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.44rem", letterSpacing: "0.06em", color: "#4A6B8A", background: "rgba(74,107,138,.15)", border: "1px solid rgba(74,107,138,.25)", padding: "2px 6px" }}>BUILDING</span>
+                    <span style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace', fontSize: "0.44rem", letterSpacing: "0.06em", color: "#C49A3C", background: "rgba(196,154,60,.1)", border: "1px solid rgba(196,154,60,.25)", padding: "2px 6px" }}>BUILDING</span>
                   )}
                 </div>
                 <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#B0A898", lineHeight: 1.65, marginBottom: "1.5rem" }}>{item.desc}</p>
@@ -1295,7 +1297,7 @@ export default function HomePage() {
               { num: "III", statement: "Dignity is an operating constraint, not a cultural value.", bold: "Dignity" },
               { num: "IV", statement: "Governance without bureaucracy is possible.", bold: "Governance without bureaucracy" },
               { num: "V", statement: "Compliance is a mirror, not a burden.", bold: "Compliance is a mirror" },
-              { num: "VI", statement: "The unfinished organisation is a permanent form, not a transition phase.", bold: "The unfinished organisation" },
+              { num: "VI", statement: "The evolving organisation is a permanent form, not a transition phase.", bold: "The evolving organisation" },
             ].map((conviction, i) => (
               <div
                 key={conviction.num}
@@ -1444,7 +1446,7 @@ export default function HomePage() {
                 Every engagement begins with measurement, not assumption. The four indexes — AI Replaceability, Brainpower Density, AI Aligned, and the Organisation Decision Architecture Index — are Axion Index&apos;s signature intellectual property. <strong>They are not generic tools.</strong> The output of a specific point of view about how AI is restructuring the economics of work.
               </p>
               <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9, marginBottom: "1.5rem" }}>
-                Axion Index operates under the intellectual influence of <strong>Nitin Nahata</strong>, Operating Architect, with 22 years across Tata Group, Standard Chartered, Udaan, and Gameskraft. The thinking behind the platform is his. The platform itself is designed to scale beyond any one practitioner. <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.3)" }}>nitinnahata.com →</a>
+                Axion Index operates under the intellectual influence of <strong>Nitin Nahata</strong>, Operating Architect, with 22 years across Tata Group, Standard Chartered, Udaan, and Gameskraft. The thinking behind the platform is his. The platform itself is designed to scale beyond any one practitioner. <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.3)" }}>nitinnahata.com →</a> · <a href="https://linkedin.com/in/nahatanitin" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.3)" }}>LinkedIn →</a>
               </p>
               <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9 }}>
                 Most organisations don&apos;t fail because of bad strategy. They fail because the system underneath cannot carry the strategy. Axion Index exists to solve that gap — before the break becomes visible.
@@ -1506,7 +1508,7 @@ export default function HomePage() {
               what <em style={{ fontStyle: "italic", color: "#C49A3C" }}>comes next?</em>
             </h2>
             <p className="reveal reveal-d1" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginTop: "1.2rem", maxWidth: "42ch", lineHeight: 1.75, borderLeft: "2px solid rgba(196,154,60,.2)", paddingLeft: "1.2rem" }}>
-              Whether you are exploring a diagnostic, a strategic engagement, or a domain practice — Axion Index begins with measurement, not assumption.
+              For founders and CHROs in 50–500 person organisations. For startups navigating Labour Code exposure. For companies where AI is compressing the workforce and the architecture has not kept up.
             </p>
           </div>
 
@@ -1528,7 +1530,7 @@ export default function HomePage() {
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C49A3C"; e.currentTarget.style.color = "#C49A3C"; }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.2)"; e.currentTarget.style.color = "#6B6358"; }}
             >
-              Enter the AI Edge Lab
+              Explore the AI Edge Lab →
             </Link>
           </div>
         </div>
@@ -1542,7 +1544,7 @@ export default function HomePage() {
             {/* Col 1: Brand */}
             <div className="lg:col-span-1">
               <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "0.5rem" }}>Axion Index</div>
-              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", maxWidth: "26ch" }}>Codified energy for the unfinished organisation.</p>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", maxWidth: "26ch" }}>Codified energy for the evolving organisation.</p>
             </div>
 
             {/* Col 2: AI Edge Lab */}
@@ -1592,6 +1594,7 @@ export default function HomePage() {
                 <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
               ))}
               <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>Nitin Nahata ↗</a>
+              <a href="https://linkedin.com/in/nahatanitin" target="_blank" rel="noopener noreferrer" className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>LinkedIn ↗</a>
             </div>
           </div>
 
@@ -1600,8 +1603,11 @@ export default function HomePage() {
             <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>
               axionindex.org · Bengaluru · 2026 · <a href="mailto:nitin@axionindex.org" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358" }}>nitin@axionindex.org</a>
             </div>
-            <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.88rem", color: "#6B6358" }}>
-              Intellectual foundation: <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358", borderBottom: "1px solid rgba(196,154,60,.1)" }}>Nitin Nahata →</a>
+            <div className="flex items-center gap-4">
+              <a href="https://linkedin.com/in/nahatanitin" target="_blank" rel="noopener noreferrer" className="no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>LinkedIn ↗</a>
+              <span style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.88rem", color: "#6B6358" }}>
+                Intellectual foundation: <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358", borderBottom: "1px solid rgba(196,154,60,.1)" }}>Nitin Nahata →</a>
+              </span>
             </div>
           </div>
         </div>

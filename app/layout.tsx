@@ -35,9 +35,9 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Axion Index — Operating Intelligence for Unfinished Organisations",
+  title: "Axion Index — Operating Intelligence for the Evolving Organisation",
   description:
-    "Codified energy for the unfinished. We help founders diagnose, redesign, and control the system underneath work before it breaks. Research-grade diagnostics by Nitin Nahata.",
+    "Codified energy for the evolving organisation. We help founders diagnose, redesign, and control the system underneath work before it breaks. Research-grade diagnostics by Nitin Nahata.",
   keywords: [
     "operating intelligence",
     "HR architecture",
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Nitin Nahata" }],
   openGraph: {
-    title: "Axion Index — Codified Energy for the Unfinished",
+    title: "Axion Index — Codified Energy for the Evolving Organisation",
     description:
-      "Operating intelligence for unfinished organisations. Diagnostic instruments and strategic frameworks by Nitin Nahata.",
+      "Operating intelligence for evolving organisations. Diagnostic instruments and strategic frameworks by Nitin Nahata.",
     type: "website",
   },
 };
