@@ -255,7 +255,7 @@ export default function HomePage() {
                 
                 {[
                   { name: "AI Aligned Index", href: "/ai-aligned", badge: "SOON", badgeType: "soon" },
-                  { name: "AI Replaceability Index", href: "/replaceability", badge: "SOON", badgeType: "soon" },
+                  { name: "AI Replaceability Index", href: "/replaceability", badge: "LIVE", badgeType: "live" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
                 ].map((item) => (
@@ -466,7 +466,7 @@ export default function HomePage() {
             </div>
             {[
               { name: "AI Aligned Index", href: "/ai-aligned", badge: "Soon" },
-              { name: "AI Replaceability Index", href: "/replaceability", badge: "Soon" },
+              { name: "AI Replaceability Index", href: "/replaceability", badge: "Live", live: true },
               { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
               { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
             ].map((item) => (
@@ -487,9 +487,9 @@ export default function HomePage() {
                     fontSize: "0.45rem",
                     letterSpacing: "0.06em",
                     padding: "2px 6px",
-                    background: item.badge === "Building" ? "rgba(196,154,60,.1)" : "rgba(107,99,88,.1)",
-                    color: item.badge === "Building" ? "#C49A3C" : "#6B6358",
-                    border: `1px solid ${item.badge === "Building" ? "rgba(196,154,60,.25)" : "rgba(107,99,88,.2)"}`,
+                    background: item.live ? "rgba(91,173,122,.15)" : item.badge === "Building" ? "rgba(196,154,60,.1)" : "rgba(107,99,88,.1)",
+                    color: item.live ? "#5BAD7A" : item.badge === "Building" ? "#C49A3C" : "#6B6358",
+                    border: `1px solid ${item.live ? "rgba(91,173,122,.3)" : item.badge === "Building" ? "rgba(196,154,60,.25)" : "rgba(107,99,88,.2)"}`,
                   }}>
                     {item.badge.toUpperCase()}
                   </span>
@@ -720,7 +720,7 @@ export default function HomePage() {
               {/* Index Rows */}
               {[
                 { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
-                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
                 { num: "03", name: "Brainpower Density Index", sub: "Judgment · Energy · Leverage", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "04", name: "Org Decision Architecture", sub: "Authority · Accountability · Speed", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
               ].map((item, i) => (
@@ -1066,7 +1066,7 @@ export default function HomePage() {
               </div>
               {[
                 { name: "AI Aligned Index", status: "soon", href: "/ai-aligned" },
-                { name: "AI Replaceability Index", status: "soon", href: "/replaceability" },
+                { name: "AI Replaceability Index", status: "live", href: "/replaceability" },
                 { name: "Brainpower Density Index", status: "building", href: "/brainpower" },
                 { name: "Org Decision Architecture", status: "engagement", href: "/org-design" },
               ].map((tool) => (
