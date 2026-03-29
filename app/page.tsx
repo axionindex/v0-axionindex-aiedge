@@ -1306,9 +1306,31 @@ export default function HomePage() {
       {/* ═══ S5 — AXION FIELD ═══ */}
       <AxionFieldSection />
 
-      {/* ═══ S6 — BRAINPOWER DENSITY ═══ */}
+{/* ═══ S6 — BRAINPOWER DENSITY ═══ */}
       <BrainpowerDensitySection />
 
+      {/* ═══ DIAGNOSTIC CTA BAND ═══ */}
+      <div className="diagnostic-cta">
+        <div className="dcta-inner">
+          <div>
+            <div className="dcta-label">Ready to measure?</div>
+            <div className="dcta-heading">Start with the AI Aligned Index</div>
+            <p className="dcta-sub" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>
+              The first diagnostic in the system. Measures how ready your organisation&apos;s belief system, architecture, and operating model are for AI integration.
+            </p>
+          </div>
+          <Link
+            href="/ai-aligned"
+            className="no-underline transition-all duration-[180ms] flex-shrink-0"
+            style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#8C3B28", color: "#FFFFFF", padding: "14px 28px" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#A64D38"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "#8C3B28"; }}
+          >
+            Take the Index →
+          </Link>
+        </div>
+      </div>
+      
       {/* ═══ S7 — FRAMEWORK ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
         <div className="max-w-[1160px] mx-auto">
@@ -1575,7 +1597,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S10 — ABOUT / INSTITUTION ═══ */}
-      <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
+      <section id="institution" style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
         <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
             The Institution
@@ -1646,7 +1668,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S11 — FINAL CTA ═══ */}
-      <section style={{ background: "#0C0B09", padding: "6rem 3.5rem", borderBottom: "1px solid rgba(196,154,60,.2)" }}>
+      <section id="engage" style={{ background: "#0C0B09", padding: "6rem 3.5rem", borderBottom: "1px solid rgba(196,154,60,.2)" }}>
         <div className="max-w-[1160px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
           {/* Left */}
           <div>
