@@ -7,19 +7,43 @@ export default function HomePage() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [heroProgress, setHeroProgress] = useState(0);
+  const [anchorNavVisible, setAnchorNavVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const heroRef = useRef<HTMLDivElement>(null);
 
-  // Scroll handler for nav + hero parallax
+  // Scroll handler for nav + hero parallax + anchor nav
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
       if (heroRef.current) {
         const progress = Math.min(window.scrollY / heroRef.current.offsetHeight, 1);
         setHeroProgress(progress);
+        // Show anchor nav after hero
+        setAnchorNavVisible(window.scrollY > heroRef.current.offsetHeight - 100);
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Section observer for anchor nav active state
+  useEffect(() => {
+    const sectionIds = ["aiedge", "cjf", "domains", "evidence", "institution", "engage"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   // Body scroll lock for mobile menu
@@ -147,6 +171,124 @@ export default function HomePage() {
           border-left-color: var(--gold);
           padding-left: 16px;
           background: rgba(196,154,60,.04);
+        }
+        
+        /* Anchor nav */
+        .anchor-nav {
+          position: fixed;
+          top: 54px;
+          left: 0;
+          right: 0;
+          z-index: 900;
+          background: rgba(12,11,9,.97);
+          border-bottom: 1px solid rgba(196,154,60,.09);
+          opacity: 0;
+          transform: translateY(-4px);
+          pointer-events: none;
+          transition: opacity 0.3s, transform 0.3s;
+        }
+        .anchor-nav.visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+        .anchor-nav-inner {
+          max-width: 1160px;
+          margin: 0 auto;
+          display: flex;
+          gap: 0;
+          height: 38px;
+          align-items: center;
+        }
+        .anchor-link {
+          font-family: var(--font-dm-mono), 'DM Mono', monospace;
+          font-size: 0.57rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--dim);
+          text-decoration: none;
+          padding: 0 1.1rem;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          border-right: 1px solid rgba(196,154,60,.09);
+          transition: color 0.2s;
+        }
+        .anchor-link:last-child { border-right: none; }
+        .anchor-link:hover, .anchor-link.active { color: var(--gold); }
+        
+        /* Hero tracks */
+        .hero-tracks {
+          margin-top: 2.2rem;
+          padding-top: 1.8rem;
+          border-top: 1px solid rgba(196,154,60,.09);
+          opacity: 0;
+          animation: fadeUp 0.85s 1.05s forwards;
+        }
+        
+        /* Sample output label */
+        .sample-output-label {
+          display: flex;
+          align-items: baseline;
+          gap: 0.8rem;
+          margin-bottom: 1rem;
+          font-size: 0.82rem;
+          color: var(--dim);
+          line-height: 1.6;
+        }
+        .sol-badge {
+          font-family: var(--font-dm-mono), 'DM Mono', monospace;
+          font-size: 0.52rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--gold);
+          background: rgba(196,154,60,.1);
+          border: 1px solid rgba(196,154,60,.25);
+          padding: 2px 7px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        
+        /* Diagnostic CTA */
+        .diagnostic-cta {
+          background: var(--parchment);
+          border-top: 1px solid rgba(140,59,40,.15);
+          border-bottom: 1px solid rgba(140,59,40,.15);
+          padding: 4rem 3.5rem;
+        }
+        .dcta-inner {
+          max-width: 1160px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 3rem;
+        }
+        .dcta-label {
+          font-family: var(--font-dm-mono), 'DM Mono', monospace;
+          font-size: 0.57rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--rust);
+          margin-bottom: 0.6rem;
+        }
+        .dcta-heading {
+          font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+          font-size: clamp(1.5rem, 2.5vw, 2rem);
+          font-weight: 700;
+          color: var(--ink);
+          line-height: 1.1;
+          margin-bottom: 0.6rem;
+        }
+        .dcta-sub {
+          font-size: 0.85rem;
+          color: #4A433C;
+          line-height: 1.75;
+          max-width: 44ch;
+        }
+        @media (max-width: 960px) {
+          .dcta-inner { flex-direction: column; align-items: flex-start; }
+          .diagnostic-cta { padding: 3rem 2rem; }
         }
         
         /* Mobile menu hamburger */
@@ -419,6 +561,28 @@ export default function HomePage() {
         </button>
       </nav>
 
+      {/* Sticky Anchor Nav */}
+      <div className={`anchor-nav ${anchorNavVisible ? "visible" : ""}`}>
+        <div className="anchor-nav-inner">
+          {[
+            { label: "Indexes", href: "#aiedge" },
+            { label: "CJF & Density", href: "#cjf" },
+            { label: "Domains", href: "#domains" },
+            { label: "Evidence", href: "#evidence" },
+            { label: "Institution", href: "#institution" },
+            { label: "Start", href: "#engage" },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`anchor-link ${activeSection === item.href.slice(1) ? "active" : ""}`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div 
@@ -654,6 +818,18 @@ export default function HomePage() {
               >
                 Start an Engagement
               </Link>
+            </div>
+
+            {/* Hero Track Summary */}
+            <div className="hero-tracks">
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.57rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#6B6358", marginBottom: "0.7rem" }}>
+                Four indexes. One system. Three starting points.
+              </div>
+              <div className="flex flex-wrap gap-6">
+                <a href="#aiedge" className="no-underline transition-colors duration-200 hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#B0A898" }}>For Organisations →</a>
+                <a href="#aiedge" className="no-underline transition-colors duration-200 hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#B0A898" }}>For Individuals →</a>
+                <a href="#aiedge" className="no-underline transition-colors duration-200 hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#B0A898" }}>For Senior Leaders →</a>
+              </div>
             </div>
           </div>
 
@@ -992,7 +1168,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S3 — THE AI EDGE LAB ═══ */}
-      <section style={{ background: "#141210", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
+      <section id="aiedge" style={{ background: "#141210", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
         {/* Large watermark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(6rem, 18vw, 14rem)", fontWeight: 700, color: "rgba(196,154,60,.04)", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
           AI EDGE LAB
@@ -1289,7 +1465,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S8 — DOMAINS ═══ */}
-      <section style={{ background: "#FAF8F4", padding: "6rem 3.5rem" }}>
+      <section id="domains" style={{ background: "#FAF8F4", padding: "6rem 3.5rem" }}>
         <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
             Areas of Practice
@@ -1367,7 +1543,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S9 — PROOF NUMBERS ═══ */}
-      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+      <section id="evidence" style={{ background: "#141210", padding: "6rem 3.5rem" }}>
         <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             The Evidence
@@ -1749,8 +1925,13 @@ function AxionFieldSection() {
   ];
 
   return (
-    <section style={{ background: "#2C2824", padding: "6rem 3.5rem" }}>
+    <section id="cjf" style={{ background: "#2C2824", padding: "6rem 3.5rem" }}>
       <div className="max-w-[1160px] mx-auto">
+        {/* Sample Output Label */}
+        <div className="sample-output-label reveal">
+          <span className="sol-badge">Sample Output</span>
+          <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>This is the tier map returned by the AI Replaceability Index. Your Edge Score locates your role in one of these tiers.</span>
+        </div>
         <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
           The Compression-Judgment Field
         </div>
@@ -1891,6 +2072,11 @@ function BrainpowerDensitySection() {
   return (
     <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
       <div className="max-w-[1160px] mx-auto">
+        {/* Sample Output Label */}
+        <div className="sample-output-label reveal">
+          <span className="sol-badge">Sample Output</span>
+          <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>This is what a Low Density diagnostic looks like. The full index returns a redesign roadmap alongside the distribution.</span>
+        </div>
         <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
           Brainpower Density Index
         </div>
