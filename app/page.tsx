@@ -254,8 +254,8 @@ export default function HomePage() {
                 </div>
                 
                 {[
-                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "BUILDING", badgeType: "building" },
-                  { name: "AI Replaceability Index", href: "/replaceability", badge: "LIVE", badgeType: "live" },
+                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "LIVE", badgeType: "live" },
+                  { name: "AI Replaceability Index", href: "/replaceability", badge: "BUILDING", badgeType: "building" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
                 ].map((item) => (
@@ -445,8 +445,8 @@ export default function HomePage() {
               AI Edge Lab
             </div>
             {[
-              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Building" },
-              { name: "AI Replaceability Index", href: "/replaceability", badge: "Live", live: true },
+              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Live", live: true },
+              { name: "AI Replaceability Index", href: "/replaceability", badge: "Building" },
               { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
               { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
             ].map((item) => (
@@ -699,8 +699,8 @@ export default function HomePage() {
 
               {/* Index Rows */}
               {[
-                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
-                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
+                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
+                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "03", name: "Brainpower Density Index", sub: "Judgment · Energy · Leverage", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "04", name: "Org Decision Architecture", sub: "Authority · Accountability · Speed", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
               ].map((item, i) => (
@@ -1038,9 +1038,9 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
-                { name: "AI Replaceability Index", status: "live", href: "/replaceability" },
-                { name: "Brainpower Density Index", status: "building", href: "/brainpower" },
-                { name: "AI Aligned Index", status: "building", href: "/ai-aligned" },
+                { name: "AI Aligned Index™", status: "live", href: "/ai-aligned" },
+                { name: "AI Replaceability Index™", status: "building", href: "/replaceability" },
+                { name: "Brainpower Density Index™", status: "building", href: "/brainpower" },
                 { name: "Org Decision Architecture", status: "engagement", href: "/org-design" },
               ].map((tool) => (
                 <div
@@ -1208,13 +1208,13 @@ export default function HomePage() {
                 barColor: "#8C3B28"
               },
               {
-                layer: "Layer Three",
-                name: "The Technology Layer",
-                role: "Building",
-                roleColor: "#4A6B8A",
+                layer: "Layer Three · System of Execution",
+                name: "HROS",
+                role: "The Technology Product",
+                roleColor: "#C49A3C",
                 desc: "The Operating Architect framework made operational at scale. Intelligent payroll as the wedge. A people operating system as the destination — built for startups and evolving organisations who cannot afford to wait for their people systems to break.",
                 subLabel: "The framework as software",
-                barColor: "#4A6B8A",
+                barColor: "#C49A3C",
                 isBuilding: true
               },
             ].map((item, i) => (
