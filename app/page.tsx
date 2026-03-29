@@ -7,19 +7,43 @@ export default function HomePage() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [heroProgress, setHeroProgress] = useState(0);
+  const [anchorNavVisible, setAnchorNavVisible] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const heroRef = useRef<HTMLDivElement>(null);
 
-  // Scroll handler for nav + hero parallax
+  // Scroll handler for nav + hero parallax + anchor nav
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 80);
       if (heroRef.current) {
         const progress = Math.min(window.scrollY / heroRef.current.offsetHeight, 1);
         setHeroProgress(progress);
+        // Show anchor nav after hero
+        setAnchorNavVisible(window.scrollY > heroRef.current.offsetHeight - 100);
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Section observer for anchor nav active state
+  useEffect(() => {
+    const sectionIds = ["aiedge", "cjf", "domains", "evidence", "institution", "engage"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   // Body scroll lock for mobile menu
@@ -149,6 +173,124 @@ export default function HomePage() {
           background: rgba(196,154,60,.04);
         }
         
+        /* Anchor nav */
+        .anchor-nav {
+          position: fixed;
+          top: 54px;
+          left: 0;
+          right: 0;
+          z-index: 900;
+          background: rgba(12,11,9,.97);
+          border-bottom: 1px solid rgba(196,154,60,.09);
+          opacity: 0;
+          transform: translateY(-4px);
+          pointer-events: none;
+          transition: opacity 0.3s, transform 0.3s;
+        }
+        .anchor-nav.visible {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+        .anchor-nav-inner {
+          max-width: 1160px;
+          margin: 0 auto;
+          display: flex;
+          gap: 0;
+          height: 38px;
+          align-items: center;
+        }
+        .anchor-link {
+          font-family: var(--font-dm-mono), 'DM Mono', monospace;
+          font-size: 0.57rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--dim);
+          text-decoration: none;
+          padding: 0 1.1rem;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          border-right: 1px solid rgba(196,154,60,.09);
+          transition: color 0.2s;
+        }
+        .anchor-link:last-child { border-right: none; }
+        .anchor-link:hover, .anchor-link.active { color: var(--gold); }
+        
+        /* Hero tracks */
+        .hero-tracks {
+          margin-top: 2.2rem;
+          padding-top: 1.8rem;
+          border-top: 1px solid rgba(196,154,60,.09);
+          opacity: 0;
+          animation: fadeUp 0.85s 1.05s forwards;
+        }
+        
+        /* Sample output label */
+        .sample-output-label {
+          display: flex;
+          align-items: baseline;
+          gap: 0.8rem;
+          margin-bottom: 1rem;
+          font-size: 0.82rem;
+          color: var(--dim);
+          line-height: 1.6;
+        }
+        .sol-badge {
+          font-family: var(--font-dm-mono), 'DM Mono', monospace;
+          font-size: 0.52rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--gold);
+          background: rgba(196,154,60,.1);
+          border: 1px solid rgba(196,154,60,.25);
+          padding: 2px 7px;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        
+        /* Diagnostic CTA */
+        .diagnostic-cta {
+          background: var(--parchment);
+          border-top: 1px solid rgba(140,59,40,.15);
+          border-bottom: 1px solid rgba(140,59,40,.15);
+          padding: 4rem 3.5rem;
+        }
+        .dcta-inner {
+          max-width: 1160px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 3rem;
+        }
+        .dcta-label {
+          font-family: var(--font-dm-mono), 'DM Mono', monospace;
+          font-size: 0.57rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: var(--rust);
+          margin-bottom: 0.6rem;
+        }
+        .dcta-heading {
+          font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+          font-size: clamp(1.5rem, 2.5vw, 2rem);
+          font-weight: 700;
+          color: var(--ink);
+          line-height: 1.1;
+          margin-bottom: 0.6rem;
+        }
+        .dcta-sub {
+          font-size: 0.85rem;
+          color: #4A433C;
+          line-height: 1.75;
+          max-width: 44ch;
+        }
+        @media (max-width: 960px) {
+          .dcta-inner { flex-direction: column; align-items: flex-start; }
+          .diagnostic-cta { padding: 3rem 2rem; }
+        }
+        
         /* Mobile menu hamburger */
         .hamburger span {
           display: block;
@@ -254,8 +396,8 @@ export default function HomePage() {
                 </div>
                 
                 {[
-                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "BUILDING", badgeType: "building" },
-                  { name: "AI Replaceability Index", href: "/replaceability", badge: "LIVE", badgeType: "live" },
+                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "LIVE", badgeType: "live" },
+                  { name: "AI Replaceability Index", href: "/replaceability", badge: "BUILDING", badgeType: "building" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
                 ].map((item) => (
@@ -419,6 +561,28 @@ export default function HomePage() {
         </button>
       </nav>
 
+      {/* Sticky Anchor Nav */}
+      <div className={`anchor-nav ${anchorNavVisible ? "visible" : ""}`}>
+        <div className="anchor-nav-inner">
+          {[
+            { label: "Indexes", href: "#aiedge" },
+            { label: "CJF & Density", href: "#cjf" },
+            { label: "Domains", href: "#domains" },
+            { label: "Evidence", href: "#evidence" },
+            { label: "Institution", href: "#institution" },
+            { label: "Start", href: "#engage" },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`anchor-link ${activeSection === item.href.slice(1) ? "active" : ""}`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div 
@@ -445,8 +609,8 @@ export default function HomePage() {
               AI Edge Lab
             </div>
             {[
-              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Building" },
-              { name: "AI Replaceability Index", href: "/replaceability", badge: "Live", live: true },
+              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Live", live: true },
+              { name: "AI Replaceability Index", href: "/replaceability", badge: "Building" },
               { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
               { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
             ].map((item) => (
@@ -561,7 +725,7 @@ export default function HomePage() {
         }}
       >
         <div 
-          className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+          className="max-w-[1160px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
           style={{ minHeight: "calc(100vh - 72px - 10rem)" }}
         >
           {/* Left Column */}
@@ -655,6 +819,18 @@ export default function HomePage() {
                 Start an Engagement
               </Link>
             </div>
+
+            {/* Hero Track Summary */}
+            <div className="hero-tracks">
+              <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.57rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#6B6358", marginBottom: "0.7rem" }}>
+                Four indexes. One system. Three starting points.
+              </div>
+              <div className="flex flex-wrap gap-6">
+                <a href="#aiedge" className="no-underline transition-colors duration-200 hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#B0A898" }}>For Organisations →</a>
+                <a href="#aiedge" className="no-underline transition-colors duration-200 hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#B0A898" }}>For Individuals →</a>
+                <a href="#aiedge" className="no-underline transition-colors duration-200 hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#B0A898" }}>For Senior Leaders →</a>
+              </div>
+            </div>
           </div>
 
           {/* Right Column - Index Panel */}
@@ -699,8 +875,8 @@ export default function HomePage() {
 
               {/* Index Rows */}
               {[
-                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
-                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
+                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
+                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "03", name: "Brainpower Density Index", sub: "Judgment · Energy · Leverage", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "04", name: "Org Decision Architecture", sub: "Authority · Accountability · Speed", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
               ].map((item, i) => (
@@ -814,6 +990,7 @@ export default function HomePage() {
           {[...Array(2)].map((_, setIdx) => (
             <div key={setIdx} className="flex items-center">
               {[
+                "AI Aligned Index",
                 "AI Replaceability Index",
                 "Brainpower Density Index",
                 "Org Decision Architecture",
@@ -823,7 +1000,6 @@ export default function HomePage() {
                 "Compression-Judgment Field",
                 "Edge Score",
                 "Family Business HR",
-                "AI Aligned Index",
               ].map((item, i) => (
                 <span key={`${setIdx}-${i}`} className="flex items-center" style={{ marginRight: "2rem" }}>
                   <span style={{ 
@@ -848,7 +1024,7 @@ export default function HomePage() {
 
       {/* ═══ S1 — SYSTEM MAP ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             How the System Works
           </div>
@@ -861,10 +1037,10 @@ export default function HomePage() {
 
           <div className="reveal reveal-d3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ border: "1px solid rgba(196,154,60,.2)" }}>
             {[
-              { step: "Step 01", title: "Measure the Role", body: "AI Replaceability Index maps what % of the role's core tasks AI can already perform — returns an Edge Score 0–100." },
-              { step: "Step 02", title: "Measure the Leader", body: "Brainpower Density Index measures what % of leadership hours are in genuinely consequential work vs. work at the wrong altitude." },
-              { step: "Step 03", title: "Map the Organisation", body: "Org Decision Architecture aggregates scores — producing a structural AI exposure map and redesign roadmap." },
-              { step: "Step 04", title: "Apply Domain Expertise", body: "Labour Codes, Family Business HR, and bespoke engagements apply the framework to your specific operating context." },
+              { step: "Step 01", title: "Measure AI Alignment", body: "AI Aligned Index measures how ready your organisation's belief system, architecture, and operating model are for AI integration." },
+              { step: "Step 02", title: "Measure Role Exposure", body: "AI Replaceability Index maps what % of the role's core tasks AI can already perform — returns an Edge Score 0–100." },
+              { step: "Step 03", title: "Measure Leadership Impact", body: "Brainpower Density Index measures what % of leadership hours are in genuinely consequential work vs. work at the wrong altitude." },
+              { step: "Step 04", title: "Map the Organisation", body: "Org Decision Architecture aggregates scores — producing a structural AI exposure map and redesign roadmap." },
             ].map((item, i) => (
               <div
                 key={item.step}
@@ -887,34 +1063,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ S2 — THREE AUDIENCES ═══ */}
-      <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
-            Where Do You Need to Start?
+      {/* ═══ S2 — CHOOSE YOUR LENS (Audience Routing) ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1160px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+            Choose your lens
           </div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#0C0B09", marginBottom: "3rem" }}>
-            The same question. <em style={{ fontStyle: "italic", color: "#8C3B28" }}>Three different answers.</em>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "3rem" }}>
+            The same platform. <em style={{ fontStyle: "italic", color: "#C49A3C" }}>Three different starting points.</em>
           </h2>
 
           <div className="reveal reveal-d2 grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { tag: "For Individuals", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Take the Index →", href: "/replaceability" },
-              { tag: "For Senior Leaders", q: "Are you creating impact at the right altitude?", body: "The Brainpower Density Index measures what % of your leadership time is in genuinely consequential work vs work that should never reach you.", cta: "Measure Your Impact →", href: "/brainpower" },
-              { tag: "For Organisations", q: "Is your organisation structured for the AI economy?", body: "The Org Decision Architecture Index maps structural AI exposure and builds a redesign roadmap with hard 12-month targets.", cta: "Begin the Engagement →", href: "/org-design" },
+              { tag: "I am an Organisation", q: "Is your organisation AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the AI Aligned Index →", href: "/ai-aligned", isLive: true },
+              { tag: "I am an Individual", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Join Waitlist →", href: "/replaceability", isLive: false },
+              { tag: "I am a Senior Leader", q: "What percentage of your week is genuinely consequential?", body: "The Brainpower Density Index measures what % of your leadership time is in decisions that require you — vs work that should never reach you.", cta: "Join Waitlist →", href: "/brainpower", isLive: false },
             ].map((card) => (
               <div
                 key={card.tag}
                 className="relative transition-all duration-[180ms] group"
-                style={{ padding: "2rem 1.6rem", border: "1px solid rgba(140,59,40,.15)", background: "#FAF8F4" }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#8C3B28"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(140,59,40,.15)"; e.currentTarget.style.transform = "translateY(0)"; }}
+                style={{ padding: "2rem 1.6rem", border: "1px solid rgba(196,154,60,.18)", background: "transparent" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C49A3C"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.18)"; e.currentTarget.style.transform = "translateY(0)"; }}
               >
-                <div className="absolute top-0 left-0 right-0 h-[2px] origin-left transition-transform duration-[300ms] scale-x-0 group-hover:scale-x-100" style={{ background: "#8C3B28" }} />
-                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>{card.tag}</div>
-                <p style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1.2rem", color: "#0C0B09", marginBottom: "1rem", lineHeight: 1.4 }}>{card.q}</p>
-                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#4A433C", lineHeight: 1.65, marginBottom: "1.5rem" }}>{card.body}</p>
-                <Link href={card.href} className="no-underline transition-colors duration-[150ms] hover:opacity-70" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28" }}>{card.cta}</Link>
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.57rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "1rem" }}>{card.tag}</div>
+                <p style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 700, color: "#F4EFE6", marginBottom: "1rem", lineHeight: 1.4 }}>{card.q}</p>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#6B6358", lineHeight: 1.65, marginBottom: "1.5rem" }}>{card.body}</p>
+                <Link href={card.href} className="no-underline transition-colors duration-[150ms] hover:opacity-70" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C49A3C" }}>{card.cta}</Link>
               </div>
             ))}
           </div>
@@ -923,7 +1098,7 @@ export default function HomePage() {
 
       {/* ═══ WHAT THIS MEANS FOR YOU ═══ */}
       <section style={{ background: "#0C0B09", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             What This Means for You
           </div>
@@ -957,7 +1132,7 @@ export default function HomePage() {
 
       {/* ═══ THE NAME — WHY AXION. WHY INDEX. ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             01 — The Name
           </div>
@@ -993,13 +1168,13 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S3 — THE AI EDGE LAB ═══ */}
-      <section style={{ background: "#141210", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
+      <section id="aiedge" style={{ background: "#141210", padding: "6rem 3.5rem", position: "relative", overflow: "hidden" }}>
         {/* Large watermark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(6rem, 18vw, 14rem)", fontWeight: 700, color: "rgba(196,154,60,.04)", letterSpacing: "0.1em", whiteSpace: "nowrap" }}>
           AI EDGE LAB
         </div>
 
-        <div className="max-w-[1200px] mx-auto relative z-10">
+        <div className="max-w-[1160px] mx-auto relative z-10">
           {/* Breadcrumb */}
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", color: "rgba(196,154,60,.5)", marginBottom: "1.5rem" }}>
             axionindex.org / <span style={{ color: "#C49A3C" }}>The AI Edge Lab</span>
@@ -1038,9 +1213,9 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
-                { name: "AI Replaceability Index", status: "live", href: "/replaceability" },
-                { name: "Brainpower Density Index", status: "building", href: "/brainpower" },
-                { name: "AI Aligned Index", status: "building", href: "/ai-aligned" },
+                { name: "AI Aligned Index™", status: "live", href: "/ai-aligned" },
+                { name: "AI Replaceability Index™", status: "building", href: "/replaceability" },
+                { name: "Brainpower Density Index™", status: "building", href: "/brainpower" },
                 { name: "Org Decision Architecture", status: "engagement", href: "/org-design" },
               ].map((tool) => (
                 <div
@@ -1131,12 +1306,34 @@ export default function HomePage() {
       {/* ═══ S5 — AXION FIELD ═══ */}
       <AxionFieldSection />
 
-      {/* ═══ S6 — BRAINPOWER DENSITY ═══ */}
+{/* ═══ S6 — BRAINPOWER DENSITY ═══ */}
       <BrainpowerDensitySection />
 
+      {/* ═══ DIAGNOSTIC CTA BAND ═══ */}
+      <div className="diagnostic-cta">
+        <div className="dcta-inner">
+          <div>
+            <div className="dcta-label">Ready to measure?</div>
+            <div className="dcta-heading">Start with the AI Aligned Index</div>
+            <p className="dcta-sub" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>
+              The first diagnostic in the system. Measures how ready your organisation&apos;s belief system, architecture, and operating model are for AI integration.
+            </p>
+          </div>
+          <Link
+            href="/ai-aligned"
+            className="no-underline transition-all duration-[180ms] flex-shrink-0"
+            style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#8C3B28", color: "#FFFFFF", padding: "14px 28px" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#A64D38"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "#8C3B28"; }}
+          >
+            Take the Index →
+          </Link>
+        </div>
+      </div>
+      
       {/* ═══ S7 — FRAMEWORK ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             The Core Framework
           </div>
@@ -1179,7 +1376,7 @@ export default function HomePage() {
 
       {/* ═══ THREE-LAYER ARCHITECTURE ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             04 — The Architecture
           </div>
@@ -1208,13 +1405,13 @@ export default function HomePage() {
                 barColor: "#8C3B28"
               },
               {
-                layer: "Layer Three",
-                name: "The Technology Layer",
-                role: "Building",
-                roleColor: "#4A6B8A",
+                layer: "Layer Three · System of Execution",
+                name: "HROS",
+                role: "The Technology Product",
+                roleColor: "#C49A3C",
                 desc: "The Operating Architect framework made operational at scale. Intelligent payroll as the wedge. A people operating system as the destination — built for startups and evolving organisations who cannot afford to wait for their people systems to break.",
                 subLabel: "The framework as software",
-                barColor: "#4A6B8A",
+                barColor: "#C49A3C",
                 isBuilding: true
               },
             ].map((item, i) => (
@@ -1290,8 +1487,8 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S8 — DOMAINS ═══ */}
-      <section style={{ background: "#FAF8F4", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+      <section id="domains" style={{ background: "#FAF8F4", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
             Areas of Practice
           </div>
@@ -1368,8 +1565,8 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S9 — PROOF NUMBERS ═══ */}
-      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+      <section id="evidence" style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             The Evidence
           </div>
@@ -1400,8 +1597,8 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S10 — ABOUT / INSTITUTION ═══ */}
-      <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+      <section id="institution" style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
             The Institution
           </div>
@@ -1471,8 +1668,8 @@ export default function HomePage() {
       </section>
 
       {/* ═══ S11 — FINAL CTA ═══ */}
-      <section style={{ background: "#0C0B09", padding: "6rem 3.5rem", borderBottom: "1px solid rgba(196,154,60,.2)" }}>
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
+      <section id="engage" style={{ background: "#0C0B09", padding: "6rem 3.5rem", borderBottom: "1px solid rgba(196,154,60,.2)" }}>
+        <div className="max-w-[1160px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
           {/* Left */}
           <div>
             <h2 className="reveal" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(3rem, 7vw, 6.5rem)", fontWeight: 700, lineHeight: 0.92, letterSpacing: "-0.02em", color: "#F4EFE6" }}>
@@ -1511,7 +1708,7 @@ export default function HomePage() {
 
       {/* ═══ FOOTER ═══ */}
       <footer style={{ background: "#141210", borderTop: "1px solid rgba(196,154,60,.2)", padding: "3rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           {/* Top: 5-column grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
             {/* Col 1: Brand */}
@@ -1524,9 +1721,9 @@ export default function HomePage() {
             <div>
               <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C49A3C", borderBottom: "1px solid rgba(196,154,60,.1)", paddingBottom: "0.5rem", marginBottom: "0.9rem" }}>AI Edge Lab</div>
               {[
+                { label: "AI Aligned Index", href: "/ai-aligned" },
                 { label: "AI Replaceability Index", href: "/replaceability" },
                 { label: "Brainpower Density Index", href: "/brainpower" },
-                { label: "AI Aligned Index", href: "/ai-aligned" },
                 { label: "Org Decision Architecture", href: "/org-design" },
               ].map((link) => (
                 <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
@@ -1597,9 +1794,9 @@ function CarouselSection() {
 
   const slides = [
     { world: "ink", pre: "The Operating Question", headline: "Is your organisation structurally built for what", em: "comes next?", body: "Most organisations have a strategy. Almost none have the operating architecture to carry it. Axion Index makes the gap visible.", cta: "Begin the Engagement →", href: "/engage" },
-    { world: "grey", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Take the Index →", href: "/replaceability", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
-    { world: "ink", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Measure Your Impact →", href: "/brainpower" },
-    { world: "grey", pre: "For Organisations", headline: "What is your organisation's true", em: "AI exposure?", body: "The Org Decision Architecture Index maps structural AI exposure across your entire organisation — produces a redesign roadmap with hard 12-month targets.", cta: "Begin the Engagement →", href: "/org-design" },
+    { world: "grey", pre: "For Organisations", headline: "Is your organisation", em: "AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the Index →", href: "/ai-aligned", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
+    { world: "ink", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Join Waitlist →", href: "/replaceability" },
+    { world: "grey", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Join Waitlist →", href: "/brainpower" },
     { world: "paper", pre: "On Labour Codes", headline: "India's Labour Codes are not a compliance question.", em: "They are a mirror.", body: "They expose every structural decision an organisation deferred. Compliance failure is philosophy failure.", cta: "Explore →", href: "/labour-codes" },
     { world: "ink", pre: "On Family Business", headline: "The largest employer class in India has almost", em: "no frameworks designed for it.", body: "Loyalty vs merit. Patriarch authority. Multi-generational belief systems.", cta: "Explore →", href: "/family-business" },
     { world: "grey", pre: "The Foundation", headline: "Belief becomes conviction. Conviction becomes", em: "rhythm.", body: "Every Axion Index engagement traces back to one governing logic. Where has your organisation broken down in this sequence?", cta: "Explore the Framework →", href: "/framework" },
@@ -1750,8 +1947,13 @@ function AxionFieldSection() {
   ];
 
   return (
-    <section style={{ background: "#2C2824", padding: "6rem 3.5rem" }}>
-      <div className="max-w-[1200px] mx-auto">
+    <section id="cjf" style={{ background: "#2C2824", padding: "6rem 3.5rem" }}>
+      <div className="max-w-[1160px] mx-auto">
+        {/* Sample Output Label */}
+        <div className="sample-output-label reveal">
+          <span className="sol-badge">Sample Output</span>
+          <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>This is the tier map returned by the AI Replaceability Index. Your Edge Score locates your role in one of these tiers.</span>
+        </div>
         <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
           The Compression-Judgment Field
         </div>
@@ -1891,7 +2093,12 @@ function BrainpowerDensitySection() {
 
   return (
     <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1160px] mx-auto">
+        {/* Sample Output Label */}
+        <div className="sample-output-label reveal">
+          <span className="sol-badge">Sample Output</span>
+          <span style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>This is what a Low Density diagnostic looks like. The full index returns a redesign roadmap alongside the distribution.</span>
+        </div>
         <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
           Brainpower Density Index
         </div>
