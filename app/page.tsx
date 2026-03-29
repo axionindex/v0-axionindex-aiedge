@@ -839,7 +839,7 @@ export default function HomePage() {
                 "Org Decision Architecture",
                 "Labour Codes as Organisational Design",
                 "Belief → Conviction → Rhythm",
-                "The Unfinished Organisation",
+                "The Evolving Organisation",
                 "Compression-Judgment Field",
                 "Edge Score",
                 "Family Business HR",
@@ -1297,7 +1297,7 @@ export default function HomePage() {
               { num: "III", statement: "Dignity is an operating constraint, not a cultural value.", bold: "Dignity" },
               { num: "IV", statement: "Governance without bureaucracy is possible.", bold: "Governance without bureaucracy" },
               { num: "V", statement: "Compliance is a mirror, not a burden.", bold: "Compliance is a mirror" },
-              { num: "VI", statement: "The unfinished organisation is a permanent form, not a transition phase.", bold: "The unfinished organisation" },
+              { num: "VI", statement: "The evolving organisation is a permanent form, not a transition phase.", bold: "The evolving organisation" },
             ].map((conviction, i) => (
               <div
                 key={conviction.num}
@@ -1446,7 +1446,7 @@ export default function HomePage() {
                 Every engagement begins with measurement, not assumption. The four indexes — AI Replaceability, Brainpower Density, AI Aligned, and the Organisation Decision Architecture Index — are Axion Index&apos;s signature intellectual property. <strong>They are not generic tools.</strong> The output of a specific point of view about how AI is restructuring the economics of work.
               </p>
               <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9, marginBottom: "1.5rem" }}>
-                Axion Index operates under the intellectual influence of <strong>Nitin Nahata</strong>, Operating Architect, with 22 years across Tata Group, Standard Chartered, Udaan, and Gameskraft. The thinking behind the platform is his. The platform itself is designed to scale beyond any one practitioner. <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.3)" }}>nitinnahata.com →</a>
+                Axion Index operates under the intellectual influence of <strong>Nitin Nahata</strong>, Operating Architect, with 22 years across Tata Group, Standard Chartered, Udaan, and Gameskraft. The thinking behind the platform is his. The platform itself is designed to scale beyond any one practitioner. <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.3)" }}>nitinnahata.com →</a> · <a href="https://linkedin.com/in/nahatanitin" target="_blank" rel="noopener noreferrer" className="no-underline" style={{ color: "#8C3B28", borderBottom: "1px solid rgba(140,59,40,.3)" }}>LinkedIn →</a>
               </p>
               <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.93rem", color: "#4A433C", lineHeight: 1.9 }}>
                 Most organisations don&apos;t fail because of bad strategy. They fail because the system underneath cannot carry the strategy. Axion Index exists to solve that gap — before the break becomes visible.
@@ -1508,7 +1508,7 @@ export default function HomePage() {
               what <em style={{ fontStyle: "italic", color: "#C49A3C" }}>comes next?</em>
             </h2>
             <p className="reveal reveal-d1" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.92rem", color: "#6B6358", marginTop: "1.2rem", maxWidth: "42ch", lineHeight: 1.75, borderLeft: "2px solid rgba(196,154,60,.2)", paddingLeft: "1.2rem" }}>
-              Whether you are exploring a diagnostic, a strategic engagement, or a domain practice — Axion Index begins with measurement, not assumption.
+              For founders and CHROs in 50–500 person organisations. For startups navigating Labour Code exposure. For companies where AI is compressing the workforce and the architecture has not kept up.
             </p>
           </div>
 
@@ -1530,7 +1530,7 @@ export default function HomePage() {
               onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C49A3C"; e.currentTarget.style.color = "#C49A3C"; }}
               onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.2)"; e.currentTarget.style.color = "#6B6358"; }}
             >
-              Enter the AI Edge Lab
+              Explore the AI Edge Lab →
             </Link>
           </div>
         </div>
@@ -1544,7 +1544,7 @@ export default function HomePage() {
             {/* Col 1: Brand */}
             <div className="lg:col-span-1">
               <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "0.5rem" }}>Axion Index</div>
-              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", maxWidth: "26ch" }}>Codified energy for the unfinished organisation.</p>
+              <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#6B6358", maxWidth: "26ch" }}>Codified energy for the evolving organisation.</p>
             </div>
 
             {/* Col 2: AI Edge Lab */}
@@ -1594,6 +1594,7 @@ export default function HomePage() {
                 <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
               ))}
               <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>Nitin Nahata ↗</a>
+              <a href="https://linkedin.com/in/nahatanitin" target="_blank" rel="noopener noreferrer" className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>LinkedIn ↗</a>
             </div>
           </div>
 
@@ -1602,8 +1603,11 @@ export default function HomePage() {
             <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>
               axionindex.org · Bengaluru · 2026 · <a href="mailto:nitin@axionindex.org" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358" }}>nitin@axionindex.org</a>
             </div>
-            <div style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.88rem", color: "#6B6358" }}>
-              Intellectual foundation: <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358", borderBottom: "1px solid rgba(196,154,60,.1)" }}>Nitin Nahata →</a>
+            <div className="flex items-center gap-4">
+              <a href="https://linkedin.com/in/nahatanitin" target="_blank" rel="noopener noreferrer" className="no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", color: "#6B6358" }}>LinkedIn ↗</a>
+              <span style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "0.88rem", color: "#6B6358" }}>
+                Intellectual foundation: <a href="https://www.nitinnahata.com" target="_blank" rel="noopener noreferrer" className="no-underline hover:text-[#C49A3C]" style={{ color: "#6B6358", borderBottom: "1px solid rgba(196,154,60,.1)" }}>Nitin Nahata →</a>
+              </span>
             </div>
           </div>
         </div>
