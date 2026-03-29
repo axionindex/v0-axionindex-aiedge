@@ -458,6 +458,28 @@ body::after {
   transform: scaleY(1);
 }
 
+/* Master container - Design Fix B */
+.container {
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 3.5rem;
+}
+
+@media (max-width: 960px) {
+  .container { padding: 0 2rem; }
+}
+
+/* Grid discipline */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+.grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4, .grid-1-2 { grid-template-columns: 1fr; }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .hide-mobile {

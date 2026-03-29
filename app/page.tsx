@@ -561,7 +561,7 @@ export default function HomePage() {
         }}
       >
         <div 
-          className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
+          className="max-w-[1160px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
           style={{ minHeight: "calc(100vh - 72px - 10rem)" }}
         >
           {/* Left Column */}
@@ -814,6 +814,7 @@ export default function HomePage() {
           {[...Array(2)].map((_, setIdx) => (
             <div key={setIdx} className="flex items-center">
               {[
+                "AI Aligned Index",
                 "AI Replaceability Index",
                 "Brainpower Density Index",
                 "Org Decision Architecture",
@@ -823,7 +824,6 @@ export default function HomePage() {
                 "Compression-Judgment Field",
                 "Edge Score",
                 "Family Business HR",
-                "AI Aligned Index",
               ].map((item, i) => (
                 <span key={`${setIdx}-${i}`} className="flex items-center" style={{ marginRight: "2rem" }}>
                   <span style={{ 
@@ -848,7 +848,7 @@ export default function HomePage() {
 
       {/* ═══ S1 — SYSTEM MAP ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             How the System Works
           </div>
@@ -887,34 +887,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ S2 — THREE AUDIENCES ═══ */}
-      <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
-          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
-            Where Do You Need to Start?
+      {/* ═══ S2 — CHOOSE YOUR LENS (Audience Routing) ═══ */}
+      <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
+        <div className="max-w-[1160px] mx-auto">
+          <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
+            Choose your lens
           </div>
-          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#0C0B09", marginBottom: "3rem" }}>
-            The same question. <em style={{ fontStyle: "italic", color: "#8C3B28" }}>Three different answers.</em>
+          <h2 className="reveal reveal-d1" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, color: "#F4EFE6", marginBottom: "3rem" }}>
+            The same platform. <em style={{ fontStyle: "italic", color: "#C49A3C" }}>Three different starting points.</em>
           </h2>
 
           <div className="reveal reveal-d2 grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { tag: "For Organisations", q: "Is your organisation AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the Index →", href: "/ai-aligned" },
-              { tag: "For Individuals", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Measure Your Edge →", href: "/replaceability" },
-              { tag: "For Senior Leaders", q: "Are you creating impact at the right altitude?", body: "The Brainpower Density Index measures what % of your leadership time is in genuinely consequential work vs work that should never reach you.", cta: "Measure Your Impact →", href: "/brainpower" },
+              { tag: "I am an Organisation", q: "Is your organisation AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the AI Aligned Index →", href: "/ai-aligned", isLive: true },
+              { tag: "I am an Individual", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Join Waitlist →", href: "/replaceability", isLive: false },
+              { tag: "I am a Senior Leader", q: "What percentage of your week is genuinely consequential?", body: "The Brainpower Density Index measures what % of your leadership time is in decisions that require you — vs work that should never reach you.", cta: "Join Waitlist →", href: "/brainpower", isLive: false },
             ].map((card) => (
               <div
                 key={card.tag}
                 className="relative transition-all duration-[180ms] group"
-                style={{ padding: "2rem 1.6rem", border: "1px solid rgba(140,59,40,.15)", background: "#FAF8F4" }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#8C3B28"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(140,59,40,.15)"; e.currentTarget.style.transform = "translateY(0)"; }}
+                style={{ padding: "2rem 1.6rem", border: "1px solid rgba(196,154,60,.18)", background: "transparent" }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C49A3C"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(196,154,60,.18)"; e.currentTarget.style.transform = "translateY(0)"; }}
               >
-                <div className="absolute top-0 left-0 right-0 h-[2px] origin-left transition-transform duration-[300ms] scale-x-0 group-hover:scale-x-100" style={{ background: "#8C3B28" }} />
-                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>{card.tag}</div>
-                <p style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontStyle: "italic", fontSize: "1.2rem", color: "#0C0B09", marginBottom: "1rem", lineHeight: 1.4 }}>{card.q}</p>
-                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#4A433C", lineHeight: 1.65, marginBottom: "1.5rem" }}>{card.body}</p>
-                <Link href={card.href} className="no-underline transition-colors duration-[150ms] hover:opacity-70" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8C3B28" }}>{card.cta}</Link>
+                <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.57rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C49A3C", marginBottom: "1rem" }}>{card.tag}</div>
+                <p style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "1.1rem", fontWeight: 700, color: "#F4EFE6", marginBottom: "1rem", lineHeight: 1.4 }}>{card.q}</p>
+                <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.82rem", color: "#6B6358", lineHeight: 1.65, marginBottom: "1.5rem" }}>{card.body}</p>
+                <Link href={card.href} className="no-underline transition-colors duration-[150ms] hover:opacity-70" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#C49A3C" }}>{card.cta}</Link>
               </div>
             ))}
           </div>
@@ -923,7 +922,7 @@ export default function HomePage() {
 
       {/* ═══ WHAT THIS MEANS FOR YOU ═══ */}
       <section style={{ background: "#0C0B09", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             What This Means for You
           </div>
@@ -957,7 +956,7 @@ export default function HomePage() {
 
       {/* ═══ THE NAME — WHY AXION. WHY INDEX. ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             01 — The Name
           </div>
@@ -999,7 +998,7 @@ export default function HomePage() {
           AI EDGE LAB
         </div>
 
-        <div className="max-w-[1200px] mx-auto relative z-10">
+        <div className="max-w-[1160px] mx-auto relative z-10">
           {/* Breadcrumb */}
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.52rem", letterSpacing: "0.1em", color: "rgba(196,154,60,.5)", marginBottom: "1.5rem" }}>
             axionindex.org / <span style={{ color: "#C49A3C" }}>The AI Edge Lab</span>
@@ -1136,7 +1135,7 @@ export default function HomePage() {
 
       {/* ═══ S7 — FRAMEWORK ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             The Core Framework
           </div>
@@ -1179,7 +1178,7 @@ export default function HomePage() {
 
       {/* ═══ THREE-LAYER ARCHITECTURE ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             04 — The Architecture
           </div>
@@ -1291,7 +1290,7 @@ export default function HomePage() {
 
       {/* ═══ S8 — DOMAINS ═══ */}
       <section style={{ background: "#FAF8F4", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
             Areas of Practice
           </div>
@@ -1369,7 +1368,7 @@ export default function HomePage() {
 
       {/* ═══ S9 — PROOF NUMBERS ═══ */}
       <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
             The Evidence
           </div>
@@ -1401,7 +1400,7 @@ export default function HomePage() {
 
       {/* ═══ S10 — ABOUT / INSTITUTION ═══ */}
       <section style={{ background: "#F4EFE6", padding: "6rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C3B28", marginBottom: "1rem" }}>
             The Institution
           </div>
@@ -1472,7 +1471,7 @@ export default function HomePage() {
 
       {/* ═══ S11 — FINAL CTA ═══ */}
       <section style={{ background: "#0C0B09", padding: "6rem 3.5rem", borderBottom: "1px solid rgba(196,154,60,.2)" }}>
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
+        <div className="max-w-[1160px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-center">
           {/* Left */}
           <div>
             <h2 className="reveal" style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif", fontSize: "clamp(3rem, 7vw, 6.5rem)", fontWeight: 700, lineHeight: 0.92, letterSpacing: "-0.02em", color: "#F4EFE6" }}>
@@ -1511,7 +1510,7 @@ export default function HomePage() {
 
       {/* ═══ FOOTER ═══ */}
       <footer style={{ background: "#141210", borderTop: "1px solid rgba(196,154,60,.2)", padding: "3rem 3.5rem" }}>
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1160px] mx-auto">
           {/* Top: 5-column grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
             {/* Col 1: Brand */}
@@ -1598,8 +1597,8 @@ function CarouselSection() {
   const slides = [
     { world: "ink", pre: "The Operating Question", headline: "Is your organisation structurally built for what", em: "comes next?", body: "Most organisations have a strategy. Almost none have the operating architecture to carry it. Axion Index makes the gap visible.", cta: "Begin the Engagement →", href: "/engage" },
     { world: "grey", pre: "For Organisations", headline: "Is your organisation", em: "AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the Index →", href: "/ai-aligned", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
-    { world: "ink", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Measure Your Edge →", href: "/replaceability" },
-    { world: "grey", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Measure Your Impact →", href: "/brainpower" },
+    { world: "ink", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Join Waitlist →", href: "/replaceability" },
+    { world: "grey", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Join Waitlist →", href: "/brainpower" },
     { world: "paper", pre: "On Labour Codes", headline: "India's Labour Codes are not a compliance question.", em: "They are a mirror.", body: "They expose every structural decision an organisation deferred. Compliance failure is philosophy failure.", cta: "Explore →", href: "/labour-codes" },
     { world: "ink", pre: "On Family Business", headline: "The largest employer class in India has almost", em: "no frameworks designed for it.", body: "Loyalty vs merit. Patriarch authority. Multi-generational belief systems.", cta: "Explore →", href: "/family-business" },
     { world: "grey", pre: "The Foundation", headline: "Belief becomes conviction. Conviction becomes", em: "rhythm.", body: "Every Axion Index engagement traces back to one governing logic. Where has your organisation broken down in this sequence?", cta: "Explore the Framework →", href: "/framework" },
@@ -1751,7 +1750,7 @@ function AxionFieldSection() {
 
   return (
     <section style={{ background: "#2C2824", padding: "6rem 3.5rem" }}>
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1160px] mx-auto">
         <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
           The Compression-Judgment Field
         </div>
@@ -1891,7 +1890,7 @@ function BrainpowerDensitySection() {
 
   return (
     <section style={{ background: "#141210", padding: "6rem 3.5rem" }}>
-      <div className="max-w-[1200px] mx-auto">
+      <div className="max-w-[1160px] mx-auto">
         <div className="reveal" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(196,154,60,.6)", marginBottom: "1rem" }}>
           Brainpower Density Index
         </div>
