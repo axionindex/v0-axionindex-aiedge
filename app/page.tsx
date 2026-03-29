@@ -396,7 +396,7 @@ export default function HomePage() {
                 </div>
                 
                 {[
-                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "LIVE", badgeType: "live" },
+                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "BUILDING", badgeType: "building" },
                   { name: "AI Replaceability Index", href: "/replaceability", badge: "BUILDING", badgeType: "building" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
@@ -609,7 +609,7 @@ export default function HomePage() {
               AI Edge Lab
             </div>
             {[
-              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Live", live: true },
+              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Building" },
               { name: "AI Replaceability Index", href: "/replaceability", badge: "Building" },
               { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
               { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
@@ -875,7 +875,7 @@ export default function HomePage() {
 
               {/* Index Rows */}
               {[
-                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
+                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "03", name: "Brainpower Density Index", sub: "Judgment · Energy · Leverage", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "04", name: "Org Decision Architecture", sub: "Authority · Accountability · Speed", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
@@ -1075,7 +1075,7 @@ export default function HomePage() {
 
           <div className="reveal reveal-d2 grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { tag: "I am an Organisation", q: "Is your organisation AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the AI Aligned Index →", href: "/ai-aligned", isLive: true },
+              { tag: "I am an Organisation", q: "Is your organisation AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Join Waitlist →", href: "/ai-aligned", isLive: false },
               { tag: "I am an Individual", q: "Is your role defensible as AI reshapes work?", body: "The AI Replaceability Index maps where your work sits on the Compression-Judgment Field and returns your Edge Score.", cta: "Join Waitlist →", href: "/replaceability", isLive: false },
               { tag: "I am a Senior Leader", q: "What percentage of your week is genuinely consequential?", body: "The Brainpower Density Index measures what % of your leadership time is in decisions that require you — vs work that should never reach you.", cta: "Join Waitlist →", href: "/brainpower", isLive: false },
             ].map((card) => (
@@ -1213,7 +1213,7 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
-                { name: "AI Aligned Index™", status: "live", href: "/ai-aligned" },
+                { name: "AI Aligned Index™", status: "building", href: "/ai-aligned" },
                 { name: "AI Replaceability Index™", status: "building", href: "/replaceability" },
                 { name: "Brainpower Density Index™", status: "building", href: "/brainpower" },
                 { name: "Org Decision Architecture", status: "engagement", href: "/org-design" },
@@ -1313,8 +1313,8 @@ export default function HomePage() {
       <div className="diagnostic-cta">
         <div className="dcta-inner">
           <div>
-            <div className="dcta-label">Ready to measure?</div>
-            <div className="dcta-heading">Start with the AI Aligned Index</div>
+            <div className="dcta-label">Building Now</div>
+            <div className="dcta-heading">AI Aligned Index — Coming Soon</div>
             <p className="dcta-sub" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>
               The first diagnostic in the system. Measures how ready your organisation&apos;s belief system, architecture, and operating model are for AI integration.
             </p>
@@ -1322,11 +1322,11 @@ export default function HomePage() {
           <Link
             href="/ai-aligned"
             className="no-underline transition-all duration-[180ms] flex-shrink-0"
-            style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#8C3B28", color: "#FFFFFF", padding: "14px 28px" }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "#A64D38"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "#8C3B28"; }}
+            style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase", background: "#C49A3C", color: "#0C0B09", padding: "14px 28px" }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "#D9AE52"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "#C49A3C"; }}
           >
-            Take the Index →
+            Join Waitlist →
           </Link>
         </div>
       </div>
@@ -1794,7 +1794,7 @@ function CarouselSection() {
 
   const slides = [
     { world: "ink", pre: "The Operating Question", headline: "Is your organisation structurally built for what", em: "comes next?", body: "Most organisations have a strategy. Almost none have the operating architecture to carry it. Axion Index makes the gap visible.", cta: "Begin the Engagement →", href: "/engage" },
-    { world: "grey", pre: "For Organisations", headline: "Is your organisation", em: "AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Take the Index →", href: "/ai-aligned", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
+    { world: "grey", pre: "For Organisations", headline: "Is your organisation", em: "AI-ready?", body: "The AI Aligned Index measures how ready your belief system, architecture, and operating model are for AI integration.", cta: "Join Waitlist →", href: "/ai-aligned", cta2: "Explore the Lab →", href2: "/ai-edge-lab" },
     { world: "ink", pre: "For Individuals", headline: "Where does your role sit on the", em: "Compression-Judgment Field?", body: "The AI Replaceability Index maps your work against what AI already does — returns an Edge Score of how defensible your role is.", cta: "Join Waitlist →", href: "/replaceability" },
     { world: "grey", pre: "For Senior Leaders", headline: "How much of your time is in", em: "genuinely consequential work?", body: "The Brainpower Density Index measures what % of leadership time is in decisions that require you — vs work that should never have reached you.", cta: "Join Waitlist →", href: "/brainpower" },
     { world: "paper", pre: "On Labour Codes", headline: "India's Labour Codes are not a compliance question.", em: "They are a mirror.", body: "They expose every structural decision an organisation deferred. Compliance failure is philosophy failure.", cta: "Explore →", href: "/labour-codes" },
