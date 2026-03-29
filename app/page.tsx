@@ -254,8 +254,8 @@ export default function HomePage() {
                 </div>
                 
                 {[
-                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "SOON", badgeType: "soon" },
-                  { name: "AI Replaceability Index", href: "/replaceability", badge: "SOON", badgeType: "soon" },
+                  { name: "AI Aligned Index", href: "/ai-aligned", badge: "BUILDING", badgeType: "building" },
+                  { name: "AI Replaceability Index", href: "/replaceability", badge: "LIVE", badgeType: "live" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
                 ].map((item) => (
@@ -465,8 +465,8 @@ export default function HomePage() {
               AI Edge Lab
             </div>
             {[
-              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Soon" },
-              { name: "AI Replaceability Index", href: "/replaceability", badge: "Soon" },
+              { name: "AI Aligned Index", href: "/ai-aligned", badge: "Building" },
+              { name: "AI Replaceability Index", href: "/replaceability", badge: "Live", live: true },
               { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
               { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
             ].map((item) => (
@@ -487,9 +487,9 @@ export default function HomePage() {
                     fontSize: "0.45rem",
                     letterSpacing: "0.06em",
                     padding: "2px 6px",
-                    background: item.badge === "Building" ? "rgba(196,154,60,.1)" : "rgba(107,99,88,.1)",
-                    color: item.badge === "Building" ? "#C49A3C" : "#6B6358",
-                    border: `1px solid ${item.badge === "Building" ? "rgba(196,154,60,.25)" : "rgba(107,99,88,.2)"}`,
+                    background: item.live ? "rgba(91,173,122,.15)" : item.badge === "Building" ? "rgba(196,154,60,.1)" : "rgba(107,99,88,.1)",
+                    color: item.live ? "#5BAD7A" : item.badge === "Building" ? "#C49A3C" : "#6B6358",
+                    border: `1px solid ${item.live ? "rgba(91,173,122,.3)" : item.badge === "Building" ? "rgba(196,154,60,.25)" : "rgba(107,99,88,.2)"}`,
                   }}>
                     {item.badge.toUpperCase()}
                   </span>
@@ -719,8 +719,8 @@ export default function HomePage() {
 
               {/* Index Rows */}
               {[
-                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
-                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Soon", statusColor: "#6B6358", statusIcon: "○" },
+                { num: "01", name: "AI Aligned Index", sub: "Belief · Architecture · Readiness", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
+                { num: "02", name: "AI Replaceability Index", sub: "Roles · Compression · Redesign", status: "Live", statusColor: "#5BAD7A", statusIcon: "●" },
                 { num: "03", name: "Brainpower Density Index", sub: "Judgment · Energy · Leverage", status: "Building", statusColor: "#C49A3C", statusIcon: "◐" },
                 { num: "04", name: "Org Decision Architecture", sub: "Authority · Accountability · Speed", status: "Engagement", statusColor: "#6B6358", statusIcon: "○" },
               ].map((item, i) => (
@@ -1035,18 +1035,11 @@ export default function HomePage() {
             The AI Edge Lab is Axion Index&apos;s work at the intersection of AI, Org Design and Human beings in the evolving workspace landscape. It translates complex workforce, compliance, and structural questions into quantified, decision-grade signals for founders, CFOs, CHROs, and boards.
           </p>
 
-          {/* Current site notice */}
-          <div className="reveal reveal-d2" style={{ padding: "1rem 1.2rem", background: "rgba(196,154,60,.06)", border: "1px solid rgba(196,154,60,.2)", marginBottom: "3rem", maxWidth: "64ch" }}>
-            <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.8rem", color: "#B0A898", lineHeight: 1.6 }}>
-              <strong style={{ color: "#C49A3C" }}>The AI Edge Lab is live and building.</strong> Four indices are in development — each translating an invisible organisational force into a quantified, decision-grade signal.
-            </p>
-          </div>
-
-          <div className="reveal reveal-d3 grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="reveal reveal-d2 grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left: Intro + CTA */}
             <div>
               <p style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif", fontSize: "0.88rem", color: "#B0A898", lineHeight: 1.75, marginBottom: "2rem" }}>
-                Work at the intersection of AI, Org Design and Human beings in the evolving workspace landscape. Not generic tools — the output of a specific point of view about how AI is restructuring the economics of work.
+                Four indices. One compound logic. Every engagement begins with measurement — translating invisible organisational forces into quantified, decision-grade signals.
               </p>
               <Link
                 href="/ai-edge-lab"
@@ -1065,9 +1058,9 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
-                { name: "AI Aligned Index", status: "soon", href: "/ai-aligned" },
-                { name: "AI Replaceability Index", status: "soon", href: "/replaceability" },
+                { name: "AI Replaceability Index", status: "live", href: "/replaceability" },
                 { name: "Brainpower Density Index", status: "building", href: "/brainpower" },
+                { name: "AI Aligned Index", status: "building", href: "/ai-aligned" },
                 { name: "Org Decision Architecture", status: "engagement", href: "/org-design" },
               ].map((tool) => (
                 <div
@@ -1099,7 +1092,7 @@ export default function HomePage() {
               ))}
               <div style={{ padding: "0.8rem 1.2rem", borderTop: "1px solid rgba(196,154,60,.15)" }}>
                 <Link href="/ai-edge-lab" className="no-underline" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.1em", color: "#C49A3C" }}>
-                  View all tools →
+                  Enter the AI Edge Lab →
                 </Link>
               </div>
             </div>
