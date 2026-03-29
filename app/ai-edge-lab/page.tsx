@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { AIEdgeSidebar } from "@/components/ai-edge-sidebar";
 import { AIEdgeHero } from "@/components/ai-edge-hero";
 import { ShiftsSection } from "@/components/shifts-section";
@@ -11,6 +12,18 @@ import { SalarySection } from "@/components/salary-section";
 import { ChangesSection } from "@/components/changes-section";
 import { CTASection } from "@/components/cta-section";
 import { AIEdgeFooter } from "@/components/ai-edge-footer";
+
+export const metadata: Metadata = {
+  title: "Axion Index — AI Edge Lab · Operating Intelligence for the Evolving Organisation",
+  description:
+    "The AI Edge Lab: Four indices translating invisible organisational forces into quantified, decision-grade signals. Framework for understanding how roles, careers, and organisations must evolve in the AI era.",
+  openGraph: {
+    title: "Axion Index — AI Edge Lab · Operating Intelligence for the Evolving Organisation",
+    description:
+      "Four indices. One compound logic. Diagnostic instruments for the evolving organisation.",
+    type: "website",
+  },
+};
 
 export default function AIEdgeLabPage() {
   return (
