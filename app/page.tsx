@@ -291,6 +291,43 @@ export default function HomePage() {
           .diagnostic-cta { padding: 3rem 2rem; }
         }
         
+        /* New resource banner */
+        .new-resource-banner {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+          padding: 0.8rem 1.2rem;
+          background: rgba(91,173,122,.08);
+          border: 1px solid rgba(91,173,122,.25);
+          border-left: 3px solid #5BAD7A;
+          margin-bottom: 1.2rem;
+          max-width: fit-content;
+          animation: subtle-pulse 3s infinite;
+        }
+        @keyframes subtle-pulse {
+          0%, 100% { border-left-color: #5BAD7A; }
+          50% { border-left-color: rgba(91,173,122,.5); }
+        }
+        .new-resource-banner .new-badge {
+          font-family: var(--font-dm-mono), 'DM Mono', monospace;
+          font-size: 0.5rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #5BAD7A;
+          background: rgba(91,173,122,.15);
+          padding: 0.2rem 0.5rem;
+          flex-shrink: 0;
+        }
+        .new-resource-banner a {
+          font-size: 0.85rem;
+          color: var(--parchment);
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .new-resource-banner a:hover {
+          color: #5BAD7A;
+        }
+        
         /* Mobile menu hamburger */
         .hamburger span {
           display: block;
@@ -400,6 +437,7 @@ export default function HomePage() {
                   { name: "AI Replaceability Index", href: "/replaceability", badge: "LIVE", badgeType: "live" },
                   { name: "Brainpower Density Index", href: "/brainpower", badge: "BUILDING", badgeType: "building" },
                   { name: "Org Decision Architecture", href: "/org-design", badge: "ENGAGEMENT", badgeType: "engagement" },
+                  { name: "Labour Codes Intelligence", href: "/labour-codes", badge: "NEW", badgeType: "live" },
                 ].map((item) => (
                   <Link
                     key={item.name}
@@ -527,13 +565,13 @@ export default function HomePage() {
                 <div style={{ height: "1px", background: "rgba(196,154,60,.1)", margin: "0.8rem 1.2rem" }} />
                 
                 {[
-                  { name: "Labour Codes Practice", href: "/labour-codes" },
+                  { name: "Labour Codes Implementation Hub", href: "/labour-codes", badge: "NEW" },
                   { name: "Family Business HR", href: "/family-business" },
                 ].map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="dropdown-link block no-underline"
+                    className="dropdown-link flex items-center justify-between no-underline"
                     style={{ 
                       fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", 
                       fontSize: "0.6rem", 
@@ -541,7 +579,19 @@ export default function HomePage() {
                       padding: "0.6rem 1.2rem",
                     }}
                   >
-                    {item.name}
+                    <span>{item.name}</span>
+                    {item.badge && (
+                      <span style={{
+                        fontSize: "0.45rem",
+                        letterSpacing: "0.06em",
+                        padding: "2px 6px",
+                        background: "rgba(91,173,122,.15)",
+                        color: "#5BAD7A",
+                        border: "1px solid rgba(91,173,122,.3)",
+                      }}>
+                        {item.badge}
+                      </span>
+                    )}
                   </Link>
                 ))}
               </div>
@@ -613,6 +663,7 @@ export default function HomePage() {
               { name: "AI Replaceability Index", href: "/replaceability", badge: "Live", live: true },
               { name: "Brainpower Density Index", href: "/brainpower", badge: "Building" },
               { name: "Org Decision Architecture", href: "/org-design", badge: "Engagement" },
+              { name: "Labour Codes Hub", href: "/labour-codes", badge: "New", live: true },
             ].map((item) => (
               <Link
                 key={item.name}
@@ -746,9 +797,17 @@ export default function HomePage() {
               </span>
             </div>
 
+            {/* NEW Resource Banner */}
+            <div className="new-resource-banner fade-up fade-up-d2">
+              <span className="new-badge">NEW</span>
+              <Link href="/labour-codes" className="no-underline" style={{ fontFamily: "var(--font-instrument), 'Instrument Sans', sans-serif" }}>
+                Labour Codes Implementation Hub — Live Intelligence for India&apos;s Employment Reform
+              </Link>
+            </div>
+
             {/* H1 */}
             <h1
-              className="hero-h1 fade-up fade-up-d2"
+              className="hero-h1 fade-up fade-up-d3"
               style={{
                 fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
                 fontSize: "clamp(3rem, 5.5vw, 5.2rem)",
@@ -1213,6 +1272,7 @@ export default function HomePage() {
                 <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "#C49A3C" }}>Diagnostic Tools</div>
               </div>
               {[
+                { name: "Labour Codes Intelligence Hub", status: "live", href: "/labour-codes" },
                 { name: "AI Aligned Index™", status: "building", href: "/ai-aligned" },
                 { name: "AI Replaceability Index™", status: "live", href: "/replaceability" },
                 { name: "Brainpower Density Index™", status: "building", href: "/brainpower" },
@@ -1734,11 +1794,14 @@ export default function HomePage() {
             <div>
               <div style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.54rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#C49A3C", borderBottom: "1px solid rgba(196,154,60,.1)", paddingBottom: "0.5rem", marginBottom: "0.9rem" }}>Expertise</div>
               {[
-                { label: "Labour Codes", href: "/labour-codes" },
+                { label: "Labour Codes Hub", href: "/labour-codes", isNew: true },
                 { label: "Family Business HR", href: "/family-business" },
                 { label: "Org Design", href: "/org-design" },
               ].map((link) => (
-                <Link key={link.label} href={link.href} className="block no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: "#6B6358", marginBottom: "0.55rem" }}>{link.label}</Link>
+                <Link key={link.label} href={link.href} className="flex items-center gap-2 no-underline transition-colors duration-[150ms] hover:text-[#C49A3C]" style={{ fontFamily: "var(--font-dm-mono), 'DM Mono', monospace", fontSize: "0.58rem", color: link.isNew ? "#5BAD7A" : "#6B6358", marginBottom: "0.55rem" }}>
+                  {link.label}
+                  {link.isNew && <span style={{ fontSize: "0.42rem", padding: "1px 4px", background: "rgba(91,173,122,.15)", color: "#5BAD7A", border: "1px solid rgba(91,173,122,.3)" }}>NEW</span>}
+                </Link>
               ))}
             </div>
 
