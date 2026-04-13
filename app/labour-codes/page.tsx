@@ -9,6 +9,8 @@ import { ComparisonGrid } from '@/components/labour-codes/comparison-grid';
 import { GreyAreaCard } from '@/components/labour-codes/grey-area-card';
 import { TriggerResult } from '@/components/labour-codes/trigger-result';
 import { IntelPanel } from '@/components/labour-codes/intel-panel';
+import { LiveTicker } from '@/components/labour-codes/live-ticker';
+import { ShowcaseBanner } from '@/components/labour-codes/showcase-banner';
 import { CheckCircle, AlertTriangle, Clock } from 'lucide-react';
 
 export default function LabourCodesPage() {
@@ -138,8 +140,14 @@ export default function LabourCodesPage() {
     <div className="min-h-screen bg-ink text-parchment">
       <Navigation />
 
+      {/* Live Status Ticker */}
+      <LiveTicker />
+
+      {/* Showcase Banner */}
+      <ShowcaseBanner />
+
       {/* Live Status Strip */}
-      <div className="sticky top-0 z-40 bg-ink border-b border-gold-border">
+      <div className="sticky top-0 z-40 bg-ink border-b border-gold-border" style={{ top: 'calc(72px + 64px + 100px)' }}>
         <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-xs font-dm-mono">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1">
@@ -152,7 +160,7 @@ export default function LabourCodesPage() {
       </div>
 
       {/* Section Navigation */}
-      <div className="sticky top-8 z-30 bg-ink border-b border-gold-border">
+      <div className="sticky z-30 bg-ink border-b border-gold-border" style={{ top: 'calc(72px + 64px + 100px + 32px)' }}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex gap-8 overflow-x-auto">
             {['overview', 'clarifications', 'readiness', 'cxo-guide', 'decision-tools'].map((tab) => (
