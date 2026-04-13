@@ -226,5 +226,189 @@
         "action": "Audit existing non-compete clauses in employment contracts"
       }
     ]
+  },
+  "decisionTools": {
+    "quickLookup": {
+      "title": "Quick Lookup",
+      "description": "Search compliance requirements across all codes and states",
+      "data": [
+        {
+          "id": "QL001",
+          "keyword": "Minimum Wage",
+          "code": "Wages",
+          "relevance": ["payroll", "compliance"],
+          "definition": "Lowest remuneration an employer must pay workers for their services",
+          "requirement": "Must be set based on skill level and state rules",
+          "source": "Wages Code, 2019 | State Wage Boards",
+          "states": ["All"]
+        },
+        {
+          "id": "QL002",
+          "keyword": "PF Contribution",
+          "code": "Social Security",
+          "relevance": ["payroll", "benefits", "compliance"],
+          "definition": "Employee and employer contribution to Provident Fund",
+          "requirement": "12% employer + 12% employee on wages (basic + DA)",
+          "source": "Social Security Code, 2020 | EPFO Rules",
+          "states": ["All"]
+        },
+        {
+          "id": "QL003",
+          "keyword": "Gratuity Eligibility",
+          "code": "Social Security",
+          "relevance": ["benefits", "exit", "severance"],
+          "definition": "Lump sum payment to employees upon separation",
+          "requirement": "5+ years service = 15 days wages | 10+ years = 30 days wages",
+          "source": "Social Security Code, 2020 | Payment of Gratuity Act",
+          "states": ["All"]
+        }
+      ]
+    },
+    "roleGuide": {
+      "title": "Role Guide",
+      "description": "Labour code essentials for every stakeholder",
+      "roles": [
+        {
+          "id": "RG001",
+          "role": "CEO/Founder",
+          "responsibility": "Overall compliance accountability",
+          "keyPoints": [
+            "Board level governance of labour compliance",
+            "Risk assessment of code changes",
+            "Resource allocation for compliance"
+          ],
+          "actionItems": [
+            "Establish labour compliance committee",
+            "Conduct quarterly code compliance audits",
+            "Budget for legal review of HR policies"
+          ]
+        },
+        {
+          "id": "RG002",
+          "role": "CHRO",
+          "responsibility": "Implementation and ongoing management",
+          "keyPoints": [
+            "Policy design aligned with codes",
+            "System updates for compliance",
+            "Staff training on new requirements"
+          ],
+          "actionItems": [
+            "Map all HR policies to code requirements",
+            "Update payroll and HRIS systems",
+            "Conduct all-employee training sessions"
+          ]
+        },
+        {
+          "id": "RG003",
+          "role": "Payroll Manager",
+          "responsibility": "Wage calculations and statutory compliance",
+          "keyPoints": [
+            "Accurate wage component identification",
+            "Timely PF/ESIC contributions",
+            "Compliance with state wage boards"
+          ],
+          "actionItems": [
+            "Update wage structure with code definitions",
+            "Verify all wage codes and state rules",
+            "Test payroll calculations for compliance"
+          ]
+        }
+      ]
+    },
+    "strategicDecisions": {
+      "title": "Strategic Decisions",
+      "description": "Framework for key HR decisions under the new codes",
+      "decisions": [
+        {
+          "id": "SD001",
+          "title": "CTC to In-Hand Transition",
+          "impact": "high",
+          "timeline": "3-6 months",
+          "description": "Moving from CTC model to transparent basic + allowances structure",
+          "considerations": [
+            "Impact on employee take-home pay",
+            "Gratuity and PF calculation changes",
+            "Tax implications",
+            "Statutory benefits changes"
+          ],
+          "recommendation": "Execute with clear communication; maintain net take-home; implement phased approach"
+        },
+        {
+          "id": "SD002",
+          "title": "Remote Work & Jurisdiction",
+          "impact": "high",
+          "timeline": "Immediate",
+          "description": "Determining applicable code jurisdiction for remote workers",
+          "considerations": [
+            "Employee work location vs registered office",
+            "State-specific code applicability",
+            "Compliance complexity",
+            "Cost variations by state"
+          ],
+          "recommendation": "Use employee work location; map state-wise compliance; document policy"
+        }
+      ]
+    },
+    "triggerEngine": {
+      "title": "Trigger Engine",
+      "description": "Calculate compliance thresholds and trigger points",
+      "triggers": [
+        {
+          "id": "TE001",
+          "trigger": "Gratuity Payout",
+          "threshold": "5 years continuous service",
+          "amount": "15 days wages (basic + DA) for every completed year",
+          "code": "Social Security",
+          "action": "Calculate and set aside",
+          "verification": "Automatic on anniversary"
+        },
+        {
+          "id": "TE002",
+          "trigger": "Leave Encashment Cap",
+          "threshold": "On exit or annually",
+          "amount": "Max 30 days of leave per year",
+          "code": "Wages",
+          "action": "Payment at normal wages",
+          "verification": "Annual review"
+        }
+      ]
+    },
+    "classificationTest": {
+      "title": "Classification Test",
+      "description": "Determine worker classification under IR Code",
+      "questions": [
+        {
+          "id": "CT001",
+          "question": "Does the worker have fixed working hours and reporting structure?",
+          "weight": 20,
+          "answers": {
+            "yes": { "classification": "Employee", "points": 20 },
+            "no": { "classification": "Independent Contractor", "points": 0 }
+          }
+        },
+        {
+          "id": "CT002",
+          "question": "Does the organization provide tools, equipment, and workspace?",
+          "weight": 20,
+          "answers": {
+            "yes": { "classification": "Employee", "points": 20 },
+            "no": { "classification": "Independent Contractor", "points": 0 }
+          }
+        }
+      ]
+    },
+    "stateTracker": {
+      "title": "State Tracker",
+      "description": "View compliance status across all states and codes",
+      "lastUpdated": "2026-04-10"
+    },
+    "clarifications": {
+      "title": "Clarifications",
+      "description": "Resolved questions and official guidance"
+    },
+    "greyAreas": {
+      "title": "Grey Areas",
+      "description": "Unresolved ambiguities and their implications"
+    }
   }
 }
