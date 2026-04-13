@@ -8,6 +8,9 @@ import { toast } from "@/hooks/use-toast";
 // Custom event for tab switching
 export const CHANGE_TAB_EVENT = "ai-edge-change-tab";
 
+// Navigation build timestamp - used to invalidate cache
+export const NAV_BUILD_TIME = "2026-04-14-v4";
+
 // Navigation items - Labour Codes, AI EDGE LAB, OS Playbook, Resources, About Us, Connect
 const navItems = [
   {
@@ -165,7 +168,8 @@ export function Navigation() {
     <>
       <nav
         id="nav"
-        data-version="labour-codes-v2"
+        data-version="labour-codes-v4"
+        data-timestamp="2026-04-14-updated"
         style={{
           position: "fixed",
           top: 0,
