@@ -481,8 +481,8 @@ export function Navigation() {
             background: rgba(201,168,76,0.05) !important;
             border-left-color: var(--gold) !important;
           }
-          .nav-trigger.simple-link:hover {
-            color: var(--gold) !important;
+          .nav-trigger.simple-link {
+            /* Simple link styling is handled entirely by inline styles */
           }
         `}</style>
       </nav>
