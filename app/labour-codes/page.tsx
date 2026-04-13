@@ -1,19 +1,11 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Navigation } from '@/components/navigation';
 import { AIEdgeFooter } from '@/components/ai-edge-footer';
-import { ContentLabel } from '@/components/labour-codes/content-label';
-import { SourceCitation } from '@/components/labour-codes/source-citation';
-import { ComparisonGrid } from '@/components/labour-codes/comparison-grid';
-import { GreyAreaCard } from '@/components/labour-codes/grey-area-card';
-import { TriggerResult } from '@/components/labour-codes/trigger-result';
-import { IntelPanel } from '@/components/labour-codes/intel-panel';
-import { CheckCircle, AlertTriangle, Clock } from 'lucide-react';
 
 export default function LabourCodesPage() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [triggerResults, setTriggerResults] = useState<any>(null);
   const [classificationAnswers, setClassificationAnswers] = useState<number[]>([]);
   const [classificationResult, setClassificationResult] = useState<string | null>(null);
 
@@ -24,453 +16,252 @@ export default function LabourCodesPage() {
 
     if (newAnswers.length === 6 && newAnswers.every((a) => a > 0)) {
       const total = newAnswers.reduce((a, b) => a + b, 0);
-      if (total >= 11) setClassificationResult('Direct Employee');
-      else if (total >= 7) setClassificationResult('Contingent Worker');
+      if (total >= 16) setClassificationResult('Direct Employee');
+      else if (total >= 10) setClassificationResult('Contingent Worker');
       else setClassificationResult('Genuine Consultant');
     }
   };
 
-  const clarifications = [
-    {
-      id: '50-wage-rule',
-      label: '50% Wage Rule',
-      status: 'resolved',
-      question: 'Does performance bonus count toward the 50% basic rule?',
-      answer: 'Yes, if guaranteed and predictable. Discretionary bonuses do not count.',
-      legal: '"Remuneration" under SS Code §2(u) includes all payments',
-      formula: 'Basic + DA ≥ 50% × (Basic + DA + Variable + Bonus + Other)',
-      risks: [
-        'Incorrect CTC breakup may trigger PF/ESI disputes',
-        'State wage boards may interpret differently',
-        'May affect gratuity and severance calculations',
-      ],
-      source: 'MoL&E FAQ, Checked: 01 Apr 2026, High',
-    },
-    {
-      id: 'it-worker',
-      label: 'IT Worker Status',
-      status: 'unresolved',
-      question: 'Are IT employees exempt from standing orders?',
-      answer: 'No exemption issued. Standing orders apply if workers ≥ 300.',
-      legal: 'IR Code §30 applies to all sectors without IT exemption',
-      risks: ['Some states may grant exemptions', 'Litigation risk if not filed'],
-      source: 'Ministry Clarification, Checked: 15 Mar 2026, Medium',
-    },
-    {
-      id: 'fnf-timeline',
-      label: 'FNF Timeline',
-      status: 'partial',
-      question: 'What is the deadline for final settlement?',
-      answer: 'Full FNF should be completed within 30 days of separation.',
-      legal: 'Wages Code §4 mandates timely payment; IR Code §25 requires notification',
-      risks: ['30-day rule is guidance, not statutory', 'State variations apply'],
-      source: 'Multiple circulars, Checked: 08 Apr 2026, Medium',
-    },
-    {
-      id: 'gratuity',
-      label: 'Gratuity',
-      status: 'resolved',
-      question: 'Is gratuity calculation based on basic only?',
-      answer: 'Yes. Gratuity = (Basic × 15 or 30) ÷ 26 × Years.',
-      legal: 'Social Security Code §57(1) defines gratuity basis',
-      formula: 'Gratuity = Basic × (15 or 30 days) ÷ 26 × Years Worked',
-      risks: ['CTC models often incorrectly show gratuity as component'],
-      source: 'SS Code Rules 2020, Checked: 01 Apr 2026, High',
-    },
-    {
-      id: 'leave-accrual',
-      label: 'Leave Accrual',
-      status: 'resolved',
-      question: 'Can leave be forfeited if not taken?',
-      answer: 'Limited leaves can be forfeited with state permission. No forfeiture for sick/casual in most states.',
-      legal: 'Wages Code §4(5) allows forfeiture only under state rules',
-      risks: ['State-wise variation; audit focus area'],
-      source: 'Wages Code Rules, Checked: 20 Mar 2026, High',
-    },
-  ];
-
-  const greyAreas = [
-    {
-      title: 'IT Worker Classification',
-      description: 'Whether IT employees qualify as workers',
-      government: 'No exemption issued; standard rules apply',
-      legal: 'Treat as employees; OT ambiguous',
-      axion: 'Apply conservative interpretation; file standing orders if ≥300',
-    },
-    {
-      title: 'Gratuity in CTC',
-      description: 'Can gratuity be shown as CTC component?',
-      government: 'Employer obligation per SS Code',
-      legal: 'Should not be in CTC display',
-      axion: 'Remove from CTC; accrue as liability',
-    },
-    {
-      title: 'Recurring Incentives',
-      description: 'Do guaranteed bonuses count in 50% test?',
-      government: 'FAQ mentions ambiguously',
-      legal: 'Include guaranteed variable',
-      axion: 'Include if predictable; document policy',
-    },
-    {
-      title: 'Remote Worker Jurisdiction',
-      description: 'Which state code applies?',
-      government: 'Employee work location',
-      legal: 'Generally work location',
-      axion: 'Apply strictest state; document in policy',
-    },
-    {
-      title: 'Bonus Calculation Timing',
-      description: 'When must bonus be paid?',
-      government: 'Generally within 8 weeks',
-      legal: 'Depends on company year-end',
-      axion: 'Pay within 30 days of closure',
-    },
-    {
-      title: 'Non-Compete Enforceability',
-      description: 'Are non-competes valid under IR Code?',
-      government: 'No position; courts decide',
-      legal: 'Narrow scope: 6 months, 50km radius',
-      axion: 'Avoid; focus on confidentiality',
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-ink text-parchment">
+    <div style={{ background: 'var(--ink)', color: 'var(--parchment)', minHeight: '100vh' }}>
       <Navigation />
 
       {/* Live Status Strip */}
-      <div className="sticky top-0 z-40 bg-ink border-b border-gold-border">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-xs font-dm-mono">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1">
-              <span className="w-1.5 h-1.5 bg-gold rounded-full animate-pulse" />
-              Manually Updated
-            </span>
+      <div style={{ 
+        position: 'fixed', 
+        top: 'var(--nav-h)',
+        left: 0,
+        right: 0,
+        background: 'var(--ink)',
+        borderBottom: '1px solid var(--rule2)',
+        padding: '16px 0',
+        zIndex: 40,
+      }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.85rem' }}>
+            <div className="live-dot" style={{ width: '8px', height: '8px', background: 'var(--gold)', borderRadius: '50%' }} />
+            <span style={{ color: 'var(--gold)' }}>4 Codes Live • 18 States Finalized</span>
           </div>
-          <div className="text-mist">Last reviewed 01 Apr 2026 · 32/36 states finalized</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--dim)', letterSpacing: '0.12em' }}>
+            UPDATED 13 APR 2026
+          </div>
         </div>
       </div>
 
-      {/* Section Navigation */}
-      <div className="sticky top-8 z-30 bg-ink border-b border-gold-border">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-8 overflow-x-auto">
-            {['overview', 'clarifications', 'readiness', 'cxo-guide', 'decision-tools'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`py-4 px-2 text-sm font-dm-mono tracking-wide border-b-2 transition-colors whitespace-nowrap ${
-                  activeTab === tab
-                    ? 'border-gold text-gold'
-                    : 'border-transparent text-mist hover:text-parchment'
-                }`}
-              >
-                {tab === 'cxo-guide' ? 'CXO Guide' : tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
+      {/* Hero Section */}
+      <section style={{ paddingTop: '120px', paddingBottom: '60px', borderBottom: '1px solid var(--rule2)' }}>
+        <div className="container">
+          <h1 style={{ 
+            fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+            fontFamily: 'var(--font-serif)',
+            fontWeight: 700,
+            lineHeight: 1.1,
+            marginBottom: '24px',
+          }}>
+            The System Reset of <span style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Employment</span> in India
+          </h1>
+          <p style={{ 
+            fontSize: '1.1rem',
+            color: 'var(--mist)',
+            maxWidth: '640px',
+            lineHeight: 1.8,
+          }}>
+            Navigate India's four labour codes with decision intelligence, compliance triggers, and strategic readiness planning. Everything you need to redesign work before the system forces you to.
+          </p>
+
+          {/* Stats Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '32px',
+            marginTop: '48px',
+          }}>
+            {[
+              { label: 'Codes in Force', value: '4', source: 'Govt of India' },
+              { label: 'Laws Replaced', value: '29', source: 'Central + States' },
+              { label: 'Minimum Basic Rule', value: '50%', source: 'Wage Code §2(n)' },
+              { label: 'IR Code Threshold', value: '300+', source: 'Per Establishment' },
+            ].map((stat, idx) => (
+              <div key={idx} style={{ borderLeft: '2px solid var(--gold)', paddingLeft: '20px' }}>
+                <div style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '8px' }}>
+                  {stat.label}
+                </div>
+                <div style={{ fontSize: '2.8rem', fontWeight: 700, fontFamily: 'var(--font-serif)', color: 'var(--parchment)', marginBottom: '4px' }}>
+                  {stat.value}
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--dim)' }}>
+                  {stat.source}
+                </div>
+              </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Navigation Tabs */}
+      <div style={{ 
+        position: 'sticky',
+        top: 'calc(var(--nav-h) + 72px)',
+        background: 'var(--ink)',
+        borderBottom: '1px solid var(--rule2)',
+        zIndex: 30,
+      }}>
+        <div className="container" style={{ display: 'flex', gap: '32px', paddingTop: '16px', paddingBottom: '16px', overflowX: 'auto' }}>
+          {['overview', 'clarifications', 'decision-tools'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                fontWeight: activeTab === tab ? 600 : 400,
+                color: activeTab === tab ? 'var(--gold)' : 'var(--dim)',
+                paddingBottom: '8px',
+                borderBottom: activeTab === tab ? '2px solid var(--gold)' : '2px solid transparent',
+                transition: 'all 0.2s',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {tab === 'overview' ? 'Overview' : tab === 'clarifications' ? 'Clarifications' : 'Decision Tools'}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* OVERVIEW TAB */}
-        {activeTab === 'overview' && (
-          <>
-            {/* Hero */}
-            <div className="mb-16">
-              <div className="text-xs font-dm-mono text-gold tracking-widest mb-2">LABOUR CODES</div>
-              <h1 className="text-5xl md:text-6xl font-cormorant mb-4 max-w-3xl">
-                The System Reset of <span className="italic text-gold">Employment</span> in India
-              </h1>
-              <p className="text-lg text-mist max-w-2xl mb-8">
-                Navigate India's four labour codes with decision intelligence, compliance clarity, and implementation playbooks.
-              </p>
-
-              {/* Axion Position */}
-              <div className="border-l-4 border-gold bg-ink4 p-6 mb-8 max-w-2xl">
-                <p className="text-sm text-parchment">
-                  <span className="text-gold font-cormorant italic">Labour Codes are not the story.</span> They are the exposure event. How you respond determines whether your organisation remains competitive and compliant.
-                </p>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">4</div>
-                  <div className="text-xs font-dm-mono text-mist">CODES IN FORCE</div>
-                </div>
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">29</div>
-                  <div className="text-xs font-dm-mono text-mist">LAWS CONSOLIDATED</div>
-                </div>
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">32/36</div>
-                  <div className="text-xs font-dm-mono text-mist">STATES FINALIZED</div>
-                </div>
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">2020</div>
-                  <div className="text-xs font-dm-mono text-mist">CENTRAL AUTHORITY</div>
+      <main style={{ paddingTop: '40px', paddingBottom: '80px' }}>
+        <div className="container">
+          {/* OVERVIEW TAB */}
+          {activeTab === 'overview' && (
+            <div>
+              <div style={{ marginBottom: '60px' }}>
+                <h2 className="sec-title">What's New</h2>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px' }}>
+                  {[
+                    { type: 'Signal', title: 'HP Finalizes All 4 Codes', date: '10 Apr 2026', status: 'live' },
+                    { type: 'Update', title: 'MoLE Issues Wage Clarification', date: '08 Apr 2026', status: 'medium' },
+                    { type: 'Divergence', title: 'Karnataka Extends Consultation', date: '05 Apr 2026', status: 'info' },
+                    { type: 'Action Required', title: 'Review Non-Compete Clauses', date: '28 Mar 2026', status: 'action' },
+                  ].map((item, idx) => (
+                    <div key={idx} style={{ 
+                      border: '1px solid var(--rule)',
+                      borderLeft: '3px solid var(--gold)',
+                      padding: '20px',
+                      background: 'rgba(196,154,60,0.02)',
+                    }}>
+                      <div style={{ 
+                        fontSize: '0.65rem',
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        color: 'var(--gold)',
+                        marginBottom: '8px',
+                      }}>
+                        {item.type}
+                      </div>
+                      <h3 style={{ fontSize: '1rem', marginBottom: '12px', color: 'var(--parchment)' }}>
+                        {item.title}
+                      </h3>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--dim)' }}>
+                        {item.date}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
+          )}
 
-            {/* What's New */}
-            <div className="mb-16">
-              <div className="text-xl font-cormorant mb-6">What's New</div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* CLARIFICATIONS TAB */}
+          {activeTab === 'clarifications' && (
+            <div>
+              <h2 className="sec-title">Clarifications & FAQs</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
                 {[
                   {
-                    type: 'Signal',
-                    title: 'HP Finalizes All Rules',
-                    desc: 'Himachal Pradesh completes rules across all four codes',
-                    badge: 'Signal',
-                    color: 'bg-green-dim text-green',
+                    id: '50-wage',
+                    title: '50% Wage Rule',
+                    question: 'Does performance bonus count toward the 50% basic rule?',
+                    answer: 'Yes, if guaranteed and predictable. Discretionary bonuses do not count. The calculation is: Basic + DA ≥ 50% of (Total Remuneration).',
+                    source: 'MoL&E FAQ, Verified 01 Apr 2026',
                   },
                   {
-                    type: 'Update',
-                    title: 'Performance Pay Clarity',
-                    desc: 'MoLE indicates bonuses to be included in wages',
-                    badge: 'Update',
-                    color: 'bg-amber-dim text-amber',
+                    id: 'it-worker',
+                    title: 'IT Workers Classification',
+                    question: 'Are IT workers exempt from certain labour code provisions?',
+                    answer: 'No blanket exemption exists. Classification depends on the employment contract and work nature under IR Code §2(k).',
+                    source: 'Delhi HC Order, 28 Mar 2026',
                   },
-                  {
-                    type: 'Divergence',
-                    title: 'State Variations',
-                    desc: 'Karnataka extends consultation to June 2026',
-                    badge: 'Divergence',
-                    color: 'bg-rust-bg text-rust',
-                  },
-                  {
-                    type: 'Action',
-                    title: 'Non-Compete Ruling',
-                    desc: 'Delhi HC clarifies non-compete principles',
-                    badge: 'Action',
-                    color: 'bg-gold/10 text-gold',
-                  },
-                ].map((item, i) => (
-                  <div key={i} className="border border-gold-border rounded-sm p-4 bg-ink3 hover:border-gold transition-colors">
-                    <div className={`text-xs font-dm-mono tracking-wide mb-2 px-2 py-1 rounded w-fit ${item.color}`}>
-                      {item.badge}
+                ].map((item) => (
+                  <div key={item.id} style={{ 
+                    border: '1px solid var(--rule)',
+                    padding: '24px',
+                    background: 'rgba(196,154,60,0.01)',
+                  }}>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', color: 'var(--parchment)' }}>
+                      {item.title}
+                    </h3>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--dim)', marginBottom: '16px', fontStyle: 'italic' }}>
+                      Q: {item.question}
+                    </p>
+                    <p style={{ fontSize: '1rem', color: 'var(--mist)', marginBottom: '16px' }}>
+                      A: {item.answer}
+                    </p>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--gold)', borderTop: '1px solid var(--rule)', paddingTop: '12px' }}>
+                      {item.source}
                     </div>
-                    <h3 className="font-cormorant text-parchment mb-2 text-sm">{item.title}</h3>
-                    <p className="text-xs text-mist">{item.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
+          )}
 
-            {/* Intel Panel */}
-            <IntelPanel
-              tabs={[
-                {
-                  id: 'faqs',
-                  title: 'Live FAQs',
-                  content: (
-                    <div className="space-y-4">
-                      <div className="p-4 border-l-4 border-gold">
-                        <p className="text-sm font-dm-mono text-gold mb-2">Q: What % must be basic?</p>
-                        <p className="text-parchment mb-2">A: At least 50% of remuneration must be basic+DA.</p>
-                        <SourceCitation source="MoL&E FAQ" date="01 Apr 2026" confidence="High" />
-                      </div>
-                      <div className="p-4 border-l-4 border-amber">
-                        <p className="text-sm font-dm-mono text-amber mb-2">Q: Does bonus count?</p>
-                        <p className="text-parchment mb-2">A: Guaranteed bonuses count toward total; discretionary do not.</p>
-                        <SourceCitation source="SS Code Rules" date="01 Apr 2026" confidence="High" />
-                      </div>
-                    </div>
-                  ),
-                },
-                {
-                  id: 'scenarios',
-                  title: 'What If Scenarios',
-                  content: (
-                    <div className="space-y-4">
-                      <div className="p-4 border-l-4 border-purple-500">
-                        <p className="text-sm font-cormorant text-parchment mb-2">Scenario: Employee moves to new state</p>
-                        <p className="text-sm text-mist">Apply rules of employee's new work location. Update in payroll and document change.</p>
-                      </div>
-                    </div>
-                  ),
-                },
-                {
-                  id: 'grey-areas',
-                  title: 'Grey Areas',
-                  content: (
-                    <div className="space-y-4">
-                      <div className="p-4 border-l-4 border-rust">
-                        <p className="text-sm font-dm-mono text-rust mb-2">Unresolved: IT Exemptions</p>
-                        <p className="text-sm text-parchment">No sector exemption issued. Conservative approach: treat as standard.</p>
-                      </div>
-                    </div>
-                  ),
-                },
-                {
-                  id: 'actions',
-                  title: 'Priority Actions',
-                  content: (
-                    <ol className="space-y-3 list-decimal list-inside text-sm text-parchment">
-                      <li>Validate wage structure against 50% rule</li>
-                      <li>File Standing Orders if workers ≥ 300</li>
-                      <li>Form statutory committees if thresholds crossed</li>
-                      <li>Update leave and FNF policies</li>
-                      <li>Document all edge cases in HR policies</li>
-                    </ol>
-                  ),
-                },
-                {
-                  id: 'readiness',
-                  title: 'Readiness Check',
-                  content: (
-                    <div className="space-y-3">
-                      <div className="flex gap-3 text-sm">
-                        <CheckCircle className="w-5 h-5 text-green flex-shrink-0" />
-                        <span>Do you have a reviewed wage structure?</span>
-                      </div>
-                      <div className="flex gap-3 text-sm">
-                        <AlertTriangle className="w-5 h-5 text-amber flex-shrink-0" />
-                        <span>Have you filed Standing Orders if required?</span>
-                      </div>
-                      <div className="flex gap-3 text-sm">
-                        <Clock className="w-5 h-5 text-rust flex-shrink-0" />
-                        <span>Is your FNF process documented and tested?</span>
-                      </div>
-                    </div>
-                  ),
-                },
-              ]}
-            />
-          </>
-        )}
+          {/* DECISION TOOLS TAB */}
+          {activeTab === 'decision-tools' && (
+            <div>
+              <h2 className="sec-title">Classification Test</h2>
+              <p style={{ color: 'var(--mist)', marginBottom: '32px' }}>
+                Answer 6 questions to determine worker classification under the Industrial Relations Code.
+              </p>
 
-        {/* CLARIFICATIONS TAB */}
-        {activeTab === 'clarifications' && (
-          <div className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-2 mb-8">
-              {clarifications.map((c) => (
-                <button key={c.id} className="px-3 py-2 text-xs font-dm-mono tracking-wide border border-gold-border rounded-sm hover:bg-ink3 transition-colors text-left">
-                  {c.label}
-                </button>
-              ))}
-            </div>
-
-            {clarifications.map((c) => (
-              <div key={c.id} className="border border-gold-border rounded-sm p-6 bg-ink3">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-cormorant text-parchment">{c.label}</h3>
-                  <ContentLabel type={c.status === 'resolved' ? 'fact' : c.status === 'partial' ? 'interpretation' : 'grey'} />
-                </div>
-
-                <div className="mb-4 pb-4 border-b border-gold-border">
-                  <p className="text-sm text-mist font-dm-mono mb-1">QUESTION</p>
-                  <p className="text-parchment">{c.question}</p>
-                </div>
-
-                <div className="mb-4 pb-4 border-b border-gold-border bg-green-dim rounded p-3">
-                  <p className="text-sm text-green font-dm-mono mb-1">ANSWER</p>
-                  <p className="text-parchment">{c.answer}</p>
-                </div>
-
-                <div className="mb-4 pb-4 border-b border-gold-border">
-                  <p className="text-xs text-mist font-dm-mono mb-2">LEGAL BASIS</p>
-                  <p className="text-sm text-parchment italic">{c.legal}</p>
-                </div>
-
-                {c.formula && (
-                  <div className="mb-4">
-                    <p className="text-xs text-mist font-dm-mono mb-2">FORMULA</p>
-                    <div className="bg-ink4 p-4 rounded border border-gold-border font-dm-mono text-center text-parchment">{c.formula}</div>
-                  </div>
-                )}
-
-                <div>
-                  <p className="text-xs text-mist font-dm-mono mb-2">RISKS IF MISSED</p>
-                  <ul className="space-y-1 text-sm text-parchment">
-                    {c.risks.map((risk, i) => (
-                      <li key={i}>• {risk}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <SourceCitation source={c.source.split(',')[0]} date={c.source.split(',')[1].trim()} confidence="High" />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* READINESS TAB */}
-        {activeTab === 'readiness' && (
-          <div className="space-y-8">
-            <h2 className="text-2xl font-cormorant">Org Readiness Framework</h2>
-
-            {['Wage Structure', 'Leave Policy', 'Gratuity', 'Policies', 'Committees'].map((topic, i) => (
-              <div key={i} className="border border-gold-border rounded-sm p-6 bg-ink3">
-                <h3 className="text-lg font-cormorant mb-3">{topic}</h3>
-                <p className="text-sm text-mist mb-4">Review and implement {topic.toLowerCase()} compliance</p>
-                <div className="bg-ink p-4 rounded border border-gold-border text-sm text-parchment">
-                  <p>Decision framework and implementation details coming soon.</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* CXO GUIDE TAB */}
-        {activeTab === 'cxo-guide' && (
-          <div className="space-y-8">
-            <h2 className="text-2xl font-cormorant">CXO Role Guide</h2>
-            <p className="text-mist mb-8">Strategic exposure points for each C-level role</p>
-
-            {['CEO', 'CFO', 'CHRO', 'COO', 'CLO'].map((role, i) => (
-              <div key={i} className="border border-gold-border rounded-sm p-6 bg-ink3">
-                <h3 className="text-lg font-cormorant mb-4">{role}</h3>
-                <div className="space-y-4">
-                  <div className="bg-green-dim rounded p-3">
-                    <p className="text-xs font-dm-mono text-green mb-2">OWNS</p>
-                    <p className="text-sm text-parchment">{role}-specific strategic ownership areas</p>
-                  </div>
-                  <div className="bg-amber-dim rounded p-3">
-                    <p className="text-xs font-dm-mono text-amber mb-2">SHOULD KNOW</p>
-                    <p className="text-sm text-parchment">{role}-specific awareness requirements</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* DECISION TOOLS TAB */}
-        {activeTab === 'decision-tools' && (
-          <div className="space-y-12">
-            <h2 className="text-2xl font-cormorant">Decision Tools</h2>
-
-            {/* Classification Test */}
-            <div className="border border-gold-border rounded-sm p-6 bg-ink3">
-              <h3 className="text-xl font-cormorant mb-6">Worker Classification Test</h3>
-
-              <div className="space-y-6 mb-8">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '20px', marginBottom: '32px' }}>
                 {[
-                  'Who controls when, where, and how work is done?',
-                  'Is this ongoing or project-based?',
-                  'Is the work core to business?',
-                  'Can worker send a substitute?',
-                  'Who provides tools/equipment?',
-                  'What % of income from this?',
-                ].map((q, i) => (
-                  <div key={i} className="pb-4 border-b border-gold-border">
-                    <p className="text-sm font-cormorant text-parchment mb-3">{i + 1}. {q}</p>
-                    <div className="flex gap-2">
-                      {['No', 'Maybe', 'Yes'].map((option, j) => (
+                  'Is the worker on fixed salary/monthly remuneration?',
+                  'Does the worker have defined workday and location?',
+                  'Are tools and equipment provided by the organization?',
+                  'Can the worker be supervised by employer?',
+                  'Is the relationship ongoing for 3+ months?',
+                  'Does the worker work primarily for you?',
+                ].map((q, idx) => (
+                  <div key={idx} style={{ 
+                    border: '1px solid var(--rule)',
+                    padding: '20px',
+                    background: 'rgba(196,154,60,0.01)',
+                  }}>
+                    <p style={{ fontSize: '1rem', color: 'var(--parchment)', marginBottom: '16px' }}>
+                      {idx + 1}. {q}
+                    </p>
+                    <div style={{ display: 'flex', gap: '12px' }}>
+                      {[
+                        { score: 1, label: 'No' },
+                        { score: 2, label: 'Maybe' },
+                        { score: 3, label: 'Yes' },
+                      ].map(({ score, label }) => (
                         <button
-                          key={j}
-                          onClick={() => handleClassificationAnswer(i, j)}
-                          className={`px-3 py-2 text-xs font-dm-mono border rounded transition-all ${
-                            classificationAnswers[i] === j
-                              ? 'bg-gold text-ink border-gold'
-                              : 'border-gold-border text-mist hover:text-parchment'
-                          }`}
+                          key={score}
+                          onClick={() => handleClassificationAnswer(idx, score)}
+                          style={{
+                            padding: '8px 16px',
+                            border: classificationAnswers[idx] === score ? '2px solid var(--gold)' : '1px solid var(--rule)',
+                            background: classificationAnswers[idx] === score ? 'rgba(196,154,60,0.1)' : 'transparent',
+                            color: classificationAnswers[idx] === score ? 'var(--gold)' : 'var(--dim)',
+                            cursor: 'pointer',
+                            fontSize: '0.85rem',
+                            transition: 'all 0.2s',
+                          }}
                         >
-                          {option}
+                          {label}
                         </button>
                       ))}
                     </div>
@@ -479,32 +270,24 @@ export default function LabourCodesPage() {
               </div>
 
               {classificationResult && (
-                <div className="bg-green-dim border border-green rounded-sm p-6">
-                  <p className="text-xs font-dm-mono text-green mb-2">CLASSIFICATION RESULT</p>
-                  <p className="text-2xl font-cormorant text-parchment">{classificationResult}</p>
+                <div style={{ 
+                  border: '2px solid var(--gold)',
+                  borderLeft: '4px solid var(--gold)',
+                  padding: '24px',
+                  background: 'rgba(196,154,60,0.04)',
+                }}>
+                  <div style={{ fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--dim)', marginBottom: '8px' }}>
+                    Your Classification
+                  </div>
+                  <div style={{ fontSize: '2rem', fontFamily: 'var(--font-serif)', fontWeight: 700, color: 'var(--gold)' }}>
+                    {classificationResult}
+                  </div>
                 </div>
               )}
             </div>
-
-            {/* Grey Areas */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-cormorant">Grey Areas Register</h3>
-              {greyAreas.map((area, i) => (
-                <GreyAreaCard key={i} {...area} />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* CTA Section */}
-      <div className="max-w-7xl mx-auto px-4 py-16 border-t border-gold-border text-center">
-        <h2 className="text-3xl font-cormorant mb-4">Ready for Compliance?</h2>
-        <p className="text-mist mb-8 max-w-2xl mx-auto">Run a 10-minute readiness check to understand your exposure and priority actions.</p>
-        <button className="px-8 py-3 bg-gold text-ink font-dm-mono text-sm tracking-widest rounded-sm hover:bg-gold-light transition-colors">
-          START READINESS CHECK
-        </button>
-      </div>
+          )}
+        </div>
+      </main>
 
       <AIEdgeFooter />
     </div>
