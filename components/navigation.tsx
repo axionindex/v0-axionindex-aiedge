@@ -215,15 +215,20 @@ export function Navigation() {
                     fontSize: "0.6rem",
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
-                    color: "rgba(245,242,236,0.45)",
+                    color: "#F5F2EC",
+                    backgroundColor: "#C49A3C",
                     cursor: "pointer",
-                    transition: "color 0.2s",
+                    transition: "all 0.2s",
                     textDecoration: "none",
                     whiteSpace: "nowrap",
                   }}
                   className="nav-trigger simple-link"
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,242,236,0.45)")}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#D4AA4C";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#C49A3C";
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -240,12 +245,18 @@ export function Navigation() {
                     fontSize: "0.6rem",
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
-                    color: "rgba(245,242,236,0.45)",
+                    color: "rgba(245,242,236,0.65)",
                     cursor: "pointer",
                     transition: "color 0.2s",
                     border: "none",
                     background: "none",
                     whiteSpace: "nowrap",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#C49A3C";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(245,242,236,0.65)";
                   }}
                 >
                   {item.label}
