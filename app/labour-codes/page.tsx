@@ -13,6 +13,10 @@ import { LoadingState, ErrorState, StatusBadge, SourceCitation, VerifiedTimestam
 import { getCountByStatus, formatDate } from "@/lib/intelligence";
 
 export default function LabourCodesPage() {
+  return <LabourCodesPageClient />;
+}
+
+function LabourCodesPageClient() {
   const { data, loading, error, retry } = useIntelligence();
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
