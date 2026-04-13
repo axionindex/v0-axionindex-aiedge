@@ -464,7 +464,6 @@ export function Navigation() {
               </a>
             </div>
           </div>
-              )}
         </div>
 
         <style jsx>{`
