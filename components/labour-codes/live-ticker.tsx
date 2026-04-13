@@ -28,7 +28,7 @@ export function LiveTicker() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="fixed top-[72px] left-0 right-0 z-30 bg-ink2 border-b" style={{ borderColor: 'rgba(196,154,60,0.2)' }}>
+    <div className="w-full left-0 right-0 bg-ink2 border-b" style={{ borderColor: 'rgba(196,154,60,0.2)' }}>
       <div className="flex items-center px-14 py-3 gap-8 h-16">
         {/* Left Badge */}
         <div className="flex-shrink-0 flex items-center gap-2">
