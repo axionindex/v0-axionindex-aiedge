@@ -142,14 +142,14 @@ export default function LabourCodesPage() {
     <div className="min-h-screen bg-ink text-parchment">
       <Navigation />
 
-      {/* Live Status Ticker */}
+      {/* Live Ticker */}
       <LiveTicker />
 
       {/* Showcase Banner */}
       <ShowcaseBanner />
 
       {/* Live Status Strip */}
-      <div className="sticky top-0 z-40 bg-ink border-b border-gold-border" style={{ top: 'calc(72px + 64px + 100px)' }}>
+      <div className="bg-ink border-b border-gold-border">
         <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-xs font-dm-mono">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1">
@@ -162,7 +162,7 @@ export default function LabourCodesPage() {
       </div>
 
       {/* Section Navigation */}
-      <div className="sticky z-30 bg-ink border-b border-gold-border" style={{ top: 'calc(72px + 64px + 100px + 32px)' }}>
+      <div className="sticky top-0 z-30 bg-ink border-b border-gold-border">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex gap-8 overflow-x-auto">
             {['overview', 'clarifications', 'readiness', 'cxo-guide', 'decision-tools'].map((tab) => (
@@ -175,7 +175,7 @@ export default function LabourCodesPage() {
                     : 'border-transparent text-mist hover:text-parchment'
                 }`}
               >
-                {tab === 'cxo-guide' ? 'CXO Guide' : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {tab === 'cxo-guide' ? 'CXO Guide' : tab === 'decision-tools' ? 'Decision Tools' : tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
             ))}
           </div>
