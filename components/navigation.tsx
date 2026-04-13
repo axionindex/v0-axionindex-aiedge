@@ -9,9 +9,9 @@ export const CHANGE_TAB_EVENT = "ai-edge-change-tab";
 
 const navItems = [
   {
-    label: "New Labour Code",
+    label: "Labour Codes",
     isSimpleLink: true,
-    href: "/new-labour-code",
+    href: "/labour-codes",
   },
   {
     label: "Doctrine",
