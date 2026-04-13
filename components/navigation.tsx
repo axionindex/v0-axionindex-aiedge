@@ -7,6 +7,7 @@ import { toast } from "@/hooks/use-toast";
 // Custom event for tab switching
 export const CHANGE_TAB_EVENT = "ai-edge-change-tab";
 
+// Navigation items - Labour Codes, AI EDGE LAB, OS Playbook, Resources, About Us, Connect
 const navItems = [
   {
     label: "Labour Codes",
