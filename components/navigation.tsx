@@ -351,6 +351,7 @@ export function Navigation() {
                   </div>
                 ))}
               </div>
+              )}
             </div>
           ))}
 
@@ -463,7 +464,6 @@ export function Navigation() {
               </a>
             </div>
           </div>
-              )}
         </div>
 
         <style jsx>{`
