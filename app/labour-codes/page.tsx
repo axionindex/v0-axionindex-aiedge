@@ -1,24 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Navigation } from "@/components/navigation";
 import { AIEdgeFooter } from "@/components/ai-edge-footer";
-
-export const metadata: Metadata = {
-  title: "Labour Codes — Axion Index",
-  description:
-    "Navigate India's four labour codes with decision intelligence, compliance triggers, and implementation playbooks.",
-  openGraph: {
-    title: "Labour Codes — Axion Index",
-    description:
-      "Navigate India's four labour codes with decision intelligence, compliance triggers, and implementation playbooks.",
-    type: "website",
-  },
-};
+import { useIntelligence } from "@/hooks/useIntelligence";
+import { DataStatusBar } from "@/components/data-status-bar";
+import { DynamicStatsGrid } from "@/components/dynamic-stats";
+import { WhatChanged } from "@/components/what-changed";
+import { TruthLayer } from "@/components/truth-layer";
+import { LoadingState, ErrorState, StatusBadge, SourceCitation, VerifiedTimestamp } from "@/components/intelligence-badges";
+import { getCountByStatus, formatDate } from "@/lib/intelligence";
 
 export default function LabourCodesPage() {
+  const { data, loading, error, retry } = useIntelligence();
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [triggerFormData, setTriggerFormData] = useState({
@@ -57,838 +52,380 @@ export default function LabourCodesPage() {
     }
   };
 
-  const whatNewCards = [
-    {
-      title: "Central Government Issues Clarification on Gratuity in CTC",
-      type: "Update",
-      date: "Apr 2026",
-    },
-    {
-      title: "Karnataka Finalises Occupational Safety Rules",
-      type: "Signal",
-      date: "Apr 2026",
-    },
-    {
-      title: "Supreme Court Defers IT Contract Labour Judgment",
-      type: "Divergence",
-      date: "Mar 2026",
-    },
-    {
-      title: "State Tracker: 18 States Now Finalised",
-      type: "Action",
-      date: "Mar 2026",
-    },
-  ];
+  if (loading && !data) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800">
+        <Navigation />
+        <div className="pt-24 max-w-7xl mx-auto px-4">
+          <LoadingState message="Loading Labour Codes intelligence..." />
+        </div>
+      </div>
+    );
+  }
 
-  const hubCards = [
-    { title: "Trigger Engine", status: "Live", badge: "Tool" },
-    { title: "Classification Test", status: "Live", badge: "Tool" },
-    { title: "State Tracker", status: "Live", badge: "Reference" },
-    { title: "Grey Areas", status: "Live", badge: "Guidance" },
-    { title: "Compensation Playbook", status: "Coming Q3", badge: "Playbook" },
-    { title: "IR Playbook", status: "Coming Q3", badge: "Playbook" },
-    { title: "Sector Guides", status: "Coming Q4", badge: "Guidance" },
-    { title: "Implementation Sequencer", status: "Coming Q4", badge: "Tool" },
-  ];
+  if (error && !data) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800">
+        <Navigation />
+        <div className="pt-24 max-w-7xl mx-auto px-4">
+          <ErrorState error={error} onRetry={retry} />
+        </div>
+      </div>
+    );
+  }
 
-  const greyAreas = [
-    {
-      question: "IT Worker Classification",
-      govt: "No official stance",
-      consensus: "Generally contracts with IT firms",
-      axion: "Classification depends on control, not sector",
-    },
-    {
-      question: "Gratuity in CTC",
-      govt: "Limited guidance on allocation",
-      consensus: "Varies by state practice",
-      axion: "Separate accrual required for compliance",
-    },
-    {
-      question: "Recurring Incentives in 50% Test",
-      govt: "Pending clarification",
-      consensus: "Some states include, some exclude",
-      axion: "Safest to exclude from 50% calculation",
-    },
-    {
-      question: "ESOPs/RSUs in Wages",
-      govt: "Not explicitly addressed",
-      consensus: "Evolving legal interpretation",
-      axion: "Treat as non-monetary for threshold purposes",
-    },
-    {
-      question: "Contract Labour: Core Activity Test",
-      govt: "Multiple contradictions",
-      consensus: "Very fact-dependent",
-      axion: "Risk mitigation through clear contracting",
-    },
-    {
-      question: "Remote Work Jurisdiction",
-      govt: "Work state vs employee state unclear",
-      consensus: "Default to work location",
-      axion: "Document clearly in engagement letter",
-    },
-  ];
+  const stats = data?.stats;
+  const stateTracker = data?.stateTracker;
+  const greyAreas = data?.greyAreas;
+  const clarifications = data?.clarifications;
+  const recentChanges = data?.recentChanges;
 
-  const complianceTriggers = [
-    { name: "PF", logic: "Employees ≥ 1", status: "Mandatory" },
-    { name: "ESI", logic: "Employees ≥ 10 (non-seasonal)", status: "Mandatory" },
-    { name: "Gratuity", logic: "Service > 5 years (≥ 1 employee)", status: "Mandatory" },
-    { name: "Bonus", logic: "Employees ≥ 1, 50% of basic ≥ threshold", status: "Mandatory" },
-    { name: "Canteen", logic: "Employees ≥ 250", status: "Mandatory" },
-    { name: "Crèche", logic: "Women employees ≥ 30", status: "Mandatory" },
-    { name: "ICC", logic: "Employees ≥ 10", status: "Mandatory" },
-    { name: "Works Committee", logic: "Employees ≥ 20 (industrial)", status: "Mandatory" },
-  ];
+  const statesFinalized = stateTracker ? getCountByStatus(stateTracker.states, 'final') : 0;
+  const statesDraft = stateTracker ? getCountByStatus(stateTracker.states, 'draft') : 0;
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0C0B09", color: "#F4EFE6" }}>
-      <style jsx global>{`
-        :root {
-          --ink: #0C0B09;
-          --gold: #C49A3C;
-          --parchment: #F4EFE6;
-          --rust: #8C3B28;
-          --dim: #6B6358;
-          --green: #5BAD7A;
-          --border-dark: rgba(196,154,60,.2);
-        }
-        
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .reveal {
-          animation: fadeUp 0.6s ease-out;
-          animation-fill-mode: both;
-        }
-
-        .reveal:nth-child(1) { animation-delay: 0.1s; }
-        .reveal:nth-child(2) { animation-delay: 0.2s; }
-        .reveal:nth-child(3) { animation-delay: 0.3s; }
-        .reveal:nth-child(4) { animation-delay: 0.4s; }
-      `}</style>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 pt-12">
+      {/* Data Status Bar */}
+      {data?.meta && (
+        <DataStatusBar
+          lastUpdated={data.meta.lastUpdated}
+          lastVerified={data.meta.lastVerified}
+          dataSource={data.meta.dataSource}
+        />
+      )}
 
       <Navigation />
 
-      {/* Live Status Strip */}
-      <div
-        style={{
-          position: "fixed",
-          top: 60,
-          left: 0,
-          right: 0,
-          background: "rgba(12, 11, 9, 0.95)",
-          borderBottom: "1px solid rgba(196,154,60,.15)",
-          backdropFilter: "blur(10px)",
-          padding: "12px 48px",
-          fontSize: "0.75rem",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: "rgba(244,239,230,0.65)",
-          display: "flex",
-          gap: "40px",
-          zIndex: 40,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <span
-            style={{
-              width: "8px",
-              height: "8px",
-              background: "#5BAD7A",
-              borderRadius: "50%",
-              display: "inline-block",
-            }}
-          ></span>
-          Central: All 4 codes in force
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <span
-            style={{
-              width: "8px",
-              height: "8px",
-              background: "var(--gold)",
-              borderRadius: "50%",
-              display: "inline-block",
-            }}
-          ></span>
-          States: ~18 finalised
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <span
-            style={{
-              width: "8px",
-              height: "8px",
-              background: "rgba(244,239,230,0.4)",
-              borderRadius: "50%",
-              display: "inline-block",
-            }}
-          ></span>
-          Karnataka: Consultation closes Apr 18
-        </div>
-      </div>
-
-      <main style={{ paddingTop: "140px" }}>
-        {/* Hero Section */}
-        <section style={{ padding: "80px 48px", textAlign: "center", marginBottom: "80px" }}>
-          <h1
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "3rem",
-              fontWeight: 400,
-              letterSpacing: "0.02em",
-              marginBottom: "30px",
-              lineHeight: 1.3,
-            }}
-          >
-            The System Reset of{" "}
-            <span style={{ fontStyle: "italic", color: "var(--gold)" }}>Employment in India</span>
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        {/* Hero */}
+        <div className="mb-16">
+          <div className="mb-4">
+            <span className="font-mono text-xs uppercase tracking-widest text-amber-300/70">
+              Intelligence Dashboard
+            </span>
+          </div>
+          <h1 className="font-serif text-5xl md:text-6xl font-bold text-gray-100 mb-4 max-w-3xl">
+            The System Reset of Employment in India
           </h1>
+          <p className="text-lg text-gray-400 max-w-2xl">
+            Real-time intelligence on India's four labour codes, state implementation status, and regulatory clarity.
+          </p>
+        </div>
 
-          {/* Stats Bar */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "60px",
-              marginTop: "50px",
-              padding: "40px",
-              background: "rgba(196,154,60,.05)",
-              border: "1px solid rgba(196,154,60,.1)",
-              borderRadius: "4px",
-              maxWidth: "700px",
-              margin: "50px auto 0",
-            }}
-          >
-            {[
-              { label: "Codes", value: "4" },
-              { label: "Laws Replaced", value: "29" },
-              { label: "Minimum Basic", value: "50%" },
-              { label: "IR Threshold", value: "300" },
-            ].map((stat, idx) => (
-              <div key={idx} style={{ textAlign: "center" }}>
-                <div
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: "var(--gold)",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <div style={{ fontSize: "0.75rem", letterSpacing: "0.1em", color: "var(--dim)" }}>
-                  {stat.label}
-                </div>
-              </div>
-            ))}
+        {/* Dynamic Stats */}
+        {stats && (
+          <div className="mb-16">
+            <DynamicStatsGrid stats={stats} lastVerified={data?.meta.lastVerified} />
           </div>
-        </section>
+        )}
 
-        {/* What's New Grid */}
-        <section style={{ padding: "0 48px 80px", marginBottom: "80px" }}>
-          <h2
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.8rem",
-              fontWeight: 400,
-              letterSpacing: "0.02em",
-              marginBottom: "50px",
-              textAlign: "center",
-            }}
-          >
-            What&apos;s New
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-              gap: "30px",
-            }}
-          >
-            {whatNewCards.map((card, idx) => (
-              <div
-                key={idx}
-                className="reveal"
-                style={{
-                  padding: "30px",
-                  background: "rgba(196,154,60,.03)",
-                  border: "1px solid var(--border-dark)",
-                  borderRadius: "2px",
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(196,154,60,.08)";
-                  e.currentTarget.style.borderColor = "var(--gold)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(196,154,60,.03)";
-                  e.currentTarget.style.borderColor = "var(--border-dark)";
-                }}
-              >
-                <div style={{ display: "flex", gap: "10px", marginBottom: "15px" }}>
-                  <span
-                    style={{
-                      padding: "2px 8px",
-                      background: "var(--gold)",
-                      color: "var(--ink)",
-                      fontSize: "0.65rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      borderRadius: "1px",
-                    }}
-                  >
-                    {card.type}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "0.65rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--dim)",
-                    }}
-                  >
-                    {card.date}
-                  </span>
-                </div>
-                <h3 style={{ fontSize: "1rem", fontWeight: 500, lineHeight: 1.4 }}>
-                  {card.title}
-                </h3>
-              </div>
-            ))}
+        {/* What Changed Section */}
+        {recentChanges?.changes && (
+          <div className="mb-16">
+            <div className="mb-6">
+              <h2 className="font-serif text-3xl font-bold text-gray-100 mb-2">What Changed</h2>
+              <p className="text-gray-400">Recent updates, clarifications, and signals</p>
+            </div>
+            <WhatChanged changes={recentChanges.changes} days={30} />
           </div>
-        </section>
+        )}
 
-        {/* Decision Tools */}
-        <section style={{ padding: "0 48px 80px", marginBottom: "80px" }}>
-          <h2
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.8rem",
-              fontWeight: 400,
-              letterSpacing: "0.02em",
-              marginBottom: "50px",
-              textAlign: "center",
-            }}
-          >
-            Decision Tools
-          </h2>
+        {/* Live Status Strip */}
+        {stateTracker && (
+          <div className="mb-16 bg-gradient-to-r from-green-900/20 to-transparent border border-green-500/20 rounded-lg p-6">
+            <h3 className="font-mono text-xs uppercase tracking-widest text-green-300/70 mb-4">
+              State Implementation Status
+            </h3>
+            <div className="grid grid-cols-3 gap-6">
+              <div>
+                <div className="text-3xl font-mono font-bold text-green-300">{statesFinalized}</div>
+                <div className="text-sm text-gray-400">States Finalized</div>
+              </div>
+              <div>
+                <div className="text-3xl font-mono font-bold text-amber-300">{statesDraft}</div>
+                <div className="text-sm text-gray-400">States in Draft</div>
+              </div>
+              <div>
+                <div className="text-3xl font-mono font-bold text-gray-300">{stateTracker.states?.length || 0}</div>
+                <div className="text-sm text-gray-400">Total States Tracked</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Decision Tools Tabs */}
+        <div className="mb-16">
+          <div className="mb-6">
+            <h2 className="font-serif text-3xl font-bold text-gray-100 mb-2">Decision Tools</h2>
+            <p className="text-gray-400">Navigate compliance with data-backed intelligence</p>
+          </div>
 
           {/* Tab Navigation */}
-          <div
-            style={{
-              display: "flex",
-              borderBottom: "1px solid var(--border-dark)",
-              marginBottom: "40px",
-              overflow: "auto",
-            }}
-          >
-            {["Trigger Engine", "Classification Test", "State Tracker", "Grey Areas"].map(
-              (tab, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveTab(idx)}
-                  style={{
-                    padding: "15px 30px",
-                    background: "transparent",
-                    border: "none",
-                    color:
-                      activeTab === idx
-                        ? "var(--gold)"
-                        : "rgba(244,239,230,0.45)",
-                    fontSize: "0.85rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    cursor: "pointer",
-                    borderBottom: activeTab === idx ? "2px solid var(--gold)" : "none",
-                    transition: "all 0.3s ease",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {tab}
-                </button>
-              )
-            )}
+          <div className="flex gap-2 mb-8 overflow-x-auto pb-2 border-b border-gray-700/50">
+            {[
+              "Clarifications",
+              "Grey Areas",
+              "State Tracker",
+              "Trigger Engine",
+              "Classification Test",
+            ].map((tab, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveTab(idx)}
+                className={`font-mono text-xs uppercase tracking-widest px-4 py-3 whitespace-nowrap transition-colors ${
+                  activeTab === idx
+                    ? "text-amber-300 border-b-2 border-amber-500"
+                    : "text-gray-500 hover:text-gray-300"
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
           </div>
 
           {/* Tab Content */}
-          <div style={{ minHeight: "400px" }}>
-            {/* Trigger Engine */}
-            {activeTab === 0 && (
-              <div>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                    gap: "20px",
-                    marginBottom: "40px",
-                  }}
-                >
-                  {[
-                    { label: "Employees", key: "employees" },
-                    { label: "Contractor Workers", key: "contractors" },
-                    { label: "Women Workers", key: "women" },
-                    { label: "Sector", key: "sector" },
-                    { label: "State", key: "state" },
-                    { label: "Establishment Type", key: "establishment" },
-                  ].map((field) => (
-                    <div key={field.key}>
-                      <label
-                        style={{
-                          display: "block",
-                          fontSize: "0.75rem",
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                          marginBottom: "8px",
-                          color: "var(--dim)",
-                        }}
-                      >
-                        {field.label}
-                      </label>
-                      <input
-                        type={field.key === "employees" ? "number" : "text"}
-                        value={
-                          triggerFormData[field.key as keyof typeof triggerFormData] || ""
-                        }
-                        onChange={(e) =>
-                          setTriggerFormData({
-                            ...triggerFormData,
-                            [field.key]: e.target.value,
-                          })
-                        }
-                        style={{
-                          width: "100%",
-                          padding: "10px",
-                          background: "rgba(196,154,60,.05)",
-                          border: "1px solid var(--border-dark)",
-                          color: "var(--parchment)",
-                          fontSize: "0.9rem",
-                          borderRadius: "2px",
-                        }}
-                      />
+          <div className="space-y-6">
+            {/* Clarifications Tab */}
+            {activeTab === 0 && clarifications?.items && (
+              <div className="space-y-6">
+                {clarifications.items.map((item: any) => (
+                  <div
+                    key={item.id}
+                    className="border border-gray-700/50 rounded-lg p-6 hover:border-amber-500/30 transition-colors"
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <h4 className="font-serif text-xl text-gray-200">{item.title}</h4>
+                      <StatusBadge status={item.status} size="sm" />
                     </div>
-                  ))}
-                </div>
 
-                <button
-                  style={{
-                    padding: "12px 30px",
-                    background: "var(--gold)",
-                    color: "var(--ink)",
-                    border: "none",
-                    fontSize: "0.85rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    cursor: "pointer",
-                    borderRadius: "2px",
-                    marginBottom: "40px",
-                  }}
-                >
-                  Calculate Triggers
-                </button>
+                    <div className="mb-4 pb-4 border-b border-gray-700/30">
+                      <p className="text-sm text-amber-300/70 font-mono mb-2">Question</p>
+                      <p className="text-gray-300">{item.question}</p>
+                    </div>
 
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-                    gap: "20px",
-                  }}
-                >
-                  {complianceTriggers.map((trigger, idx) => (
-                    <div
-                      key={idx}
-                      style={{
-                        padding: "20px",
-                        background: "rgba(196,154,60,.03)",
-                        border: "1px solid var(--border-dark)",
-                        borderRadius: "2px",
-                      }}
-                    >
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
-                        <h4 style={{ fontSize: "0.95rem", fontWeight: "600" }}>
-                          {trigger.name}
-                        </h4>
-                        <span
-                          style={{
-                            padding: "2px 8px",
-                            background: "var(--green)",
-                            color: "var(--ink)",
-                            fontSize: "0.65rem",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            borderRadius: "1px",
-                          }}
-                        >
-                          {trigger.status}
-                        </span>
+                    <div className="mb-4 pb-4 border-b border-gray-700/30">
+                      <p className="text-sm text-green-300/70 font-mono mb-2">Answer</p>
+                      <p className="text-gray-300">{item.answer}</p>
+                    </div>
+
+                    {item.sources && (
+                      <div className="mb-4 pb-4 border-b border-gray-700/30">
+                        <p className="text-sm text-gray-400/70 font-mono mb-3">Sources</p>
+                        <div className="space-y-2">
+                          {item.sources.map((source: any, idx: number) => (
+                            <SourceCitation
+                              key={idx}
+                              name={source.name}
+                              type={source.type}
+                              date={source.date}
+                              url={source.url}
+                            />
+                          ))}
+                        </div>
                       </div>
-                      <p style={{ fontSize: "0.85rem", color: "rgba(244,239,230,0.65)" }}>
-                        {trigger.logic}
-                      </p>
+                    )}
+
+                    {item.actionItems && (
+                      <div className="mb-4 pb-4 border-b border-gray-700/30">
+                        <p className="text-sm text-amber-300/70 font-mono mb-3">Action Items</p>
+                        <ul className="space-y-2">
+                          {item.actionItems.map((action: string, idx: number) => (
+                            <li key={idx} className="text-sm text-gray-300 flex items-start gap-2">
+                              <span className="text-amber-500 mt-1">→</span>
+                              <span>{action}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {item.lastVerified && <VerifiedTimestamp date={item.lastVerified} />}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Grey Areas Tab */}
+            {activeTab === 1 && greyAreas?.items && (
+              <div className="space-y-6">
+                {greyAreas.items.map((item: any) => (
+                  <div
+                    key={item.id}
+                    className="border border-gray-700/50 rounded-lg p-6 hover:border-amber-500/30 transition-colors"
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <h4 className="font-serif text-xl text-gray-200">{item.title}</h4>
+                      <StatusBadge status={item.status} size="sm" />
                     </div>
-                  ))}
+
+                    <p className="text-sm text-amber-300/70 font-mono mb-2">Question</p>
+                    <p className="text-gray-300 mb-6">{item.question}</p>
+
+                    <TruthLayer
+                      governmentPosition={item.governmentPosition}
+                      legalConsensus={item.legalConsensus}
+                      axionView={item.axionView}
+                      verified={item.lastVerified}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* State Tracker Tab */}
+            {activeTab === 2 && stateTracker?.states && (
+              <div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-700/50">
+                        <th className="text-left py-3 px-4 font-mono text-xs uppercase tracking-widest text-gray-400">
+                          State
+                        </th>
+                        <th className="text-left py-3 px-4 font-mono text-xs uppercase tracking-widest text-gray-400">
+                          Wage Code
+                        </th>
+                        <th className="text-left py-3 px-4 font-mono text-xs uppercase tracking-widest text-gray-400">
+                          IR Code
+                        </th>
+                        <th className="text-left py-3 px-4 font-mono text-xs uppercase tracking-widest text-gray-400">
+                          SS Code
+                        </th>
+                        <th className="text-left py-3 px-4 font-mono text-xs uppercase tracking-widest text-gray-400">
+                          OSH Code
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {stateTracker.states.map((state: any) => (
+                        <tr key={state.name} className="border-b border-gray-700/30 hover:bg-gray-800/30 transition-colors">
+                          <td className="py-4 px-4 font-mono text-gray-300">{state.name}</td>
+                          <td className="py-4 px-4">
+                            <StatusBadge status={state.wageCode.status} size="sm" />
+                          </td>
+                          <td className="py-4 px-4">
+                            <StatusBadge status={state.irCode.status} size="sm" />
+                          </td>
+                          <td className="py-4 px-4">
+                            <StatusBadge status={state.ssCode.status} size="sm" />
+                          </td>
+                          <td className="py-4 px-4">
+                            <StatusBadge status={state.oshCode.status} size="sm" />
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             )}
 
-            {/* Classification Test */}
-            {activeTab === 1 && (
-              <div>
-                {[
-                  "Who controls when, where, how work is done?",
-                  "Is this ongoing or project-based?",
-                  "Is the work core to business?",
-                  "Can worker send a substitute?",
-                  "Who provides tools/equipment?",
-                  "What % of income from this engagement?",
-                ].map((question, idx) => (
-                  <div key={idx} style={{ marginBottom: "40px" }}>
-                    <h4 style={{ fontSize: "0.95rem", marginBottom: "15px" }}>
-                      {idx + 1}. {question}
-                    </h4>
-                    <div style={{ display: "flex", gap: "15px" }}>
-                      {["Low", "Medium", "High"].map((level, levelIdx) => (
-                        <button
-                          key={levelIdx}
-                          onClick={() => handleClassificationAnswer(idx, levelIdx + 1)}
-                          style={{
-                            padding: "10px 20px",
-                            background:
-                              classificationAnswers[idx] === levelIdx + 1
-                                ? "var(--gold)"
-                                : "rgba(196,154,60,.05)",
-                            color:
-                              classificationAnswers[idx] === levelIdx + 1
-                                ? "var(--ink)"
-                                : "var(--parchment)",
-                            border:
-                              classificationAnswers[idx] === levelIdx + 1
-                                ? "none"
-                                : "1px solid var(--border-dark)",
-                            fontSize: "0.85rem",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            cursor: "pointer",
-                            borderRadius: "2px",
-                            transition: "all 0.3s ease",
-                          }}
-                        >
-                          {level}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-
-                {classificationResult && (
-                  <div
-                    style={{
-                      padding: "30px",
-                      background: "rgba(91,173,122,.1)",
-                      border: "1px solid rgba(91,173,122,.3)",
-                      borderRadius: "2px",
-                      marginTop: "40px",
-                    }}
+            {/* Trigger Engine Tab */}
+            {activeTab === 3 && (
+              <div className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-mono text-gray-400 mb-2">
+                    Number of Employees
+                  </label>
+                  <input
+                    type="number"
+                    value={triggerFormData.employees}
+                    onChange={(e) =>
+                      setTriggerFormData({
+                        ...triggerFormData,
+                        employees: e.target.value,
+                      })
+                    }
+                    className="w-full bg-gray-900/50 border border-gray-700 rounded px-3 py-2 text-gray-300 text-sm"
+                    placeholder="Enter number of employees"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-mono text-gray-400 mb-2">
+                    Sector
+                  </label>
+                  <select
+                    value={triggerFormData.sector}
+                    onChange={(e) =>
+                      setTriggerFormData({
+                        ...triggerFormData,
+                        sector: e.target.value,
+                      })
+                    }
+                    className="w-full bg-gray-900/50 border border-gray-700 rounded px-3 py-2 text-gray-300 text-sm"
                   >
-                    <h4 style={{ fontSize: "0.85rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--dim)", marginBottom: "10px" }}>
-                      Classification Result
-                    </h4>
-                    <p style={{ fontSize: "1.3rem", fontWeight: "600", color: "#5BAD7A" }}>
-                      {classificationResult}
-                    </p>
+                    <option value="">Select sector</option>
+                    <option value="tech">Technology</option>
+                    <option value="retail">Retail</option>
+                    <option value="mfg">Manufacturing</option>
+                  </select>
+                </div>
+                <div className="pt-4 text-sm text-gray-400">
+                  <p>Configure your organization profile to see compliance triggers.</p>
+                </div>
+              </div>
+            )}
+
+            {/* Classification Test Tab */}
+            {activeTab === 4 && (
+              <div className="space-y-6">
+                <div className="text-sm text-gray-400 mb-4">
+                  <p>Answer 6 questions to determine worker classification</p>
+                </div>
+                <div className="space-y-4">
+                  {[
+                    "Is the worker on a fixed salary/monthly remuneration?",
+                    "Does the worker have a defined workday and location?",
+                    "Is the worker provided with tools/equipment?",
+                    "Can the worker be supervised by the employer?",
+                    "Is the relationship ongoing for 3+ months?",
+                    "Does the worker work primarily for you?",
+                  ].map((q, idx) => (
+                    <div key={idx} className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-4">
+                      <p className="text-sm font-mono text-gray-400 mb-3">Question {idx + 1}</p>
+                      <p className="text-gray-300 mb-4">{q}</p>
+                      <div className="flex gap-2">
+                        {[1, 2, 3].map((score) => (
+                          <button
+                            key={score}
+                            onClick={() => handleClassificationAnswer(idx, score)}
+                            className={`px-3 py-2 text-sm font-mono rounded transition-colors ${
+                              classificationAnswers[idx] === score
+                                ? "bg-amber-900/40 border border-amber-500/50 text-amber-300"
+                                : "bg-gray-900/40 border border-gray-700/50 text-gray-400 hover:border-gray-600/50"
+                            }`}
+                          >
+                            {score === 1 ? "No" : score === 2 ? "Maybe" : "Yes"}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {classificationResult && (
+                  <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-6 mt-6">
+                    <p className="text-sm text-green-300/70 font-mono mb-2">Classification Result</p>
+                    <p className="text-xl font-serif text-green-300">{classificationResult}</p>
                   </div>
                 )}
               </div>
             )}
-
-            {/* State Tracker */}
-            {activeTab === 2 && (
-              <div style={{ overflowX: "auto" }}>
-                <table
-                  style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
-                    fontSize: "0.85rem",
-                  }}
-                >
-                  <thead>
-                    <tr style={{ borderBottom: "1px solid var(--border-dark)" }}>
-                      <th style={{ padding: "15px", textAlign: "left", color: "var(--dim)" }}>
-                        State
-                      </th>
-                      <th style={{ padding: "15px", textAlign: "center", color: "var(--dim)" }}>
-                        Wages Code
-                      </th>
-                      <th style={{ padding: "15px", textAlign: "center", color: "var(--dim)" }}>
-                        IR Code
-                      </th>
-                      <th style={{ padding: "15px", textAlign: "center", color: "var(--dim)" }}>
-                        SS Code
-                      </th>
-                      <th style={{ padding: "15px", textAlign: "center", color: "var(--dim)" }}>
-                        OSH Code
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      "Andhra Pradesh",
-                      "Assam",
-                      "Bihar",
-                      "Chhattisgarh",
-                      "Delhi",
-                      "Gujarat",
-                      "Haryana",
-                      "Himachal Pradesh",
-                      "Jharkhand",
-                      "Karnataka",
-                    ].map((state, idx) => (
-                      <tr
-                        key={idx}
-                        style={{
-                          borderBottom: "1px solid rgba(196,154,60,.1)",
-                        }}
-                      >
-                        <td
-                          style={{
-                            padding: "15px",
-                            color: "rgba(244,239,230,0.85)",
-                          }}
-                        >
-                          {state}
-                        </td>
-                        {[0, 1, 2, 3].map((col) => (
-                          <td
-                            key={col}
-                            style={{
-                              padding: "15px",
-                              textAlign: "center",
-                            }}
-                          >
-                            <span
-                              style={{
-                                width: "12px",
-                                height: "12px",
-                                borderRadius: "50%",
-                                display: "inline-block",
-                                background:
-                                  (idx + col) % 3 === 0
-                                    ? "#5BAD7A"
-                                    : (idx + col) % 3 === 1
-                                      ? "var(--gold)"
-                                      : "rgba(107,99,88,0.5)",
-                              }}
-                            ></span>
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-
-            {/* Grey Areas */}
-            {activeTab === 3 && (
-              <div>
-                {greyAreas.map((area, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      padding: "30px",
-                      background: "rgba(196,154,60,.03)",
-                      border: "1px solid var(--border-dark)",
-                      marginBottom: "20px",
-                      borderRadius: "2px",
-                    }}
-                  >
-                    <h4 style={{ fontSize: "0.95rem", fontWeight: "600", marginBottom: "15px" }}>
-                      {area.question}
-                    </h4>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "20px" }}>
-                      <div>
-                        <p
-                          style={{
-                            fontSize: "0.75rem",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            color: "var(--dim)",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          Government Position
-                        </p>
-                        <p style={{ fontSize: "0.9rem", lineHeight: 1.5 }}>
-                          {area.govt}
-                        </p>
-                      </div>
-                      <div>
-                        <p
-                          style={{
-                            fontSize: "0.75rem",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            color: "var(--dim)",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          Legal Consensus
-                        </p>
-                        <p style={{ fontSize: "0.9rem", lineHeight: 1.5 }}>
-                          {area.consensus}
-                        </p>
-                      </div>
-                      <div>
-                        <p
-                          style={{
-                            fontSize: "0.75rem",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            color: "var(--gold)",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          Axion View
-                        </p>
-                        <p style={{ fontSize: "0.9rem", lineHeight: 1.5 }}>
-                          {area.axion}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
-        </section>
-
-        {/* Hub Section */}
-        <section style={{ padding: "0 48px 80px", marginBottom: "80px" }}>
-          <h2
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.8rem",
-              fontWeight: 400,
-              letterSpacing: "0.02em",
-              marginBottom: "50px",
-              textAlign: "center",
-            }}
-          >
-            Tools & Resources
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-              gap: "25px",
-            }}
-          >
-            {hubCards.map((card, idx) => (
-              <div
-                key={idx}
-                className="reveal"
-                style={{
-                  padding: "30px",
-                  background: "rgba(196,154,60,.03)",
-                  border: "1px solid var(--border-dark)",
-                  borderRadius: "2px",
-                  transition: "all 0.3s ease",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "rgba(196,154,60,.08)";
-                  e.currentTarget.style.borderColor = "var(--gold)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "rgba(196,154,60,.03)";
-                  e.currentTarget.style.borderColor = "var(--border-dark)";
-                }}
-              >
-                <div style={{ display: "flex", gap: "8px", marginBottom: "15px" }}>
-                  <span
-                    style={{
-                      padding: "2px 8px",
-                      background:
-                        card.status === "Live"
-                          ? "var(--green)"
-                          : "rgba(196,154,60,.3)",
-                      color:
-                        card.status === "Live" ? "var(--ink)" : "var(--parchment)",
-                      fontSize: "0.6rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      borderRadius: "1px",
-                    }}
-                  >
-                    {card.status}
-                  </span>
-                  <span
-                    style={{
-                      padding: "2px 8px",
-                      background: "rgba(196,154,60,.15)",
-                      color: "var(--parchment)",
-                      fontSize: "0.6rem",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      borderRadius: "1px",
-                    }}
-                  >
-                    {card.badge}
-                  </span>
-                </div>
-                <h3 style={{ fontSize: "1rem", fontWeight: "500", lineHeight: 1.4 }}>
-                  {card.title}
-                </h3>
-              </div>
-            ))}
-          </div>
-        </section>
+        </div>
 
         {/* CTA Section */}
-        <section
-          style={{
-            padding: "80px 48px",
-            textAlign: "center",
-            background: "rgba(196,154,60,.05)",
-            border: "1px solid var(--border-dark)",
-            marginBottom: "80px",
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "2rem",
-              fontWeight: 400,
-              letterSpacing: "0.02em",
-              marginBottom: "30px",
-            }}
-          >
-            Run a 10-Minute Readiness Check
+        <div className="mb-16 bg-gradient-to-r from-amber-900/20 to-transparent border border-amber-500/20 rounded-lg p-8 text-center">
+          <h2 className="font-serif text-3xl font-bold text-gray-100 mb-4">
+            Ready for Compliance?
           </h2>
-          <p style={{ fontSize: "1rem", marginBottom: "30px", color: "rgba(244,239,230,0.8)" }}>
-            Get clarity on your compliance status across all four codes
+          <p className="text-gray-400 mb-6 max-w-2xl mx-auto">
+            Use our decision tools, clarification library, and real-time state tracker to navigate the labour code landscape with confidence.
           </p>
-          <button
-            style={{
-              padding: "15px 40px",
-              background: "var(--gold)",
-              color: "var(--ink)",
-              border: "none",
-              fontSize: "0.85rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              cursor: "pointer",
-              borderRadius: "2px",
-              fontWeight: "600",
-            }}
-          >
-            Start Assessment →
+          <button className="px-6 py-3 bg-amber-900/40 border border-amber-500/50 text-amber-300 hover:bg-amber-900/50 rounded-lg font-mono text-sm uppercase transition-colors">
+            Run Readiness Check
           </button>
-        </section>
-      </main>
+        </div>
+      </div>
 
       <AIEdgeFooter />
     </div>

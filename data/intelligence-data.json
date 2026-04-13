@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "lastUpdated": "2026-04-12T10:30:00+05:30",
+    "lastVerified": "2026-04-12T10:30:00+05:30",
+    "updatedBy": "Axion Index Editorial",
+    "dataSource": "Manual curation + Government sources",
+    "refreshFrequency": "Daily"
+  },
+  "stats": {
+    "codesInForce": {
+      "value": 4,
+      "label": "Codes in Force",
+      "definition": "Number of Labour Codes currently implemented",
+      "source": "MoLE Notification",
+      "sourceUrl": "https://labour.gov.in/",
+      "asOf": "2025-11-21",
+      "lastVerified": "2026-04-12"
+    },
+    "lawsReplaced": {
+      "value": 29,
+      "label": "Laws Replaced",
+      "definition": "Number of labour laws consolidated into the four codes",
+      "source": "Ministry of Labour & Employment",
+      "sourceUrl": "https://labour.gov.in/",
+      "asOf": "2025-11-21",
+      "lastVerified": "2026-04-12"
+    },
+    "statesFinalized": {
+      "value": 8,
+      "label": "States Finalized",
+      "definition": "Number of states that have completed rules for all codes",
+      "source": "Labour Code Tracker",
+      "sourceUrl": "https://labour.gov.in/",
+      "asOf": "2026-04-10",
+      "lastVerified": "2026-04-12"
+    },
+    "daysSinceImplementation": {
+      "value": null,
+      "label": "Days Since Implementation",
+      "calculatedFrom": "2025-11-21",
+      "autoCalculate": true
+    }
+  },
+  "stateTracker": {
+    "lastUpdated": "2026-04-10",
+    "states": [
+      {
+        "name": "Andhra Pradesh",
+        "wageCode": { "status": "final", "date": "2026-02-15" },
+        "irCode": { "status": "final", "date": "2026-02-15" },
+        "ssCode": { "status": "final", "date": "2026-02-15" },
+        "oshCode": { "status": "final", "date": "2026-02-15" },
+        "overall": "final",
+        "lastVerified": "2026-04-10"
+      },
+      {
+        "name": "Karnataka",
+        "wageCode": { "status": "draft", "date": null },
+        "irCode": { "status": "draft", "date": null },
+        "ssCode": { "status": "draft", "date": null },
+        "oshCode": { "status": "draft", "date": null },
+        "overall": "draft",
+        "lastVerified": "2026-04-10"
+      },
+      {
+        "name": "Tamil Nadu",
+        "wageCode": { "status": "final", "date": "2026-01-20" },
+        "irCode": { "status": "final", "date": "2026-01-20" },
+        "ssCode": { "status": "final", "date": "2026-01-20" },
+        "oshCode": { "status": "final", "date": "2026-01-20" },
+        "overall": "final",
+        "lastVerified": "2026-04-10"
+      },
+      {
+        "name": "Maharashtra",
+        "wageCode": { "status": "final", "date": "2026-03-01" },
+        "irCode": { "status": "final", "date": "2026-03-01" },
+        "ssCode": { "status": "final", "date": "2026-03-01" },
+        "oshCode": { "status": "final", "date": "2026-03-01" },
+        "overall": "final",
+        "lastVerified": "2026-04-10"
+      },
+      {
+        "name": "Delhi",
+        "wageCode": { "status": "final", "date": "2025-12-10" },
+        "irCode": { "status": "final", "date": "2025-12-10" },
+        "ssCode": { "status": "final", "date": "2025-12-10" },
+        "oshCode": { "status": "final", "date": "2025-12-10" },
+        "overall": "final",
+        "lastVerified": "2026-04-10"
+      },
+      {
+        "name": "Gujarat",
+        "wageCode": { "status": "final", "date": "2026-01-05" },
+        "irCode": { "status": "final", "date": "2026-01-05" },
+        "ssCode": { "status": "final", "date": "2026-01-05" },
+        "oshCode": { "status": "final", "date": "2026-01-05" },
+        "overall": "final",
+        "lastVerified": "2026-04-10"
+      },
+      {
+        "name": "Rajasthan",
+        "wageCode": { "status": "final", "date": "2026-02-28" },
+        "irCode": { "status": "final", "date": "2026-02-28" },
+        "ssCode": { "status": "final", "date": "2026-02-28" },
+        "oshCode": { "status": "final", "date": "2026-02-28" },
+        "overall": "final",
+        "lastVerified": "2026-04-10"
+      },
+      {
+        "name": "Punjab",
+        "wageCode": { "status": "final", "date": "2026-03-15" },
+        "irCode": { "status": "final", "date": "2026-03-15" },
+        "ssCode": { "status": "final", "date": "2026-03-15" },
+        "oshCode": { "status": "final", "date": "2026-03-15" },
+        "overall": "final",
+        "lastVerified": "2026-04-10"
+      }
+    ]
+  },
+  "greyAreas": {
+    "items": [
+      {
+        "id": "GA001",
+        "title": "ESOPs/RSUs in Wages",
+        "status": "unresolved",
+        "priority": "medium",
+        "question": "Whether equity forms part of wages",
+        "governmentPosition": { "stance": "Not addressed", "source": null, "date": null },
+        "legalConsensus": { "stance": "Generally excluded", "confidence": "medium", "reasoning": "Equity is considered a future benefit, not current compensation" },
+        "axionView": { "recommendation": "Exclude from wages; document in offer letter", "actionTag": "watch" },
+        "lastVerified": "2026-04-12"
+      },
+      {
+        "id": "GA002",
+        "title": "Performance Bonus Classification",
+        "status": "unresolved",
+        "priority": "high",
+        "question": "Whether performance bonuses count as wages under new codes",
+        "governmentPosition": { "stance": "Under clarification from MoLE", "source": "MoLE FAQ", "date": "2026-03-15" },
+        "legalConsensus": { "stance": "Likely to be included based on code language", "confidence": "medium", "reasoning": "Code definition of wages is broader than before" },
+        "axionView": { "recommendation": "Include in gross wages; separate from basic + allowances", "actionTag": "act" },
+        "lastVerified": "2026-04-12"
+      }
+    ]
+  },
+  "clarifications": {
+    "items": [
+      {
+        "id": "CL001",
+        "title": "Gratuity in CTC",
+        "status": "resolved",
+        "priority": "high",
+        "question": "Can gratuity be shown in CTC?",
+        "answer": "NO. Gratuity is a statutory liability, not a salary component. Cannot be part of CTC.",
+        "sources": [
+          { "name": "ICAI FAQ", "type": "regulatory", "date": "2025-12-28", "url": "https://icai.org/" },
+          { "name": "MoLE Clarification", "type": "government", "date": "2026-01-10", "url": "https://labour.gov.in/" }
+        ],
+        "axionView": { "recommendation": "Remove from CTC; show separately. Get actuarial valuation.", "actionTag": "act" },
+        "actionItems": ["Remove from offer letters", "Get actuarial valuation", "Update payroll systems"],
+        "lastVerified": "2026-04-12"
+      },
+      {
+        "id": "CL002",
+        "title": "Leave Encashment in Gratuity Calculation",
+        "status": "partial",
+        "priority": "high",
+        "question": "Should leave encashment be included in gratuity calculation?",
+        "answer": "Partial resolution. Leave encashment at termination is separate from gratuity but may impact gratuity if paid during service.",
+        "sources": [
+          { "name": "Code on Social Security, 2020", "type": "legal", "date": "2020-12-28", "url": null },
+          { "name": "State Rules - Maharashtra", "type": "state", "date": "2026-03-01", "url": "https://maharashtra.gov.in/" }
+        ],
+        "axionView": { "recommendation": "Consult legal; follow state rules. Document leave policy.", "actionTag": "watch" },
+        "actionItems": ["Review state-specific rules", "Get legal opinion", "Document in employee handbook"],
+        "lastVerified": "2026-04-12"
+      }
+    ]
+  },
+  "recentChanges": {
+    "changes": [
+      {
+        "id": "RC001",
+        "date": "2026-04-10",
+        "type": "state_update",
+        "priority": "high",
+        "title": "HP finalizes OSH Code rules",
+        "description": "Himachal Pradesh completes rules for all four codes, effective immediately",
+        "source": "HP Gazette",
+        "actionRequired": true,
+        "action": "Review OSH compliance requirements for HP operations"
+      },
+      {
+        "id": "RC002",
+        "date": "2026-04-08",
+        "type": "grey_area_update",
+        "priority": "medium",
+        "title": "MoLE issues draft clarification on performance pay",
+        "description": "Ministry indicates performance bonuses likely to be included in wages calculation",
+        "source": "MoLE Notification",
+        "actionRequired": true,
+        "action": "Review compensation structure for bonus classification"
+      },
+      {
+        "id": "RC003",
+        "date": "2026-04-05",
+        "type": "state_update",
+        "priority": "medium",
+        "title": "Karnataka consultation deadline extended",
+        "description": "State extends consultation period for wage code to June 15, 2026",
+        "source": "Karnataka Labour Ministry",
+        "actionRequired": false,
+        "action": "Continue monitoring for final rules"
+      },
+      {
+        "id": "RC004",
+        "date": "2026-03-28",
+        "type": "legal_precedent",
+        "priority": "high",
+        "title": "High Court ruling on non-compete clauses",
+        "description": "Delhi HC clarifies that non-compete duration should align with IR Code, 2020 principles",
+        "source": "Delhi High Court Order",
+        "actionRequired": true,
+        "action": "Audit existing non-compete clauses in employment contracts"
+      }
+    ]
+  }
+}
