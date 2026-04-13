@@ -20,7 +20,7 @@ export function LabourCodesHero() {
   };
 
   return (
-    <section className="relative min-h-[70vh] flex flex-col justify-center px-14 py-12 bg-ink">
+    <section className="relative min-h-[50vh] flex flex-col justify-center px-0 py-8 bg-ink mb-12">
       {/* Background effect */}
       <style>{`
         .hero-bg::before {
@@ -37,7 +37,7 @@ export function LabourCodesHero() {
 
       <div className="hero-bg absolute inset-0 pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl">
+      <div className="relative z-10 max-w-4xl px-14">
         {/* Eyebrow */}
         <div className="reveal flex items-center gap-3 mb-3">
           <div className="w-8 h-px bg-rust" />

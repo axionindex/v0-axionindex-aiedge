@@ -148,12 +148,6 @@ export default function LabourCodesPage() {
       {/* Showcase Banner */}
       <ShowcaseBanner />
 
-      {/* Hero Section */}
-      <LabourCodesHero />
-
-      {/* Consolidation Architecture Section */}
-      <ConsolidationArchitecture />
-
       {/* Live Status Strip */}
       <div className="sticky top-0 z-40 bg-ink border-b border-gold-border" style={{ top: 'calc(72px + 64px + 100px)' }}>
         <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-xs font-dm-mono">
@@ -193,46 +187,14 @@ export default function LabourCodesPage() {
         {/* OVERVIEW TAB */}
         {activeTab === 'overview' && (
           <>
-            {/* Hero */}
-            <div className="mb-16">
-              <div className="text-xs font-dm-mono text-gold tracking-widest mb-2">LABOUR CODES</div>
-              <h1 className="text-5xl md:text-6xl font-cormorant mb-4 max-w-3xl">
-                The System Reset of <span className="italic text-gold">Employment</span> in India
-              </h1>
-              <p className="text-lg text-mist max-w-2xl mb-8">
-                Navigate India's four labour codes with decision intelligence, compliance clarity, and implementation playbooks.
-              </p>
+            {/* New Hero Section from Chunk 2 */}
+            <LabourCodesHero />
 
-              {/* Axion Position */}
-              <div className="border-l-4 border-gold bg-ink4 p-6 mb-8 max-w-2xl">
-                <p className="text-sm text-parchment">
-                  <span className="text-gold font-cormorant italic">Labour Codes are not the story.</span> They are the exposure event. How you respond determines whether your organisation remains competitive and compliant.
-                </p>
-              </div>
+            {/* New Consolidation Architecture from Chunk 2 */}
+            <ConsolidationArchitecture />
 
-              {/* Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">4</div>
-                  <div className="text-xs font-dm-mono text-mist">CODES IN FORCE</div>
-                </div>
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">29</div>
-                  <div className="text-xs font-dm-mono text-mist">LAWS CONSOLIDATED</div>
-                </div>
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">32/36</div>
-                  <div className="text-xs font-dm-mono text-mist">STATES FINALIZED</div>
-                </div>
-                <div className="border border-gold-border p-4 bg-ink3">
-                  <div className="text-3xl font-cormorant text-gold mb-1">2020</div>
-                  <div className="text-xs font-dm-mono text-mist">CENTRAL AUTHORITY</div>
-                </div>
-              </div>
-            </div>
-
-            {/* What's New */}
-            <div className="mb-16">
+            {/* What's New Section */}
+            <div className="mb-16 mt-16">
               <div className="text-xl font-cormorant mb-6">What's New</div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
