@@ -11,6 +11,8 @@ import { TriggerResult } from '@/components/labour-codes/trigger-result';
 import { IntelPanel } from '@/components/labour-codes/intel-panel';
 import { LiveTicker } from '@/components/labour-codes/live-ticker';
 import { ShowcaseBanner } from '@/components/labour-codes/showcase-banner';
+import { LabourCodesHero } from '@/components/labour-codes/hero';
+import { ConsolidationArchitecture } from '@/components/labour-codes/consolidation-architecture';
 import { CheckCircle, AlertTriangle, Clock } from 'lucide-react';
 
 export default function LabourCodesPage() {
@@ -145,6 +147,12 @@ export default function LabourCodesPage() {
 
       {/* Showcase Banner */}
       <ShowcaseBanner />
+
+      {/* Hero Section */}
+      <LabourCodesHero />
+
+      {/* Consolidation Architecture Section */}
+      <ConsolidationArchitecture />
 
       {/* Live Status Strip */}
       <div className="sticky top-0 z-40 bg-ink border-b border-gold-border" style={{ top: 'calc(72px + 64px + 100px)' }}>
