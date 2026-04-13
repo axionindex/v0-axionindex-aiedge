@@ -14,14 +14,20 @@ const navItems = [
     href: "/labour-codes",
   },
   {
-    label: "About",
+    label: "AI EDGE LAB",
+    isSimpleLink: true,
+    href: "/ai-edge-lab",
+  },
+  {
+    label: "OS Playbook",
     groups: [
       {
-        label: "Axion Index",
+        label: "Operating System",
         items: [
-          { num: "→", title: "Our Approach", sub: "Decision architecture for evolving organisations", href: "#approach" },
-          { num: "→", title: "The Operating Architect", sub: "How Nitin Nahata built this system", href: "https://www.perplexity.ai/computer/a/the-making-of-the-operating-ar-mXeHIIQeSJWFEvWxSQaKtw", isExternal: true, highlight: true, gold: true },
-          { num: "→", title: "Family Businesses", sub: "Scaling governance beyond the founder", href: "#family-businesses" },
+          { num: "→", title: "Decision Architecture", sub: "The 4D framework for evolving organisations", href: "#decision-arch" },
+          { num: "→", title: "Ownership Ladders", sub: "Scaling judgment and thinking across teams", href: "#ownership-ladders" },
+          { num: "→", title: "Brainpower Density Curve", sub: "Where your value sits and where it's migrating", href: "#brainpower" },
+          { num: "→", title: "Implementation Playbook", sub: "Step-by-step guidance for your organisation", href: "#playbook" },
         ],
       },
     ],
@@ -36,6 +42,22 @@ const navItems = [
           { num: "↓", title: "The Doctrine — PDF", sub: "Full manifesto · Laws · Principles · 2026 Edition", href: "/AI-Edge-Doctrine-2026.pdf", isDownload: true, highlight: true, gold: true },
           { num: "↗", title: "Articles & Insights", sub: "Deep dives on operating architecture", href: "#articles" },
           { num: "↓", title: "Sample Diagnostic Report", sub: "See what the Full Diagnostic produces", href: "/sample-report", isPage: true, highlight: true, gold: true },
+          { num: "↗", title: "Research Papers", sub: "Academic studies on workforce transformation", href: "#research" },
+        ],
+      },
+    ],
+    width: "380px",
+  },
+  {
+    label: "About Us",
+    groups: [
+      {
+        label: "About Axion Index",
+        items: [
+          { num: "→", title: "Our Mission", sub: "Decision architecture for evolving organisations", href: "#mission" },
+          { num: "→", title: "The Operating Architect", sub: "How Nitin Nahata built this system", href: "https://www.perplexity.ai/computer/a/the-making-of-the-operating-ar-mXeHIIQeSJWFEvWxSQaKtw", isExternal: true, highlight: true, gold: true },
+          { num: "→", title: "Family Businesses", sub: "Scaling governance beyond the founder", href: "#family-businesses" },
+          { num: "→", title: "Contact & Support", sub: "Reach out to our team", href: "#contact" },
         ],
       },
     ],
@@ -43,7 +65,7 @@ const navItems = [
     alignRight: 60,
   },
   {
-    label: "Contact",
+    label: "Connect",
     groups: [
       {
         label: "Get in Touch",
@@ -51,6 +73,7 @@ const navItems = [
           { num: "↗", title: "Email", sub: "contact@axionindex.com", href: "mailto:contact@axionindex.com", isExternal: true },
           { num: "↗", title: "LinkedIn", sub: "Connect with Nitin Nahata", href: "https://www.linkedin.com/in/nahatanitin/", isExternal: true },
           { num: "↗", title: "Request Diagnostic", sub: "Personalized assessment & playbook", href: "mailto:contact@axionindex.com?subject=Request%20Diagnostic", isExternal: true, highlight: true, gold: true },
+          { num: "↗", title: "Twitter/X", sub: "Latest insights and updates", href: "https://x.com/axionindex", isExternal: true },
         ],
       },
     ],
