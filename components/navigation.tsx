@@ -1,5 +1,6 @@
 "use client";
 
+// Component version: 2024-labour-codes-nav-v3
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
@@ -87,11 +88,6 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
-
-  // Debug: Log nav items to verify they're correct
-  useEffect(() => {
-    console.log("[v0] Navigation items loaded:", navItems.map(item => item.label));
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
