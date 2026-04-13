@@ -85,7 +85,13 @@ const navItems = [
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
+
+  // Debug: Log nav items to verify they're correct
+  useEffect(() => {
+    console.log("[v0] Navigation items loaded:", navItems.map(item => item.label));
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
