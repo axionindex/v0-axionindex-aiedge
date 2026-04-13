@@ -1,11 +1,15 @@
 "use client";
 
+// Component version: 2024-labour-codes-nav-v3
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { toast } from "@/hooks/use-toast";
 
 // Custom event for tab switching
 export const CHANGE_TAB_EVENT = "ai-edge-change-tab";
+
+// Navigation build timestamp - used to invalidate cache
+export const NAV_BUILD_TIME = "2026-04-14-v4";
 
 // Navigation items - Labour Codes, AI EDGE LAB, OS Playbook, Resources, About Us, Connect
 const navItems = [
@@ -85,6 +89,7 @@ const navItems = [
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -163,6 +168,8 @@ export function Navigation() {
     <>
       <nav
         id="nav"
+        data-version="labour-codes-v4"
+        data-timestamp="2026-04-14-updated"
         style={{
           position: "fixed",
           top: 0,
