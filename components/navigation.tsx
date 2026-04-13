@@ -163,6 +163,7 @@ export function Navigation() {
     <>
       <nav
         id="nav"
+        data-version="labour-codes-v2"
         style={{
           position: "fixed",
           top: 0,
