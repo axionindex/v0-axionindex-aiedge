@@ -14,71 +14,43 @@ const navItems = [
     href: "/labour-codes",
   },
   {
-    label: "Doctrine",
+    label: "About",
     groups: [
       {
-        label: "The Three Structural Shifts",
+        label: "Axion Index",
         items: [
-          { num: "01", title: "Intelligence is Becoming Abundant", sub: "The supply shock — cognitive tasks now done by machines", href: "#shifts" },
-          { num: "02", title: "Judgment Becomes the New Scarcity", sub: "The new premium — consequence-bearing decisions", href: "#shifts" },
-          { num: "03", title: "Organisations Must Redesign Work", sub: "The operating challenge — before the market forces it", href: "#shifts" },
-        ],
-      },
-      {
-        label: "What Must Change",
-        items: [
-          { num: "→", title: "For the Individual", sub: "Career strategy rewrite", href: "#changes", tabIndex: 0 },
-          { num: "→", title: "For the Leader", sub: "Structural question, not a tech question", href: "#changes", tabIndex: 1 },
-          { num: "→", title: "For the Organisation", sub: "Workforce strategy means redesigning work itself", href: "#changes", tabIndex: 2 },
-        ],
-      },
-    ],
-    width: "370px",
-  },
-  {
-    label: "Framework",
-    groups: [
-      {
-        label: "E.D.G.E. — Four Dimensions",
-        items: [
-          { num: "E", title: "Exposure", sub: "Proportion of work that is AI-compressible", href: "#edge", gold: true },
-          { num: "D", title: "Decision Density", sub: "Consequence-bearing judgment you own", href: "#edge", gold: true },
-          { num: "G", title: "Growth of Boundary", sub: "Decision authority — expanding or contracting", href: "#edge", gold: true },
-          { num: "E", title: "Economic Anchoring", sub: "Compensation tied to real scarcity above the line", href: "#edge", gold: true },
-        ],
-      },
-      {
-        label: "Instruments",
-        items: [
-          { num: "→", title: "Ownership Ladders — Judgment & Thinking", sub: "I own → I lead → I contribute → I execute", href: "#ownership" },
-          { num: "∿", title: "The Brainpower Density Curve™", sub: "Where your value sits — and where it's migrating", href: "#bpdcurve" },
+          { num: "→", title: "Our Approach", sub: "Decision architecture for evolving organisations", href: "#approach" },
+          { num: "→", title: "The Operating Architect", sub: "How Nitin Nahata built this system", href: "https://www.perplexity.ai/computer/a/the-making-of-the-operating-ar-mXeHIIQeSJWFEvWxSQaKtw", isExternal: true, highlight: true, gold: true },
+          { num: "→", title: "Family Businesses", sub: "Scaling governance beyond the founder", href: "#family-businesses" },
         ],
       },
     ],
     width: "380px",
   },
   {
-    label: "Assessment",
-    groups: [
-      {
-        label: "Choose Your Instrument",
-        items: [
-          { num: "◇", title: "Quick Mirror — Free", sub: "5 min · Instant results on page", href: "/quick-mirror", isPage: true },
-          { num: "◆", title: "Full Diagnostic — Coming Soon", sub: "30 min · PDF report via email", href: "#", isPage: false, disabled: true },
-        ],
-      },
-    ],
-    width: "350px",
-    alignRight: 60,
-  },
-  {
     label: "Resources",
     groups: [
       {
-        label: "Publications",
+        label: "Research & Publications",
         items: [
           { num: "↓", title: "The Doctrine — PDF", sub: "Full manifesto · Laws · Principles · 2026 Edition", href: "/AI-Edge-Doctrine-2026.pdf", isDownload: true, highlight: true, gold: true },
-          { num: "↗", title: "Sample Diagnostic Report", sub: "See what the Full Diagnostic produces", href: "/sample-report", isPage: true, highlight: true, gold: true },
+          { num: "↗", title: "Articles & Insights", sub: "Deep dives on operating architecture", href: "#articles" },
+          { num: "↓", title: "Sample Diagnostic Report", sub: "See what the Full Diagnostic produces", href: "/sample-report", isPage: true, highlight: true, gold: true },
+        ],
+      },
+    ],
+    width: "380px",
+    alignRight: 60,
+  },
+  {
+    label: "Contact",
+    groups: [
+      {
+        label: "Get in Touch",
+        items: [
+          { num: "↗", title: "Email", sub: "contact@axionindex.com", href: "mailto:contact@axionindex.com", isExternal: true },
+          { num: "↗", title: "LinkedIn", sub: "Connect with Nitin Nahata", href: "https://www.linkedin.com/in/nahatanitin/", isExternal: true },
+          { num: "↗", title: "Request Diagnostic", sub: "Personalized assessment & playbook", href: "mailto:contact@axionindex.com?subject=Request%20Diagnostic", isExternal: true, highlight: true, gold: true },
         ],
       },
     ],
@@ -114,8 +86,14 @@ export function Navigation() {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    item: { href: string; tabIndex?: number; isPdf?: boolean; isModal?: boolean; isPage?: boolean; isDownload?: boolean }
+    item: { href: string; tabIndex?: number; isPdf?: boolean; isModal?: boolean; isPage?: boolean; isDownload?: boolean; isExternal?: boolean }
   ) => {
+    // Handle external links
+    if (item.isExternal) {
+      window.open(item.href, "_blank");
+      return;
+    }
+
     // Handle page navigation (don't prevent default)
     if (item.isPage) {
       return; // Let the browser handle the navigation normally
