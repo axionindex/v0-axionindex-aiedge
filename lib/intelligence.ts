@@ -1,4 +1,4 @@
-const DATA_URL = '/data/intelligence-data.json';
+import intelligenceData from '@/data/intelligence-data.json';
 
 export interface IntelligenceData {
   meta: {
@@ -18,9 +18,8 @@ export interface IntelligenceData {
 
 export async function fetchIntelligence(): Promise<IntelligenceData> {
   try {
-    const res = await fetch(DATA_URL);
-    if (!res.ok) throw new Error(`Failed to fetch intelligence data: ${res.status}`);
-    return res.json();
+    // Return the imported data directly (simulating async for compatibility)
+    return Promise.resolve(intelligenceData as IntelligenceData);
   } catch (error) {
     console.error('[Intelligence] Fetch error:', error);
     throw error;
