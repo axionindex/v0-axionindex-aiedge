@@ -9,6 +9,11 @@ export const CHANGE_TAB_EVENT = "ai-edge-change-tab";
 
 const navItems = [
   {
+    label: "New Labour Code",
+    isSimpleLink: true,
+    href: "/new-labour-code",
+  },
+  {
     label: "Doctrine",
     groups: [
       {
@@ -219,33 +224,61 @@ export function Navigation() {
         <div className="nav-right" style={{ display: "flex", alignItems: "center", height: "100%", gap: 0 }}>
           {navItems.map((item, idx) => (
             <div key={idx} className="nav-item" style={{ position: "relative", height: "100%", display: "flex", alignItems: "center" }}>
-              <button
-                className="nav-trigger"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                  padding: "0 14px",
-                  height: "100%",
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.6rem",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(245,242,236,0.45)",
-                  cursor: "pointer",
-                  transition: "color 0.2s",
-                  border: "none",
-                  background: "none",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {item.label}
-                <svg width="7" height="7" viewBox="0 0 10 6" fill="none" style={{ transition: "transform 0.22s", opacity: 0.35 }}>
-                  <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              </button>
+              {item.isSimpleLink ? (
+                <Link
+                  href={item.href}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    padding: "0 14px",
+                    height: "100%",
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "0.6rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "rgba(245,242,236,0.45)",
+                    cursor: "pointer",
+                    transition: "color 0.2s",
+                    textDecoration: "none",
+                    whiteSpace: "nowrap",
+                  }}
+                  className="nav-trigger simple-link"
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--gold)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245,242,236,0.45)")}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <button
+                  className="nav-trigger"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                    padding: "0 14px",
+                    height: "100%",
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "0.6rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "rgba(245,242,236,0.45)",
+                    cursor: "pointer",
+                    transition: "color 0.2s",
+                    border: "none",
+                    background: "none",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {item.label}
+                  <svg width="7" height="7" viewBox="0 0 10 6" fill="none" style={{ transition: "transform 0.22s", opacity: 0.35 }}>
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </button>
+              )}
 
               {/* Dropdown */}
+              {!item.isSimpleLink && (
               <div
                 className="nav-dd"
                 style={{
@@ -430,6 +463,7 @@ export function Navigation() {
               </a>
             </div>
           </div>
+              )}
         </div>
 
         <style jsx>{`
@@ -457,6 +491,9 @@ export function Navigation() {
           .dd-item:hover {
             background: rgba(201,168,76,0.05) !important;
             border-left-color: var(--gold) !important;
+          }
+          .nav-trigger.simple-link:hover {
+            color: var(--gold) !important;
           }
         `}</style>
       </nav>
