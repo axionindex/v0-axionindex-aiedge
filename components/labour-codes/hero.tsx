@@ -37,7 +37,7 @@ export function LabourCodesHero() {
 
       <div className="hero-bg absolute inset-0 pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl px-14">
+      <div className="relative z-10 max-w-4xl">
         {/* Eyebrow */}
         <div className="reveal flex items-center gap-3 mb-3">
           <div className="w-8 h-px bg-rust" />
