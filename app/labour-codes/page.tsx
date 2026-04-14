@@ -139,7 +139,7 @@ export default function LabourCodesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-ink text-parchment">
+    <div className="min-h-screen bg-ink text-parchment" key="labour-codes-page-v2">
       <Navigation />
 
       {/* Live Ticker */}
