@@ -184,8 +184,8 @@ export function ConsolidationArchitecture() {
   const currentCode = codesData.find((c) => c.id === activeCode)!;
 
   return (
-    <section className="py-16 bg-ink2 border-t-[3px]" style={{ borderColor: 'rgba(196,154,60,.2)' }}>
-      <div className="max-w-4xl">
+    <section className="py-16 bg-ink2 border-t-[3px] -mx-4 px-4" style={{ borderColor: 'rgba(196,154,60,.2)' }}>
+      <div className="max-w-4xl w-full mx-auto">
         {/* Section Header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-2">
